@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://sevenbamboos.github.com"></form>
@@ -60,6 +60,59 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-ES-2015" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/my-blog/2017/02/27/ES-2015/" class="article-date">
+  <time datetime="2017-02-27T14:59:32.000Z" itemprop="datePublished">02-27-2017</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/my-blog/2017/02/27/ES-2015/">ES2015</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="A-better-length-method-for-unicode-text"><a href="#A-better-length-method-for-unicode-text" class="headerlink" title="A better length method for unicode text"></a>A better length method for unicode text</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">codePointLen</span>(<span class="params">text</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> result = text.match(<span class="regexp">/[\s\S]/gu</span>);</div><div class="line">  <span class="keyword">return</span> result ? result.length : <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Default-param"><a href="#Default-param" class="headerlink" title="Default param"></a>Default param</h3><p>A trivial version<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getID</span>(<span class="params">name, defaultValue</span>) </span>&#123;</div><div class="line">  defaultValue = defaultValue || <span class="number">1000</span>;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>The problem is defaultValue would be ignored with falsy value like 0. As a result, a more decent version before ES2015 is<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getID</span>(<span class="params">name, defaultValue</span>) </span>&#123;</div><div class="line">  defaultValue = (<span class="keyword">typeof</span> defaultValue !== <span class="string">"undefined"</span>) ? defaultValue : <span class="number">0</span>;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>In ES2015, it can be simplified as<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getID</span>(<span class="params">name, defaultValue=<span class="number">1000</span></span>) </span>&#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="Apply-call-and-array-destructuring"><a href="#Apply-call-and-array-destructuring" class="headerlink" title="Apply, call and array destructuring"></a>Apply, call and array destructuring</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> values = [<span class="number">4</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>];</div><div class="line"></div><div class="line"><span class="comment">// Because Math.max doesn't accept array. Please remember that "call" accepts multiple params and do the same function invocation as "apply" </span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.max.apply(<span class="built_in">Math</span>, values));</div><div class="line"></div><div class="line"><span class="comment">// The first param can be anything since max is a pure function (instead of a method)</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.max.apply(<span class="literal">null</span>, values));</div><div class="line"></div><div class="line"><span class="comment">// But it's easier with array destructuring</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.max(...values));</div></pre></td></tr></table></figure>
+<h3 id="How-to-check-whether-a-function-is-called-with-“new”"><a href="#How-to-check-whether-a-function-is-called-with-“new”" class="headerlink" title="How to check whether a function is called with “new”"></a>How to check whether a function is called with “new”</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (<span class="keyword">this</span> <span class="keyword">instanceof</span> Person) &#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"Call Person with new, please"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> Person(<span class="string">"tom"</span>);</div><div class="line"></div><div class="line"><span class="comment">// It can be checked by Person and throw the error</span></div><div class="line"><span class="comment">// let p2 = Person("jerry");</span></div><div class="line"></div><div class="line"><span class="comment">// No error with this call </span></div><div class="line"><span class="keyword">let</span> p2 = Person.call(p1, <span class="string">"jerry"</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(p1.name); <span class="comment">//jerry</span></div><div class="line"><span class="built_in">console</span>.log(p2); <span class="comment">//undefined</span></div></pre></td></tr></table></figure>
+<p>ES2015 fixes the issue with:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">  <span class="comment">// "new.target" is not supported in safari (on iPhone, iPad and Mac)</span></div><div class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">new</span>.target !== <span class="string">"undefined"</span>) &#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"Call Person with new, please"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="Differences-between-arrow-function-and-normal-one"><a href="#Differences-between-arrow-function-and-normal-one" class="headerlink" title="Differences between arrow function and normal one"></a>Differences between arrow function and normal one</h3><ul>
+<li>No this, super and new.target bindings; No prototype and arguments</li>
+<li>Can’t be called with new (since arrow function doesn’t have [[Construct]], only [[Call]])</li>
+<li>Can’t change this, which remains the same throughout the life cycle of the function</li>
+</ul>
+<h3 id="Tail-call-optimization"><a href="#Tail-call-optimization" class="headerlink" title="Tail call optimization"></a>Tail call optimization</h3><p>In theory, the optimization is enabled when the tail call has no dependency to the current stack and there is no further work to do after the call, plus the call must return as the function value. So this won’t be optimized:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fact</span>(<span class="params">n</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">return</span> n * fact(n<span class="number">-1</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>In fact, I notice it is quite efficient (in safari on Mac). fact(170), the maximum param making the result less than infinity, is as fast as below, which is regarded as optimized:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fact</span>(<span class="params">n, p=<span class="number">1</span></span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>*p;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">return</span> fact(n<span class="number">-1</span>, n*p);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Here is another example:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fibo</span>(<span class="params">n, i=<span class="number">2</span>, p1=<span class="number">1</span>, p2=<span class="number">1</span></span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (n &lt; <span class="number">0</span>) &#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"param n can't be less than zero"</span>);</div><div class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (n &lt; <span class="number">2</span>) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">if</span> (n === i) &#123;</div><div class="line">      <span class="keyword">return</span> p1 + p2;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="keyword">return</span> fibo(n, i+<span class="number">1</span>, p1+p2, p1);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sevenbamboos.github.com/my-blog/2017/02/27/ES-2015/" data-id="cizo8dkx00001num6qernjleb" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/Programming/">Programming</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-PPT-with-HTML" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -93,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sevenbamboos.github.com/my-blog/2017/02/13/PPT-with-HTML/" data-id="ciz5ni41e000015m6db63t5o7" class="article-share-link">Share</a>
+      <a data-url="https://sevenbamboos.github.com/my-blog/2017/02/13/PPT-with-HTML/" data-id="cizo8dkwv0000num68ndg6nsb" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/Tool/">Tool</a></li></ul>
@@ -140,7 +193,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sevenbamboos.github.com/my-blog/2017/02/13/hello-world/" data-id="ciz5ni41h000115m63sg8sbyv" class="article-share-link">Share</a>
+      <a data-url="https://sevenbamboos.github.com/my-blog/2017/02/13/hello-world/" data-id="cizo8dkx60003num616vw8swl" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -160,9 +213,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/Tool/">Tool</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/Programming/">Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/Tool/">Tool</a></li></ul>
     </div>
   </div>
 
@@ -170,9 +223,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/my-blog/tags/Tool/" style="font-size: 10px;">Tool</a>
+      <a href="/my-blog/tags/Programming/" style="font-size: 10px;">Programming</a> <a href="/my-blog/tags/Tool/" style="font-size: 10px;">Tool</a>
     </div>
   </div>
 
@@ -189,9 +242,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/my-blog/2017/02/27/ES-2015/">ES2015</a>
+          </li>
         
           <li>
             <a href="/my-blog/2017/02/13/PPT-with-HTML/">PPT with HTML</a>
@@ -214,7 +271,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Yuping Wang<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
