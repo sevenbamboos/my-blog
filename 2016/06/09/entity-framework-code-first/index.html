@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Code First in Entity framework | Sam&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Why choose code firstThere are three major advantages to use code first:
+
+Less configuration (no mapping file, no design model, no need to create table first)
+Easier to write code (no need to build co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Code First in Entity framework">
+<meta property="og:url" content="https://sevenbamboos.github.com/2016/06/09/entity-framework-code-first/index.html">
+<meta property="og:site_name" content="Sam's Blog">
+<meta property="og:description" content="Why choose code firstThere are three major advantages to use code first:
+
+Less configuration (no mapping file, no design model, no need to create table first)
+Easier to write code (no need to build co">
+<meta property="og:updated_time" content="2017-02-28T14:19:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Code First in Entity framework">
+<meta name="twitter:description" content="Why choose code firstThere are three major advantages to use code first:
+
+Less configuration (no mapping file, no design model, no need to create table first)
+Easier to write code (no need to build co">
+  
+    <link rel="alternate" href="/atom.xml" title="Sam&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/my-blog/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/my-blog/" id="logo">Sam&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/my-blog/">Home</a>
+        
+          <a class="main-nav-link" href="/my-blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://sevenbamboos.github.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-entity-framework-code-first" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/my-blog/2016/06/09/entity-framework-code-first/" class="article-date">
+  <time datetime="2016-06-09T14:59:32.000Z" itemprop="datePublished">06-09-2016</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Code First in Entity framework
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Why-choose-code-first"><a href="#Why-choose-code-first" class="headerlink" title="Why choose code first"></a>Why choose code first</h2><p>There are three major advantages to use code first:</p>
+<ol>
+<li>Less configuration (no mapping file, no design model, no need to create table first)</li>
+<li>Easier to write code (no need to build complicated model or query)</li>
+<li>With some extra configuration, the generated/target database can be adapted to DBA’s requirements. At least, the difficulty is less than the opposite way.</li>
+</ol>
+<h2 id="Configure-the-correct-connection-string-in-DbContext"><a href="#Configure-the-correct-connection-string-in-DbContext" class="headerlink" title="Configure the correct connection string in DbContext"></a>Configure the correct connection string in DbContext</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public EFSampleContext() : base(@&quot;Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename=the-path-to-local-mdf; MultipleActiveResultSets=true; Integrated Security = True; Connect Timeout = 30&quot;)</div></pre></td></tr></table></figure>
+<p>Please note that <strong>MultipleActiveResultSets</strong> by default is false, making it impossible to use DbReader nested inside loop</p>
+<h2 id="Many-to-many-relationship"><a href="#Many-to-many-relationship" class="headerlink" title="Many-to-many relationship"></a>Many-to-many relationship</h2><p>I’ll illustrate this relationship with a wildly-used user&amp;role model.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">public class Role &#123;</div><div class="line">	// EF is able to recognize two kinds of naming conversions: TypeID or ID</div><div class="line">	// Personally, I prefer the former except for the case of inheritance</div><div class="line">	public int RoleID &#123; get; set; &#125;</div><div class="line"></div><div class="line">	[Required]</div><div class="line">	public string Name &#123; get; set; &#125;</div><div class="line"></div><div class="line">	// easy way to give an initialized value</div><div class="line">	public bool Active &#123; get; set; &#125; = true; </div><div class="line">&#125;</div><div class="line"></div><div class="line">public class User &#123;</div><div class="line">	public int UserID &#123; get; set; &#125;</div><div class="line"></div><div class="line">	[Required]</div><div class="line">	public string Name &#123; get; set; &#125;</div><div class="line">	</div><div class="line">	// EF can understand normal value object as long as it has no identity	</div><div class="line">	public Address Address &#123; get; set; &#125; = new Address();</div><div class="line"></div><div class="line">	// Make it virtual so that EF can implement logic such as lazy-loading under the hood</div><div class="line">	// Also don&apos;t forget to initialize it before using (otherwise null pointer exception is waiting for you)</div><div class="line">	public virtual ICollection&lt;Role&gt; Roles &#123; get; set; &#125; = new HashSet&lt;Role&gt;();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Inside DbContext’s OnModelCreating method, add the following configuration. The idea to move as many as possible of configuration (annotation) from model to a specific place is to make model independent to persistence framework to make it more general and easier to read and maintain.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// I prefer to add schema for each generated table</div><div class="line">modelBuilder.Entity&lt;Role&gt;().ToTable(&quot;AppRole&quot;, &quot;EFSample&quot;);</div><div class="line"></div><div class="line">// many-to-many with one direction</div><div class="line">// There is no link from role to user, so in this case we only need to configurate the user side</div><div class="line">modelBuilder.Entity&lt;User&gt;().ToTable(&quot;AppUser&quot;, &quot;EFSample&quot;)</div><div class="line">	.HasMany(u =&gt; u.Roles)</div><div class="line">	.WithMany()</div><div class="line">	.Map(m =&gt;</div><div class="line">	&#123;</div><div class="line">		m.MapLeftKey(&quot;UserID&quot;);</div><div class="line">		m.MapRightKey(&quot;RoleID&quot;);</div><div class="line">		m.ToTable(&quot;User_Role&quot;, &quot;EFSample&quot;);</div><div class="line">	&#125;);</div></pre></td></tr></table></figure></p>
+<p>Suppose we need to loop through all users to find roles for each of them:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">using (var ctx = new EFSampleContext()) &#123;</div><div class="line">	foreach (var user in ctx.Users.OrderBy(u =&gt; u.UserID)) &#123;</div><div class="line"></div><div class="line">		// It would load each user&apos;s role, which is lazy-loaded by default</div><div class="line">		//ctx.Entry&lt;User&gt;(user).Collection&lt;Role&gt;(u =&gt; u.Roles).Load();</div><div class="line"></div><div class="line">		// But since we are inside the lifetime of DbContext, just using the navigating property (Roles) directly can work</div><div class="line">		// And this is where property &quot;MultipleActiveResultSets&quot; must be true</div><div class="line">		foreach (var role in user.Roles) &#123;</div><div class="line">			Console.WriteLine($&quot;&#123;user.Name&#125; has role: &#123;role.Name&#125;&quot;);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Suppose we need to query users who have a specific role, then:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">using (var ctx = new EFSampleContext()) &#123;</div><div class="line">	var results = from u in ctx.Users</div><div class="line">		from r in u.Roles</div><div class="line">		where r.Name == &quot;role 1&quot;</div><div class="line">		select u;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="Many-to-one-and-one-to-many"><a href="#Many-to-one-and-one-to-many" class="headerlink" title="Many-to-one and one-to-many"></a>Many-to-one and one-to-many</h2><p>The many-to-one relationship here is each study belongs to one patient, while a patient can have multiple studies.<br>The one-to-many relationship here is an order can contain multiple studies, while each study can be (optional) included only in one order.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">public class Patient</div><div class="line">&#123;</div><div class="line">	public int PatientID &#123; get; set; &#125;</div><div class="line"></div><div class="line">	// I find required annotation is acceptable and more readable to be put in model</div><div class="line">	// By contrast, the relationships (navigating properties) are better to put somewhere outside model</div><div class="line">	[Required]</div><div class="line">	public string Name &#123; get; set; &#125;</div><div class="line"></div><div class="line">	// DateTime is struct. That&apos;s how to set it as optional</div><div class="line">	public DateTime? DateOfBirth &#123; get; set; &#125;</div><div class="line"></div><div class="line">	// EF has no problem to recognize enum</div><div class="line">	public Gender? Gender &#123; get; set; &#125;</div><div class="line"></div><div class="line">	// For computable properties, use NotMapped to make EF skip processing them</div><div class="line">	[NotMapped]</div><div class="line">	public int? Age &#123;</div><div class="line">		get &#123;</div><div class="line">			TimeSpan? span = DateTime.Now - DateOfBirth;</div><div class="line">			if (span.HasValue) &#123;</div><div class="line">				return (int)Math.Ceiling(span.Value.Days / 365m);</div><div class="line">			&#125; else &#123;</div><div class="line">				return null;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		private set &#123; &#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class Study &#123;</div><div class="line">	public int StudyID &#123; get; set; &#125;</div><div class="line"></div><div class="line">	[Required]</div><div class="line">	public string StudyUID &#123; get; set; &#125;</div><div class="line"></div><div class="line">	[Required]</div><div class="line">	public string Name &#123; get; set; &#125;</div><div class="line"></div><div class="line">	public DateTime? ScheduleTime &#123; get; set; &#125;</div><div class="line">	public virtual Patient Patient &#123; get; set; &#125;</div><div class="line">	public virtual Order Order &#123; get; set; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class Order &#123;</div><div class="line">	public int OrderID &#123; get; set; &#125;</div><div class="line"></div><div class="line">	[Required]</div><div class="line">	public string AccessionNumber &#123; get; set; &#125;</div><div class="line"></div><div class="line">	public virtual ICollection&lt;Study&gt; Studies &#123; get; set; &#125; = new HashSet&lt;Study&gt;();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Add the following in DbContext’s OnModelCreating method to fine-tune the model:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">modelBuilder.Entity&lt;Patient&gt;().ToTable(&quot;Patient&quot;, &quot;EFSample&quot;);</div><div class="line"></div><div class="line">modelBuilder.Entity&lt;Study&gt;().ToTable(&quot;Study&quot;, &quot;EFSample&quot;);</div><div class="line"></div><div class="line">// one-to-many with two directions</div><div class="line">modelBuilder.Entity&lt;Order&gt;().ToTable(&quot;RisOrder&quot;, &quot;EFSample&quot;)</div><div class="line">	.HasMany(o =&gt; o.Studies)</div><div class="line">	.WithOptional(s =&gt; s.Order)	// a study can have no order at all</div><div class="line">	.Map(m =&gt; m.MapKey(&quot;OrderID&quot;)); // Name a nicer foreign key, by default, it is NavigatingPropertyName_TargetTypeID</div><div class="line"></div><div class="line">// many-to-one with one direction</div><div class="line">modelBuilder.Entity&lt;Study&gt;()</div><div class="line">	.HasRequired(s =&gt; s.Patient) // a study must belong to a patient</div><div class="line">	.WithMany()</div><div class="line">	.Map(m =&gt; m.MapKey(&quot;PatientID&quot;));</div><div class="line">``` </div><div class="line"></div><div class="line">Notice that for required navigating property, the generated foreign keys will be marked as **ON DELETE CASCADE**: </div><div class="line">The screen-shot is</div><div class="line">![table-study](/images/entity-framework-code-first/table-study.png)</div><div class="line"></div><div class="line">Also notice that during saving a study to an order, both of the following ways is working:</div></pre></td></tr></table></figure></p>
+<p>study.Order = anOrder;<br>// anOrder.Studies.Add(study)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Here is some example to play with the models</div></pre></td></tr></table></figure></p>
+<p>using (var ctx = new EFSampleContext()) {</p>
+<pre><code>// Query male patients
+var malePatients = from p in ctx.Patients
+    where p.Gender == Gender.Male
+    select p;
+foreach (var patient in malePatients) {
+    Console.WriteLine($&quot;{patient.Name}&quot;);
+}
+
+// Loop orders and visit study and patient properties
+foreach (var o in ctx.Orders) {
+    Console.WriteLine($&quot;Order:{o.AccessionNumber}&quot;);
+    foreach (var s in o.Studies) {
+        Console.WriteLine($&quot;Study:{s.Name}, Patient:{s.Patient.Name} Gender({s.Patient.Gender}) Age={s.Patient.Age ?? 0}&quot;);
+    }
+}
+</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## One-to-many self reference and table per inheritance</div><div class="line">Category is a tree-like structure which has a point to parent and can contain more than one child categories.</div><div class="line">Goods is an abstract class which can be represented by a series of concrete classes: Vehicle, Artwork and Estate each of which has different properties. Here I use one table to store the whole hierarchy.</div><div class="line">AuctionItem is a model having links to user and goods, which is included here for the completeness of auction model</div></pre></td></tr></table></figure></p>
+<p>public class Category {<br>    public int CategoryID { get; set; }<br>    public string Name { get; set; }</p>
+<pre><code>public virtual Category Parent { get; set; }
+public virtual ICollection&lt;Category&gt; SubCategories { get; set; } = new HashSet&lt;Category&gt;();
+</code></pre><p>}</p>
+<p>public abstract class Goods {<br>    public int GoodsID { get; set; }<br>    public string Name { get; set; }</p>
+<pre><code>public virtual Category Category { get; set; }
+</code></pre><p>}</p>
+<p>public class Vehicle : Goods {<br>    public string Manufacturer { get; set; }<br>    public string Model { get; set; }<br>    public int? Mileage { get; set; }<br>}</p>
+<p>public class Artwork : Goods {<br>    public string Author { get; set; }<br>    public string Genre { get; set; }<br>}</p>
+<p>public class Estate : Goods {<br>    public Address Address { get; set; } = new Address();<br>    public decimal? Area { get; set; }<br>    public DateTime? BuildTime { get; set; }<br>}</p>
+<p>public class AuctionItem {<br>    public int AuctionItemID { get; set; }<br>    public decimal StartingPrice { get; set; }<br>    public decimal? BargainPrice { get; set; }<br>    public DateTime? BargainTime { get; set; }</p>
+<pre><code>public Goods Goods { get; set; }
+public User Bargainer { get; set; }
+</code></pre><p>}</p>
+<p>modelBuilder.Entity<category>().ToTable(“Category”, “EFSample”)<br>    .HasMany(c =&gt; c.SubCategories)<br>    .WithOptional(c =&gt; c.Parent)<br>    .Map(c =&gt; c.MapKey(“ParentID”));</category></p>
+<p>modelBuilder.Entity<goods>().ToTable(“Goods”, “EFSample”)<br>    .Map<vehicle>(m =&gt; m.Requires(“GoodsType”).HasValue(0))<br>    .Map<artwork>(m =&gt; m.Requires(“GoodsType”).HasValue(1))<br>    .Map<estate>(m =&gt; m.Requires(“GoodsType”).HasValue(2));</estate></artwork></vehicle></goods></p>
+<p>modelBuilder.Entity<goods>()<br>    .HasRequired(g =&gt; g.Category)<br>    .WithMany()<br>    .Map(m =&gt; m.MapKey(“CategoryID”));</goods></p>
+<p>modelBuilder.Entity<auctionitem>().ToTable(“AuctionItem”, “EFSample”)<br>    .HasRequired(a =&gt; a.Goods)<br>    .WithMany()<br>    .Map(m =&gt; m.MapKey(“GoodsID”));</auctionitem></p>
+<p>modelBuilder.Entity<auctionitem>()<br>    .HasRequired(a =&gt; a.Bargainer)<br>    .WithMany()<br>    .Map(m =&gt; m.MapKey(“BargainerID”));<br>```</auctionitem></p>
+<p>The CRUD operations in EF will be included in the other articles.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sevenbamboos.github.com/my-blog/2016/06/09/entity-framework-code-first/" data-id="cizpmd6bk0004fum6uuucqqgg" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/Programming/">Programming</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/my-blog/2017/01/09/Hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          Hexo - How to publish site on Github
+        
+      </div>
+    </a>
+  
+  
+    <a href="/my-blog/2016/06/01/git/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Git &amp; Github Basic</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/Programming/">Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/Tool/">Tool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/my-blog/tags/Programming/" style="font-size: 10px;">Programming</a> <a href="/my-blog/tags/Tool/" style="font-size: 20px;">Tool</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/my-blog/2017/02/27/ES-2015/">ES2015</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2017/02/13/PPT-with-HTML/">PPT with HTML</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2017/02/13/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2017/01/09/Hexo/">Hexo - How to publish site on Github</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2016/06/09/entity-framework-code-first/">Code First in Entity framework</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Yuping Wang<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/my-blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/my-blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/my-blog/fancybox/jquery.fancybox.css">
+  <script src="/my-blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/my-blog/js/script.js"></script>
+
+  </div>
+</body>
+</html>
