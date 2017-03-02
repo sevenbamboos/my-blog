@@ -1,98 +1,324 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
+<!doctype html>
+
+
+
   
-  <title>Code First in Entity framework | Sam&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Why choose code firstThere are three major advantages to use code first:
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/my-blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/my-blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/my-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Programming," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/my-blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Why choose code firstThere are three major advantages to use code first:
 
 Less configuration (no mapping file, no design model, no need to create table first)
 Easier to write code (no need to build co">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Code First in Entity framework">
 <meta property="og:url" content="https://sevenbamboos.github.com/2016/06/09/entity-framework-code-first/index.html">
-<meta property="og:site_name" content="Sam's Blog">
+<meta property="og:site_name" content="Sam's Chest of Drawers">
 <meta property="og:description" content="Why choose code firstThere are three major advantages to use code first:
 
 Less configuration (no mapping file, no design model, no need to create table first)
 Easier to write code (no need to build co">
-<meta property="og:updated_time" content="2017-03-01T15:18:56.000Z">
+<meta property="og:updated_time" content="2017-03-02T14:11:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Code First in Entity framework">
 <meta name="twitter:description" content="Why choose code firstThere are three major advantages to use code first:
 
 Less configuration (no mapping file, no design model, no need to create table first)
 Easier to write code (no need to build co">
-  
-    <link rel="alternate" href="/atom.xml" title="Sam&#39;s Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/my-blog/css/style.css">
-  
 
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/my-blog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sevenbamboos.github.com/2016/06/09/entity-framework-code-first/"/>
+
+
+
+
+
+  <title> Code First in Entity framework | Sam's Chest of Drawers </title>
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/my-blog/" id="logo">Sam&#39;s Blog</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/my-blog/">Home</a>
-        
-          <a class="main-nav-link" href="/my-blog/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://sevenbamboos.github.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-entity-framework-code-first" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/my-blog/2016/06/09/entity-framework-code-first/" class="article-date">
-  <time datetime="2016-06-09T14:59:32.000Z" itemprop="datePublished">06-09-2016</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Code First in Entity framework
-    </h1>
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
   
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/my-blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sam's Chest of Drawers</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thinking about Programming and Lifestyle</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/my-blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/my-blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2016/06/09/entity-framework-code-first/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Code First in Entity framework
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-09T22:59:32+08:00">
+                06-09-2016
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         <h2 id="Why-choose-code-first"><a href="#Why-choose-code-first" class="headerlink" title="Why choose code first"></a>Why choose code first</h2><p>There are three major advantages to use code first:</p>
 <ol>
@@ -107,7 +333,7 @@ Easier to write code (no need to build co">
 <p>Suppose we need to loop through all users to find roles for each of them:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">using (var ctx = new EFSampleContext()) &#123;</div><div class="line">	foreach (var user in ctx.Users.OrderBy(u =&gt; u.UserID)) &#123;</div><div class="line"></div><div class="line">		// It would load each user&apos;s role, which is lazy-loaded by default</div><div class="line">		//ctx.Entry&lt;User&gt;(user).Collection&lt;Role&gt;(u =&gt; u.Roles).Load();</div><div class="line"></div><div class="line">		// But since we are inside the lifetime of DbContext, just using the navigating property (Roles) directly can work</div><div class="line">		// And this is where property &quot;MultipleActiveResultSets&quot; must be true</div><div class="line">		foreach (var role in user.Roles) &#123;</div><div class="line">			Console.WriteLine($&quot;&#123;user.Name&#125; has role: &#123;role.Name&#125;&quot;);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>Suppose we need to query users who have a specific role, then:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">using (var ctx = new EFSampleContext()) &#123;</div><div class="line">	var results = from u in ctx.Users</div><div class="line">		from r in u.Roles</div><div class="line">		where r.Name == &quot;role 1&quot;</div><div class="line">		select u;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="Many-to-one-and-one-to-many"><a href="#Many-to-one-and-one-to-many" class="headerlink" title="Many-to-one and one-to-many"></a>Many-to-one and one-to-many</h2><p>The many-to-one relationship here is each study belongs to one patient, while a patient can have multiple studies.<br>The one-to-many relationship here is an order can contain multiple studies, while each study can be (optional) included only in one order.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">public class Patient</div><div class="line">&#123;</div><div class="line">	public int PatientID &#123; get; set; &#125;</div><div class="line"></div><div class="line">	// I find required annotation is acceptable and more readable to be put in model</div><div class="line">	// By contrast, the relationships (navigating properties) are better to put somewhere outside model</div><div class="line">	[Required]</div><div class="line">	public string Name &#123; get; set; &#125;</div><div class="line"></div><div class="line">	// DateTime is struct. That&apos;s how to set it as optional</div><div class="line">	public DateTime? DateOfBirth &#123; get; set; &#125;</div><div class="line"></div><div class="line">	// EF has no problem to recognize enum</div><div class="line">	public Gender? Gender &#123; get; set; &#125;</div><div class="line"></div><div class="line">	// For computable properties, use NotMapped to make EF skip processing them</div><div class="line">	[NotMapped]</div><div class="line">	public int? Age &#123;</div><div class="line">		get &#123;</div><div class="line">			TimeSpan? span = DateTime.Now - DateOfBirth;</div><div class="line">			if (span.HasValue) &#123;</div><div class="line">				return (int)Math.Ceiling(span.Value.Days / 365m);</div><div class="line">			&#125; else &#123;</div><div class="line">				return null;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		private set &#123; &#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class Study &#123;</div><div class="line">	public int StudyID &#123; get; set; &#125;</div><div class="line"></div><div class="line">	[Required]</div><div class="line">	public string StudyUID &#123; get; set; &#125;</div><div class="line"></div><div class="line">	[Required]</div><div class="line">	public string Name &#123; get; set; &#125;</div><div class="line"></div><div class="line">	public DateTime? ScheduleTime &#123; get; set; &#125;</div><div class="line">	public virtual Patient Patient &#123; get; set; &#125;</div><div class="line">	public virtual Order Order &#123; get; set; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class Order &#123;</div><div class="line">	public int OrderID &#123; get; set; &#125;</div><div class="line"></div><div class="line">	[Required]</div><div class="line">	public string AccessionNumber &#123; get; set; &#125;</div><div class="line"></div><div class="line">	public virtual ICollection&lt;Study&gt; Studies &#123; get; set; &#125; = new HashSet&lt;Study&gt;();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>Add the following in DbContext’s OnModelCreating method to fine-tune the model:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">modelBuilder.Entity&lt;Patient&gt;().ToTable(&quot;Patient&quot;, &quot;EFSample&quot;);</div><div class="line"></div><div class="line">modelBuilder.Entity&lt;Study&gt;().ToTable(&quot;Study&quot;, &quot;EFSample&quot;);</div><div class="line"></div><div class="line">// one-to-many with two directions</div><div class="line">modelBuilder.Entity&lt;Order&gt;().ToTable(&quot;RisOrder&quot;, &quot;EFSample&quot;)</div><div class="line">	.HasMany(o =&gt; o.Studies)</div><div class="line">	.WithOptional(s =&gt; s.Order)	// a study can have no order at all</div><div class="line">	.Map(m =&gt; m.MapKey(&quot;OrderID&quot;)); // Name a nicer foreign key, by default, it is NavigatingPropertyName_TargetTypeID</div><div class="line"></div><div class="line">// many-to-one with one direction</div><div class="line">modelBuilder.Entity&lt;Study&gt;()</div><div class="line">	.HasRequired(s =&gt; s.Patient) // a study must belong to a patient</div><div class="line">	.WithMany()</div><div class="line">	.Map(m =&gt; m.MapKey(&quot;PatientID&quot;));</div><div class="line">``` </div><div class="line"></div><div class="line">Notice that for required navigating property, the generated foreign keys will be marked as **ON DELETE CASCADE**: </div><div class="line">The screen-shot is</div><div class="line">![table-study](/table-study.png)</div><div class="line"></div><div class="line">Also notice that during saving a study to an order, both of the following ways is working:</div></pre></td></tr></table></figure></p>
+<p>Add the following in DbContext’s OnModelCreating method to fine-tune the model:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">modelBuilder.Entity&lt;Patient&gt;().ToTable(&quot;Patient&quot;, &quot;EFSample&quot;);</div><div class="line"></div><div class="line">modelBuilder.Entity&lt;Study&gt;().ToTable(&quot;Study&quot;, &quot;EFSample&quot;);</div><div class="line"></div><div class="line">// one-to-many with two directions</div><div class="line">modelBuilder.Entity&lt;Order&gt;().ToTable(&quot;RisOrder&quot;, &quot;EFSample&quot;)</div><div class="line">	.HasMany(o =&gt; o.Studies)</div><div class="line">	.WithOptional(s =&gt; s.Order)	// a study can have no order at all</div><div class="line">	.Map(m =&gt; m.MapKey(&quot;OrderID&quot;)); // Name a nicer foreign key, by default, it is NavigatingPropertyName_TargetTypeID</div><div class="line"></div><div class="line">// many-to-one with one direction</div><div class="line">modelBuilder.Entity&lt;Study&gt;()</div><div class="line">	.HasRequired(s =&gt; s.Patient) // a study must belong to a patient</div><div class="line">	.WithMany()</div><div class="line">	.Map(m =&gt; m.MapKey(&quot;PatientID&quot;));</div><div class="line">``` </div><div class="line"></div><div class="line">Notice that for required navigating property, the generated foreign keys will be marked as **ON DELETE CASCADE**: </div><div class="line">The screen-shot is</div><div class="line">![img](entity-framework-code-first/table-study.png)</div><div class="line"></div><div class="line">Also notice that during saving a study to an order, both of the following ways is working:</div></pre></td></tr></table></figure></p>
 <p>study.Order = anOrder;<br>// anOrder.Studies.Add(study)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Here is some example to play with the models</div></pre></td></tr></table></figure></p>
 <p>using (var ctx = new EFSampleContext()) {</p>
 <pre><code>// Query male patients
@@ -149,136 +375,336 @@ public User Bargainer { get; set; }
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://sevenbamboos.github.com/my-blog/2016/06/09/entity-framework-code-first/" data-id="cizr3xxef0004t1m6vrq7dth2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/Programming/">Programming</a></li></ul>
 
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/my-blog/tags/Programming/" rel="tag"># Programming</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/my-blog/2016/06/01/git/" rel="next" title="Git & Github Basic">
+                <i class="fa fa-chevron-left"></i> Git & Github Basic
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/my-blog/2017/01/09/Hexo/" rel="prev" title="Hexo - How to publish site on Github">
+                Hexo - How to publish site on Github <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
-  
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
     
-<nav id="article-nav">
-  
-    <a href="/my-blog/2017/01/09/Hexo/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
+  </div>
+
+
+        </div>
         
-          Hexo - How to publish site on Github
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80"
+               alt="Yuping Wang" />
+          <p class="site-author-name" itemprop="name">Yuping Wang</p>
+           
+              <p class="site-description motion-element" itemprop="description">85608565</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/my-blog/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-choose-code-first"><span class="nav-number">1.</span> <span class="nav-text">Why choose code first</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configure-the-correct-connection-string-in-DbContext"><span class="nav-number">2.</span> <span class="nav-text">Configure the correct connection string in DbContext</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Many-to-many-relationship"><span class="nav-number">3.</span> <span class="nav-text">Many-to-many relationship</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Many-to-one-and-one-to-many"><span class="nav-number">4.</span> <span class="nav-text">Many-to-one and one-to-many</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
         
       </div>
-    </a>
-  
-  
-    <a href="/my-blog/2016/06/01/git/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Git &amp; Github Basic</div>
-    </a>
-  
-</nav>
+    </main>
 
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
   
-</article>
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuping Wang</span>
+</div>
 
-</section>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
         
-          <aside id="sidebar">
-  
-    
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/Programming/">Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/Tool/">Tool</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/my-blog/tags/Programming/" style="font-size: 10px;">Programming</a> <a href="/my-blog/tags/Tool/" style="font-size: 20px;">Tool</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2016/06/">June 2016</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/my-blog/2017/02/27/ES-2015/">ES2015</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2017/02/13/PPT-with-HTML/">PPT with HTML</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2017/02/13/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2017/01/09/Hexo/">Hexo - How to publish site on Github</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2016/06/09/entity-framework-code-first/">Code First in Entity framework</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2017 Yuping Wang<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/my-blog/" class="mobile-nav-link">Home</a>
-  
-    <a href="/my-blog/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+    </footer>
+
     
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/my-blog/fancybox/jquery.fancybox.css">
-  <script src="/my-blog/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/my-blog/js/script.js"></script>
-
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
   </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/my-blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/my-blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/my-blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
 </body>
 </html>
