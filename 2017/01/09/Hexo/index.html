@@ -71,7 +71,7 @@
 <link href="/my-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Tool," />
+  <meta name="keywords" content="Hexo," />
 
 
 
@@ -97,7 +97,7 @@ Workflow123456hexo">
 <meta property="og:description" content="It’s a tool that supports generating static HTML from Markdown, which makes it suitable to publish personal blog on website (e.g. github-pages).
 Installation1npm install -g hexo-cli
 Workflow123456hexo">
-<meta property="og:updated_time" content="2017-02-28T13:48:52.000Z">
+<meta property="og:updated_time" content="2017-03-05T03:40:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo - How to publish site on Github">
 <meta name="twitter:description" content="It’s a tool that supports generating static HTML from Markdown, which makes it suitable to publish personal blog on website (e.g. github-pages).
@@ -207,12 +207,32 @@ Workflow123456hexo">
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/my-blog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/my-blog/archives" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/my-blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
           </a>
         </li>
       
@@ -292,6 +312,28 @@ Workflow123456hexo">
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Tool/" itemprop="url" rel="index">
+                    <span itemprop="name">Tool</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -321,7 +363,8 @@ Workflow123456hexo">
 <h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo-cli</div></pre></td></tr></table></figure>
 <h2 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">hexo init &lt;folder&gt;</div><div class="line">cd &lt;folder&gt;</div><div class="line">hexo clean</div><div class="line">hexo n &quot;Title&quot;</div><div class="line">hexo g[enerate]</div><div class="line">hexo s[erver]</div></pre></td></tr></table></figure>
 <h2 id="Deploy-to-github-pages"><a href="#Deploy-to-github-pages" class="headerlink" title="Deploy to github-pages"></a>Deploy to github-pages</h2><p>It’s better to create a repo (on github) for the hexo project itself and another repo for the generated HTML files so that we can add contents even on different machines.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm install --save hexo-deployer-git</div><div class="line">// add repo, branch setting to config file</div><div class="line">hexo d[eploy]</div></pre></td></tr></table></figure></p>
-<h2 id="Theme-TBD"><a href="#Theme-TBD" class="headerlink" title="Theme [TBD]"></a>Theme [TBD]</h2><p>There is a dedicate topic on Hexo at Zhihu.com</p>
+<h2 id="Theme"><a href="#Theme" class="headerlink" title="Theme"></a>Theme</h2><p>There is a dedicate topic on Hexo at Zhihu.com<br>A good starting point is <a href="http://theme-next.iissnan.com" target="_blank" rel="external">Next</a></p>
+<h3 id="How-to-generate-category-and-tag-pages-in-Next-theme"><a href="#How-to-generate-category-and-tag-pages-in-Next-theme" class="headerlink" title="How to generate category and tag pages (in Next theme)"></a>How to generate category and tag pages (in Next theme)</h3><p>By default, even enable these two in menu section of the theme config file, you will still get 404 error when nevigating to “categories” or “tags” pages. The reason is due to the missing index.html under the folder of the above two names. The fix is to add pages with <code>hexo new page categories</code> and <code>hexo new page index</code>. Then modify the generated index.md to:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// index.md for categories</div><div class="line">type: &quot;categories&quot;</div><div class="line">comments: false</div><div class="line"></div><div class="line">// index.md for tags </div><div class="line">type: &quot;tags&quot;</div><div class="line">comments: false</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -345,7 +388,7 @@ Workflow123456hexo">
       
         <div class="post-tags">
           
-            <a href="/my-blog/tags/Tool/" rel="tag"># Tool</a>
+            <a href="/my-blog/tags/Hexo/" rel="tag"># Hexo</a>
           
         </div>
       
@@ -449,13 +492,20 @@ Workflow123456hexo">
           
 
           
+            <div class="site-state-item site-state-categories">
+              <a href="/my-blog/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
 
           
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">2</span>
+              <a href="/my-blog/tags">
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">tags</span>
-              
+              </a>
             </div>
           
 
@@ -464,6 +514,26 @@ Workflow123456hexo">
         
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sevenbamboos" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/sevenbamboos" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
           
         </div>
 
@@ -488,7 +558,7 @@ Workflow123456hexo">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Workflow"><span class="nav-number">2.</span> <span class="nav-text">Workflow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deploy-to-github-pages"><span class="nav-number">3.</span> <span class="nav-text">Deploy to github-pages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Theme-TBD"><span class="nav-number">4.</span> <span class="nav-text">Theme [TBD]</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Workflow"><span class="nav-number">2.</span> <span class="nav-text">Workflow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deploy-to-github-pages"><span class="nav-number">3.</span> <span class="nav-text">Deploy to github-pages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Theme"><span class="nav-number">4.</span> <span class="nav-text">Theme</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-to-generate-category-and-tag-pages-in-Next-theme"><span class="nav-number">4.1.</span> <span class="nav-text">How to generate category and tag pages (in Next theme)</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -510,7 +580,7 @@ Workflow123456hexo">
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2016 - 
   <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
