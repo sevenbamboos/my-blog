@@ -71,7 +71,7 @@
 <link href="/my-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Angular,typescript,Javascript,Redux,NgRx,RxJS,Reactive Functional Programming," />
+  <meta name="keywords" content="Angular,typescript,Redux,NgRx,RxJS," />
 
 
 
@@ -93,7 +93,7 @@
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/03/24/when-angular-meets-ngrx/index.html">
 <meta property="og:site_name" content="Sam's Chest of Drawers">
 <meta property="og:description" content="IntroductionIt’s quite a long time after the last post. Although keeping learning in a systematic way in this period, I find it more difficult than expected to come up with a post with decent insight.">
-<meta property="og:updated_time" content="2017-03-25T04:09:26.000Z">
+<meta property="og:updated_time" content="2017-03-26T14:28:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="When Angular meets NgRx">
 <meta name="twitter:description" content="IntroductionIt’s quite a long time after the last post. Although keeping learning in a systematic way in this period, I find it more difficult than expected to come up with a post with decent insight.">
@@ -370,6 +370,7 @@
 <p>Again, it depends whether there is a need for unit test.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// Add component</div><div class="line">ng g component --flat true --inline-style true --spec false --app &lt;app-name&gt; folder/name</div></pre></td></tr></table></figure>
 <p>If a component uses inline-style (and there is no unit test), then it has at most two files: one for source code, the other for template. As a result, we can use <code>flat</code> not to wrap it in a new folder. Note, as same as module, the new component will have a “component” suffix so it’s unnecessary to include it in the command line argument.</p>
+<p>Regarding adding styles to @angular/cli, first we need to install the style with:<br><code>npm i --save bootstrap@next</code>, for now it will install a beta version of bootstrap 4.0. Then add reference to the “styles” section of angular-cli.json:<br><code>../node_modules/bootstrap/dist/css/bootstrap.min.css</code>. It starts the root folder from src, and that’s the reason I put <code>..</code> at the beginning.</p>
 <h2 id="Typescript"><a href="#Typescript" class="headerlink" title="Typescript"></a>Typescript</h2><p>Normally, with the help of @angular/cli, there is no need to configure Typescript. However, for Node projects, there is something to do to make Typescript compiler understand external libraries (which are not written in Typescript) as well as provide indication to IDE. </p>
 <p>For example, to program Node in Typescript, first we need the type definition of Node: <code>npm i @types/node --save-dev</code>. </p>
 <p>Then add the reference to the beginning of source file:<br><code>///&lt;reference path=&quot;../node_modules/@types/node/index.d.ts&quot;/&gt;</code>.<br>However, there is warning of this way of adding reference when compiling the source file and I’ve figured out no better way to walk around.</p>
@@ -418,15 +419,11 @@
           
             <a href="/my-blog/tags/typescript/" rel="tag"># typescript</a>
           
-            <a href="/my-blog/tags/Javascript/" rel="tag"># Javascript</a>
-          
             <a href="/my-blog/tags/Redux/" rel="tag"># Redux</a>
           
             <a href="/my-blog/tags/NgRx/" rel="tag"># NgRx</a>
           
             <a href="/my-blog/tags/RxJS/" rel="tag"># RxJS</a>
-          
-            <a href="/my-blog/tags/Reactive-Functional-Programming/" rel="tag"># Reactive Functional Programming</a>
           
         </div>
       
@@ -519,7 +516,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/my-blog/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -528,7 +525,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/my-blog/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -537,7 +534,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/my-blog/tags">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

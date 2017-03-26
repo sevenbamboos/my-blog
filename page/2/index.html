@@ -553,6 +553,620 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2015/03/16/what-I-learned-from-school-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2015/03/16/what-I-learned-from-school-2/" itemprop="url">
+                  What I learned from school 2
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-16T22:35:00+08:00">
+                03-16-2015
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Lifestyle/" itemprop="url" rel="index">
+                    <span itemprop="name">Lifestyle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Define-key-information-in-fundamental-engineering"><a href="#Define-key-information-in-fundamental-engineering" class="headerlink" title="Define key information in fundamental engineering"></a>Define key information in fundamental engineering</h2><p>My specialization is computer science and software engineering, and my knowledge of this part starts from Turning machine, a mathematical model of computation. </p>
+<blockquote>
+<p>From the “computer composition” course, I learned that a Turning machine is a Finite State Machine (FSM) and consists of a number of functions, which is able to change FSM from one state to another based on the input. </p>
+</blockquote>
+<p>A more general concept, Universal Turning Machine (UTM), is a Turning machine that can turn into any Turning machine with the description of the target machine as input. It means we don’t need to build specific machines for specific tasks.</p>
+<p>For me, the theory of Turning machine has influence in two areas. One is that it helps to understand the modern computer systems (which I will describe later). The other is “Turning complete”, a way to measure the capability of a computer. There are four elements in “Turning complete”: unlimited storage, ability to do arithmetic, evaluation with condition and the support of repetition of execution. They are mandatory for a model with maximum capability of computation. Once we find them in a model, we can prove it has reached the limit of computation and therefore is “Turning complete”. That is the reason why I spent a large amount of time in my dissertation of a model-based framework (2005) to implement functional programming (or formally Lambda calculus) in an imperative programming language. Recently (2014), I implemented a Domain Specific Language (DSL) for healthcare business and filled a gap using this thesis.</p>
+<p>Modern computer systems consist of a number of modules and sub modules, including Central Processing Unit (CPU), storage, the controllers to manage input / output devices and other external devices such as monitor, printer, massive storage (hard disk), network and so on. These modules talk to each other by an electronic pipeline called “bus”. In fact, the concept of bus is so widely used that it affects the design of software. For example, I prefer using event bus to connect multiple components to achieve the result of loose coupling. It builds communication between components without introducing strong dependency. It can also be used in the mode of “subscribe and publish”, which can further improve the flexibility of a system. For example, I worked in a Model-View-Controller (MVC) application. Controller receives data from model and updates view. Meanwhile, it talks to other controllers via an event bus so that all parts of User Interface (UI) get updated.</p>
+<p>Another concept that gives me inspiration is cache. Compared to high-speed of CPU, storage works much slowly. In normal usage, computer system sends the large amount of data between modules and it is very likely to be the bottleneck of the system. The solution is to provide a high-speed cache to keep temporary data. Bear the concept of cache in mind, I designed a connectivity component with compiled expression tree in memory (instead of in database) to improve the network throughput. (2013)</p>
+<p>Computation happens inside a CPU, so the understanding of CPU plays an important role. </p>
+<blockquote>
+<p>In “digital logic&amp;logic design” course, I learned how to design a CPU with Hardware Description Language (HDL). </p>
+</blockquote>
+<p>It uses logic gates as an elementary unit and based on the theory of Boolean algebra, logic gates can form into large computational block called combinational circuit to implement complex logic. Emulators are used to run the compiled HDL and the result can be verified without creating a real Integrated Circuit.</p>
+<p>Once CPU is ready, we can give it instructions to do computation. For this purpose, every CPU has been designed to understand a language called machine language. </p>
+<h2 id="Concepts-and-principles-to-across-a-broad-spectrum-of-engineering"><a href="#Concepts-and-principles-to-across-a-broad-spectrum-of-engineering" class="headerlink" title="Concepts and principles to across a broad spectrum of engineering"></a>Concepts and principles to across a broad spectrum of engineering</h2><blockquote>
+<p>“Assembly language” course gives me knowledge about how to do programming with this low-level language. </p>
+</blockquote>
+<p>For most software engineers, it is not the most commonly used language but it can be used by a middle-level language (e.g., C) to provide a hardware specific (or performance critical) solution. It also helps when fine-tuning a program written in higher level languages. Through the analysis to the generated assembly code, I can optimize the source code of higher-level language by changing the configuration of the compiler. </p>
+<blockquote>
+<p>It also involves the knowledge of “compiling principles”. I took my first programming course, “fundamentals of programming”, in the second term and C programming language was used as teaching material, which is a middle-level language. </p>
+</blockquote>
+<p>It has a clear syntax and provides an abstract layer for hardware, which enables me to focus on business logic (data structures and algorithms) instead of the details of how to manipulate hardware. It also helps to improve the program’s portability with less chance of incompatible issue. C programming language can be used to build drivers and provide Application Program Interface (API) for high-level languages to control hardware. It still has a large population of developers worldwide and is heavily used in the development of embedded systems and home automation.</p>
+<blockquote>
+<p>I took “Operating System” (OS) course in the third year and an extension course (advanced UNIX programming) during my master’s degree. </p>
+</blockquote>
+<p>Basically, OS stays on top of hardware and provides service to access CPU, storage and I/O devices. OS also has a scheduling system to run multiple programs simultaneously. Process is a running program with the exclusive use of a virtual memory space. OS cuts clock time into small slices and chooses a waiting process to run in each slice. Inside one process, thread is a lightweight solution for concurrent computation. I have some experience in performance fine-tuning for multi-thread program during the project of online auction.</p>
+<p>The concepts of process and virtual memory space play an important role in understanding programming languages. In fact, it involves a number of pitfalls that I was not aware of them until I worked for Kodak digital cinema division, where I spent much time debugging memory use of a video player.</p>
+<p>The top part of the virtual memory is for stacks, which is used when a program invokes a function. Each stack will be allocated with local variables and a return address. When the program returns from the function call, the stack will be deallocated. For local variables of value-type, they will be cleared along with the stack. For those of reference-type, their reference pointers in the stack will be cleared, but not the data in the heap (which is allocated via system function malloc). This is one of root causes of memory leak. </p>
+<h2 id="Fundamentals-to-solve-complex-engineering-problems"><a href="#Fundamentals-to-solve-complex-engineering-problems" class="headerlink" title="Fundamentals to solve complex engineering problems"></a>Fundamentals to solve complex engineering problems</h2><p>Different technologies have different solutions. Either programmer need to free the data in the heap manually (e.g., C and C++), or rely on reference counter implemented inside the runtime of the language (e.g., Object C). A more advanced (but may slower) solution is that the runtime performs a scan on the heap at regular intervals, looking for all allocated memory that have no external reference and mark them as candidates for garbage collection (e.g., Java, Javascript, C#).</p>
+<p>Another pitfall comes from the misunderstanding of how parameters are passed during function call. If they are passed as values, then the program has to do copy for these parameters before doing the function call. If they are passed as references, only the reference pointers have to be copied, not including the data in the heap.</p>
+<p>Without the understanding of stack and heap, it is unlikely to be successful in software development. That is the reason why I always pay attention to how programming languages do memory management.</p>
+<blockquote>
+<p>I learned from the course of “Network” about the TCP/IP protocol suite. </p>
+</blockquote>
+<p>The model of abstraction layers (link, internet, transport and application) has wide influence on the multi-layer architecture of software such as JavaEE core pattern, which in turn is a reference of my model-based framework “SGMF”. I also acquired knowledge about cryptography, which was used in a project of online auction (X.509 certification authority and Denial of Service), in a project of video player with embedded chip (RSA).</p>
+<blockquote>
+<p>I learned from the course of “Database” about Entity Relationship (ER) model and database normalisation, which give me the ability to design database in online auction project, connectivity module of healthcare system and other projects. </p>
+</blockquote>
+<p>The knowledge of structured query language (SQL) gives me the ability to fine-tune programs with object relationship mapping (ORM) frameworks such as “Hibernate”, JPA and ADO.net Entity (I wrote an article about how to do ORM in Entity framework with samples from real projects in my Github blog). A recent case was that on an Oracle database, I replaced “sysdate” with “currentTimestamp” in a database query to fix a subtle issue happened only when database and application are installed with different time zones.</p>
+<p>To sum up, these courses give me the fundamental knowledge to continue the study of specialist courses and work as a software engineer.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2015/02/23/what-I-learned-from-school-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2015/02/23/what-I-learned-from-school-1/" itemprop="url">
+                  What I learned from school 1
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-02-23T20:43:30+08:00">
+                02-23-2015
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Lifestyle/" itemprop="url" rel="index">
+                    <span itemprop="name">Lifestyle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Mathematics-statistics-and-numerical-methods"><a href="#Mathematics-statistics-and-numerical-methods" class="headerlink" title="Mathematics, statistics and numerical methods"></a>Mathematics, statistics and numerical methods</h2><blockquote>
+<p>The course of “Fourier analysis” mainly focuses on the idea of mapping a function in the time domain to the one in the frequency domain. </p>
+</blockquote>
+<p>I did not realize the usefulness in signal processing until I did a research on the compress algorithm of MP3, which is a file format to store sound wave in file system. When computer records a sound, first it receives the sound wave via a microphone. The sound becomes electronic signals and after processed by sound card, it is saved into file system with the original format WAV. Fourier transformation can convert the original signals (in the time domain) into a series of numbers which represent offsets on different frequencies. In this way, MP3 has enormous compression rate compared to the WAV format and therefore nowadays a portable music player is able to keep thousands of songs.</p>
+<blockquote>
+<p>In addition, with the help of Fourier transformation, we can analyze tones of music. </p>
+</blockquote>
+<p>For example, there is a popular application on mobile phone, which is able to match a pop song from its huge music library after analyzing the sound wave from microphone.</p>
+<p>Nevertheless, to achieve a higher compression rate, MP3 conversion will discard parts of tones with high frequency that is hardly audible for human beings. So it is not a lossless format and is not suitable for hi-fi equipment.</p>
+<blockquote>
+<p>Another example is from the course of “linear algebra”, which focuses on the calculation of matrices and vectors. </p>
+</blockquote>
+<p>In my current work, we maintain an image application for medical study, which can help radiologists diagnose diseases. If the image is 3D, there will be a picture-in-picture alongside, which is a 2D projection by the following transformation:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[ x ]   [ 1, 0, 0 ] </div><div class="line">[ y ] x [ 0, 1, 0 ] </div><div class="line">[ z ]</div></pre></td></tr></table></figure></p>
+<p>There are other transformations such as reversing, rotating and enlargement. In theory, an image can be enlarged unlimitedly. But in practice, the limit is the pixel dense of the original image file. If the image has to be enlarged over that limit, the transformation has to fill in extra pixels depending on detailed algorithms, which can cause a fuzzy outcome.</p>
+<h2 id="Statistical-variability"><a href="#Statistical-variability" class="headerlink" title="Statistical variability"></a>Statistical variability</h2><p>As a software developer, one of my responsibilities is to analyze performance data and fine-tune source accordingly. In my current job, the connectivity module that I maintain has two separate processors: one for Admit Discharge Transfer (ADT) message, the other for Order Message (ORM). They are different processors and should have no dependency. </p>
+<p>From the result of performance data, the processing time of them has a rather high correlation: 0.5. So I investigated in this direction and found that near the end of processing, both processors will trigger an asynchrony downstream workflow, which shares a common code base and had a performance issue. </p>
+<blockquote>
+<p>So it explains the unexpected high correlation and the finding is based on the knowledge of “probability and statistics” course.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">ADT(a)ms</th>
+<th style="text-align:center">ORM(b)ms</th>
+<th style="text-align:center">a</th>
+<th style="text-align:center">b</th>
+<th style="text-align:center">a*b</th>
+<th style="text-align:center">a*a</th>
+<th style="text-align:center">b*b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">747</td>
+<td style="text-align:center">1172</td>
+<td style="text-align:center">-271.4</td>
+<td style="text-align:center">-1029.4</td>
+<td style="text-align:center">279379.16</td>
+<td style="text-align:center">73657.96</td>
+<td style="text-align:center">1059664.36</td>
+</tr>
+<tr>
+<td style="text-align:right">412</td>
+<td style="text-align:center">2800</td>
+<td style="text-align:center">-606.4</td>
+<td style="text-align:center">598.6</td>
+<td style="text-align:center">-362991.04</td>
+<td style="text-align:center">367720.96</td>
+<td style="text-align:center">358321.96</td>
+</tr>
+<tr>
+<td style="text-align:right">2807</td>
+<td style="text-align:center">4594</td>
+<td style="text-align:center">1788.6</td>
+<td style="text-align:center">2392.6</td>
+<td style="text-align:center">4279404.36</td>
+<td style="text-align:center">3199089.96</td>
+<td style="text-align:center">5724534.76</td>
+</tr>
+<tr>
+<td style="text-align:right">832</td>
+<td style="text-align:center">1926</td>
+<td style="text-align:center">-186.4</td>
+<td style="text-align:center">-275.4</td>
+<td style="text-align:center">51334.56</td>
+<td style="text-align:center">34744.96</td>
+<td style="text-align:center">75845.16</td>
+</tr>
+<tr>
+<td style="text-align:right">294</td>
+<td style="text-align:center">515</td>
+<td style="text-align:center">-724.4</td>
+<td style="text-align:center">-1686.4</td>
+<td style="text-align:center">1221628.16</td>
+<td style="text-align:center">524755.36</td>
+<td style="text-align:center">2843944.96</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Mean(x)</th>
+<th style="text-align:center">Mean(x)</th>
+<th style="text-align:center">Sum(a*b)</th>
+<th style="text-align:center">Sum(a*a)</th>
+<th style="text-align:center">Sum(b*b)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1018.4</td>
+<td style="text-align:center">2201.4</td>
+<td style="text-align:center">5468755.2</td>
+<td style="text-align:center">4199969.2</td>
+<td style="text-align:center">10062311.2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Knowledge-of-probability-statistics-and-calculus"><a href="#Knowledge-of-probability-statistics-and-calculus" class="headerlink" title="Knowledge of probability, statistics and calculus"></a>Knowledge of probability, statistics and calculus</h2><p>E2.4 Knowledge of trigonometry, probability and statistics, differential and integral calculus, and multivariate calculus that supports the solving of complex engineering problems </p>
+<blockquote>
+<p>I use the knowledge of “probability and statistics” in another fine-tuning of software performance. </p>
+</blockquote>
+<p>I designed an in-memory component which in rare cases could fail to notify other nodes in a cluster environment of the latest change in database, and which in turn can cause unsynchronized error. Now a workaround is that we add a check to the nodes to synchronize with database at regular intervals. I need to give an analysis on how long we need to set the interval to reduce the probability of error to a certain level.</p>
+<p>Suppose we know the probability of the notification failure P(N) and the notification success P(N’), then the probability of the error has the following expression:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">P(E) = P(E|N)P(N) + P(E|N’)P(N’) (E2.4.1)</div></pre></td></tr></table></figure></p>
+<p>When the notification works, it is impossible to have this error. So the expression E2.4.1 can be simplified to:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">P(E|N) = P(E) / P(N) (E2.4.2)</div></pre></td></tr></table></figure></p>
+<p>Before we add the check, P(E|N) = 1. With the timely check, there is still a probability of getting error because:<br><code>P(E|N) = (T – 2a * T / t) / T</code> (a is a short interval that is regarded as an acceptable period to wait for data synchronization; t stands for the target interval; T stands for a given period of time unit, e.g., a minute or an hour). The expression E2.4.2 can be further simplified to:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">P(E|N) = (t – 2a) / t. (E2.4.3)</div></pre></td></tr></table></figure></p>
+<p>Suppose we want to reduce the error level to 1%. And suppose 2 seconds is the acceptable waiting time, then:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">t &lt;= 2a / (1 – 1%) = 4 / 0.99 (s) (E2.4.4)</div></pre></td></tr></table></figure></p>
+<p>So the solution is the node needs to perform the check every 4 seconds.</p>
+<p>I learned multivariate calculus in mathematics course, which has the following use in the management of software projects. I am the team leader of a group of software developers. I notice that the overall story points (an indicator used in Scrum methodology to measure performance) of the team in a certain period of time is a function of working hours H and expenditure E (including labour costs, entertainment fee, and so on): P(H, E).</p>
+<p>Now suppose the marginal point of working hours is proportional to the overall performance per working time:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">∂ P / ∂ H = a * (P / H) (a is a constant) (E2.4.5)</div></pre></td></tr></table></figure></p>
+<p>When E remains the same (E₀), it becomes a differential equation:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">P(H, E₀) = k * Hª (E2.4.6)</div></pre></td></tr></table></figure></p>
+<p>Similarly, from the partial derivative for expenditure E, we get:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">P(H₀, E) = m * Eᵇ (E2.4.7)</div></pre></td></tr></table></figure></p>
+<p>Combine E2.4.6 and E2.4.7, we get:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">P(H, E) = k * m * Hª * Eᵇ (E2.4.8)</div></pre></td></tr></table></figure></p>
+<p>Suppose it conforms to the Cobb-Douglas Production Function (suppose a + b = 1), the final equation is:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">P(H, E) = c * Hª * E¹⁻ª (c is a constant) (E2.4.9)</div></pre></td></tr></table></figure></p>
+<p>With the help of E2.4.9, I have quantitative knowledge of team’s performance and understand how to arrange resource to achieve team’s potential.</p>
+<h2 id="Differential-equations-in-time-dependent-processes"><a href="#Differential-equations-in-time-dependent-processes" class="headerlink" title="Differential equations in time-dependent processes"></a>Differential equations in time-dependent processes</h2><blockquote>
+<p>Differential equation is one of the most important applications of calculus (“advanced mathematics”). </p>
+</blockquote>
+<p>We can describe a phenomenon with a differential equation. With the analysis to sample data, we can find a formula for the equation and display it with graphics. It is very useful for software development.</p>
+<p>For example, modern CPU has multi-cores, which enables Operating System (OS) to create hundreds of threads to process data simultaneously. But each thread needs extra resource and switching among them too frequently can cause performance penalty. Therefore for a fully loaded web server, a technical question is how many threads we should configure in thread pool to make maximum use of the capability of hardware.<br>Supposing that very few threads exist when sever starts up and we set this moment as the start time. Gradually, external requests start coming and the server starts creating new threads to serve them. Depending on different OS, some have specific algorithms to create a number of new threads to serve concurrent requests. Supposing that the change rate of threads is proportional to the thread number, we have:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">d(C) / d(t) = a * C (C stands for thread number, a is a constant) (E2.5.1)</div></pre></td></tr></table></figure></p>
+<p>After a certain period of time when the thread number reaches a threshold, the thread number increases slowly and finally stops growing. The underlying reason is that all threads are busing with data processing and the average processing time becomes increasing so that it seems that CPU has not enough resource to create new thread. So in this case, the growth rate of threads will drop and the expression of the change rate of the thread number becomes:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">d (C) / d(t) = a * C ( 1 - C/H) (H stands for the threshold) (E2.5.2)</div></pre></td></tr></table></figure></p>
+<p>The meaning of this equation is when C is small enough, the growth rate is close to a * C. As C grows, the rate becomes slower and finally stops growing. After solving this equation, we get a function in time domain of the thread number:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">C (t) = H (1 + b * e ⁻ªᵗ)⁻¹ (b = (H - C₀) / C₀ (C₀ is the figure of thread number at the start time) (E2.5.3)</div></pre></td></tr></table></figure></p>
+<p>We also know that <code>lim C(t) = H (when t -&gt; ∞)</code>. With the help of this equation, we know how many threads should be initialized in thread pool to have the best performance. We also know how many servers we need to set up as a cluster to handle large number of requests.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2015/01/26/what-I-learned-from-school-0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2015/01/26/what-I-learned-from-school-0/" itemprop="url">
+                  What I learned from school 0
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-01-26T20:43:30+08:00">
+                01-26-2015
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Lifestyle/" itemprop="url" rel="index">
+                    <span itemprop="name">Lifestyle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Fundamental-quantitative-knowledge-of-physical-world"><a href="#Fundamental-quantitative-knowledge-of-physical-world" class="headerlink" title="Fundamental quantitative knowledge of physical world"></a>Fundamental quantitative knowledge of physical world</h2><blockquote>
+<p>In “physics” course, I learned the following fundamental concepts.</p>
+</blockquote>
+<p>Mass is an important property for a physical body. For example, to build a software model for the movement of a racing car, we need to calculate its mass by<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">∫density * d(volume)</div></pre></td></tr></table></figure></p>
+<p>In practice, a car consists of many parts and each of them has different densities. So an approximation is:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">∑ density-of-part * volume-of-part = density-of-engine * volume-of-engine </div><div class="line">+ density-of-tyre * volume-of-tyre + density-of-chassis * volume-of-chassis</div><div class="line">+ …</div></pre></td></tr></table></figure></p>
+<p>The second concept is Newton’s Second Law of Motion, which is the fundamentals of Kinetics. In a 3D world, the motion in each component can be described with the equation: </p>
+<pre><code>∑ Force = mass * acceleration
+</code></pre><p>Supposing that we are developing an angry-bird like game and need to analyze the path of a flying bird. If we can ignore the wind or the drag caused by air, then the speed on the x-component remains the same, while on the y-component, a constant acceleration (gravity) is taking effect. This information is sufficient to build a physical model for a video game. If it is a 3D game, we also need to add the force analysis on the z-component.</p>
+<p>The next and maybe the most significant concept is the atomic hypothesis. Atom’s motion can explain heat and mechanics phenomena. Atom’s electrical force can explain phenomena of electricity and magnetism. More importantly, it leads to quantum mechanics, which describes why at high frequencies, waves in electromagnetic field behave like particles. It means wave and particle might be two aspects of the same thing. For computer science, it is of importance because computers have difficulty in calculating continuous data like integration. Instead, computers use discrete sample data to provide approximate results. If progress is made in quantum computer, it can help build a better model for the computation of the physical world.</p>
+<blockquote>
+<p>In addition, “physics experiment” course tells me that no matter how many times we repeat an experiment, the result is unlikely to be exact the same as the figure calculated by laws. </p>
+</blockquote>
+<p>The same thing happens in computer science. For example, we cannot generate a real random number by a software program or get the accurate computation time (system clock is a timely signal coming from crystal oscillator). But in practice, we can prove that the overall result conforms to mathematical expectation. As a result, for software engineers, it does not make sense to try in vain to look for a perfect solution. Instead, an appropriate solution which can meet the needs is sufficient before a better solution is found.</p>
+<h2 id="Scientific-method-and-problem-solving"><a href="#Scientific-method-and-problem-solving" class="headerlink" title="Scientific method and problem solving"></a>Scientific method and problem solving</h2><blockquote>
+<p>In the course of “Dialectic of Nature”, I learned the fact that humans are in pursuit of truth, but have not revealed universal truths. </p>
+</blockquote>
+<p>To put it in another way, the laws in course books are not truths but approximations. On the other hand, these approximations are helpful in understanding thing in small scales or in the scope that we know for sure and then we can extend them to larger scales to find out better answers. In the pursuit of truth, the only method that we can rely on is to experiment. This illustrates what is the scientific method and I carry out the spirit in software design as following:</p>
+<ul>
+<li><p>The first step is to observe a requirement. In software development, I start from known conditions, carry out analysis in the domain of the problem and have discussions with domain experts to clarify the input / output of the system and how the system is supposed to be used (what is use scenarios).</p>
+</li>
+<li><p>The second step is to make judgements. I give my proposal or a draft design based on the result of the previous step, together with the domain knowledge and experience in similar problems. Sometimes, I also use my imagination or intuition as it is an important way from the known to the unknown.</p>
+</li>
+<li><p>The last and also the most important step is to experiment. I do experiment with source code to test my design and then do experiment with a running system to test the source code, which in turn is verified by software testing and customers’ feedback.</p>
+</li>
+</ul>
+<p>I also use the scientific method in problem solving. My approach is to start from a small scope until I reach a specific rule and then broad the scope to build a generic rule. Basically, in computer science, the divide-and-conquer approach is a typical use of this idea and I will explain it later.</p>
+<h2 id="Application-of-knowledge-to-solve-engineering-problems"><a href="#Application-of-knowledge-to-solve-engineering-problems" class="headerlink" title="Application of knowledge to solve engineering problems"></a>Application of knowledge to solve engineering problems</h2><p>I have used physics knowledge to design a model for an online auction, which has the following rule:</p>
+<blockquote>
+<p>Each participant bid for an item on sale with a bargain price that has to be higher than the current price. If at the end of an auction, the highest price comes from multiple participants, then the one who submits the price first will win. </p>
+</blockquote>
+<p>At first, the design was using the machine time of the application server as a global time. But the auction server became too complicated to process requests from clients and update its status with all other clients. The server could also become the bottleneck with the increasing number of clients. On the other hand, the application on client side relies on the notification from the auction server to update UI or to do validation on the input. The high network latency could affect its responsiveness.</p>
+<p>Inspired by Einstein’s Special Theory of Relativity, especially the concepts of affective past and affective future of space-time interval, I gave a new design, which does not need a global time. Instead, each client becomes an element of a vector, representing events from clients. At the beginning, each element has been reset and the auction server will broadcast the vector to each client. Client will update itself according to other client’s events and send the vector back to the server after updating its event in the vector. During an auction, whenever a client gives a bid, the event will be sent to the server and then broadcast to other clients to update everyone’s status. On one hand, it saves the computation time of the server. On the other hand, the distributed computation performed on client side provides better user experience since it is performed locally without network delay.</p>
+<p>The design has not been put into use just because the auction server could have performance issues to broadcast events to all clients. In spite of this, the new design brings about a clearer model which reduces the complexity of source code.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -602,7 +1216,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/my-blog/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -611,7 +1225,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/my-blog/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -620,7 +1234,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/my-blog/tags">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
