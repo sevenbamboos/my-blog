@@ -921,6 +921,14 @@
           
             <p>It’s a tool that supports generating static HTML from Markdown, which makes it suitable to publish personal blog on website (e.g. github-pages).</p>
 <h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo-cli</div></pre></td></tr></table></figure>
+<h2 id="Issue-of-cannot-find-module-DTraceProviderBindings"><a href="#Issue-of-cannot-find-module-DTraceProviderBindings" class="headerlink" title="Issue of cannot-find-module-DTraceProviderBindings"></a>Issue of cannot-find-module-DTraceProviderBindings</h2><p>After playing a hexo project for some time, I happened to try a <code>yarn install</code>, which may update some underlying dependencies. Then I found hexo didn’t work anymore. The complain is:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cannot find module &apos;./build/Release/DTraceProviderBindings</div></pre></td></tr></table></figure></p>
+<p>I tried: </p>
+<ul>
+<li><code>npm i hexo</code>. No use.</li>
+<li><code>rm -rfd node_modules &amp;&amp; npm i</code>. No use.</li>
+<li><code>npm i hexo --no-optional</code>. It works for me.</li>
+<li><code>npm uninstall hexo-cli -g &amp;&amp; npm i hexo-cli -g</code>. It should work but I haven’t tried it.</li>
+</ul>
 <h2 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">hexo init &lt;folder&gt;</div><div class="line">cd &lt;folder&gt;</div><div class="line">hexo clean</div><div class="line">hexo n &quot;Title&quot;</div><div class="line">hexo g[enerate]</div><div class="line">hexo s[erver]</div></pre></td></tr></table></figure>
 <h2 id="Deploy-to-github-pages"><a href="#Deploy-to-github-pages" class="headerlink" title="Deploy to github-pages"></a>Deploy to github-pages</h2><p>It’s better to create a repo (on github) for the hexo project itself and another repo for the generated HTML files so that we can add contents even on different machines.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm install --save hexo-deployer-git</div><div class="line">// add repo, branch setting to config file</div><div class="line">hexo d[eploy]</div></pre></td></tr></table></figure></p>
 <h2 id="Theme"><a href="#Theme" class="headerlink" title="Theme"></a>Theme</h2><p>There is a dedicate topic on Hexo at Zhihu.com<br>A good starting point is <a href="http://theme-next.iissnan.com" target="_blank" rel="external">Next</a></p>
@@ -960,7 +968,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/my-blog/page/2/">2</a><a class="extend next" rel="next" href="/my-blog/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/my-blog/page/2/">2</a><a class="page-number" href="/my-blog/page/3/">3</a><a class="extend next" rel="next" href="/my-blog/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1005,7 +1013,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/my-blog/archives">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1023,7 +1031,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/my-blog/tags">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

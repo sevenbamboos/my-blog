@@ -89,20 +89,20 @@
 
 <meta name="description" content="It’s a tool that supports generating static HTML from Markdown, which makes it suitable to publish personal blog on website (e.g. github-pages).
 Installation1npm install -g hexo-cli
-Workflow123456hexo">
+Issue of cannot-fi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo - How to publish site on Github">
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/01/09/Hexo/index.html">
 <meta property="og:site_name" content="Sam's Chest of Drawers">
 <meta property="og:description" content="It’s a tool that supports generating static HTML from Markdown, which makes it suitable to publish personal blog on website (e.g. github-pages).
 Installation1npm install -g hexo-cli
-Workflow123456hexo">
-<meta property="og:updated_time" content="2017-03-05T03:40:35.000Z">
+Issue of cannot-fi">
+<meta property="og:updated_time" content="2017-03-27T08:43:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo - How to publish site on Github">
 <meta name="twitter:description" content="It’s a tool that supports generating static HTML from Markdown, which makes it suitable to publish personal blog on website (e.g. github-pages).
 Installation1npm install -g hexo-cli
-Workflow123456hexo">
+Issue of cannot-fi">
 
 
 
@@ -361,6 +361,14 @@ Workflow123456hexo">
       
         <p>It’s a tool that supports generating static HTML from Markdown, which makes it suitable to publish personal blog on website (e.g. github-pages).</p>
 <h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo-cli</div></pre></td></tr></table></figure>
+<h2 id="Issue-of-cannot-find-module-DTraceProviderBindings"><a href="#Issue-of-cannot-find-module-DTraceProviderBindings" class="headerlink" title="Issue of cannot-find-module-DTraceProviderBindings"></a>Issue of cannot-find-module-DTraceProviderBindings</h2><p>After playing a hexo project for some time, I happened to try a <code>yarn install</code>, which may update some underlying dependencies. Then I found hexo didn’t work anymore. The complain is:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cannot find module &apos;./build/Release/DTraceProviderBindings</div></pre></td></tr></table></figure></p>
+<p>I tried: </p>
+<ul>
+<li><code>npm i hexo</code>. No use.</li>
+<li><code>rm -rfd node_modules &amp;&amp; npm i</code>. No use.</li>
+<li><code>npm i hexo --no-optional</code>. It works for me.</li>
+<li><code>npm uninstall hexo-cli -g &amp;&amp; npm i hexo-cli -g</code>. It should work but I haven’t tried it.</li>
+</ul>
 <h2 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">hexo init &lt;folder&gt;</div><div class="line">cd &lt;folder&gt;</div><div class="line">hexo clean</div><div class="line">hexo n &quot;Title&quot;</div><div class="line">hexo g[enerate]</div><div class="line">hexo s[erver]</div></pre></td></tr></table></figure>
 <h2 id="Deploy-to-github-pages"><a href="#Deploy-to-github-pages" class="headerlink" title="Deploy to github-pages"></a>Deploy to github-pages</h2><p>It’s better to create a repo (on github) for the hexo project itself and another repo for the generated HTML files so that we can add contents even on different machines.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm install --save hexo-deployer-git</div><div class="line">// add repo, branch setting to config file</div><div class="line">hexo d[eploy]</div></pre></td></tr></table></figure></p>
 <h2 id="Theme"><a href="#Theme" class="headerlink" title="Theme"></a>Theme</h2><p>There is a dedicate topic on Hexo at Zhihu.com<br>A good starting point is <a href="http://theme-next.iissnan.com" target="_blank" rel="external">Next</a></p>
@@ -485,7 +493,7 @@ Workflow123456hexo">
           
             <div class="site-state-item site-state-posts">
               <a href="/my-blog/archives">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -503,7 +511,7 @@ Workflow123456hexo">
           
             <div class="site-state-item site-state-tags">
               <a href="/my-blog/tags">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -558,7 +566,7 @@ Workflow123456hexo">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Workflow"><span class="nav-number">2.</span> <span class="nav-text">Workflow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deploy-to-github-pages"><span class="nav-number">3.</span> <span class="nav-text">Deploy to github-pages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Theme"><span class="nav-number">4.</span> <span class="nav-text">Theme</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-to-generate-category-and-tag-pages-in-Next-theme"><span class="nav-number">4.1.</span> <span class="nav-text">How to generate category and tag pages (in Next theme)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Issue-of-cannot-find-module-DTraceProviderBindings"><span class="nav-number">2.</span> <span class="nav-text">Issue of cannot-find-module-DTraceProviderBindings</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Workflow"><span class="nav-number">3.</span> <span class="nav-text">Workflow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deploy-to-github-pages"><span class="nav-number">4.</span> <span class="nav-text">Deploy to github-pages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Theme"><span class="nav-number">5.</span> <span class="nav-text">Theme</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-to-generate-category-and-tag-pages-in-Next-theme"><span class="nav-number">5.1.</span> <span class="nav-text">How to generate category and tag pages (in Next theme)</span></a></li></ol></li></ol></div>
             
 
           </div>
