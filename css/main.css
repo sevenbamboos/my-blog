@@ -830,7 +830,7 @@ pre .javascript .function {
   font-size: 14px;
   color: #fff;
   background: #222;
-  border: 2px solid #222;
+  border: 2px solid #0684bd;
   text-decoration: none;
   border-radius: 0;
   transition-property: background-color;
@@ -994,7 +994,7 @@ pre .javascript .function {
   display: inline-block;
   padding: 0 40px;
   color: #fff;
-  background: #222;
+  background: #0684bd;
   border-bottom: none;
 }
 .brand:hover {
@@ -1438,7 +1438,7 @@ pre .javascript .function {
 .post-button .btn {
   color: #fff;
   font-size: 14px;
-  background: #222;
+  background: #0684bd;
   border-radius: 0;
   line-height: 2;
   margin: 0 4px 8px 4px;
@@ -1698,7 +1698,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #743306;
+  background: #776eff;
 }
 .links-of-blogroll {
   font-size: 13px;
