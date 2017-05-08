@@ -71,7 +71,7 @@
 <link href="/my-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Swift," />
 
 
 
@@ -87,16 +87,17 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="In this second series, I wanna to talk about struct, which is a rather new concept for Java programmer. Value typeFirst of all, remember struct is value type (in comparison with reference type as clas">
+<meta name="keywords" content="Swift">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://sevenbamboos.github.com/2017/02/13/hello-world/index.html">
+<meta property="og:title" content="Swift For Java Programmer 2 - Struct">
+<meta property="og:url" content="https://sevenbamboos.github.com/2017/05/08/swift-for-java-programmer-2/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:updated_time" content="2017-02-13T14:22:24.000Z">
+<meta property="og:description" content="In this second series, I wanna to talk about struct, which is a rather new concept for Java programmer. Value typeFirst of all, remember struct is value type (in comparison with reference type as clas">
+<meta property="og:updated_time" content="2017-05-08T15:28:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="Swift For Java Programmer 2 - Struct">
+<meta name="twitter:description" content="In this second series, I wanna to talk about struct, which is a rather new concept for Java programmer. Value typeFirst of all, remember struct is value type (in comparison with reference type as clas">
 
 
 
@@ -124,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="https://sevenbamboos.github.com/2017/02/13/hello-world/"/>
+  <link rel="canonical" href="https://sevenbamboos.github.com/2017/05/08/swift-for-java-programmer-2/"/>
 
 
 
 
 
-  <title> Hello World | Sam's Chest of Drawers </title>
+  <title> Swift For Java Programmer 2 - Struct | Sam's Chest of Drawers </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -259,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/02/13/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/05/08/swift-for-java-programmer-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yuping Wang">
@@ -280,7 +281,7 @@
             
             
               
-                Hello World
+                Swift For Java Programmer 2 - Struct
               
             
           </h1>
@@ -295,8 +296,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T22:22:24+08:00">
-                02-13-2017
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-08T23:20:36+08:00">
+                05-08-2017
               </time>
             
 
@@ -305,6 +306,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -331,15 +354,77 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>In this second series, I wanna to talk about struct, which is a rather new concept for Java programmer.</p>
+<h1 id="Value-type"><a href="#Value-type" class="headerlink" title="Value type"></a>Value type</h1><p>First of all, remember struct is value type (in comparison with reference type as class) so that on assignment instances are COPIED. It has the following impact:</p>
+<ol>
+<li><p>The instance will be allocated in stack (instead of heap), which means it could be fast and has trouble-free for memory management.</p>
+</li>
+<li><p>If the variable is declared as <code>let instance = ...</code>, then there is no way to modify the value, including its properties. The fix is to use <code>var instance = ...</code>.</p>
+</li>
+</ol>
+<a id="more"></a>
+<ol>
+<li><p>The above case is for the case that we modify the struct instance by changing the property. If the change is via a method, then the method needs to be marked as <code>mutating</code>(so that the compiler knows it can’t be called for a constant struct instance).</p>
+</li>
+<li><p>Other instances, which were copied from the original instance, have no impact if the original instance get changed. The same behavior as integer, boolean and string in Java. That’s also the reason that in Swift, Int, Bool and String (and other primitives) are defined as struct.</p>
+</li>
+</ol>
+<blockquote>
+<p>Note that value type is copied into a cloned instance, which can be NOT obvious in case like <code>for</code> loop. This is a tricky one <a href="http://stackoverflow.com/questions/26371751/changing-the-value-of-struct-in-an-arra" target="_blank" rel="external">stackoverflow</a></p>
+</blockquote>
+<h1 id="Property-observer"><a href="#Property-observer" class="headerlink" title="Property observer"></a>Property observer</h1><p>It’s simple to monitor property’s change with <code>willSet</code> and <code>didSet</code>. The former can visit the value via <code>newValue</code>, while the later via <code>oldValue</code>. </p>
+<pre><code>struct Person {
+  let name: String
+  var birthYear: Int {
+    willSet {
+      guard newValue &lt;= Person.currentYear() else {
+        print(&quot;Invalid birthYear before set: \(newValue)&quot;)
+        return
+    }
+  }
+
+    didSet {
+      guard birthYear &lt;= Person.currentYear() else {
+        print(&quot;Invalid birthYear after set: \(birthYear)&quot;)
+        birthYear = oldValue
+        return
+      }
+      print(magicNo * birthYear)
+    }
+  }
+</code></pre><blockquote>
+<p>One thing that puzzles me is that how to prevent an invalid value in <code>willSet</code></p>
+</blockquote>
+<h1 id="Lazy-property"><a href="#Lazy-property" class="headerlink" title="Lazy property"></a>Lazy property</h1><p>Lazy property won’t need to be initialized until the first time it’s accessed. However, compiler will enforce to include it in Person’s init unless we give an explicit init like that.</p>
+<pre><code>lazy var magicNo: Int = {
+  print(&quot;calculating magicNo&quot;)
+  return 13
+}()
+
+init (name: String, birth: Int) { ... }
+</code></pre><blockquote>
+<p>Note that the lazy block only gets executed once throughout the lifecycle of a <code>Person</code> instance. </p>
+</blockquote>
+<h1 id="Computerized-property"><a href="#Computerized-property" class="headerlink" title="Computerized property"></a>Computerized property</h1><p>In spite of this, there is no need of these two blocks for computerized properties since it can be obviously written into its get and set. In the following piece of code, <code>birthYear</code> has property observers, while <code>age</code> is a computerized property (from <code>birthYear</code>).</p>
+<pre><code>  var age: Int {
+    get {
+      return Person.calculateAge(year: birthYear)
+    }
+    set {
+      birthYear = Person.currentYear() - newValue
+    }
+  }
+
+  static func calculateAge(year: Int) -&gt; Int {
+    return currentYear() - year
+  }
+
+  static func currentYear() -&gt; Int {
+    return Calendar(identifier: Calendar.Identifier.gregorian)
+      .component(Calendar.Component.year, from: Date())
+  }
+}
+</code></pre><p>This wraps all about struct. In the next session, I’ll talk about class.</p>
 
       
     </div>
@@ -361,6 +446,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/my-blog/tags/Swift/" rel="tag"># Swift</a>
+          
+        </div>
+      
 
       
         
@@ -370,8 +461,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/my-blog/2017/01/09/Hexo/" rel="next" title="Hexo - How to publish site on Github">
-                <i class="fa fa-chevron-left"></i> Hexo - How to publish site on Github
+              <a href="/my-blog/2017/05/07/swift-for-java-programer/" rel="next" title="Swift For Java Programer">
+                <i class="fa fa-chevron-left"></i> Swift For Java Programer
               </a>
             
           </div>
@@ -379,10 +470,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/my-blog/2017/02/13/PPT-with-HTML/" rel="prev" title="PPT with HTML">
-                PPT with HTML <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -527,7 +614,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Value-type"><span class="nav-number">1.</span> <span class="nav-text">Value type</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Property-observer"><span class="nav-number">2.</span> <span class="nav-text">Property observer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lazy-property"><span class="nav-number">3.</span> <span class="nav-text">Lazy property</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Computerized-property"><span class="nav-number">4.</span> <span class="nav-text">Computerized property</span></a></li></ol></div>
             
 
           </div>
