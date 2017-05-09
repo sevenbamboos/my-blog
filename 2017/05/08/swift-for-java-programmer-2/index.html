@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="In this second series, I wanna to talk about struct, which is a rather new concept for Java programmer. Value typeFirst of all, remember struct is value type (in comparison with reference type as clas">
+<meta name="description" content="In this second series, I want to talk about struct, which is a rather new concept for Java programmer. Value typeFirst of all, remember struct is value type (in comparison with reference type as class">
 <meta name="keywords" content="Swift">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift For Java Programmer 2 - Struct">
+<meta property="og:title" content="Swift For Java Programmer 2">
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/05/08/swift-for-java-programmer-2/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
-<meta property="og:description" content="In this second series, I wanna to talk about struct, which is a rather new concept for Java programmer. Value typeFirst of all, remember struct is value type (in comparison with reference type as clas">
-<meta property="og:updated_time" content="2017-05-08T15:28:11.000Z">
+<meta property="og:description" content="In this second series, I want to talk about struct, which is a rather new concept for Java programmer. Value typeFirst of all, remember struct is value type (in comparison with reference type as class">
+<meta property="og:updated_time" content="2017-05-09T15:02:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift For Java Programmer 2 - Struct">
-<meta name="twitter:description" content="In this second series, I wanna to talk about struct, which is a rather new concept for Java programmer. Value typeFirst of all, remember struct is value type (in comparison with reference type as clas">
+<meta name="twitter:title" content="Swift For Java Programmer 2">
+<meta name="twitter:description" content="In this second series, I want to talk about struct, which is a rather new concept for Java programmer. Value typeFirst of all, remember struct is value type (in comparison with reference type as class">
 
 
 
@@ -131,7 +131,7 @@
 
 
 
-  <title> Swift For Java Programmer 2 - Struct | Sam's Chest of Drawers </title>
+  <title> Swift For Java Programmer 2 | Sam's Chest of Drawers </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -281,7 +281,7 @@
             
             
               
-                Swift For Java Programmer 2 - Struct
+                Swift For Java Programmer 2
               
             
           </h1>
@@ -354,21 +354,19 @@
       
 
       
-        <p>In this second series, I wanna to talk about struct, which is a rather new concept for Java programmer.</p>
+        <p>In this second series, I want to talk about struct, which is a rather new concept for Java programmer.</p>
 <h1 id="Value-type"><a href="#Value-type" class="headerlink" title="Value type"></a>Value type</h1><p>First of all, remember struct is value type (in comparison with reference type as class) so that on assignment instances are COPIED. It has the following impact:</p>
 <ol>
 <li><p>The instance will be allocated in stack (instead of heap), which means it could be fast and has trouble-free for memory management.</p>
 </li>
 <li><p>If the variable is declared as <code>let instance = ...</code>, then there is no way to modify the value, including its properties. The fix is to use <code>var instance = ...</code>.</p>
 </li>
-</ol>
-<a id="more"></a>
-<ol>
 <li><p>The above case is for the case that we modify the struct instance by changing the property. If the change is via a method, then the method needs to be marked as <code>mutating</code>(so that the compiler knows it can’t be called for a constant struct instance).</p>
 </li>
 <li><p>Other instances, which were copied from the original instance, have no impact if the original instance get changed. The same behavior as integer, boolean and string in Java. That’s also the reason that in Swift, Int, Bool and String (and other primitives) are defined as struct.</p>
 </li>
 </ol>
+<a id="more"></a>
 <blockquote>
 <p>Note that value type is copied into a cloned instance, which can be NOT obvious in case like <code>for</code> loop. This is a tricky one <a href="http://stackoverflow.com/questions/26371751/changing-the-value-of-struct-in-an-arra" target="_blank" rel="external">stackoverflow</a></p>
 </blockquote>
@@ -471,6 +469,10 @@ init (name: String, birth: Int) { ... }
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/my-blog/2017/05/09/swift-for-java-programmer-3/" rel="prev" title="Swift For Java Programmer 3">
+                Swift For Java Programmer 3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -541,7 +543,7 @@ init (name: String, birth: Int) { ... }
           
             <div class="site-state-item site-state-posts">
               <a href="/my-blog/archives">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -559,7 +561,7 @@ init (name: String, birth: Int) { ... }
           
             <div class="site-state-item site-state-tags">
               <a href="/my-blog/tags">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
