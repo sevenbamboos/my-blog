@@ -71,7 +71,7 @@
 <link href="/my-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="[object Object]," />
+  <meta name="keywords" content="Swift," />
 
 
 
@@ -88,13 +88,13 @@
 
 
 <meta name="description" content="In the third series, let’s start the part of class. In Swift, class is reference type, which has a lot in common with this concept in other programming language like Java, c# and Javascript. superFor">
-<meta name="keywords" content="[object Object]">
+<meta name="keywords" content="Swift">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift For Java Programmer 3">
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/05/09/swift-for-java-programmer-3/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
 <meta property="og:description" content="In the third series, let’s start the part of class. In Swift, class is reference type, which has a lot in common with this concept in other programming language like Java, c# and Javascript. superFor">
-<meta property="og:updated_time" content="2017-05-09T15:03:49.000Z">
+<meta property="og:updated_time" content="2017-05-10T14:55:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift For Java Programmer 3">
 <meta name="twitter:description" content="In the third series, let’s start the part of class. In Swift, class is reference type, which has a lot in common with this concept in other programming language like Java, c# and Javascript. superFor">
@@ -370,8 +370,104 @@
 }
 </code></pre><p>We can’t call any instance method until phase 2 because at that time the initialization has been completed.</p>
 <a id="more"></a>
-<h1 id="init"><a href="#init" class="headerlink" title="init"></a>init</h1><p>TBD</p>
+<h1 id="Designated-init-vs-convenience-init"><a href="#Designated-init-vs-convenience-init" class="headerlink" title="Designated init vs convenience init"></a>Designated init vs convenience init</h1><p>It’s better to illustrate the rules and constraints via the diagrams from <a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Initialization.html" target="_blank" rel="external">Apple’s official document</a> I try to explain with a doctor-is-a-person example.</p>
+<blockquote>
+<p>Note the comments I add in Doctor class</p>
+</blockquote>
+<pre><code>class Person : CustomStringConvertible {
+    var fn: String
+    var ln: String
 
+    var description: String {
+        return &quot;\(fn) \(ln)&quot;
+    }
+
+    // Designated
+    init(fn: String, ln: String) {
+        self.fn = fn
+        self.ln = ln
+    }
+
+    convenience init(name: String) {
+        let arr = name.components(separatedBy: &quot; &quot;)
+        self.init(fn: arr[0], ln: arr[1])
+    }
+}
+
+class Doctor : Person {
+    // Since we have a new property (not initialized) in sub-class,
+    // we need to define new designated inits.
+    // Otherwise it&apos;s possible to inherit inits from the base-class
+    var title: String
+
+    // override is required during compiling
+    override var description: String {
+        return &quot;\(title) \(fn) \(ln)&quot;
+    }    
+
+    // Designated for sub-class, it MUST call a designated init from the base-class
+    init(fn: String, ln: String, title: String) {
+        self.title = title
+        super.init(fn: fn, ln: ln)
+    }
+
+    // Another designated, it must NOT call a convenience init from the base-class
+    init(name: String, title: String) {
+        self.title = title
+        let arr = name.components(separatedBy: &quot; &quot;)
+        super.init(fn: arr[0], ln: arr[1])
+    }
+
+    // can ONLY call a designated from the same class, not from the base-class
+    convenience init(name: String) {
+        let arr = name.components(separatedBy: &quot; &quot;)
+        self.init(fn: arr[1], ln: arr[2], title: arr[0])
+    }    
+}
+</code></pre><p>Briefly, a quick review can be found in this <a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Art/initializerDelegation02_2x.png" target="_blank" rel="external">diagram</a></p>
+<h1 id="Required-init"><a href="#Required-init" class="headerlink" title="Required init"></a>Required init</h1><p>To make things more complicated, <code>required init</code> could be quite confusing if we see it together with designated or convenience init. In fact, it is for a different purpose: to enforce sub-class to provide a certain init. It defers from normal override method in that sub-class MUST use <code>required</code> instead of <code>override</code> modifier before the init. See the below example:</p>
+<blockquote>
+<p>Note the comments I add to Person class.</p>
+</blockquote>
+<pre><code>protocol Namable {
+    init(fn: String, ln: String)
+}
+
+class Person : Namable, CustomStringConvertible {
+
+    // ... same as above
+
+    // Person implements Namable, so it needs to provide the init from Namable
+    // And it must be marked as required so that any sub-class is required to provide their owns
+    required init(fn: String, ln: String) {
+        self.fn = fn
+        self.ln = ln
+    }
+
+    // Required can be added to a convenience init as well
+    required convenience init(name: String) {
+        let arr = name.components(separatedBy: &quot; &quot;)
+        self.init(fn: arr[0], ln: arr[1])
+    }
+}
+
+class Doctor : Person {
+
+    // ... same as above
+
+    required init(fn: String, ln: String) {
+        self.title = &quot;Dr.&quot;
+        super.init(fn: fn, ln: ln);
+    }
+
+    // ... same as above
+
+    required convenience init(name: String) {
+        let arr = name.components(separatedBy: &quot; &quot;)
+        self.init(fn: arr[1], ln: arr[2], title: arr[0])
+    }    
+}
+</code></pre>
       
     </div>
 
@@ -394,7 +490,7 @@
       
         <div class="post-tags">
           
-            <a href="/my-blog/tags/object-Object/" rel="tag"># [object Object]</a>
+            <a href="/my-blog/tags/Swift/" rel="tag"># Swift</a>
           
         </div>
       
@@ -560,7 +656,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#super"><span class="nav-number">1.</span> <span class="nav-text">super</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#init"><span class="nav-number">2.</span> <span class="nav-text">init</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#super"><span class="nav-number">1.</span> <span class="nav-text">super</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Designated-init-vs-convenience-init"><span class="nav-number">2.</span> <span class="nav-text">Designated init vs convenience init</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Required-init"><span class="nav-number">3.</span> <span class="nav-text">Required init</span></a></li></ol></div>
             
 
           </div>
