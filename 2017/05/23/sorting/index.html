@@ -1,0 +1,750 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/my-blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/my-blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/my-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Algorithm,Java," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/my-blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Recently, I did some study on sorting algorithms and I’m amazed to find that the sort from standard Java Runtime Environment (JRE) is NOT as efficient as I expected. According to Java-DOC’s descriptio">
+<meta name="keywords" content="Algorithm,Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sorting Performance">
+<meta property="og:url" content="https://sevenbamboos.github.com/2017/05/23/sorting/index.html">
+<meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
+<meta property="og:description" content="Recently, I did some study on sorting algorithms and I’m amazed to find that the sort from standard Java Runtime Environment (JRE) is NOT as efficient as I expected. According to Java-DOC’s descriptio">
+<meta property="og:image" content="https://sevenbamboos.github.com/my-blog/2017/05/23/sorting/o_n_2.png">
+<meta property="og:image" content="https://sevenbamboos.github.com/my-blog/2017/05/23/sorting/o_n_lgn.png">
+<meta property="og:image" content="https://sevenbamboos.github.com/my-blog/2017/05/23/sorting/performance.png">
+<meta property="og:updated_time" content="2017-05-24T14:44:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sorting Performance">
+<meta name="twitter:description" content="Recently, I did some study on sorting algorithms and I’m amazed to find that the sort from standard Java Runtime Environment (JRE) is NOT as efficient as I expected. According to Java-DOC’s descriptio">
+<meta name="twitter:image" content="https://sevenbamboos.github.com/my-blog/2017/05/23/sorting/o_n_2.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/my-blog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sevenbamboos.github.com/2017/05/23/sorting/"/>
+
+
+
+
+
+  <title> Sorting Performance | Sam's Chest of Drawers </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/my-blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sam's Chest of Drawers</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thinking about Programming and Lifestyle</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/my-blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/my-blog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/my-blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/my-blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/05/23/sorting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Sorting Performance
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-23T11:31:45+08:00">
+                05-23-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Recently, I did some study on sorting algorithms and I’m amazed to find that the sort from standard Java Runtime Environment (JRE) is <em>NOT</em> as efficient as I expected. According to Java-DOC’s description:</p>
+<p><code>public static &lt;T&gt; void sort(T[] a, Comparator&lt;? super T&gt; c)</code></p>
+<blockquote>
+<p>Sorts the specified array of objects according to the order induced by the specified comparator. All elements in the array must be mutually comparable by the specified comparator (that is, c.compare(e1, e2) must not throw a ClassCastException for any elements e1 and e2 in the array).</p>
+<p>This sort is guaranteed to be stable: equal elements will not be reordered as a result of the sort.<br>Implementation note: This implementation is a stable, adaptive, iterative mergesort that requires far fewer than n lg(n) comparisons when the input array is partially sorted, while offering the performance of a traditional mergesort when the input array is randomly ordered. If the input array is nearly sorted, the implementation requires approximately n comparisons. Temporary storage requirements vary from a small constant for nearly sorted input arrays to n/2 object references for randomly ordered input arrays.</p>
+<p>The implementation takes equal advantage of ascending and descending order in its input array, and can take advantage of ascending and descending order in different parts of the the same input array. It is well-suited to merging two or more sorted arrays: simply concatenate the arrays and sort the resulting array.</p>
+<p>The implementation was adapted from Tim Peters’s list sort for Python ( TimSort). It uses techniques from Peter McIlroy’s “Optimistic Sorting and Information Theoretic Complexity”, in Proceedings of the Fourth Annual ACM-SIAM Symposium on Discrete Algorithms, pp 467-474, January 1993.</p>
+</blockquote>
+<p>I have checked another sort method’s description:</p>
+<blockquote>
+<p>Implementation note: The sorting algorithm is a Dual-Pivot Quicksort by Vladimir Yaroslavskiy, Jon Bentley, and Joshua Bloch. This algorithm offers O(n log(n)) performance on many data sets that cause other quicksorts to degrade to quadratic performance, and is typically faster than traditional (one-pivot) Quicksort implementations.</p>
+</blockquote>
+<p>So I’m curious to know how good the built-in sort is and whether my home-made sort can defeat it. It sounds like playing with AlphaGo, but I still decide to have a go. For the completeness, I include elementary sorting methods (e.g. select sort, insert sort and shell sort, which have the performance of <img src="/my-blog/2017/05/23/sorting/o_n_2.png" alt="o_n_2" title="o_n_2">), as well as more advanced sort (e.g. merge sort and quick sort with the performance of <img src="/my-blog/2017/05/23/sorting/o_n_lgn.png" alt="o_n_lgn" title="o_n_lgn">). Here is the detailed source code.</p>
+<a id="more"></a>
+<h1 id="Select-sort"><a href="#Select-sort" class="headerlink" title="Select sort"></a>Select sort</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">Comparable[] selectSort(Comparable[] t) &#123;</div><div class="line">  for (int i = 0; i &lt; t.length; i++) &#123;</div><div class="line"></div><div class="line">    // find the smallest item from ith</div><div class="line">    Comparable min = t[i];</div><div class="line">    int jj = i;</div><div class="line">    for (int j = i+1; j &lt; t.length; j++) &#123;</div><div class="line">      if (isLess(t[j], min)) &#123;</div><div class="line">        min = t[j];</div><div class="line">        jj = j;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // exchange the ith with the smallest</div><div class="line">    exchange(t, i, jj);</div><div class="line">  &#125;</div><div class="line">  return t;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Insert-sort"><a href="#Insert-sort" class="headerlink" title="Insert sort"></a>Insert sort</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Comparable[] insertSort(Comparable[] t) &#123;</div><div class="line">  for (int i = 1; i &lt; t.length; i++) &#123;</div><div class="line">    // insert the ith into the right place of 0..&lt;i</div><div class="line">    for (int j = i; j &gt; 0; j--) &#123;</div><div class="line">      if (isLess(t[j], t[j-1])) &#123;</div><div class="line">        exchange(t, j, j-1);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  return t;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Shell-sort"><a href="#Shell-sort" class="headerlink" title="Shell sort"></a>Shell sort</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">Comparable[] shellSort(Comparable[] t) &#123;</div><div class="line">  int pace = 1, length = t.length;</div><div class="line"></div><div class="line">  while (pace &lt; length/3) pace = 3*pace + 1;</div><div class="line"></div><div class="line">  while (pace &gt; 0) &#123;</div><div class="line">    for (int j = 0; j &lt; length; j += pace) &#123;</div><div class="line">      for (int k = j; k &gt;= pace; k -= pace) &#123;</div><div class="line">        if (isLess(t[k], t[k-pace])) &#123;</div><div class="line">          exchange(t, k, k-pace);</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    pace = pace / 3;</div><div class="line">  &#125;</div><div class="line">  return t;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Merge-Sort"><a href="#Merge-Sort" class="headerlink" title="Merge Sort"></a>Merge Sort</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">Comparable[] mergeSort(Comparable[] t) &#123;</div><div class="line">  doMergeSort(t, 0, t.length-1, new Comparable[t.length]);</div><div class="line">  return t;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void doMergeSort(Comparable[] t, int lo, int hi, Comparable[] buff) &#123;</div><div class="line">  if (lo &gt;= hi) return;</div><div class="line">  int mid = (lo + hi) / 2;</div><div class="line">  doMergeSort(t, lo, mid, buff);</div><div class="line">  doMergeSort(t, mid+1, hi, buff);</div><div class="line">  merge(t, lo, mid, hi, buff);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void merge(Comparable[] t, int lo, int mi, int hi, Comparable[] buff) &#123;</div><div class="line">  if (lo &gt;= hi) return;</div><div class="line"></div><div class="line">  int index1 = lo, index2 = mi+1, len = hi - lo + 1;</div><div class="line">  for (int i = 0; i &lt; len; i++) &#123;</div><div class="line"></div><div class="line">    if (index1 &gt; mi &amp;&amp; index2 &lt;= hi) &#123;</div><div class="line">      buff[lo + i] = t[index2++];</div><div class="line">    &#125; else if (index1 &lt;= mi &amp;&amp; index2 &gt; hi) &#123;</div><div class="line">      buff[lo + i] = t[index1++];</div><div class="line">    &#125; else if (index1 &lt;= mi &amp;&amp; index2 &lt;= hi) &#123;</div><div class="line">      if (isLess(t[index1], t[index2])) &#123;</div><div class="line">        buff[lo + i] = t[index1++];</div><div class="line">      &#125; else &#123;</div><div class="line">        buff[lo + i] = t[index2++];</div><div class="line">      &#125;</div><div class="line">    &#125; else &#123; // not possible</div><div class="line">      throw new RuntimeException();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  for (int i = 0; i &lt; len; i++) &#123;</div><div class="line">    t[i+lo] = buff[lo + i];</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Quick-Sort"><a href="#Quick-Sort" class="headerlink" title="Quick Sort"></a>Quick Sort</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">Comparable[] quickSort(Comparable[] t) &#123;</div><div class="line">  doQuickSort(t, 0, t.length-1);</div><div class="line">  return t;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void doQuickSort(Comparable[] t, int lo, int hi) &#123;</div><div class="line">  if (lo &gt;= hi) return;</div><div class="line">  int anchor = makePartition(t, lo, hi, lo);</div><div class="line">  doQuickSort(t, lo, anchor);</div><div class="line">  doQuickSort(t, anchor+1, hi);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int makePartition(Comparable[] t, int lo, int hi, int sp) &#123;</div><div class="line">  exchange(t, lo, sp);</div><div class="line">  Comparable anchor = t[lo];</div><div class="line"></div><div class="line">  int j = lo+1, k = hi;</div><div class="line">  while (j &lt; k) &#123;</div><div class="line">    while (j &lt;= hi &amp;&amp; isLess(t[j], anchor)) j++;</div><div class="line">    while (k &gt;= lo &amp;&amp; isLess(anchor, t[k])) k--;</div><div class="line"></div><div class="line">    if (j &lt; k) &#123;</div><div class="line">      exchange(t, j, k);</div><div class="line">      j++;</div><div class="line">      k--;</div><div class="line">      continue;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  if (j &gt; k) &#123;</div><div class="line">    exchange(t, lo, k);</div><div class="line">    return k;</div><div class="line">  &#125; else &#123;</div><div class="line">    int anchorIndex = isLess(t[k], t[lo]) ? k : k-1;</div><div class="line">    exchange(t, lo, anchorIndex);</div><div class="line">    return anchorIndex;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Performance-amp-Conclusion"><a href="#Performance-amp-Conclusion" class="headerlink" title="Performance &amp; Conclusion"></a>Performance &amp; Conclusion</h1><p>These are typical implementations without many well-known optimizations. The goal is to keep the code short and easy to understand. Let’s put them into use to see if they are competitive with JRE’s built-in sort.</p>
+<img src="/my-blog/2017/05/23/sorting/performance.png" alt="performance" title="performance">
+<blockquote>
+<p>Y-axis is millisecond, X-axis is the size of array to be sorted.</p>
+</blockquote>
+<p>For each round, the performance is measured by generating 10 test data and sort these random data with different methods and take the mean time. The test data is shuffled in this way:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">void shuffle(Comparable[] a) &#123;</div><div class="line">  for (int i = 0; i &lt; a.length; i++) &#123;</div><div class="line">    exchange(a, i, random(0, i));</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>From the chart we can see that all elementary sort methods start to struggle with the performance for arrays of 20K (an one-second waiting time is an obvious delay for user experience as well as a cross boundary transaction), while those advanced sort methods’ limits are around 2,000K.</p>
+<p>Admittedly, modern compiler and CPU are competitive enough for even elementary sort methods to handle array within 10K. In terms of code complexity and footprint, both Select Sort and Insert Sort have a straightforward code structure and easy to read, so they can be good candidates for non-resource-critical use. Shell Sort, however, has a rather complicated code and has the most significant performance issue and therefore should not be used unless in the special circumstance that most adjacent elements have a far distance.</p>
+<p>On the other hand, for large-scale applications, a decent sort method like Merge Sort or Quick Sort is the only choice when the sorting array consists of more than millions of data. Among these methods, Merge Sort falls behind when the data is over one million and Quick Sort manages to finish the sorting of one million within half a second.</p>
+<p>Another interesting finding is although the benchmark of JRE’s built-in sort is stable for different inputs, it is beaten by my home-made Quick Sort when the size of incoming array is over one million. I did the same test several times and each time had the same conclusion.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/my-blog/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+            <a href="/my-blog/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/my-blog/2017/05/15/mvx/" rel="next" title="MVC, MVP, MVVM and Redux">
+                <i class="fa fa-chevron-left"></i> MVC, MVP, MVVM and Redux
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80"
+               alt="Yuping Wang" />
+          <p class="site-author-name" itemprop="name">Yuping Wang</p>
+           
+              <p class="site-description motion-element" itemprop="description">85608565</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/my-blog/archives">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/my-blog/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/my-blog/tags">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sevenbamboos" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/sevenbamboos" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Select-sort"><span class="nav-number">1.</span> <span class="nav-text">Select sort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Insert-sort"><span class="nav-number">2.</span> <span class="nav-text">Insert sort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shell-sort"><span class="nav-number">3.</span> <span class="nav-text">Shell sort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Merge-Sort"><span class="nav-number">4.</span> <span class="nav-text">Merge Sort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Quick-Sort"><span class="nav-number">5.</span> <span class="nav-text">Quick Sort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance-amp-Conclusion"><span class="nav-number">6.</span> <span class="nav-text">Performance & Conclusion</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuping Wang</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/my-blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/my-blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/my-blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
