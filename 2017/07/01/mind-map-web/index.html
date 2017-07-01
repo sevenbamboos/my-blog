@@ -87,16 +87,16 @@
 
 
 
-<meta name="description" content="Tips and references from articles about web programming.">
+<meta name="description" content="Tips and references from articles about web programming. It’s called mind map not because of the mind map drawing, but due to the similarity of the data structure “map”. Given a keyword, I can find th">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mind Map for Web">
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/07/01/mind-map-web/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
-<meta property="og:description" content="Tips and references from articles about web programming.">
-<meta property="og:updated_time" content="2017-07-01T10:10:46.000Z">
+<meta property="og:description" content="Tips and references from articles about web programming. It’s called mind map not because of the mind map drawing, but due to the similarity of the data structure “map”. Given a keyword, I can find th">
+<meta property="og:updated_time" content="2017-07-01T14:00:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mind Map for Web">
-<meta name="twitter:description" content="Tips and references from articles about web programming.">
+<meta name="twitter:description" content="Tips and references from articles about web programming. It’s called mind map not because of the mind map drawing, but due to the similarity of the data structure “map”. Given a keyword, I can find th">
 
 
 
@@ -353,7 +353,7 @@
       
 
       
-        <p>Tips and references from articles about web programming.</p>
+        <p>Tips and references from articles about web programming. It’s called mind map not because of the mind map drawing, but due to the similarity of the data structure “map”. Given a keyword, I can find the read articles within a constant time (O(1)), just as <code>map.for(key:) -&gt; &lt;Value?&gt;</code>.</p>
 <a id="more"></a>
 <table>
 <thead>
@@ -365,14 +365,35 @@
 <tbody>
 <tr>
 <td>Webpack Gulp</td>
-<td><a href="https://www.liquidlight.co.uk/blog/article/getting-started-with-webpack-3/" target="_blank" rel="external">Ref</a></td>
+<td><a href="https://www.liquidlight.co.uk/blog/article/getting-started-with-webpack-3/" target="_blank" rel="external">Webpack 3 with Gulp</a></td>
 </tr>
 <tr>
 <td>module.exports exports</td>
-<td><a href="#module-exports">Ref</a></td>
+<td><a href="#module-exports">Comment</a></td>
+</tr>
+<tr>
+<td>MVC MVP MVVM</td>
+<td><a href="https://medium.com/ios-os-x-development/ios-architecture-patterns-ecba4c38de52" target="_blank" rel="external">iOS architecture</a>, <a href="https://medium.com/monitisemea/using-redux-with-mvvm-on-ios-18212454d676" target="_blank" rel="external">MVVM + Redux</a>, <a href="#mvp-mvvm">Comment</a>, <a href="https://www.cocoawithlove.com/blog/mvc-and-cocoa.html" target="_blank" rel="external">mvc and cocoa</a>, <a href="https://juejin.im/post/593021272f301e0058273468" target="_blank" rel="external">mvc/mvp/mvvm</a></td>
+</tr>
+<tr>
+<td>flatMap</td>
+<td><a href="#flatMap">Comment</a> <a href="http://2ality.com/2017/04/flatmap.html" target="_blank" rel="external">flatMap</a></td>
+</tr>
+<tr>
+<td>await async Promise</td>
+<td><a href="#await-async-Promise">Comment</a>, <a href="https://medium.com/@bluepnume/learn-about-promises-before-you-start-using-async-await-eb148164a9c8" target="_blank" rel="external">learn about promises</a></td>
+</tr>
+<tr>
+<td>put post</td>
+<td><a href="#put-post">Comment</a>, <a href="http://restcookbook.com/HTTP%20Methods/put-vs-post/" target="_blank" rel="external">RESTful cookbook</a></td>
 </tr>
 </tbody>
 </table>
+<h1 id="put-post"><a href="#put-post" class="headerlink" title="put post"></a>put post</h1><p>If client knows where to put the (new) resource, use put:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PUT /article/1234 HTTP/1.1</div><div class="line">&lt;article/&gt;</div></pre></td></tr></table></figure></p>
+<p>Otherwise, client uses post:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">POST /articles HTTP/1.1</div><div class="line">&lt;article/&gt;</div><div class="line"></div><div class="line">HTTP/1.1 201 Created</div><div class="line">Location: /articles/63636</div></pre></td></tr></table></figure></p>
+<p>And the location of the (created) resource will be included in the response.</p>
+<h1 id="flatMap"><a href="#flatMap" class="headerlink" title="flatMap"></a>flatMap</h1><p>flatMap can return zero or one or multiple items when applying function on each map item. Return empty array means ignore.</p>
+<h1 id="await-async-Promise"><a href="#await-async-Promise" class="headerlink" title="await async Promise"></a>await async Promise</h1><p>Note that the last “downloadFiles” example. await accept a Promise and async function returns a Promise.</p>
 <h1 id="module-exports"><a href="#module-exports" class="headerlink" title="module exports"></a>module exports</h1><p>module.exports points to the same reference as exports.</p>
 <pre><code>// module-a
 class Foo {...}
@@ -388,7 +409,9 @@ aFoo.method(...);
 
 var moduleB = require(&apos;./module-b&apos;);
 moduleB.bar(...);
-</code></pre>
+</code></pre><h1 id="mvp-mvvm"><a href="#mvp-mvvm" class="headerlink" title="mvp mvvm"></a>mvp mvvm</h1><p>The difference between MVP and MVVM is the data binding. VM will create the binding and later on the model and view will be in sync without the interference from VM.</p>
+<p>For iOS, UIViewController is actually a presenter, a supervising controller and therefore iOS’s MVC is MVP</p>
+
       
     </div>
 
@@ -571,7 +594,7 @@ moduleB.bar(...);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#module-exports"><span class="nav-number">1.</span> <span class="nav-text">module exports</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#put-post"><span class="nav-number">1.</span> <span class="nav-text">put post</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flatMap"><span class="nav-number">2.</span> <span class="nav-text">flatMap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#await-async-Promise"><span class="nav-number">3.</span> <span class="nav-text">await async Promise</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#module-exports"><span class="nav-number">4.</span> <span class="nav-text">module exports</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mvp-mvvm"><span class="nav-number">5.</span> <span class="nav-text">mvp mvvm</span></a></li></ol></div>
             
 
           </div>
