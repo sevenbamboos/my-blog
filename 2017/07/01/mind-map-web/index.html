@@ -89,13 +89,13 @@
 
 <meta name="description" content="Tips and references from articles about web programming. It’s called mind map not because of the mind map drawing, but due to the similarity of the data structure “map”. Given a keyword, I can find th">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mind Map for Web">
+<meta property="og:title" content="Mind Map of Web">
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/07/01/mind-map-web/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
 <meta property="og:description" content="Tips and references from articles about web programming. It’s called mind map not because of the mind map drawing, but due to the similarity of the data structure “map”. Given a keyword, I can find th">
-<meta property="og:updated_time" content="2017-07-01T14:00:22.000Z">
+<meta property="og:updated_time" content="2017-07-02T02:23:57.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mind Map for Web">
+<meta name="twitter:title" content="Mind Map of Web">
 <meta name="twitter:description" content="Tips and references from articles about web programming. It’s called mind map not because of the mind map drawing, but due to the similarity of the data structure “map”. Given a keyword, I can find th">
 
 
@@ -130,7 +130,7 @@
 
 
 
-  <title> Mind Map for Web | Sam's Chest of Drawers </title>
+  <title> Mind Map of Web | Sam's Chest of Drawers </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -280,7 +280,7 @@
             
             
               
-                Mind Map for Web
+                Mind Map of Web
               
             
           </h1>
@@ -354,12 +354,11 @@
 
       
         <p>Tips and references from articles about web programming. It’s called mind map not because of the mind map drawing, but due to the similarity of the data structure “map”. Given a keyword, I can find the read articles within a constant time (O(1)), just as <code>map.for(key:) -&gt; &lt;Value?&gt;</code>.</p>
-<a id="more"></a>
-<table>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><table>
 <thead>
 <tr>
 <th>Keywords</th>
-<th>Reference</th>
+<th>Comment &amp; Reference</th>
 </tr>
 </thead>
 <tbody>
@@ -373,7 +372,7 @@
 </tr>
 <tr>
 <td>MVC MVP MVVM</td>
-<td><a href="https://medium.com/ios-os-x-development/ios-architecture-patterns-ecba4c38de52" target="_blank" rel="external">iOS architecture</a>, <a href="https://medium.com/monitisemea/using-redux-with-mvvm-on-ios-18212454d676" target="_blank" rel="external">MVVM + Redux</a>, <a href="#mvp-mvvm">Comment</a>, <a href="https://www.cocoawithlove.com/blog/mvc-and-cocoa.html" target="_blank" rel="external">mvc and cocoa</a>, <a href="https://juejin.im/post/593021272f301e0058273468" target="_blank" rel="external">mvc/mvp/mvvm</a></td>
+<td><a href="#mvp-mvvm">Comment</a>, <a href="https://medium.com/ios-os-x-development/ios-architecture-patterns-ecba4c38de52" target="_blank" rel="external">iOS architecture</a>, <a href="https://medium.com/monitisemea/using-redux-with-mvvm-on-ios-18212454d676" target="_blank" rel="external">MVVM + Redux</a>, <a href="https://www.cocoawithlove.com/blog/mvc-and-cocoa.html" target="_blank" rel="external">mvc and cocoa</a>, <a href="https://juejin.im/post/593021272f301e0058273468" target="_blank" rel="external">mvc/mvp/mvvm</a></td>
 </tr>
 <tr>
 <td>flatMap</td>
@@ -387,8 +386,29 @@
 <td>put post</td>
 <td><a href="#put-post">Comment</a>, <a href="http://restcookbook.com/HTTP%20Methods/put-vs-post/" target="_blank" rel="external">RESTful cookbook</a></td>
 </tr>
+<tr>
+<td>event bubbling</td>
+<td><a href="#event-bubbling">Comment</a>, <a href="https://www.sitepoint.com/event-bubbling-javascript/" target="_blank" rel="external">Event Propagation Explained</a></td>
+</tr>
+<tr>
+<td>console.log</td>
+<td><a href="#console-log">Comment</a>, <a href="https://medium.freecodecamp.org/how-to-get-the-most-out-of-the-javascript-console-b57ca9db3e6d" target="_blank" rel="external">Javascript console</a></td>
+</tr>
+<tr>
+<td>partial curry high order Lodash</td>
+<td><a href="#high-order-lodash">Comment</a>, <a href="https://blog.pragmatists.com/higher-order-functions-in-lodash-3283b7625175" target="_blank" rel="external">Higher order in Lodash</a></td>
+</tr>
 </tbody>
 </table>
+<a id="more"></a>
+<h1 id="high-order-lodash"><a href="#high-order-lodash" class="headerlink" title="high order lodash"></a>high order lodash</h1><p>partial returns a function that binds rest of arguments to its first argument.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function partial_impl(fn, ...args) &#123;</div><div class="line">  return function(...newArgs) &#123;</div><div class="line">    fn.apply(this, args.concat(newArgs));</div><div class="line">    // fn.call needs a series of arguments, while apply can be used with an array-like argument</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// lodash&apos;s built-in partial supports to bind argument to a specific position</div><div class="line">_.partial(fn, _, param);</div></pre></td></tr></table></figure></p>
+<p>curry returns a function that supports to bind argument one at a time<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// provide a second parameter to specify the argument length to help eliminate the confusion of optional argument</div><div class="line">let newDivide = _.curry(divide);</div><div class="line">let half = newDivide(_, 2);</div><div class="line">half(10); // 5</div></pre></td></tr></table></figure></p>
+<p>flow combines an array of functions into one like <code>_.flow([k, g, f])(x) &lt;=&gt; k(g(f(x)))</code></p>
+<h1 id="console-log"><a href="#console-log" class="headerlink" title="console log"></a>console log</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">// %i, %d for integer, %f for float</div><div class="line">console.log(&apos;string %s&apos;, &apos;substitutions&apos;);</div><div class="line"></div><div class="line">// %c for CSS style</div><div class="line">const success = [</div><div class="line"> &apos;background: green&apos;, &apos;color: white&apos;, &apos;display: block&apos;, &apos;text-align: center&apos;</div><div class="line">].join(&apos;;&apos;);</div><div class="line">console.info(&apos;%c /dancing/bears was Successful!&apos;, success);</div><div class="line"></div><div class="line">// log as error with a stack trace if not fulfilled</div><div class="line">console.assert(isTrue, &apos;This will not&apos;);</div><div class="line"></div><div class="line">// format as table</div><div class="line">console.table([value1, value2]);</div><div class="line">console.table(&#123;key1: value1, key2: value2&#125;);</div><div class="line"></div><div class="line">// performance</div><div class="line">console.time(&apos;id for timer&apos;);</div><div class="line">console.timeEnd(&apos;id for timer&apos;);</div></pre></td></tr></table></figure>
+<h1 id="event-bubbling"><a href="#event-bubbling" class="headerlink" title="event bubbling"></a>event bubbling</h1><p>Capture phase is from the window to the event target parent.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// The third parameter is optional. </div><div class="line">// By default it&apos;s false so that `listener` won&apos;t be a capture.</div><div class="line">element.addEventListener(&apos;click&apos;, listener, true)</div></pre></td></tr></table></figure></p>
+<p>Then the event arrives at itself. Note that some events e.g. focus, blur and load stop at this phase. </p>
+<p>Bubble phase is from the event target parent back to the window.</p>
+<p>Regarding event, it can always get from <code>event.target</code>, while <code>event.currentTarget</code> points to the current element that the event is arrives. <code>event.stopPropagation()</code> will stop the propagation. <code>event.preventDefault()</code> will prevent some default behavior that browser registers for certain UI elements. For example, clicking a link is supposed to navigate to a new page and clicking a submit button will submit the form.</p>
 <h1 id="put-post"><a href="#put-post" class="headerlink" title="put post"></a>put post</h1><p>If client knows where to put the (new) resource, use put:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PUT /article/1234 HTTP/1.1</div><div class="line">&lt;article/&gt;</div></pre></td></tr></table></figure></p>
 <p>Otherwise, client uses post:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">POST /articles HTTP/1.1</div><div class="line">&lt;article/&gt;</div><div class="line"></div><div class="line">HTTP/1.1 201 Created</div><div class="line">Location: /articles/63636</div></pre></td></tr></table></figure></p>
 <p>And the location of the (created) resource will be included in the response.</p>
@@ -594,7 +614,7 @@ moduleB.bar(...);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#put-post"><span class="nav-number">1.</span> <span class="nav-text">put post</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flatMap"><span class="nav-number">2.</span> <span class="nav-text">flatMap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#await-async-Promise"><span class="nav-number">3.</span> <span class="nav-text">await async Promise</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#module-exports"><span class="nav-number">4.</span> <span class="nav-text">module exports</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mvp-mvvm"><span class="nav-number">5.</span> <span class="nav-text">mvp mvvm</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">1.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#high-order-lodash"><span class="nav-number">2.</span> <span class="nav-text">high order lodash</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#console-log"><span class="nav-number">3.</span> <span class="nav-text">console log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#event-bubbling"><span class="nav-number">4.</span> <span class="nav-text">event bubbling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#put-post"><span class="nav-number">5.</span> <span class="nav-text">put post</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flatMap"><span class="nav-number">6.</span> <span class="nav-text">flatMap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#await-async-Promise"><span class="nav-number">7.</span> <span class="nav-text">await async Promise</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#module-exports"><span class="nav-number">8.</span> <span class="nav-text">module exports</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mvp-mvvm"><span class="nav-number">9.</span> <span class="nav-text">mvp mvvm</span></a></li></ol></div>
             
 
           </div>
