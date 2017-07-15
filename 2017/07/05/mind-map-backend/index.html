@@ -93,7 +93,7 @@
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/07/05/mind-map-backend/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
 <meta property="og:description" content="Backend tends to have a totally different topics than Web (frontend). What’s more, before putting too many items into “Mind Map of Web”, creating a new mind-map slot for backend is quite reasonable. A">
-<meta property="og:updated_time" content="2017-07-15T08:23:27.000Z">
+<meta property="og:updated_time" content="2017-07-15T13:51:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mind Map of Backend">
 <meta name="twitter:description" content="Backend tends to have a totally different topics than Web (frontend). What’s more, before putting too many items into “Mind Map of Web”, creating a new mind-map slot for backend is quite reasonable. A">
@@ -398,9 +398,15 @@
 <td>git merge rebase fixup autosquash feature branch</td>
 <td>see my post “Feature Branch Workflow”</td>
 </tr>
+<tr>
+<td>slf4j logback MDC</td>
+<td><a href="#log">Comment</a></td>
+</tr>
 </tbody>
 </table>
 <a id="more"></a>
+<h1 id="log"><a href="#log" class="headerlink" title="log"></a>log</h1><p>Simple log facade for Java(slf4j) defines logger interface for log libraries like java logging, log4j and logback. Check its <a href="https://www.slf4j.org/manual.html" target="_blank" rel="external">manual</a> for details. Note to introduce dependency in maven, don’t directly use slf4j API (but use their adapted packages with log implementation).</p>
+<p>Logback is the next generation of log4j. Use <code>log.debug(&quot;foo {}&quot;, bar);</code> to avoid concat string if logger level is higher than DEBUG. Also check Mapped Diagnostic Context <a href="https://logback.qos.ch/manual/mdc.html" target="_blank" rel="external">MDC</a> for the support of multi-thread, remote client request (e.g. servlet filter) and microservice.</p>
 <h1 id="js-dependency"><a href="#js-dependency" class="headerlink" title="js dependency"></a>js dependency</h1><p>Check current dependency with <code>npm ls --depth=0</code></p>
 <p>Before introducing a new dependency, check the maturity with <code>npm view &lt;package-name&gt;</code></p>
 <p>List outdated dependencies with <code>npm outdated</code></p>
@@ -594,7 +600,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">1.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js-dependency"><span class="nav-number">2.</span> <span class="nav-text">js dependency</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dynamic-programming"><span class="nav-number">3.</span> <span class="nav-text">dynamic programming</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">1.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#log"><span class="nav-number">2.</span> <span class="nav-text">log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js-dependency"><span class="nav-number">3.</span> <span class="nav-text">js dependency</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dynamic-programming"><span class="nav-number">4.</span> <span class="nav-text">dynamic programming</span></a></li></ol></div>
             
 
           </div>
