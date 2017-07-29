@@ -93,7 +93,7 @@
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/07/05/mind-map-backend/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
 <meta property="og:description" content="Backend tends to have a totally different topics than Web (frontend). What’s more, before putting too many items into “Mind Map of Web”, creating a new mind-map slot for backend is quite reasonable. A">
-<meta property="og:updated_time" content="2017-07-15T13:51:54.000Z">
+<meta property="og:updated_time" content="2017-07-29T08:14:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mind Map of Backend">
 <meta name="twitter:description" content="Backend tends to have a totally different topics than Web (frontend). What’s more, before putting too many items into “Mind Map of Web”, creating a new mind-map slot for backend is quite reasonable. A">
@@ -399,14 +399,32 @@
 <td>see my post “Feature Branch Workflow”</td>
 </tr>
 <tr>
-<td>slf4j logback MDC</td>
+<td>slf4j logback MDC kafka</td>
 <td><a href="#log">Comment</a></td>
+</tr>
+<tr>
+<td>CAP Eventual Consistency nosql kafka RabbitMQ MongoDB HBase Cassandra Redis Neo4j</td>
+<td><a href="#cap-nosql">Comment</a></td>
+</tr>
+<tr>
+<td>https</td>
+<td><a href="https://mp.weixin.qq.com/s/StqqafHePlBkWAPQZg3NrA" target="_blank" rel="external">Introduction</a></td>
+</tr>
+<tr>
+<td>git mergetool kdiff3</td>
+<td><a href="#git-mergetool-kdiff3">Comment</a></td>
 </tr>
 </tbody>
 </table>
 <a id="more"></a>
+<h1 id="git-mergetool-kdiff3"><a href="#git-mergetool-kdiff3" class="headerlink" title="git mergetool kdiff3"></a>git mergetool kdiff3</h1><p><a href="https://sourceforge.net/projects/kdiff3/" target="_blank" rel="external">kdiff3</a> is a cross-platform  3-way merge tool. To configure it with git, run:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ git config --global merge.tool kdiff3</div><div class="line">$ git config --global mergetool.kdiff3.path &lt;path-to-kdiff3&gt;</div><div class="line">// it will generate the following contents in ~/.gitconfig</div><div class="line">[merge]</div><div class="line">	tool = kdiff3</div><div class="line">[mergetool &quot;kdiff3&quot;]</div><div class="line">	path = /Applications/kdiff3.app/Contents/MacOS/kdiff3</div></pre></td></tr></table></figure></p>
+<h1 id="cap-nosql"><a href="#cap-nosql" class="headerlink" title="cap nosql"></a>cap nosql</h1><p>In the absence of network failure, both consistency and availability can be satisfied. On the other hand, in the presence of network partition, distributed system has to choose between consistency and availability. </p>
+<p>Note that CAP is not saying of choosing two of three. No trade-off when no network issues, though for large scale distributed systems network partition can’t be avoided.</p>
+<p>No matter which to choose, reconciliation should be made via Eventual Consistency, which serves the fundamental of many NoSQL databases.</p>
+<p>HBase: distributed hashmap<br>MongoDB: distributed json<br>Redis: distributed hashmap in memory</p>
 <h1 id="log"><a href="#log" class="headerlink" title="log"></a>log</h1><p>Simple log facade for Java(slf4j) defines logger interface for log libraries like java logging, log4j and logback. Check its <a href="https://www.slf4j.org/manual.html" target="_blank" rel="external">manual</a> for details. Note to introduce dependency in maven, don’t directly use slf4j API (but use their adapted packages with log implementation).</p>
 <p>Logback is the next generation of log4j. Use <code>log.debug(&quot;foo {}&quot;, bar);</code> to avoid concat string if logger level is higher than DEBUG. Also check Mapped Diagnostic Context <a href="https://logback.qos.ch/manual/mdc.html" target="_blank" rel="external">MDC</a> for the support of multi-thread, remote client request (e.g. servlet filter) and microservice.</p>
+<p>Another <a href="https://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying" target="_blank" rel="external">article</a> about log-central system from the author of kafka</p>
 <h1 id="js-dependency"><a href="#js-dependency" class="headerlink" title="js dependency"></a>js dependency</h1><p>Check current dependency with <code>npm ls --depth=0</code></p>
 <p>Before introducing a new dependency, check the maturity with <code>npm view &lt;package-name&gt;</code></p>
 <p>List outdated dependencies with <code>npm outdated</code></p>
@@ -600,7 +618,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">1.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#log"><span class="nav-number">2.</span> <span class="nav-text">log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js-dependency"><span class="nav-number">3.</span> <span class="nav-text">js dependency</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dynamic-programming"><span class="nav-number">4.</span> <span class="nav-text">dynamic programming</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">1.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-mergetool-kdiff3"><span class="nav-number">2.</span> <span class="nav-text">git mergetool kdiff3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cap-nosql"><span class="nav-number">3.</span> <span class="nav-text">cap nosql</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#log"><span class="nav-number">4.</span> <span class="nav-text">log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js-dependency"><span class="nav-number">5.</span> <span class="nav-text">js dependency</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dynamic-programming"><span class="nav-number">6.</span> <span class="nav-text">dynamic programming</span></a></li></ol></div>
             
 
           </div>
