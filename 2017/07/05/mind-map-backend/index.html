@@ -93,7 +93,7 @@
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/07/05/mind-map-backend/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
 <meta property="og:description" content="Backend tends to have a totally different topics than Web (frontend). What’s more, before putting too many items into “Mind Map of Web”, creating a new mind-map slot for backend is quite reasonable. A">
-<meta property="og:updated_time" content="2017-08-20T14:33:15.000Z">
+<meta property="og:updated_time" content="2017-08-27T03:35:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mind Map of Backend">
 <meta name="twitter:description" content="Backend tends to have a totally different topics than Web (frontend). What’s more, before putting too many items into “Mind Map of Web”, creating a new mind-map slot for backend is quite reasonable. A">
@@ -419,8 +419,8 @@
 <td><a href="https://sspai.com/post/39951" target="_blank" rel="external">Anki</a> <a href="https://sspai.com/post/34411" target="_blank" rel="external">Studies</a></td>
 </tr>
 <tr>
-<td>scala resource</td>
-<td>[lots of resources<a href="https://github.com/lauris/awesome-scala" target="_blank" rel="external">14</a></td>
+<td>scala</td>
+<td><a href="#scala-tip">Comment</a>, <a href="https://github.com/lauris/awesome-scala" target="_blank" rel="external">resources</a>, <a href="http://danielwestheide.com/scala/neophytes.html" target="_blank" rel="external">a blog</a>, <a href="http://blog.originate.com/blog/2013/10/21/reader-monad-for-dependency-injection/" target="_blank" rel="external">reader monad</a></td>
 </tr>
 <tr>
 <td>java nio</td>
@@ -430,13 +430,179 @@
 <td>java concurrency</td>
 <td><a href="#java-concurrency">Comment</a></td>
 </tr>
+<tr>
+<td>linux command</td>
+<td><a href="https://zhuanlan.zhihu.com/p/28674639" target="_blank" rel="external">commands</a></td>
+</tr>
+<tr>
+<td>disk clean (for Mac)</td>
+<td><a href="https://sspai.com/post/40503" target="_blank" rel="external">link</a></td>
+</tr>
 </tbody>
 </table>
 <a id="more"></a>
-<h1 id="java-concurrency"><a href="#java-concurrency" class="headerlink" title="java concurrency"></a>java concurrency</h1><p>Singleton in double-checked locking [A]: 1) synchronized on getInstance is unnecessary for the case of initialized instance and therefore inefficient; 2) a nest synchronized block of the first null check on the singleton class, containing the second null check; 3) add volatile modifier to instance property to prevent other threads from seeing half-initialized instance (also see happen-before guarantee).<br>happen-before guarantee [A]: Without it, CPU won’t guarantee changed variable is written to memory (so that other threads can see it) in the order of statement in source code. Thread.start and join have this guarantee so that statements happen before are ensured to be available in main memory.<br>Singleton in Enum [A]: thread-safety guarantee by JVM and working in case of serialization</p>
-<p>CAS [A]: Compare-And-Swap, the fundamental of non-blocking algorithm. Compare the value with the expected one and give up setting to the new value if the compare fails. CPU provides instruction for CAS, resulting better performance over synchronized lock in most cases. Also see Java’s atomic types, which are used by many concurrent classes.<br>aThread.join [A]: The current thread blocks until ‘aThread’ terminates.<br>Reentrant Synchronization [A]: A thread can acquire a lock that it already owns.</p>
-<h1 id="java-nio"><a href="#java-nio" class="headerlink" title="java nio"></a>java nio</h1><p>Types of Channel [A]: File, TCP and UDP; normal(blocking) and asynchronous<br>Transfer between channels [A]: FileChannel.transferFrom and transerTo are more efficient than read&amp;write since it can rely on file system cache without copy operation.<br>Transfer between threads with Pipe [A]: Thread A writes data to Pipe.SinkChannel, which then sends the data to Pipe.SourceChannel which can be read by Thread B.<br>Channel and Buffer [A]: For inbound, data reads from Channel and is put in Buffer; for outbound, Channel gets data from Buffer.<br>Channel and Selector [A]: For non-blocking channels, multiple channels can register with a selector for events like connect, accept, read and write. Selector.select(it’s blocking) returns the number of channels that have events. Selector.selectedKeys is used to iterate these events. </p>
-<p>Capacity, limit and position of Buffer [A]: Invariant: 0 &lt;= mark &lt;= position &lt;= limit &lt;= capacity<br>Buffer clear [A]: position &lt;- 0; limit &lt;- capacity. (ready for put operations)<br>Buffer flip [A]: limit &lt;- position; position &lt;- 0. (ready for get operations)<br>Buffer rewind [A]: position &lt;- 0. (for re-reading)<br>Buffer mark and reset [A]: mark keeps a position so that later reset can restore to this position.<br>Java io vs nio [A]: Stream doesn’t provide a built-in buffer, and is blocking but can simplify data processing, while Channel and Buffer need more control over buffered data. Another difference is the possibility of non-blocking operation in nio. Two ways to invoke asynchronous operation: one is Future(though Future.get is blocking), the other is via callback.</p>
+<h1 id="scala-tip"><a href="#scala-tip" class="headerlink" title="scala tip"></a>scala tip</h1><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>compose, andThen</td>
+<td>f <em> compose g </em> //=&gt; f(g()); f <em> andThen g </em> //=&gt; g(f())</td>
+</tr>
+<tr>
+<td>curried and Dependency Injection(DI)</td>
+<td>minusCu = minus.curried //Int=&gt;Int=&gt;Int; minusCu(5)(2) //=3; Curried function can be used for DI, especially with implicit parameter. To avoid to give implicit dependency to each function, Reader monad comes to help. </td>
+</tr>
+<tr>
+<td>Explicitly Typed Self References</td>
+<td>this: Foo with Bar =&gt; // this trait/class/object must extend from Foo and Bar, so that this can use code in Foo and Bar (without explicit dependency of type if this is abstract class or trait). In Cake Pattern (great way for DI), it’s used in service that declares dependency to other services.</td>
+</tr>
+<tr>
+<td>Structural typing (AKA Duck typing)</td>
+<td>def greet(duck: {def quack(s: String): String}) = duck.quack(s”Hello ${duck.quack(“Joe”)}”) // not only method, also include val. Multiple items can be separated with ; or new line. Also a great way for DI (see <a href="http://jonasboner.com/real-world-scala-dependency-injection-di/" target="_blank" rel="external">link</a> for other ways of DI in scala).</td>
+</tr>
+<tr>
+<td>Partially applied function</td>
+<td>minusBy2 = minus(<em>:Int,2); minusFunc = minus </em> </td>
+</tr>
+<tr>
+<td>PartialFunction</td>
+<td>val int2bool: PartialFunction[Int, Boolean] = {case 0 =&gt; false; case 1 =&gt; true}; int2bool.isDefinedAt(2) //=&gt; false</td>
+</tr>
+</tbody>
+</table>
+<h1 id="java-concurrency"><a href="#java-concurrency" class="headerlink" title="java concurrency"></a>java concurrency</h1><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Singleton in double-checked locking</td>
+<td>1) synchronized on getInstance is unnecessary for the case of initialized instance and therefore inefficient; 2) a nest synchronized block of the first null check on the singleton class, containing the second null check; 3) add volatile modifier to instance property to prevent other threads from seeing half-initialized instance (also see happen-before guarantee). </td>
+</tr>
+<tr>
+<td>happen-before guarantee</td>
+<td>Without it, CPU won’t guarantee changed variable is written to memory (so that other threads can see it) in the order of statement in source code. Thread.start and join have this guarantee so that statements happen before are ensured to be available in main memory.  </td>
+</tr>
+<tr>
+<td>Singleton in Enum</td>
+<td>thread-safety guarantee by JVM and working in case of serialization</td>
+</tr>
+<tr>
+<td>CAS</td>
+<td>Compare-And-Swap, the fundamental of non-blocking algorithm. Compare the value with the expected one and give up setting to the new value if the compare fails. CPU provides instruction for CAS, resulting better performance over synchronized lock in most cases. Also see Java’s atomic types, which are used by many concurrent classes.</td>
+</tr>
+<tr>
+<td>aThread.join</td>
+<td>The current thread blocks until ‘aThread’ terminates.</td>
+</tr>
+<tr>
+<td>Reentrant Synchronization</td>
+<td>A thread can acquire a lock that it already owns.</td>
+</tr>
+<tr>
+<td>Java Memory Model</td>
+<td>1) Each thread has its own stack, containing local primitives and object references, while object instances are kept in shared heap. 2) On the other hand, each CPU has its own registers and cache, which keep changed value and sync with the main memory from time to time. 3) Therefore without volatile and synchronized lock, the changed value made by one CPU may be invisible to other CPU.</td>
+</tr>
+<tr>
+<td>BlockingQueue &amp; BlockingDeque</td>
+<td>It provides operations in 4 ways: throw runtime exceptions; return special value; blocking; return after timeout.</td>
+</tr>
+<tr>
+<td>ConcurrentMap</td>
+<td>It has multiple table buckets, write operation locks only one bucket and read operation doesn’t block.</td>
+</tr>
+<tr>
+<td>When volatile is enough</td>
+<td>In case only one thread updates the value while other threads are reading the value.</td>
+</tr>
+<tr>
+<td>ExecutorService</td>
+<td>Executors as a factory can generate multiple ExecutorService like normal thread pool, scheduled thread pool and ForkJoinPool. It can accept(submit) Runnable or Callable tasks and manage lifecycle of these tasks via shutDown and awaitTermination.   </td>
+</tr>
+<tr>
+<td>ForkJoinPool(FJP)</td>
+<td>Threads in the pool try to execute submitted tasks. execute is fire-and-forget style; invoke is blocking; submit returns ForkJoinTask.</td>
+</tr>
+<tr>
+<td>ForkJoinTask</td>
+<td>A lightweight form of Future for tasks running within FJP. fork starts execution and join wait for the result. The efficiency comes from the use of pure function and isolated objects as the computation.</td>
+</tr>
+<tr>
+<td>CopyOnWrite(COW)</td>
+<td>Copy internal data on mutate operation, and no lock on read-only operation. Suitable for the case that mutate operation happens much less than read. What’s more, it’s better to support batch mode for mutate operation. </td>
+</tr>
+<tr>
+<td>CompletableFuture</td>
+<td>Promise in Java available from Java 8.</td>
+</tr>
+<tr>
+<td>Lock vs synchronized bloc</td>
+<td>lock acquire and release should be put in try-final block, while synchronization has no such an issue.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="java-nio"><a href="#java-nio" class="headerlink" title="java nio"></a>java nio</h1><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Types of Channel</td>
+<td>File, TCP and UDP; normal(blocking) and asynchronous</td>
+</tr>
+<tr>
+<td>Transfer between channels</td>
+<td>FileChannel.transferFrom and transerTo are more efficient than read&amp;write since it can rely on file system cache without copy operation.</td>
+</tr>
+<tr>
+<td>Transfer between threads with Pipe</td>
+<td>Thread A writes data to Pipe.SinkChannel, which then sends the data to Pipe.SourceChannel which can be read by Thread B.</td>
+</tr>
+<tr>
+<td>Channel and Buffer</td>
+<td>For inbound, data reads from Channel and is put in Buffer; for outbound, Channel gets data from Buffer.</td>
+</tr>
+<tr>
+<td>Channel and Selector</td>
+<td>For non-blocking channels, multiple channels can register with a selector for events like connect, accept, read and write. Selector.select(it’s blocking) returns the number of channels that have events. Selector.selectedKeys is used to iterate these events. </td>
+</tr>
+<tr>
+<td>Capacity, limit and position of Buffer</td>
+<td>Invariant: 0 &lt;= mark &lt;= position &lt;= limit &lt;= capacity </td>
+</tr>
+<tr>
+<td>Buffer clear</td>
+<td>position &lt;- 0; limit &lt;- capacity. (ready for put operations)</td>
+</tr>
+<tr>
+<td>Buffer flip</td>
+<td>limit &lt;- position; position &lt;- 0. (ready for get operations)</td>
+</tr>
+<tr>
+<td>Buffer rewind</td>
+<td>position &lt;- 0. (for re-reading)</td>
+</tr>
+<tr>
+<td>Buffer mark and reset</td>
+<td>mark keeps a position so that later reset can restore to this position.</td>
+</tr>
+<tr>
+<td>Java io vs nio</td>
+<td>Stream doesn’t provide a built-in buffer, and is blocking but can simplify data processing, while Channel and Buffer need more control over buffered data. Another difference is the possibility of non-blocking operation in nio. Two ways to invoke asynchronous operation: one is Future(though Future.get is blocking), the other is via callback.</td>
+</tr>
+</tbody>
+</table>
 <h1 id="git-mergetool-kdiff3"><a href="#git-mergetool-kdiff3" class="headerlink" title="git mergetool kdiff3"></a>git mergetool kdiff3</h1><p><a href="https://sourceforge.net/projects/kdiff3/" target="_blank" rel="external">kdiff3</a> is a cross-platform  3-way merge tool. To configure it with git, run:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ git config --global merge.tool kdiff3</div><div class="line">$ git config --global mergetool.kdiff3.path &lt;path-to-kdiff3&gt;</div><div class="line">// it will generate the following contents in ~/.gitconfig</div><div class="line">[merge]</div><div class="line">	tool = kdiff3</div><div class="line">[mergetool &quot;kdiff3&quot;]</div><div class="line">	path = /Applications/kdiff3.app/Contents/MacOS/kdiff3</div></pre></td></tr></table></figure></p>
 <h1 id="cap-nosql"><a href="#cap-nosql" class="headerlink" title="cap nosql"></a>cap nosql</h1><p>In the absence of network failure, both consistency and availability can be satisfied. On the other hand, in the presence of network partition, distributed system has to choose between consistency and availability. </p>
 <p>Note that CAP is not saying of choosing two of three. No trade-off when no network issues, though for large scale distributed systems network partition can’t be avoided.</p>
@@ -638,7 +804,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">1.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java-concurrency"><span class="nav-number">2.</span> <span class="nav-text">java concurrency</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java-nio"><span class="nav-number">3.</span> <span class="nav-text">java nio</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-mergetool-kdiff3"><span class="nav-number">4.</span> <span class="nav-text">git mergetool kdiff3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cap-nosql"><span class="nav-number">5.</span> <span class="nav-text">cap nosql</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#log"><span class="nav-number">6.</span> <span class="nav-text">log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js-dependency"><span class="nav-number">7.</span> <span class="nav-text">js dependency</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dynamic-programming"><span class="nav-number">8.</span> <span class="nav-text">dynamic programming</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">1.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#scala-tip"><span class="nav-number">2.</span> <span class="nav-text">scala tip</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java-concurrency"><span class="nav-number">3.</span> <span class="nav-text">java concurrency</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java-nio"><span class="nav-number">4.</span> <span class="nav-text">java nio</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-mergetool-kdiff3"><span class="nav-number">5.</span> <span class="nav-text">git mergetool kdiff3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cap-nosql"><span class="nav-number">6.</span> <span class="nav-text">cap nosql</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#log"><span class="nav-number">7.</span> <span class="nav-text">log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js-dependency"><span class="nav-number">8.</span> <span class="nav-text">js dependency</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dynamic-programming"><span class="nav-number">9.</span> <span class="nav-text">dynamic programming</span></a></li></ol></div>
             
 
           </div>
