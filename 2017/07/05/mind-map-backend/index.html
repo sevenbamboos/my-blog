@@ -93,7 +93,7 @@
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/07/05/mind-map-backend/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
 <meta property="og:description" content="Backend tends to have a totally different topics than Web (frontend). What’s more, before putting too many items into “Mind Map of Web”, creating a new mind-map slot for backend is quite reasonable. A">
-<meta property="og:updated_time" content="2017-08-27T03:35:26.000Z">
+<meta property="og:updated_time" content="2017-08-27T09:31:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mind Map of Backend">
 <meta name="twitter:description" content="Backend tends to have a totally different topics than Web (frontend). What’s more, before putting too many items into “Mind Map of Web”, creating a new mind-map slot for backend is quite reasonable. A">
@@ -471,10 +471,11 @@
 </tr>
 <tr>
 <td>PartialFunction</td>
-<td>val int2bool: PartialFunction[Int, Boolean] = {case 0 =&gt; false; case 1 =&gt; true}; int2bool.isDefinedAt(2) //=&gt; false</td>
+<td>val int2bool: PartialFunction[Int, Boolean] = {case 0 =&gt; false; case 1 =&gt; true}; int2bool.isDefinedAt(2) //=&gt; false </td>
 </tr>
 </tbody>
 </table>
+<p>//not included in quizlet<br>isInstanceOf | scala.Any::isInstanceOf[T] vs Java’s version: static <t> boolean isInstanceOf(Class<t> t, Object obj) {return t.isAssignableFrom(obj.getClass());}<br>apply in class and object | In class, it serves as method, while in object it’s a smart constructor. For example in List, apply(index: Int):T and apply(xs: T*): List[T]<br>Try::toOption | def get(i: Int): Option[T] = Try(lst(i)).toOption // in case i is an illegal index, it’s handy to avoid length check. Internally, apply accepts by-name parameter (treated as () -&gt; T, lazy evaluated), and wraps it with try-catch.<br>Map(1-&gt;”a”,2-&gt;”b”) and get | -&gt; is defined in Predef to return Tuple2. Map’s apply accepts multiple Tuple2. Note Map::apply(key) returns Value while Map::get(key) returns Option, which can avoid NoSuchElementException<br>Pattern match vs for comprehension | Suppose fn and ln are both Option, for (f &lt;- fn; l &lt;- ln) yield (f,l) //return Option[Tuple2]; (fn, ln) match {case (Some(f),Some(l)) =&gt; …; case _ =&gt; None} // more elegant</t></t></p>
 <h1 id="java-concurrency"><a href="#java-concurrency" class="headerlink" title="java concurrency"></a>java concurrency</h1><table>
 <thead>
 <tr>
