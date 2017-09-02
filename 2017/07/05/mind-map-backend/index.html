@@ -93,7 +93,7 @@
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/07/05/mind-map-backend/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
 <meta property="og:description" content="Backend tends to have a totally different topics than Web (frontend). What’s more, before putting too many items into “Mind Map of Web”, creating a new mind-map slot for backend is quite reasonable. A">
-<meta property="og:updated_time" content="2017-08-27T09:31:24.000Z">
+<meta property="og:updated_time" content="2017-09-02T07:25:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mind Map of Backend">
 <meta name="twitter:description" content="Backend tends to have a totally different topics than Web (frontend). What’s more, before putting too many items into “Mind Map of Web”, creating a new mind-map slot for backend is quite reasonable. A">
@@ -420,7 +420,11 @@
 </tr>
 <tr>
 <td>scala</td>
-<td><a href="#scala-tip">Comment</a>, <a href="https://github.com/lauris/awesome-scala" target="_blank" rel="external">resources</a>, <a href="http://danielwestheide.com/scala/neophytes.html" target="_blank" rel="external">a blog</a>, <a href="http://blog.originate.com/blog/2013/10/21/reader-monad-for-dependency-injection/" target="_blank" rel="external">reader monad</a></td>
+<td><a href="#programming-scala">programming scala</a>, <a href="#scala-tip">scala tip</a>, []<a href="https://github.com/lauris/awesome-scala" target="_blank" rel="external">resources</a>, <a href="http://danielwestheide.com/scala/neophytes.html" target="_blank" rel="external">a blog</a>, <a href="http://blog.originate.com/blog/2013/10/21/reader-monad-for-dependency-injection/" target="_blank" rel="external">reader monad</a></td>
+</tr>
+<tr>
+<td>sbt</td>
+<td><a href="#sbt-repositories">Comment</a> </td>
 </tr>
 <tr>
 <td>java nio</td>
@@ -438,9 +442,86 @@
 <td>disk clean (for Mac)</td>
 <td><a href="https://sspai.com/post/40503" target="_blank" rel="external">link</a></td>
 </tr>
+<tr>
+<td>e-book site (for IT)</td>
+<td><a href="http://www.finelybook.com/" target="_blank" rel="external">link</a>, <a href="http://www.salttiger.com" target="_blank" rel="external">link</a></td>
+</tr>
 </tbody>
 </table>
 <a id="more"></a>
+<h1 id="sbt-repositories"><a href="#sbt-repositories" class="headerlink" title="sbt repositories"></a>sbt repositories</h1><p>~/.sbt/repositories<br>Please note that maven-central is fallback in case other repositories have invalid-hash-value error. aliyun is for fast-access in China.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[repositories]</div><div class="line">	local</div><div class="line">	aliyun-ivy: http://maven.aliyun.com/nexus/content/groups/public, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]  </div><div class="line">	aliyun-maven: http://maven.aliyun.com/nexus/content/groups/public </div><div class="line">	typesafe: http://repo.typesafe.com/typesafe/ivy-releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext], bootOnly</div><div class="line">	sbt-plugins-repo: http://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]</div><div class="line">	play: http://private-repo.typesafe.com/typesafe/maven-releases/</div><div class="line">	sonatype-snapshots: https://oss.sonatype.org/content/repositories/snapshots</div><div class="line">	typesafe-releases: https://repo.typesafe.com/typesafe/releases</div><div class="line">	typesafe-maven-releases: http://repo.typesafe.com/typesafe/maven-releases/</div><div class="line">	typesafe-ivy-releasez: https://repo.typesafe.com/typesafe/ivy-releases, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]</div><div class="line">	maven-central</div></pre></td></tr></table></figure></p>
+<h1 id="programming-scala"><a href="#programming-scala" class="headerlink" title="programming scala"></a>programming scala</h1><p>TODO<br>How to join other worker threads in the main thread?</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Where to find API and source code</td>
+<td>scala-lang.org has API documentation and source code link (to Github) on most pages</td>
+</tr>
+<tr>
+<td>How to REPL with SBT</td>
+<td>sbt -&gt; console will load the project in classpath. Ctrl-D or :quit to quit REPL mode from SBT</td>
+</tr>
+<tr>
+<td>How to check definitions in a class</td>
+<td>javap (no way to see the implementation without source code?)</td>
+</tr>
+<tr>
+<td>How to define detailed messages (for Actor)</td>
+<td>Put signals in an object like: object Messages { case object …; case class …; } (see source code 01)</td>
+</tr>
+<tr>
+<td>How to put multiple lines of code in one pattern match branch</td>
+<td>No need to wrap them in {…} because =&gt; and the next <code>case</code> defines the boundary</td>
+</tr>
+<tr>
+<td>How to define an <code>init</code> message (for Actor) that won’t be used in anywhere else</td>
+<td>In the file of Actor, <code>private object Init</code> </td>
+</tr>
+<tr>
+<td>When will <code>Future</code> start to execute</td>
+<td>It starts after <code>Future.apply()</code>. No need to worry about when to get the result because it’s always there inside the future instance (see source code 02)</td>
+</tr>
+<tr>
+<td>When explicit type annotation is needed</td>
+<td>Scala does local type inference, so method parameters, return type of recursive and overloaded methods (which is disallowed for nested function) need type annotation. </td>
+</tr>
+<tr>
+<td>Given a List[Int], how to call <code>def foo(is: Int*)</code></td>
+<td>foo(lst :<em>*) `:</em>*` is read as turning whatever (List?) to multiple variables</td>
+</tr>
+<tr>
+<td>How to use Java type whose name is a reverse word in Scala</td>
+<td>back quotes e.g. java.util.Scanner.`match`</td>
+</tr>
+<tr>
+<td>How to format multi-line String</td>
+<td>use “”” and stripMargin (see source code 03)</td>
+</tr>
+<tr>
+<td>How to exclude a few types when doing import</td>
+<td><code>import xxxpackage.{ Foo =&gt; _, Bar =&gt; Foo }</code></td>
+</tr>
+<tr>
+<td>How to group class, object and function so that they are available with one import</td>
+<td>package object (see source code 04)</td>
+</tr>
+<tr>
+<td>When can’t function be called with parentheses</td>
+<td>For function having no parameters, if it’s defined without parentheses, caller must invoke it WITHOUT parentheses. Otherwise, empty parentheses can be omitted. So a function without side-effects can be defined without parentheses.</td>
+</tr>
+<tr>
+<td>When can functions be called in a chain without =&gt; like <code>List(...) filter isEven foreach println</code></td>
+<td>Functions take a single argument</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">// source code 01</div><div class="line">object Messages &#123;</div><div class="line">  object Exit</div><div class="line">  object Start</div><div class="line">  object Stop</div><div class="line">  case class Inbound(message: String)</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 02</div><div class="line">val aFuture: Future[Int] = Future &#123;</div><div class="line">	// do the job</div><div class="line">&#125;</div><div class="line">// aFuture starts to run in another thread</div><div class="line">aFuture foreach &#123; res =&gt;</div><div class="line">	// res is available here</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 03</div><div class="line">// | is the default leading char</div><div class="line">val s =</div><div class="line">	s&quot;&quot;&quot;First line</div><div class="line">	   |Second line</div><div class="line">	&quot;&quot;&quot;.stripMargin</div><div class="line"></div><div class="line">// source code 04</div><div class="line">package samw.hl7</div><div class="line">package object api &#123;</div><div class="line">	class &#123;...&#125;</div><div class="line">	def ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h1 id="scala-tip"><a href="#scala-tip" class="headerlink" title="scala tip"></a>scala tip</h1><table>
 <thead>
 <tr>
@@ -473,9 +554,28 @@
 <td>PartialFunction</td>
 <td>val int2bool: PartialFunction[Int, Boolean] = {case 0 =&gt; false; case 1 =&gt; true}; int2bool.isDefinedAt(2) //=&gt; false </td>
 </tr>
+<tr>
+<td>isInstanceOf</td>
+<td>scala.Any::isInstanceOf[T] vs Java’s version: static <t> boolean isInstanceOf(Class<t> t, Object obj) {return t.isAssignableFrom(obj.getClass());}</t></t></td>
+</tr>
+<tr>
+<td>apply in class and object</td>
+<td>In class, it serves as method, while in object it’s a smart constructor. For example in List, apply(index: Int):T and apply(xs: T*): List[T]</td>
+</tr>
+<tr>
+<td>Try::toOption</td>
+<td>def get(i: Int): Option[T] = Try(lst(i)).toOption // in case i is an illegal index, it’s handy to avoid length check. Internally, apply accepts by-name parameter (treated as () -&gt; T, lazy evaluated), and wraps it with try-catch.</td>
+</tr>
+<tr>
+<td>Map(1-&gt;”a”,2-&gt;”b”) and get</td>
+<td>-&gt; is defined in Predef to return Tuple2. Map’s apply accepts multiple Tuple2. Note Map::apply(key) returns Value while Map::get(key) returns Option, which can avoid NoSuchElementException </td>
+</tr>
+<tr>
+<td>Pattern match vs for comprehension</td>
+<td>Suppose fn and ln are both Option, for (f &lt;- fn; l &lt;- ln) yield (f,l) //return Option[Tuple2]; (fn, ln) match {case (Some(f),Some(l)) =&gt; …; case _ =&gt; None} // more elegant</td>
+</tr>
 </tbody>
 </table>
-<p>//not included in quizlet<br>isInstanceOf | scala.Any::isInstanceOf[T] vs Java’s version: static <t> boolean isInstanceOf(Class<t> t, Object obj) {return t.isAssignableFrom(obj.getClass());}<br>apply in class and object | In class, it serves as method, while in object it’s a smart constructor. For example in List, apply(index: Int):T and apply(xs: T*): List[T]<br>Try::toOption | def get(i: Int): Option[T] = Try(lst(i)).toOption // in case i is an illegal index, it’s handy to avoid length check. Internally, apply accepts by-name parameter (treated as () -&gt; T, lazy evaluated), and wraps it with try-catch.<br>Map(1-&gt;”a”,2-&gt;”b”) and get | -&gt; is defined in Predef to return Tuple2. Map’s apply accepts multiple Tuple2. Note Map::apply(key) returns Value while Map::get(key) returns Option, which can avoid NoSuchElementException<br>Pattern match vs for comprehension | Suppose fn and ln are both Option, for (f &lt;- fn; l &lt;- ln) yield (f,l) //return Option[Tuple2]; (fn, ln) match {case (Some(f),Some(l)) =&gt; …; case _ =&gt; None} // more elegant</t></t></p>
 <h1 id="java-concurrency"><a href="#java-concurrency" class="headerlink" title="java concurrency"></a>java concurrency</h1><table>
 <thead>
 <tr>
@@ -805,7 +905,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">1.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#scala-tip"><span class="nav-number">2.</span> <span class="nav-text">scala tip</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java-concurrency"><span class="nav-number">3.</span> <span class="nav-text">java concurrency</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java-nio"><span class="nav-number">4.</span> <span class="nav-text">java nio</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-mergetool-kdiff3"><span class="nav-number">5.</span> <span class="nav-text">git mergetool kdiff3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cap-nosql"><span class="nav-number">6.</span> <span class="nav-text">cap nosql</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#log"><span class="nav-number">7.</span> <span class="nav-text">log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js-dependency"><span class="nav-number">8.</span> <span class="nav-text">js dependency</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dynamic-programming"><span class="nav-number">9.</span> <span class="nav-text">dynamic programming</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">1.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sbt-repositories"><span class="nav-number">2.</span> <span class="nav-text">sbt repositories</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#programming-scala"><span class="nav-number">3.</span> <span class="nav-text">programming scala</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#scala-tip"><span class="nav-number">4.</span> <span class="nav-text">scala tip</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java-concurrency"><span class="nav-number">5.</span> <span class="nav-text">java concurrency</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java-nio"><span class="nav-number">6.</span> <span class="nav-text">java nio</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-mergetool-kdiff3"><span class="nav-number">7.</span> <span class="nav-text">git mergetool kdiff3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cap-nosql"><span class="nav-number">8.</span> <span class="nav-text">cap nosql</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#log"><span class="nav-number">9.</span> <span class="nav-text">log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js-dependency"><span class="nav-number">10.</span> <span class="nav-text">js dependency</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dynamic-programming"><span class="nav-number">11.</span> <span class="nav-text">dynamic programming</span></a></li></ol></div>
             
 
           </div>
