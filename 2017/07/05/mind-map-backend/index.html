@@ -93,7 +93,7 @@
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/07/05/mind-map-backend/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
 <meta property="og:description" content="Backend tends to have a totally different topics than Web (frontend). What’s more, before putting too many items into “Mind Map of Web”, creating a new mind-map slot for backend is quite reasonable. A">
-<meta property="og:updated_time" content="2017-09-02T07:25:46.000Z">
+<meta property="og:updated_time" content="2017-09-03T14:39:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mind Map of Backend">
 <meta name="twitter:description" content="Backend tends to have a totally different topics than Web (frontend). What’s more, before putting too many items into “Mind Map of Web”, creating a new mind-map slot for backend is quite reasonable. A">
@@ -450,7 +450,7 @@
 </table>
 <a id="more"></a>
 <h1 id="sbt-repositories"><a href="#sbt-repositories" class="headerlink" title="sbt repositories"></a>sbt repositories</h1><p>~/.sbt/repositories<br>Please note that maven-central is fallback in case other repositories have invalid-hash-value error. aliyun is for fast-access in China.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[repositories]</div><div class="line">	local</div><div class="line">	aliyun-ivy: http://maven.aliyun.com/nexus/content/groups/public, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]  </div><div class="line">	aliyun-maven: http://maven.aliyun.com/nexus/content/groups/public </div><div class="line">	typesafe: http://repo.typesafe.com/typesafe/ivy-releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext], bootOnly</div><div class="line">	sbt-plugins-repo: http://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]</div><div class="line">	play: http://private-repo.typesafe.com/typesafe/maven-releases/</div><div class="line">	sonatype-snapshots: https://oss.sonatype.org/content/repositories/snapshots</div><div class="line">	typesafe-releases: https://repo.typesafe.com/typesafe/releases</div><div class="line">	typesafe-maven-releases: http://repo.typesafe.com/typesafe/maven-releases/</div><div class="line">	typesafe-ivy-releasez: https://repo.typesafe.com/typesafe/ivy-releases, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]</div><div class="line">	maven-central</div></pre></td></tr></table></figure></p>
-<h1 id="programming-scala"><a href="#programming-scala" class="headerlink" title="programming scala"></a>programming scala</h1><p>TODO<br>How to join other worker threads in the main thread?</p>
+<h1 id="programming-scala"><a href="#programming-scala" class="headerlink" title="programming scala"></a>programming scala</h1><p>TODO<br>How to join other worker threads in the main thread?<br>Implement Automatic Resource Manage (ARM) in Java</p>
 <table>
 <thead>
 <tr>
@@ -519,9 +519,85 @@
 <td>When can functions be called in a chain without =&gt; like <code>List(...) filter isEven foreach println</code></td>
 <td>Functions take a single argument</td>
 </tr>
+<tr>
+<td>Overhead of duck typing</td>
+<td>It needs reflection to find the method(property), and needs to import language.reflectiveCalls. On the other hand, it can support legacy (external) resource that is out of control of conforming to a trait (see source code 05)</td>
+</tr>
+<tr>
+<td>How to define a do-while block</td>
+<td>1) Use by-name (lazy) parameter for both guard and body to make sure they only get evaluated when being used; 2) If use recursive to achieve loop effect, annotate with tailrec; 3) Separate guard and body into two parameter lists so that it looks like a native loop (see source code 06)</td>
+</tr>
+<tr>
+<td>When to go for <code>scala.Enumeration</code></td>
+<td>It’s lightweight compared to <code>case class</code>. Note it’s an object, and needs <code>type foo=Value</code> to give it a type. Each value needs to be added via <code>Value</code> method (see source code 07)</td>
+</tr>
+<tr>
+<td>Is it possible to extend traits during creating objects</td>
+<td>Yes. No need to define a sub-type with the traits in advance</td>
+</tr>
+<tr>
+<td>How to match a case with a variable defined outside match block</td>
+<td>case `variableOutside` =&gt; …</td>
+</tr>
+<tr>
+<td>Whether do parentheses need for <code>if</code> guard in a case for pattern match</td>
+<td>No. <code>if</code> and <code>=&gt;</code> provide the boundary.</td>
+</tr>
+<tr>
+<td>:: vs +: vs :+</td>
+<td>+: is for Seq, which is super type of List. :: is for List. +: is prepend while :+ is append. For List, :+ takes O(n) time to trave to the last element. For Vector which is IndexedSeq, :+ takes O(1)</td>
+</tr>
+<tr>
+<td>How to match elements from the end</td>
+<td><code>case rest :+ end =&gt; ...</code> Under the hood, :+ is an infix extractor, acted like :+(rest, end).</td>
+</tr>
+<tr>
+<td>How to deconstruct multiple elements (for sequence)</td>
+<td><code>case first +: second +: tail =&gt; ...</code> or <code>case Seq(first, second, _*) =&gt; ...</code></td>
+</tr>
+<tr>
+<td>Is there any performance penalty for lazy values</td>
+<td>Yes. There is a guard for each lazy value to check whether it has been initialized. So after the first time of initialization, the check becomes unnecessary for later use.</td>
+</tr>
+<tr>
+<td>How to bind variable to multiple parameters in pattern match</td>
+<td><code>case Foo(props @ _*) =&gt; ...</code></td>
+</tr>
+<tr>
+<td>How to match Seq[T] for different T</td>
+<td>Since generic T will be erased at runtime, workaround is to get head and do a nested match (see source code 08)</td>
+</tr>
+<tr>
+<td>How to define an abstract method (no side effects) in super type</td>
+<td><code>def aMethod: ReturnType</code> then sub-type has the freedom to use <code>val aMethod: ReturnType</code> as implementation, or even <code>case class SubType(aMethod: ReturnType)</code> Note there is no parentheses for aMethod in super type.</td>
+</tr>
+<tr>
+<td>Can PartialFunction be passed into map</td>
+<td>Yes. <code>trait PartialFunction[A,B] extends (A) ⇒ B</code> Note to add default case otherwise there would be match error (at runtime)</td>
+</tr>
+<tr>
+<td>What does Predef.implicitly do</td>
+<td>Take a type and make an implicit value, so that to save an implicit parameter. <code>def implicitly[T](implicit e: T) = e</code></td>
+</tr>
+<tr>
+<td>How to class cast (and test cast)</td>
+<td>Any::asInstanceOf[T] and Any::isInstanceOf[T]. Note generic type will be erased at runtime so better not involve it</td>
+</tr>
+<tr>
+<td>What is implicit classes</td>
+<td>the class’ primary constructor is available for implicit conversions when the class is in scope</td>
+</tr>
+<tr>
+<td>What’s the difference between with or without val(var) in class constructor</td>
+<td>Without val(var), variable is visible in class block but not as a property. case class can omit val(var) and still keep them as properties</td>
+</tr>
+<tr>
+<td>What is &lt;:&lt;</td>
+<td>Provide evidence that for A &lt;:&lt; B (or written as &lt;:&lt;[A,B]), B is super type of A. (see TraversableOnce::toMap, evidence is implicit so no extra work but can enforce the type check by compiler) </td>
+</tr>
 </tbody>
 </table>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">// source code 01</div><div class="line">object Messages &#123;</div><div class="line">  object Exit</div><div class="line">  object Start</div><div class="line">  object Stop</div><div class="line">  case class Inbound(message: String)</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 02</div><div class="line">val aFuture: Future[Int] = Future &#123;</div><div class="line">	// do the job</div><div class="line">&#125;</div><div class="line">// aFuture starts to run in another thread</div><div class="line">aFuture foreach &#123; res =&gt;</div><div class="line">	// res is available here</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 03</div><div class="line">// | is the default leading char</div><div class="line">val s =</div><div class="line">	s&quot;&quot;&quot;First line</div><div class="line">	   |Second line</div><div class="line">	&quot;&quot;&quot;.stripMargin</div><div class="line"></div><div class="line">// source code 04</div><div class="line">package samw.hl7</div><div class="line">package object api &#123;</div><div class="line">	class &#123;...&#125;</div><div class="line">	def ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">// source code 01</div><div class="line">object Messages &#123;</div><div class="line">  object Exit</div><div class="line">  object Start</div><div class="line">  object Stop</div><div class="line">  case class Inbound(message: String)</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 02</div><div class="line">val aFuture: Future[Int] = Future &#123;</div><div class="line">	// do the job</div><div class="line">&#125;</div><div class="line">// aFuture starts to run in another thread</div><div class="line">aFuture foreach &#123; res =&gt;</div><div class="line">	// res is available here</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 03</div><div class="line">// | is the default leading char</div><div class="line">val s =</div><div class="line">	s&quot;&quot;&quot;First line</div><div class="line">	   |Second line</div><div class="line">	&quot;&quot;&quot;.stripMargin</div><div class="line"></div><div class="line">// source code 04</div><div class="line">package samw.hl7</div><div class="line">package object api &#123;</div><div class="line">	class &#123;...&#125;</div><div class="line">	def ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 05</div><div class="line">import scala.language.reflectiveCalls</div><div class="line">def clearAll(ts: &#123;def clear(): Unit&#125;*) = &#123;</div><div class="line">	ts.foreach(_.clear())</div><div class="line">&#125;</div><div class="line">def clear[T &lt;: Clearable] (ts: T*) = &#123;</div><div class="line">	ts.foreach(_.clear())</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 06</div><div class="line">@annotation.tailrec</div><div class="line">def doWhile(guard: =&gt; Boolean)(body: =&gt; Unit): Unit = &#123;</div><div class="line">	if (guard) &#123;</div><div class="line">		body</div><div class="line">		doWhile(guard)(body)</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">doWhile(i &gt; 0) &#123;</div><div class="line">	//...</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 07</div><div class="line">object Animal extends Enumeration &#123;</div><div class="line">	type Animal = Value // 1) Value</div><div class="line">	val Dog, Cat, Pig = Value // 2) Value</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 08</div><div class="line">case Nil =&gt; ... // necessary to cover all cases</div><div class="line">case head +: _ =&gt; head match &#123;</div><div class="line">	case type1: Type1 =&gt; ...</div><div class="line">	case type2: Type2 =&gt; ...</div><div class="line">	case _ =&gt; ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h1 id="scala-tip"><a href="#scala-tip" class="headerlink" title="scala tip"></a>scala tip</h1><table>
 <thead>
 <tr>
