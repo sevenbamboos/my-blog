@@ -93,7 +93,7 @@
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/07/05/mind-map-backend/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
 <meta property="og:description" content="Backend tends to have a totally different topics than Web (frontend). What’s more, before putting too many items into “Mind Map of Web”, creating a new mind-map slot for backend is quite reasonable. A">
-<meta property="og:updated_time" content="2017-09-03T14:39:47.000Z">
+<meta property="og:updated_time" content="2017-09-10T11:36:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mind Map of Backend">
 <meta name="twitter:description" content="Backend tends to have a totally different topics than Web (frontend). What’s more, before putting too many items into “Mind Map of Web”, creating a new mind-map slot for backend is quite reasonable. A">
@@ -595,9 +595,125 @@
 <td>What is &lt;:&lt;</td>
 <td>Provide evidence that for A &lt;:&lt; B (or written as &lt;:&lt;[A,B]), B is super type of A. (see TraversableOnce::toMap, evidence is implicit so no extra work but can enforce the type check by compiler) </td>
 </tr>
+<tr>
+<td>How to overload functions just with different parameter types</td>
+<td>Create implicit objects for different types and add an implicit argument list with type object at the end of function (see source code 09).</td>
+</tr>
+<tr>
+<td>What is type class pattern and when to use it</td>
+<td>ad hoc polymorphism, that is add capability to existing classes (see source code 10). Use it when only a few of classes need a particular behavior. If a function takes a list of objects in different types, only one implicit class would be passed in. If we therefore implement the behavior for multiple types in one implicit class, it leads to an ugly solution. </td>
+</tr>
+<tr>
+<td>What is scala.util.control.TailCalls</td>
+<td>Make recursive calls on the heap instead of the stack. (see source code in ScalaDoc for fib with tailcall)</td>
+</tr>
+<tr>
+<td>How to invoke function of argument list with a tuple</td>
+<td>Function.tupled<a href="f: (a1,a2" target="_blank" rel="external">a1,a2,b</a>=&gt;b): ((a1,a2)) =&gt; b // there are more tupled for more parameter (as well as untupled)</td>
+</tr>
+<tr>
+<td>How to turn PartialFunction to a full function</td>
+<td>PartialFunction::lift() // MatchError will become Option</td>
+</tr>
+<tr>
+<td>How to overwrite type defined in Predef</td>
+<td>Use a type alias and a val as a companion object for its apply (see source code 11)</td>
+</tr>
+<tr>
+<td>How to implement fib with Stream</td>
+<td>BigInt(0) #:: BigInt(2) #:: fibs.zip(fibs.tail).map { n =&gt; n._1 + n._2 } </td>
+</tr>
+<tr>
+<td>What’s the point to have both reduceRight and reduceLeft</td>
+<td>reduceLeft supports tail recursive, while reduceRight can handle infinite lazy stream. reduceLeft =&gt; rl(f(head) +: accum, tail) =&gt; ((1+2)+3)+4; reduceRight =&gt; f(head) +: rR(tail)(f) =&gt; 1+(2+(3+4)) </td>
+</tr>
+<tr>
+<td>What is persistent data structure</td>
+<td>It can keep the previous state after being modified. For binary search tree (BST), each change to one node will also change at most log(n) nodes (along the path from the changed node to the topmost)</td>
+</tr>
+<tr>
+<td>How many times of iteration for chained map and filter</td>
+<td>Intermediate operations will be combined and evaluated in one iteration until a terminal operation like reduce. </td>
+</tr>
+<tr>
+<td>What is universal trait</td>
+<td>Derive from <code>Any</code>, including methods only and the implementation has no initialization of its own. If the trait is used as type parameter(generic) or function signature, the wrapper will be allocated (in heap). (see source code 12) </td>
+</tr>
+<tr>
+<td>What is value class</td>
+<td>Has to be top-level type, only one val argument, no secondary constructors, only methods, can’t override equals and hashCode, inherit from universal trait. As a wrapper, it’s not necessary to allocate itself in heap. (see source code 12)</td>
+</tr>
+<tr>
+<td>How to define unary method</td>
+<td>def unary_X : … // X is the unary operation and put a space between operation and :</td>
+</tr>
+<tr>
+<td>When to use inheritance</td>
+<td>Concrete class should never be subclassed unless for mixing orthogonal behaviors or unit testing; never split logical state (e.g. related to hashcode or equality) across parent-child boundary.</td>
+</tr>
+<tr>
+<td>How to mix traits when creating object</td>
+<td><code>val foo = new Foo() with BarTrait</code> // not extends here</td>
+</tr>
+<tr>
+<td>When mixing multiple traits, what’s the order of type hierarchy</td>
+<td>For each type from RIGHT to left, find hierarchy list and append it to the final hierarchy. Then scan from the end of the final list and remove duplicated ones before it.</td>
+</tr>
+<tr>
+<td>When mixing multiple traits, what’s the order of initialization</td>
+<td>For each type from LEFT to right, execute the type body.</td>
+</tr>
+<tr>
+<td>Class or trait</td>
+<td>Mixins are for adjunct behavior. If a trait is used most as a parent of classes, so that child classes behave as the trait, try to turn the trait to a class. Refer to Liskov substitution principle: replace a parent class with a child should not make change to client code.</td>
+</tr>
+<tr>
+<td>Is there variance annotation for paremeterized method</td>
+<td>No, it’s applied to types only, meaning for methods it’s invariant.</td>
+</tr>
+<tr>
+<td>What’s the variance of mutable types</td>
+<td>Invariance. It can have both getter and setter, which means it appears at method parameter as contravariant and at method return type as covariant. So it must be invariance.</td>
+</tr>
+<tr>
+<td>How to parse arguments of command line with pattern match</td>
+<td><code>case (&quot;-p&quot; :: param :: tail) =&gt; doParse(tail, result.copy(p=param))</code> (see source code 13)</td>
+</tr>
+<tr>
+<td>When value types (e.g. Int, Boolean) need to be allocated on the heap</td>
+<td>They’re represented as Java primitives so stay in stack by default. But Rich* types provide more methods for them and if one of these methods are used, it needs to allocate an instance on the heap.</td>
+</tr>
+<tr>
+<td>When to override method</td>
+<td>Template pattern is a way to walkaround override and defines fine-tuned abstract methods in super type; if super type provides a simple (mock) implementation for a method, then override is acceptable; another case is to provide separate concerns on top of the basic implementation.</td>
+</tr>
+<tr>
+<td>What is <code>def foo[T &lt;: Bar](...</code></td>
+<td>T must be sub-type of Bar (In Java, &lt;? extends Bar&gt;)</td>
+</tr>
+<tr>
+<td>What is <code>def foo[T :&gt; Bar](...</code></td>
+<td>T must be super-type of Bar (In Java, &lt;? super Bar&gt;)</td>
+</tr>
+<tr>
+<td>What is Context Bounds <code>def foo[T : Bar](...</code></td>
+<td>There must exist Bar[T]. (see source code 14) </td>
+</tr>
+<tr>
+<td>When to use parameterized types and when to abstract types</td>
+<td>In case of constructor needs type parameter in arguments, the former is the only approach.</td>
+</tr>
+<tr>
+<td>What is structural types (ducking type)</td>
+<td>For example in observer pattern, <code>type Observer = {def notify(state: Any): Unit}</code>. To decouple the method name, it can be simplified as <code>type Observer = State =&gt; Unit</code>. But it has a limit to can only handle the type with one method.</td>
+</tr>
+<tr>
+<td>What is existential types</td>
+<td>Type parameters are erased in JVM byte code. So two functions with same name and same arguments but different type parameters can’t co-exist (overloaded). In case of Seq, workaround is observe each item and apply function to it (see source code 15) Also note existential types can have type bounds like <code>Seq[_ &gt;: Bar &lt;: Foo]</code></td>
+</tr>
 </tbody>
 </table>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">// source code 01</div><div class="line">object Messages &#123;</div><div class="line">  object Exit</div><div class="line">  object Start</div><div class="line">  object Stop</div><div class="line">  case class Inbound(message: String)</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 02</div><div class="line">val aFuture: Future[Int] = Future &#123;</div><div class="line">	// do the job</div><div class="line">&#125;</div><div class="line">// aFuture starts to run in another thread</div><div class="line">aFuture foreach &#123; res =&gt;</div><div class="line">	// res is available here</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 03</div><div class="line">// | is the default leading char</div><div class="line">val s =</div><div class="line">	s&quot;&quot;&quot;First line</div><div class="line">	   |Second line</div><div class="line">	&quot;&quot;&quot;.stripMargin</div><div class="line"></div><div class="line">// source code 04</div><div class="line">package samw.hl7</div><div class="line">package object api &#123;</div><div class="line">	class &#123;...&#125;</div><div class="line">	def ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 05</div><div class="line">import scala.language.reflectiveCalls</div><div class="line">def clearAll(ts: &#123;def clear(): Unit&#125;*) = &#123;</div><div class="line">	ts.foreach(_.clear())</div><div class="line">&#125;</div><div class="line">def clear[T &lt;: Clearable] (ts: T*) = &#123;</div><div class="line">	ts.foreach(_.clear())</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 06</div><div class="line">@annotation.tailrec</div><div class="line">def doWhile(guard: =&gt; Boolean)(body: =&gt; Unit): Unit = &#123;</div><div class="line">	if (guard) &#123;</div><div class="line">		body</div><div class="line">		doWhile(guard)(body)</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">doWhile(i &gt; 0) &#123;</div><div class="line">	//...</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 07</div><div class="line">object Animal extends Enumeration &#123;</div><div class="line">	type Animal = Value // 1) Value</div><div class="line">	val Dog, Cat, Pig = Value // 2) Value</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 08</div><div class="line">case Nil =&gt; ... // necessary to cover all cases</div><div class="line">case head +: _ =&gt; head match &#123;</div><div class="line">	case type1: Type1 =&gt; ...</div><div class="line">	case type2: Type2 =&gt; ...</div><div class="line">	case _ =&gt; ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div></pre></td><td class="code"><pre><div class="line">// source code 01</div><div class="line">object Messages &#123;</div><div class="line">  object Exit</div><div class="line">  object Start</div><div class="line">  object Stop</div><div class="line">  case class Inbound(message: String)</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 02</div><div class="line">val aFuture: Future[Int] = Future &#123;</div><div class="line">	// do the job</div><div class="line">&#125;</div><div class="line">// aFuture starts to run in another thread</div><div class="line">aFuture foreach &#123; res =&gt;</div><div class="line">	// res is available here</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 03</div><div class="line">// | is the default leading char</div><div class="line">val s =</div><div class="line">	s&quot;&quot;&quot;First line</div><div class="line">	   |Second line</div><div class="line">	&quot;&quot;&quot;.stripMargin</div><div class="line"></div><div class="line">// source code 04</div><div class="line">package samw.hl7</div><div class="line">package object api &#123;</div><div class="line">	class &#123;...&#125;</div><div class="line">	def ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 05</div><div class="line">import scala.language.reflectiveCalls</div><div class="line">def clearAll(ts: &#123;def clear(): Unit&#125;*) = &#123;</div><div class="line">	ts.foreach(_.clear())</div><div class="line">&#125;</div><div class="line">def clear[T &lt;: Clearable] (ts: T*) = &#123;</div><div class="line">	ts.foreach(_.clear())</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 06</div><div class="line">@annotation.tailrec</div><div class="line">def doWhile(guard: =&gt; Boolean)(body: =&gt; Unit): Unit = &#123;</div><div class="line">	if (guard) &#123;</div><div class="line">		body</div><div class="line">		doWhile(guard)(body)</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">doWhile(i &gt; 0) &#123;</div><div class="line">	//...</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 07</div><div class="line">object Animal extends Enumeration &#123;</div><div class="line">	type Animal = Value // 1) Value</div><div class="line">	val Dog, Cat, Pig = Value // 2) Value</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 08</div><div class="line">case Nil =&gt; ... // necessary to cover all cases</div><div class="line">case head +: _ =&gt; head match &#123;</div><div class="line">	case type1: Type1 =&gt; ...</div><div class="line">	case type2: Type2 =&gt; ...</div><div class="line">	case _ =&gt; ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 09</div><div class="line">implicit object IntMaker</div><div class="line">implicit object StringMaker</div><div class="line">def m(seq: Seq[Int])(implicit i: IntMaker.type): Unit = println(s&quot;seq[int]: $seq&quot;)</div><div class="line">def m(seq: Seq[String])(implicit i: StringMaker.type): Unit = println(s&quot;seq[string]: $seq&quot;)</div><div class="line"></div><div class="line">// source code 10</div><div class="line">class Foo ...</div><div class="line">class Bar ...</div><div class="line">implicit class Foo2Json(foo: Foo) &#123;</div><div class="line">	def toJson ...</div><div class="line">&#125;</div><div class="line">implicit class Bar2Json(bar: Bar) &#123;</div><div class="line">	def toJson ...</div><div class="line">&#125;</div><div class="line">println(new Foo(...).toJson)</div><div class="line">println(new Bar(...).toJson)</div><div class="line"></div><div class="line">// source code 11</div><div class="line">package util</div><div class="line">package object datastructs &#123;</div><div class="line">  type Seq[+A] = scala.collection.immutable.Seq[A]</div><div class="line">  val Seq = scala.collection.immutable.Seq</div><div class="line">&#125;</div><div class="line">// import util.datastructs._</div><div class="line"></div><div class="line">// source code 12</div><div class="line">trait Formatter extends Any &#123; // universal trait</div><div class="line">	def format(format: String): String = ???</div><div class="line">&#125;</div><div class="line">trait AnotherTrait extends Any &#123;...&#125;</div><div class="line"></div><div class="line">// Through String is not from AnyVal (AnyRef instead), it&apos;s still a value class</div><div class="line">class PhoneNumber(val s: String) extends AnyVal</div><div class="line">	with Formatter with AnotherTrait &#123;</div><div class="line">	override def toString = &#123;...&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 13</div><div class="line">case class Args(p1: String, p2: String)</div><div class="line"></div><div class="line">// exit returns Nothing, which is subtype for everything</div><div class="line">// so any function can call exit without breaking type checking</div><div class="line">def quit(msg: String, status: Int): Nothing = &#123;</div><div class="line">	if (msg.length &gt; 0) println(msg)</div><div class="line">	sys.exit(status)</div><div class="line">&#125;</div><div class="line"></div><div class="line">def parseCommandLine(args: Array[String]): Args = &#123;</div><div class="line">	def doParse(argList: List[String], result: Args): Args = argList match &#123;</div><div class="line">		case Nil =&gt; result</div><div class="line">		case (&quot;-h&quot; | &quot;--help&quot;) :: Nil =&gt; quit(&quot;&quot;, 0)</div><div class="line">		case (&quot;-p1&quot;) :: p1 :: tail =&gt; doParse(tail, result.copy(p1 = p1))</div><div class="line">		case (&quot;-p2&quot;) :: p2 :: tail =&gt; doParse(tail, result.copy(p2 = p2))</div><div class="line">		case _ =&gt; quit(s&quot;Unknown argument $&#123;argList.head&#125;&quot;, 1)</div><div class="line">	&#125;</div><div class="line">	return doParse(args.toList, Args(&quot;&quot;, &quot;&quot;))</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 14</div><div class="line">import math.Ordering</div><div class="line">case class MyList[A](list: List[A]) &#123;</div><div class="line">	def sortBy1[B](f: A =&gt; B)(implicit order: Ordering[B]): List[A] =</div><div class="line">		list.sortBy(f)(order)</div><div class="line"></div><div class="line">	def sortBy2[B: Ordering](f: A =&gt; B): List[A] =</div><div class="line">		list.sortBy(f)(implicitly(Ordering[B]))</div><div class="line">&#125;</div><div class="line"></div><div class="line">def main(args: Array[String]): Unit = &#123;</div><div class="line">	val lst = MyList(List(4,3,1,5,2))</div><div class="line">	println(lst.sortBy1(i =&gt; -i))</div><div class="line">	println(lst.sortBy2(i =&gt; -i))</div><div class="line">&#125;</div><div class="line"></div><div class="line">// source code 15</div><div class="line">def double(seq: Seq[_]): Seq[Int] = seq match &#123;</div><div class="line">	case Nil =&gt; Nil</div><div class="line">	case head +: tail =&gt; toInt(head)*2 +: double(tail)</div><div class="line">&#125;</div><div class="line"></div><div class="line">private def toInt(x: Any): Int = x match &#123;</div><div class="line">	case i: Int =&gt; i</div><div class="line">	case s: String =&gt; s.toInt</div><div class="line">	case x =&gt; throw new IllegalArgumentException(s&quot;Can&apos;t turn $x to Int&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h1 id="scala-tip"><a href="#scala-tip" class="headerlink" title="scala tip"></a>scala tip</h1><table>
 <thead>
 <tr>
