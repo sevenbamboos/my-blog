@@ -1,0 +1,736 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/my-blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/my-blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/my-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Scala," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/my-blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="What is FutureFuture is a place to hold a value (that may not be available yet). Future has two parts: asynchronized computation (a block provided by application) and the computation result. Future’s">
+<meta name="keywords" content="Scala">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Promise and Future">
+<meta property="og:url" content="https://sevenbamboos.github.com/2017/09/17/promise-and-future/index.html">
+<meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
+<meta property="og:description" content="What is FutureFuture is a place to hold a value (that may not be available yet). Future has two parts: asynchronized computation (a block provided by application) and the computation result. Future’s">
+<meta property="og:updated_time" content="2017-09-17T13:43:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Promise and Future">
+<meta name="twitter:description" content="What is FutureFuture is a place to hold a value (that may not be available yet). Future has two parts: asynchronized computation (a block provided by application) and the computation result. Future’s">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/my-blog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sevenbamboos.github.com/2017/09/17/promise-and-future/"/>
+
+
+
+
+
+  <title> Promise and Future | Sam's Chest of Drawers </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/my-blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sam's Chest of Drawers</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thinking about Programming and Lifestyle</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/my-blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/my-blog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/my-blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/my-blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/09/17/promise-and-future/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Promise and Future
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-17T11:09:56+08:00">
+                09-17-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="What-is-Future"><a href="#What-is-Future" class="headerlink" title="What is Future"></a>What is Future</h1><p>Future is a place to hold a value (that may not be available yet). Future has two parts: asynchronized computation (a block provided by application) and the computation result.</p>
+<h2 id="Future’s-computation"><a href="#Future’s-computation" class="headerlink" title="Future’s computation"></a>Future’s computation</h2><p>In language such as Scala, a block of computation is actually by-name parameter like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">val fetchPatientDetails = Future&#123;</div><div class="line">  val session = getSession(credential)</div><div class="line">  session.getPatientInfo(id)</div><div class="line">&#125; // it&apos;s Future&lt;PatientInfo&gt;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h2 id="Future’s-result"><a href="#Future’s-result" class="headerlink" title="Future’s result"></a>Future’s result</h2><p>To get the result wrapped in Future, one way is to invoke a blocking method (getValue, just as what Java’s Future does). It’s very inconvenient and just letting application to take responsibility of polling. After all, the result may not be available or suddenly become accessible any moment after Future start, which could make the whole application undeterministic. Another way is to install callbacks to Future so that on completion it will invoke the proper callback depending on whether successful or failed. Note: callback is invoked by Future in the meaning of <code>inversion of control</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// install a callback for happy path</div><div class="line">fetchPatientDetails foreach &#123; patient =&gt;</div><div class="line">  val address = getMajorCommunicationChannel(patient.id)</div><div class="line">  UI.confirmPostalAddress(address)</div><div class="line">&#125;</div><div class="line"></div><div class="line">// install callbacks for both success and failure</div><div class="line">fetchPatientDetails onComplete &#123;</div><div class="line">  case Success(info) =&gt; ...</div><div class="line">  case Failure(e) if NonFatal(e) =&gt; ... // try not to catch fatal errors</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="What-is-good-to-have-Future-combinator"><a href="#What-is-good-to-have-Future-combinator" class="headerlink" title="What is good to have Future combinator"></a>What is good to have Future combinator</h1><p>It could be tedious to make a sequential of Future with nested callback like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">fetchPatientDetails foreach &#123; patient =&gt;</div><div class="line">  val fetchPatientReports = Future&#123;</div><div class="line">    session.findReportsByPatient(patient.id)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  fetchLatestReport foreach &#123; reports =&gt;</div><div class="line">    val latestReport = reports sortWith(_.createDate &gt; _.createDate).take(1)</div><div class="line">    val fetchComparisonStudies = Future&#123;</div><div class="line">      session.findComparisonStudies(latestReport.id)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    fetchComparisonStudies foreach &#123; studies =&gt;</div><div class="line">      UI.displayReport(latestReport, studies)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>To simplify the code structure, combinator is a solution.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">val fetchLatestReport = fetchPatientDetails map &#123; patient =&gt;</div><div class="line">  val reports = session.findReportsByPatient(patient.id)</div><div class="line">  reports sortWith(_.createDate &gt; _.createDate).take(1)</div><div class="line">&#125;</div><div class="line"></div><div class="line">val fetchComparisonStudies = fetchLatestReport map &#123; report =&gt;</div><div class="line">  val studies = session.findComparisonStudies(report.id)</div><div class="line">  (report, studies)</div><div class="line">&#125;</div><div class="line"></div><div class="line">fetchComparisonStudies foreach &#123; (report, studies) =&gt;</div><div class="line">  UI.displayReport(report, studies)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Actually in Scala, combinator code can be simplified further with for-comprehension:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">val session = getSession(credential)</div><div class="line">val (report, studies) = for &#123;</div><div class="line">  patient &lt;- Future &#123; session.getPatientInfo(id) &#125;</div><div class="line">  reports &lt;- Future &#123; session.findReportsByPatient(patient.id) &#125;</div><div class="line">  latestReport = reports sortWith(_.createDate &gt; _.createDate).take(1)</div><div class="line">  studies &lt;- Future &#123; session.findComparisonStudies(latestReport.id) &#125;</div><div class="line">&#125; yield (latestReport, studies)</div><div class="line">UI.displayReport(report, studies)</div></pre></td></tr></table></figure></p>
+<p>A huge improvement compared to the version with callback. Admittedly, Java’s Future is even worse in that it has no way to install callback other than calling the blocking method get.</p>
+<h1 id="What-is-Promise-how-to-build-Future"><a href="#What-is-Promise-how-to-build-Future" class="headerlink" title="What is Promise (how to build Future)"></a>What is Promise (how to build Future)</h1><blockquote>
+<p>While futures are defined as a type of read-only placeholder object created for a result which doesn’t yet exist, a promise can be thought of as a writable, single-assignment container, which completes a future. That is, a promise can be used to successfully complete a future with a value (by “completing” the promise) using the success method. </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">val p = Promise[Seq[Task]]()</div><div class="line">val fetchOpenTasks = p.future</div><div class="line"></div><div class="line">val prepareForNotification = Future &#123;</div><div class="line">  val tasks = session.findOpenTasksForPatient(id)</div><div class="line">  if (tasks.isEmpty)</div><div class="line">    p failure (new RuntimeException(&quot;No open tasks&quot;))</div><div class="line">  else &#123;</div><div class="line">    p success tasks</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">fetchOpenTasks onComplete &#123;</div><div class="line">  case Success(tasks) =&gt; Notification.sendForTasks(tasks)</div><div class="line">  case Failure(e) =&gt; UI.inform(e.getMessage)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Promise can be used to construct Future combinator:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">def first[T](f: Future[T], g: Future[T]): Future[T] = &#123;</div><div class="line">  val p = promise[T]</div><div class="line"></div><div class="line">  f foreach &#123;</div><div class="line">    case x =&gt; p.trySuccess(x)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  g foreach &#123;</div><div class="line">    case x =&gt; p.trySuccess(x)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  p.future</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="How-to-convert-blocking-function-to-Future-with-Promise"><a href="#How-to-convert-blocking-function-to-Future-with-Promise" class="headerlink" title="How to convert blocking function to Future with Promise"></a>How to convert blocking function to Future with Promise</h2><p>Suppose we have a blocking function:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">def fib(input: Int): BigInt = &#123;</div><div class="line">  lazy val fibs: Stream[BigInt] = BigInt(0) #:: BigInt(1) #:: fibs.zip(fibs.tail).map(n =&gt; n._1 + n._2)</div><div class="line"></div><div class="line">  val result = for &#123;</div><div class="line">    p &lt;- fibs.take(input).zip(1 to input)</div><div class="line">    //_ = println(s&quot;fib($&#123;p._2&#125;)=$&#123;p._1&#125;&quot;)</div><div class="line">  &#125; yield p._1</div><div class="line"></div><div class="line">  result.last</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Let’s see the Future version:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">def fibFuture(input: Int): Future[BigInt] = &#123;</div><div class="line">  val p = Promise[BigInt]</div><div class="line">  Future &#123;</div><div class="line">    try p success(fib(input))</div><div class="line">    catch &#123; case e if NonFatal(e) =&gt; p failure(e) &#125;</div><div class="line">  &#125;</div><div class="line">  p.future</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="How-to-convert-callback-to-Future-with-Promise"><a href="#How-to-convert-callback-to-Future-with-Promise" class="headerlink" title="How to convert callback to Future with Promise"></a>How to convert callback to Future with Promise</h2><p>Suppose we have a function taking a callback to handle the result:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">def fibCB(input: Int, cb: (BigInt) =&gt; Unit): Unit = cb(fib(input))</div></pre></td></tr></table></figure></p>
+<p>The Future version is:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">def fibFutureForCB(input: Int): Future[BigInt] = &#123;</div><div class="line">  val p = Promise[BigInt]</div><div class="line">  Future &#123;</div><div class="line">    try fibCB(input, x =&gt; p success(x))</div><div class="line">    catch &#123; case e if NonFatal(e) =&gt; p failure(e) &#125;</div><div class="line">  &#125;</div><div class="line">  p.future</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="How-to-cancel-asynchronous-computation"><a href="#How-to-cancel-asynchronous-computation" class="headerlink" title="How to cancel asynchronous computation"></a>How to cancel asynchronous computation</h2><p>The key point is to give application a Promise to do cancellation<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">type Cancellable[T] = (Promise[Unit],Future[T])</div><div class="line"></div><div class="line">def cancellable[T](b: Future[Unit] =&gt; T): Cancellable[T] = &#123;</div><div class="line">  val cancel = Promise[Unit]</div><div class="line">  val f = Future &#123;</div><div class="line">    val r = b(cancel.future)</div><div class="line">    if (!cancel.tryFailure(new Exception))</div><div class="line">      throw new CancellationException</div><div class="line">    r</div><div class="line">  &#125;</div><div class="line">  (cancel, f)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>The application could be like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">val (cancel, value) = cancellable &#123; cancel =&gt;</div><div class="line">  for (i &lt;- 0 to 5) &#123;</div><div class="line">    if (cancel.isCompleted) throw new CancellationException</div><div class="line">    Thread.sleep(500)</div><div class="line">    println(s&quot;$i: working&quot;)</div><div class="line">  &#125;</div><div class="line">  &quot;result&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Thread.sleep(1500)</div><div class="line">cancel trySuccess()</div><div class="line">println(&quot;cancelled!&quot;)</div><div class="line">Thread.sleep(2000)</div></pre></td></tr></table></figure></p>
+<p>Once application tells <code>cancel</code> to success, the computation will stop</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>Scala’s official site has an introduction about <a href="http://docs.scala-lang.org/overviews/core/futures.html#functional-composition-and-for-comprehensions" target="_blank" rel="external">promise and future</a>.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/my-blog/tags/Scala/" rel="tag"># Scala</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/my-blog/2017/09/05/mind-map-scala/" rel="next" title="Mind Map of Scala">
+                <i class="fa fa-chevron-left"></i> Mind Map of Scala
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80"
+               alt="Yuping Wang" />
+          <p class="site-author-name" itemprop="name">Yuping Wang</p>
+           
+              <p class="site-description motion-element" itemprop="description">85608565</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/my-blog/archives">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/my-blog/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/my-blog/tags">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sevenbamboos" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/sevenbamboos" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-Future"><span class="nav-number">1.</span> <span class="nav-text">What is Future</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Future’s-computation"><span class="nav-number">1.1.</span> <span class="nav-text">Future’s computation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Future’s-result"><span class="nav-number">1.2.</span> <span class="nav-text">Future’s result</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-good-to-have-Future-combinator"><span class="nav-number">2.</span> <span class="nav-text">What is good to have Future combinator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-Promise-how-to-build-Future"><span class="nav-number">3.</span> <span class="nav-text">What is Promise (how to build Future)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-convert-blocking-function-to-Future-with-Promise"><span class="nav-number">3.1.</span> <span class="nav-text">How to convert blocking function to Future with Promise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-convert-callback-to-Future-with-Promise"><span class="nav-number">3.2.</span> <span class="nav-text">How to convert callback to Future with Promise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-cancel-asynchronous-computation"><span class="nav-number">3.3.</span> <span class="nav-text">How to cancel asynchronous computation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuping Wang</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/my-blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/my-blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/my-blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
