@@ -93,7 +93,7 @@
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/09/05/mind-map-scala/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
 <meta property="og:description" content="Map   Keywords Comment &amp;amp; Reference     Concurrent programming in Scala Q&amp;amp;A   Programming Scala Q&amp;amp;A     Scala tip Q&amp;amp;A   Algebraic Data Types Comment, blog 1,2,3   sbt Comment    reader">
-<meta property="og:updated_time" content="2017-09-17T03:07:25.000Z">
+<meta property="og:updated_time" content="2017-09-24T01:52:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mind Map of Scala">
 <meta name="twitter:description" content="Map   Keywords Comment &amp;amp; Reference     Concurrent programming in Scala Q&amp;amp;A   Programming Scala Q&amp;amp;A     Scala tip Q&amp;amp;A   Algebraic Data Types Comment, blog 1,2,3   sbt Comment    reader">
@@ -487,6 +487,38 @@
 <tr>
 <td>21. How to do exception handling for Future</td>
 <td><code>f.failed foreach{ case NonFatal(e) =&gt;... }</code> Don’t catch fatal errors. </td>
+</tr>
+<tr>
+<td>22. What’s the relation between Promise and Future</td>
+<td>Promise keeps a one-time assignment to a variable either with a value or exception, which makes it suitable to construct Future (see my blog <code>Promise and Future</code>)</td>
+</tr>
+<tr>
+<td>23. How to block (main) thread to wait for asynchronous computation</td>
+<td>scala.concurrent.Await::ready and result.</td>
+</tr>
+<tr>
+<td>24. How to indicate execution context there is a blocking part inside a Future</td>
+<td>blocking { … }</td>
+</tr>
+<tr>
+<td>25. Why does performance test need warmup</td>
+<td>For language with just-in-time compilation like Java, bytecode as the output of compiler will be run first as interpreted mode until JVM decides to turn part of frequent visited into machine code and thereby that part will run in the steady state, which is much faster than before. That’s the reason we need warmup (maybe hundreds of times of test code) before doing performance measurement. </td>
+</tr>
+<tr>
+<td>26. In Rx, what is good to define Subject to implement both Observable and Observer</td>
+<td>Observer may not be available when creating Observable. So Subject can be a mediator between Observable and final observers.</td>
+</tr>
+<tr>
+<td>27. What is Software Transactional Memory(STM)</td>
+<td>Wrap atomic block around shared resources (like what atomic reference does but STM provides an easy way to manage multiple references) and automatically retry the block if any resource has been changed by other threads (like what database transactions do). Resource needs to be wrapped in STM reference (to be known by STM) before atomic block. Inside block, resources need to accessed by the references. And the references should never be used outside the block (not even in afterCommit/afterRollback methods, which perform operations without the danger of executing them multiple times when retrying). Also note to avoid long-running like infinite loop in the block.</td>
+</tr>
+<tr>
+<td>28. In STM, what happens when there is nested atomic block</td>
+<td>In ScalaSTM, wrapped block will become the top-level block and rollback retry start from the topmost block.</td>
+</tr>
+<tr>
+<td>29. How to express a method whose return type is the class itself</td>
+<td><code>def foo(...): this.type</code></td>
 </tr>
 </tbody>
 </table>

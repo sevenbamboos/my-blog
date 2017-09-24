@@ -897,6 +897,10 @@
 <td><a href="https://sspai.com/post/39951" target="_blank" rel="external">Anki</a> <a href="https://sspai.com/post/34411" target="_blank" rel="external">Studies</a></td>
 </tr>
 <tr>
+<td>vim</td>
+<td><a href="#vim-tips">Comment</a></td>
+</tr>
+<tr>
 <td>java nio</td>
 <td><a href="#java-nio">Comment</a></td>
 </tr>
@@ -914,7 +918,11 @@
 </tr>
 <tr>
 <td>e-book site (for IT)</td>
-<td><a href="http://www.finelybook.com/" target="_blank" rel="external">link</a>, <a href="http://www.salttiger.com" target="_blank" rel="external">link</a></td>
+<td><a href="http://www.finelybook.com/" target="_blank" rel="external">finelybook</a> (down since 2017.9, not sure the future), <a href="http://www.salttiger.com" target="_blank" rel="external">salttiger</a>, <a href="https://archive.org/" target="_blank" rel="external">archive.org</a></td>
+</tr>
+<tr>
+<td>machine learning</td>
+<td><a href="#machine-learning">Comment</a></td>
 </tr>
 </tbody>
 </table>
@@ -1144,11 +1152,778 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/05/23/sorting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2017/05/23/sorting/" itemprop="url">
+                  Sorting Performance
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-23T11:31:45+08:00">
+                05-23-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Recently, I did some study on sorting algorithms and I’m amazed to find that the sort from standard Java Runtime Environment (JRE) is <em>NOT</em> as efficient as I expected. According to Java-DOC’s description:</p>
+<p><code>public static &lt;T&gt; void sort(T[] a, Comparator&lt;? super T&gt; c)</code></p>
+<blockquote>
+<p>Sorts the specified array of objects according to the order induced by the specified comparator. All elements in the array must be mutually comparable by the specified comparator (that is, c.compare(e1, e2) must not throw a ClassCastException for any elements e1 and e2 in the array).</p>
+<p>This sort is guaranteed to be stable: equal elements will not be reordered as a result of the sort.<br>Implementation note: This implementation is a stable, adaptive, iterative mergesort that requires far fewer than n lg(n) comparisons when the input array is partially sorted, while offering the performance of a traditional mergesort when the input array is randomly ordered. If the input array is nearly sorted, the implementation requires approximately n comparisons. Temporary storage requirements vary from a small constant for nearly sorted input arrays to n/2 object references for randomly ordered input arrays.</p>
+<p>The implementation takes equal advantage of ascending and descending order in its input array, and can take advantage of ascending and descending order in different parts of the the same input array. It is well-suited to merging two or more sorted arrays: simply concatenate the arrays and sort the resulting array.</p>
+<p>The implementation was adapted from Tim Peters’s list sort for Python ( TimSort). It uses techniques from Peter McIlroy’s “Optimistic Sorting and Information Theoretic Complexity”, in Proceedings of the Fourth Annual ACM-SIAM Symposium on Discrete Algorithms, pp 467-474, January 1993.</p>
+</blockquote>
+<p>I have checked another sort method’s description:</p>
+<blockquote>
+<p>Implementation note: The sorting algorithm is a Dual-Pivot Quicksort by Vladimir Yaroslavskiy, Jon Bentley, and Joshua Bloch. This algorithm offers O(n log(n)) performance on many data sets that cause other quicksorts to degrade to quadratic performance, and is typically faster than traditional (one-pivot) Quicksort implementations.</p>
+</blockquote>
+<p>So I’m curious to know how good the built-in sort is and whether my home-made sort can defeat it. It sounds like playing with AlphaGo, but I still decide to have a go. For the completeness, I include elementary sorting methods e.g. select sort, insert sort and shell sort, which have the performance of<br><img src="/my-blog/2017/05/23/sorting/o_n_2.png" alt="o_n_2.png" title="">,<br>as well as more advanced sort e.g. merge sort and quick sort with the performance of<br><img src="/my-blog/2017/05/23/sorting/o_n_lgn.png" alt="o_n_lgn.png" title="">.<br>Here is the detailed source code.</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/my-blog/2017/05/23/sorting/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/05/15/mvx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2017/05/15/mvx/" itemprop="url">
+                  MVC, MVP, MVVM and Redux
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-15T22:17:20+08:00">
+                05-15-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><ul>
+<li>View controller is getting bigger and bigger</li>
+<li>View controller keeps data (or cached data)</li>
+<li>View controller is NOT testable</li>
+<li>View controllers tend to have complicated interaction</li>
+<li>Model is dumb data structure</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/my-blog/2017/05/15/mvx/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/05/10/swift-for-java-programmer-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2017/05/10/swift-for-java-programmer-4/" itemprop="url">
+                  Swift For Java Programmer 4
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-10T21:27:08+08:00">
+                05-10-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Let’s focus on Pattern matching, a powerful language feature in Swift. When I first saw this in blogs or articles, I felt confused and even complained about why people added this into Swift so that more often than not there are more than one way to achieve the same thing. For programmers from other world (like Java), it’s hard to accept since most of them believe in the principle that simplicity is beauty. </p>
+<blockquote>
+<p>I find this <a href="http://alisoftware.github.io/swift/pattern-matching/2016/03/27/pattern-matching-1/" target="_blank" rel="external">tutorial</a> very helpful and use an <a href="https://iswift.org/playground" target="_blank" rel="external">online Swift runner</a> due to the lack of Swift compiler implementation on Windows. Note this is the only runner that supports Foundations.</p>
+<p>Edited on [May 11, 2017]: another thorough <a href="https://appventure.me/2015/08/20/swift-pattern-matching-in-detail/" target="_blank" rel="external">tutorial</a></p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/my-blog/2017/05/10/swift-for-java-programmer-4/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/05/09/swift-for-java-programmer-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2017/05/09/swift-for-java-programmer-3/" itemprop="url">
+                  Swift For Java Programmer 3
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-09T22:47:07+08:00">
+                05-09-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>In the third series, let’s start the part of class. In Swift, class is reference type, which has a lot in common with this concept in other programming language like Java, c# and Javascript.</p>
+<h1 id="super"><a href="#super" class="headerlink" title="super"></a>super</h1><p>For a normal override method in sub-class, it’s always better to call its super method at the very beginning of the method. Otherwise, the logic in sub-class could get overwritten by the base class.</p>
+<p>For the same reason, inside init, sub-class MUST call <code>super.init</code> before returning. It’s called two-phase initialization.</p>
+<pre><code>class SubClass: BaseClass {
+  var sth: String
+  init(...) {
+    // phase 1 start
+    self.sth = ...
+    super.init(...)
+    // phase 2 start
+    self.foo()
+  }
+  foo() {...}
+}
+</code></pre><p>We can’t call any instance method until phase 2 because at that time the initialization has been completed.</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/my-blog/2017/05/09/swift-for-java-programmer-3/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/05/08/swift-for-java-programmer-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2017/05/08/swift-for-java-programmer-2/" itemprop="url">
+                  Swift For Java Programmer 2
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-08T23:20:36+08:00">
+                05-08-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>In this second series, I want to talk about struct, which is a rather new concept for Java programmer.</p>
+<h1 id="Value-type"><a href="#Value-type" class="headerlink" title="Value type"></a>Value type</h1><p>First of all, remember struct is value type (in comparison with reference type as class) so that on assignment instances are COPIED. It has the following impact:</p>
+<ol>
+<li><p>The instance will be allocated in stack (instead of heap), which means it could be fast and has trouble-free for memory management.</p>
+</li>
+<li><p>If the variable is declared as <code>let instance = ...</code>, then there is no way to modify the value, including its properties. The fix is to use <code>var instance = ...</code>.</p>
+</li>
+<li><p>The above case is for the case that we modify the struct instance by changing the property. If the change is via a method, then the method needs to be marked as <code>mutating</code>(so that the compiler knows it can’t be called for a constant struct instance).</p>
+</li>
+<li><p>Other instances, which were copied from the original instance, have no impact if the original instance get changed. The same behavior as integer, boolean and string in Java. That’s also the reason that in Swift, Int, Bool and String (and other primitives) are defined as struct.</p>
+</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/my-blog/2017/05/08/swift-for-java-programmer-2/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/my-blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/my-blog/page/6/">6</a><a class="extend next" rel="next" href="/my-blog/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/my-blog/page/2/">2</a><a class="page-number" href="/my-blog/page/3/">3</a><a class="extend next" rel="next" href="/my-blog/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
