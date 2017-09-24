@@ -257,6 +257,161 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/05/08/swift-for-java-programmer-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2017/05/08/swift-for-java-programmer-2/" itemprop="url">
+                  Swift For Java Programmer 2
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-08T23:20:36+08:00">
+                05-08-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>In this second series, I want to talk about struct, which is a rather new concept for Java programmer.</p>
+<h1 id="Value-type"><a href="#Value-type" class="headerlink" title="Value type"></a>Value type</h1><p>First of all, remember struct is value type (in comparison with reference type as class) so that on assignment instances are COPIED. It has the following impact:</p>
+<ol>
+<li><p>The instance will be allocated in stack (instead of heap), which means it could be fast and has trouble-free for memory management.</p>
+</li>
+<li><p>If the variable is declared as <code>let instance = ...</code>, then there is no way to modify the value, including its properties. The fix is to use <code>var instance = ...</code>.</p>
+</li>
+<li><p>The above case is for the case that we modify the struct instance by changing the property. If the change is via a method, then the method needs to be marked as <code>mutating</code>(so that the compiler knows it can’t be called for a constant struct instance).</p>
+</li>
+<li><p>Other instances, which were copied from the original instance, have no impact if the original instance get changed. The same behavior as integer, boolean and string in Java. That’s also the reason that in Swift, Int, Bool and String (and other primitives) are defined as struct.</p>
+</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/my-blog/2017/05/08/swift-for-java-programmer-2/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/05/07/swift-for-java-programer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1552,160 +1707,6 @@ let days = daysOfMonth(2, in: 2017);
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2016/06/01/git/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yuping Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sam's Chest of Drawers">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/my-blog/2016/06/01/git/" itemprop="url">
-                  Git & Github Basic
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-01T22:59:32+08:00">
-                06-01-2016
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/my-blog/categories/Tool/" itemprop="url" rel="index">
-                    <span itemprop="name">Tool</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><ul>
-<li>reference <a href="http://www.jianshu.com/p/6d1ce5b65523" target="_blank" rel="external">http://www.jianshu.com/p/6d1ce5b65523</a> and <a href="http://learngitbranching.js.org/?demo" target="_blank" rel="external">http://learngitbranching.js.org/?demo</a></li>
-<li>Install <a href="http://cmder.net/" target="_blank" rel="external">http://cmder.net/</a> (including MsysGit)</li>
-<li>Config<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">git config --global user.name &quot;xxx&quot; </div><div class="line">git config --global user.email &quot;xxx@yyy&quot;</div><div class="line">git config --global alias.st status</div><div class="line">git config --global alias.co checkout</div><div class="line">git config --global alias.ci commit</div><div class="line">git config --global alias.br branch</div><div class="line">git config --list //~\.gitconfig</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="Check-in"><a href="#Check-in" class="headerlink" title="Check in"></a>Check in</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git init</div><div class="line">git status</div><div class="line">git add .</div><div class="line">git commit -m &quot;xxx&quot;</div><div class="line">git commit -a -m &quot;xxx&quot; // without git add</div></pre></td></tr></table></figure>
-<h2 id="Revert"><a href="#Revert" class="headerlink" title="Revert"></a>Revert</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git reflog //review commit id for revert</div><div class="line">git reset --hard xxx //commit id or HEAD^ (the next version), HEAD^^ (the next next version)</div><div class="line">git checkout -- filename //revert when there is no local change **added**</div><div class="line">git reset HEAD filename &amp;&amp; git checkout -- filename //revert **added** change, then revert local change</div></pre></td></tr></table></figure>
-<h2 id="Change"><a href="#Change" class="headerlink" title="Change"></a>Change</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git rm xxx</div><div class="line">git rm --cache xxx // remove tracked file, but keep it locally</div><div class="line">git rm -f xxx // remove file physically.</div><div class="line">git mv xxx yyy</div></pre></td></tr></table></figure>
-<h2 id="Branch"><a href="#Branch" class="headerlink" title="Branch"></a>Branch</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git checkout -b xxx // git branch xxx &amp;&amp; git checkout xxx</div><div class="line">git merge xxx</div><div class="line">git branch -d xxx //delete branch</div></pre></td></tr></table></figure>
-<h2 id="gitignore-when-it-doesn’t-work"><a href="#gitignore-when-it-doesn’t-work" class="headerlink" title="gitignore when it doesn’t work:"></a>gitignore when it doesn’t work:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git rm -r --cached .</div><div class="line">git add .</div><div class="line">git commit -m &apos;update .gitignore&apos;</div></pre></td></tr></table></figure>
-<h1 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h1><h2 id="Generate-SSH-key"><a href="#Generate-SSH-key" class="headerlink" title="Generate SSH key"></a>Generate SSH key</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C&quot;mail&quot; //id_rsa and id_rsa.pub</div><div class="line">ssh -T github.com</div></pre></td></tr></table></figure>
-<h2 id="ssh-config"><a href="#ssh-config" class="headerlink" title=".ssh/config"></a>.ssh/config</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Host github.com</div><div class="line">User git</div><div class="line">Hostname ssh.github.com</div><div class="line">PreferredAuthentications publickey</div><div class="line">IdentityFile ~/.ssh/id_rsa</div><div class="line">Port 443</div></pre></td></tr></table></figure>
-<h2 id="Upload"><a href="#Upload" class="headerlink" title="Upload"></a>Upload</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git remote add origin git@github.com:sevenbamboos/test.git</div><div class="line">git push --set-upstream origin master</div><div class="line">git push origin master</div><div class="line">git pull origin master</div></pre></td></tr></table></figure>
-<h2 id="Merge"><a href="#Merge" class="headerlink" title="Merge"></a>Merge</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git mergetool</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1755,7 +1756,7 @@ let days = daysOfMonth(2, in: 2017);
           
             <div class="site-state-item site-state-posts">
               <a href="/my-blog/archives">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
