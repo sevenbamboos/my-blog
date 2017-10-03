@@ -87,16 +87,16 @@
 
 
 
-<meta name="description" content="Map   Keywords Comment &amp;amp; Reference     machine learning Comment   R in Action Q&amp;amp;A">
+<meta name="description" content="Map   Keywords Comment &amp;amp; Reference     machine learning Comment   R in Action Q&amp;amp;A   Python crash course Q&amp;amp;A">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mind Map of Machine Learning">
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/09/24/mind-map-ml/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
-<meta property="og:description" content="Map   Keywords Comment &amp;amp; Reference     machine learning Comment   R in Action Q&amp;amp;A">
-<meta property="og:updated_time" content="2017-09-24T08:36:42.000Z">
+<meta property="og:description" content="Map   Keywords Comment &amp;amp; Reference     machine learning Comment   R in Action Q&amp;amp;A   Python crash course Q&amp;amp;A">
+<meta property="og:updated_time" content="2017-10-02T23:59:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mind Map of Machine Learning">
-<meta name="twitter:description" content="Map   Keywords Comment &amp;amp; Reference     machine learning Comment   R in Action Q&amp;amp;A">
+<meta name="twitter:description" content="Map   Keywords Comment &amp;amp; Reference     machine learning Comment   R in Action Q&amp;amp;A   Python crash course Q&amp;amp;A">
 
 
 
@@ -369,9 +369,96 @@
 <td>R in Action</td>
 <td><a href="#R-in-action">Q&amp;A</a></td>
 </tr>
+<tr>
+<td>Python crash course</td>
+<td><a href="#Python-crash-course">Q&amp;A</a></td>
+</tr>
 </tbody>
 </table>
 <a id="more"></a>
+<h1 id="Python-crash-course"><a href="#Python-crash-course" class="headerlink" title="Python crash course"></a>Python crash course</h1><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01.Access the last element of a list</td>
+<td><code>aList[-1]</code> // it can be interpreted as <code>aList[len(aList)-1]</code></td>
+</tr>
+<tr>
+<td>02.Remove an element from a list</td>
+<td><code>previousLastOne = aList.pop()</code> or <code>del aList[-1]</code> The first one can get the removed one.</td>
+</tr>
+<tr>
+<td>03.Is it accessible for a (loop) variable after the loop (e.g. for ele in elements:)</td>
+<td>Sadly, it is (e.g. ele). How to get rid of it? (<code>del ele</code>, ugly workaround)</td>
+</tr>
+<tr>
+<td>04.How to turn a range object to a list</td>
+<td><code>list(range(1,5))</code> // range() returns a range object (iterable) and passed to list() to become a list</td>
+</tr>
+<tr>
+<td>05.How to slice a list</td>
+<td><code>aList[-3:]</code> // obviously here : needs specific syntax support</td>
+</tr>
+<tr>
+<td>06.Find if an element exists in a list/string</td>
+<td><code>element in aList</code> or <code>sub_string in aString</code> // it returns a boolean, a syntax keyword</td>
+</tr>
+<tr>
+<td>07.How to check empty string/list</td>
+<td><code>if aList:</code> or <code>if aString:</code> // empty string/list is false in for and if</td>
+</tr>
+<tr>
+<td>08.Loop through a dictionary</td>
+<td><code>for k, v in aDict.items()</code></td>
+</tr>
+<tr>
+<td>09.Provide a description to a function/class/module</td>
+<td>Put <code>&quot;&quot;&quot;...&quot;&quot;&quot;</code> (docstring) below a function/class or at the beginning of a module</td>
+</tr>
+<tr>
+<td>10.Flexible number of function parameters</td>
+<td><code>def foo(p, *pa):</code> // put *pa after positioned parameters</td>
+</tr>
+<tr>
+<td>11.Flexible number of named parameters</td>
+<td><code>def foo(**user_info)</code> // Note the call side doesn’t need to create a dictionary to use user_info (see source code 01)</td>
+</tr>
+<tr>
+<td>12.Import a function with another name from a module</td>
+<td><code>from a_module import function_a as function_b</code></td>
+</tr>
+<tr>
+<td>13.Arrange function parameters in multiple lines</td>
+<td>use two TAB to make parameters look different from function body (see source code 02) </td>
+</tr>
+<tr>
+<td>14.Call methods of super class</td>
+<td><code>super().__init__(...)</code></td>
+</tr>
+<tr>
+<td>15.Open a file without closing it explicitly</td>
+<td><code>with open(&#39;file_name&#39;) as file_object:</code></td>
+</tr>
+<tr>
+<td>16.Loop through file object line by line</td>
+<td><code>for line in file_object:</code></td>
+</tr>
+<tr>
+<td>17.Exception handling</td>
+<td>try-except-else block. Use pass in except branch to fail silently. Note else is not final and there is no final branch. </td>
+</tr>
+<tr>
+<td>18.Is there concept of Option</td>
+<td>No. None is same as null.</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">//01</div><div class="line">def foo(**user_info):</div><div class="line">    res = &#123;&#125;</div><div class="line">    for k, v in user_info.items():</div><div class="line">        res[k] = v</div><div class="line">    return res</div><div class="line"></div><div class="line"></div><div class="line">user = foo(lastName=&quot;Foo&quot;, firstName=&quot;Bar&quot;)</div><div class="line">for k, v in user.items():</div><div class="line">    print(&quot;&#123;&#125; -&gt; &#123;&#125;&quot;.format(k, v))</div><div class="line"></div><div class="line">//02</div><div class="line">def foo(</div><div class="line">        param1,</div><div class="line">        param2,</div><div class="line">        param3):</div><div class="line">    // function body</div></pre></td></tr></table></figure>
 <h1 id="R-in-action"><a href="#R-in-action" class="headerlink" title="R in action"></a>R in action</h1><table>
 <thead>
 <tr>
@@ -381,59 +468,59 @@
 </thead>
 <tbody>
 <tr>
-<td>01. How to get a certain row/column of a matrix/dataframe</td>
+<td>01.How to get a certain row/column of a matrix/dataframe</td>
 <td><code>data[n,]</code> for nth row; <code>data[,n]</code> for nth column;</td>
 </tr>
 <tr>
-<td>02. How to cross-tabulate multiple factors to a table of counts</td>
+<td>02.How to cross-tabulate multiple factors to a table of counts</td>
 <td><code>table(fac1, fac2, ...)</code></td>
 </tr>
 <tr>
-<td>03. How to show the structure of a data</td>
+<td>03.How to show the structure of a data</td>
 <td><code>str(data)</code></td>
 </tr>
 <tr>
-<td>04. How to edit a data</td>
+<td>04.How to edit a data</td>
 <td><code>fix(data)</code> # the result will be saved to <code>data</code> reference.</td>
 </tr>
 <tr>
-<td>05. How to configure for <code>plot</code></td>
+<td>05.How to configure for <code>plot</code></td>
 <td><code>plot(x,y,type=&quot;b&quot;,xlab=&quot;x&quot;,ylab=&quot;y&quot;)</code> ?plot and ?par for details</td>
 </tr>
 <tr>
-<td>06. How to choose font when exporting diagram to PDF</td>
+<td>06.How to choose font when exporting diagram to PDF</td>
 <td><code>names(pdfFonts())</code> and then <code>pdf(file=&quot;...&quot;, family=&quot;font&quot;)</code></td>
 </tr>
 <tr>
-<td>07. How to render math annotation for <code>plot</code></td>
+<td>07.How to render math annotation for <code>plot</code></td>
 <td>?plotmath and demo(plotmath)</td>
 </tr>
 <tr>
-<td>08. How to transform data frame</td>
+<td>08.How to transform data frame</td>
 <td><code>transform(data, sum=c1+c2+c3, mean=(c1+c2+c3)/3)</code></td>
 </tr>
 <tr>
-<td>09. How to set value to cells of data frame</td>
+<td>09.How to set value to cells of data frame</td>
 <td><code>performance$insertSort[performance$insertSort == 999] &lt;- NA</code></td>
 </tr>
 <tr>
-<td>10. How to modify data frame with <code>within</code></td>
+<td>10.How to modify data frame with <code>within</code></td>
 <td>data &lt;- within(data,{insert[insert == 999] &lt;- NA })</td>
 </tr>
 <tr>
-<td>11. How to remove missing data (when it’s not too much)</td>
+<td>11.How to remove missing data (when it’s not too much)</td>
 <td><code>data &lt;- na.omit(data)</code></td>
 </tr>
 <tr>
-<td>12. How to convert date</td>
+<td>12.How to convert date</td>
 <td>as.Date, date() and Sys.Date()</td>
 </tr>
 <tr>
-<td>13. How to sort data</td>
+<td>13.How to sort data</td>
 <td><code>order(gender, -age)</code></td>
 </tr>
 <tr>
-<td>14. How to combine data frames</td>
+<td>14.How to combine data frames</td>
 <td>cbind(), rbind(), merge(frame1,frame2,by=c(“id”))</td>
 </tr>
 </tbody>
@@ -447,6 +534,8 @@
 </ol>
 <p>Phase 01:</p>
 <ol>
+<li><p><em>Python crash course</em></p>
+</li>
 <li><p><em>R in Action</em></p>
 </li>
 <li><p>Introduction to Statistical Learning</p>
@@ -648,7 +737,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">1.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#R-in-action"><span class="nav-number">2.</span> <span class="nav-text">R in action</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#machine-learning"><span class="nav-number">3.</span> <span class="nav-text">machine learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#road-map"><span class="nav-number">3.1.</span> <span class="nav-text">road map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">3.2.</span> <span class="nav-text">reference</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">1.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-crash-course"><span class="nav-number">2.</span> <span class="nav-text">Python crash course</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#R-in-action"><span class="nav-number">3.</span> <span class="nav-text">R in action</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#machine-learning"><span class="nav-number">4.</span> <span class="nav-text">machine learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#road-map"><span class="nav-number">4.1.</span> <span class="nav-text">road map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">4.2.</span> <span class="nav-text">reference</span></a></li></ol></li></ol></div>
             
 
           </div>
