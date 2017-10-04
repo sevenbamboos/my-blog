@@ -93,7 +93,7 @@
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/09/24/mind-map-ml/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
 <meta property="og:description" content="Map   Keywords Comment &amp;amp; Reference     machine learning Comment   R in Action Q&amp;amp;A   Python crash course Q&amp;amp;A">
-<meta property="og:updated_time" content="2017-10-02T23:59:53.000Z">
+<meta property="og:updated_time" content="2017-10-04T12:50:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mind Map of Machine Learning">
 <meta name="twitter:description" content="Map   Keywords Comment &amp;amp; Reference     machine learning Comment   R in Action Q&amp;amp;A   Python crash course Q&amp;amp;A">
@@ -371,12 +371,12 @@
 </tr>
 <tr>
 <td>Python crash course</td>
-<td><a href="#Python-crash-course">Q&amp;A</a></td>
+<td><a href="#Python-Basic">Q&amp;A</a></td>
 </tr>
 </tbody>
 </table>
 <a id="more"></a>
-<h1 id="Python-crash-course"><a href="#Python-crash-course" class="headerlink" title="Python crash course"></a>Python crash course</h1><table>
+<h1 id="Python-Basic"><a href="#Python-Basic" class="headerlink" title="Python Basic"></a>Python Basic</h1><table>
 <thead>
 <tr>
 <th>Question</th>
@@ -450,15 +450,67 @@
 </tr>
 <tr>
 <td>17.Exception handling</td>
-<td>try-except-else block. Use pass in except branch to fail silently. Note else is not final and there is no final branch. </td>
+<td>try-except-else-finally block. Use pass in except branch to fail silently.</td>
 </tr>
 <tr>
 <td>18.Is there concept of Option</td>
 <td>No. None is same as null.</td>
 </tr>
+<tr>
+<td>19.Check if variable is None</td>
+<td><code>a is None</code> // is not is to check the opposite</td>
+</tr>
+<tr>
+<td>20.Unpack sequence</td>
+<td><code>a,b,*_ = (&quot;foo&quot;,&quot;bar&quot;,1,2)</code> // _ =&gt; [1,2]</td>
+</tr>
+<tr>
+<td>21.Performance of list insert, pop and in</td>
+<td>For non-last element, it’s O(n) while n is the size of the list</td>
+</tr>
+<tr>
+<td>22.For loop with index</td>
+<td><code>for i,value in enumerate(seq):</code></td>
+</tr>
+<tr>
+<td>23.Convert a list of rows into a list of columns</td>
+<td><code>zip(*seq)</code> //see source code 03</td>
+</tr>
+<tr>
+<td>24.Objects can be put in dictionary as key</td>
+<td>number, string, tuple (immutable) or anything else has fixed value of <code>hash(obj)</code></td>
+</tr>
+<tr>
+<td>25.Nested for comprehension</td>
+<td><code>[v2 for v1 in s1 if ... for v2 in v1 if ...]</code></td>
+</tr>
+<tr>
+<td>26.Variable scope</td>
+<td>There are two scopes: local and global. class, function can create nested scope, but not if/for/while.</td>
+</tr>
+<tr>
+<td>27.Currying</td>
+<td><code>from functools import partial</code> and <code>partial(foo, some_variable)</code></td>
+</tr>
+<tr>
+<td>28.Generator in for comprehension</td>
+<td><code>(x for x in ... if ...)</code> or use <code>yield</code> in generator function</td>
+</tr>
+<tr>
+<td>29.Anonymous function</td>
+<td><code>lambda x: x[0]</code></td>
+</tr>
+<tr>
+<td>30.Generator from itertools</td>
+<td>groupby, combinations, product, permutations, etc.</td>
+</tr>
+<tr>
+<td>31.Catch multiple errors</td>
+<td><code>except (TypeError, ValueError):</code></td>
+</tr>
 </tbody>
 </table>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">//01</div><div class="line">def foo(**user_info):</div><div class="line">    res = &#123;&#125;</div><div class="line">    for k, v in user_info.items():</div><div class="line">        res[k] = v</div><div class="line">    return res</div><div class="line"></div><div class="line"></div><div class="line">user = foo(lastName=&quot;Foo&quot;, firstName=&quot;Bar&quot;)</div><div class="line">for k, v in user.items():</div><div class="line">    print(&quot;&#123;&#125; -&gt; &#123;&#125;&quot;.format(k, v))</div><div class="line"></div><div class="line">//02</div><div class="line">def foo(</div><div class="line">        param1,</div><div class="line">        param2,</div><div class="line">        param3):</div><div class="line">    // function body</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">//01</div><div class="line">def foo(**user_info):</div><div class="line">    res = &#123;&#125;</div><div class="line">    for k, v in user_info.items():</div><div class="line">        res[k] = v</div><div class="line">    return res</div><div class="line"></div><div class="line"></div><div class="line">user = foo(lastName=&quot;Foo&quot;, firstName=&quot;Bar&quot;)</div><div class="line">for k, v in user.items():</div><div class="line">    print(&quot;&#123;&#125; -&gt; &#123;&#125;&quot;.format(k, v))</div><div class="line"></div><div class="line">//02</div><div class="line">def foo(</div><div class="line">        param1,</div><div class="line">        param2,</div><div class="line">        param3):</div><div class="line">    // function body</div><div class="line"></div><div class="line">//03</div><div class="line">names = [(&quot;Tony&quot;,&quot;Zhang&quot;),(&quot;Anri&quot;,&quot;Liu&quot;),(&quot;Charry&quot;,&quot;Y&quot;)]</div><div class="line">fns, lns = zip(*names)</div><div class="line">fns // (&quot;Tony&quot;,&quot;Anri&quot;,&quot;Charry&quot;)</div><div class="line">lns // (&quot;Zhang&quot;,&quot;Liu&quot;,&quot;Y&quot;)</div></pre></td></tr></table></figure>
 <h1 id="R-in-action"><a href="#R-in-action" class="headerlink" title="R in action"></a>R in action</h1><table>
 <thead>
 <tr>
@@ -534,7 +586,9 @@
 </ol>
 <p>Phase 01:</p>
 <ol>
-<li><p><em>Python crash course</em></p>
+<li><p>Python crash course</p>
+</li>
+<li><p><em>Python for Data Analysis</em></p>
 </li>
 <li><p><em>R in Action</em></p>
 </li>
@@ -737,7 +791,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">1.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-crash-course"><span class="nav-number">2.</span> <span class="nav-text">Python crash course</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#R-in-action"><span class="nav-number">3.</span> <span class="nav-text">R in action</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#machine-learning"><span class="nav-number">4.</span> <span class="nav-text">machine learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#road-map"><span class="nav-number">4.1.</span> <span class="nav-text">road map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">4.2.</span> <span class="nav-text">reference</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">1.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-Basic"><span class="nav-number">2.</span> <span class="nav-text">Python Basic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#R-in-action"><span class="nav-number">3.</span> <span class="nav-text">R in action</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#machine-learning"><span class="nav-number">4.</span> <span class="nav-text">machine learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#road-map"><span class="nav-number">4.1.</span> <span class="nav-text">road map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">4.2.</span> <span class="nav-text">reference</span></a></li></ol></li></ol></div>
             
 
           </div>
