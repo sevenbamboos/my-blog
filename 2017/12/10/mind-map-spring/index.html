@@ -1,0 +1,794 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/my-blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/my-blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/my-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/my-blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="TODO: What’s the use of java.lang.annotation.Target,Retention? In other words, give a practical view of Java Annotation. In which case, @Autowired needs to used together with @Qualifier">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring 5">
+<meta property="og:url" content="https://sevenbamboos.github.com/2017/12/10/mind-map-spring/index.html">
+<meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
+<meta property="og:description" content="TODO: What’s the use of java.lang.annotation.Target,Retention? In other words, give a practical view of Java Annotation. In which case, @Autowired needs to used together with @Qualifier">
+<meta property="og:updated_time" content="2017-12-16T04:47:36.354Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring 5">
+<meta name="twitter:description" content="TODO: What’s the use of java.lang.annotation.Target,Retention? In other words, give a practical view of Java Annotation. In which case, @Autowired needs to used together with @Qualifier">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/my-blog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sevenbamboos.github.com/2017/12/10/mind-map-spring/"/>
+
+
+
+
+
+  <title> Spring 5 | Sam's Chest of Drawers </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/my-blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sam's Chest of Drawers</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thinking about Programming and Lifestyle</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/my-blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/my-blog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/my-blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/my-blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/12/10/mind-map-spring/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spring 5
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-10T14:38:14+08:00">
+                12-10-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>TODO:</p>
+<p>What’s the use of java.lang.annotation.Target,Retention? In other words, give a practical view of Java Annotation.</p>
+<p>In which case, @Autowired needs to used together with @Qualifier</p>
+<a id="more"></a>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01.JDK dynamic proxy VS CGlib (, javassist, etc.)</td>
+<td>Dynamic proxy applies to interface, while CGlib to sub-class. (see code)</td>
+</tr>
+<tr>
+<td>02.Whether to put configuration option in business interface</td>
+<td>It depends on whether it makes sense to all implementations. If not, define a separate interface for configuration.</td>
+</tr>
+<tr>
+<td>03.Dependency lookup VS injection</td>
+<td>lookup is active and tends to have more code but (personally) easier to take full control (for test mock and run in standalone mode), while injection is passive and less code.</td>
+</tr>
+<tr>
+<td>04.What’s the bad side of field injection</td>
+<td>Hard to inject dependency manually (for test) because of the private field; Rely on container’s injection.</td>
+</tr>
+<tr>
+<td>05.When to use @Resource instead of @Autowired</td>
+<td>If the dependency is in a collection<code>&lt;type&gt;</code> (array,list,set,map), @Autowired will look for all beans of the contained type instead of the bean of the collection itself.</td>
+</tr>
+<tr>
+<td>06.In case for lookup method injection, what’s the difference between annotation and XML</td>
+<td>Annotation needs a non-abstract empty method implementation, while XML configuration can use an abstract method.</td>
+</tr>
+<tr>
+<td>07.Lookup and replaced method</td>
+<td>Lookup is used when the dependency has a different lifecycle (e.g. non-singleton) than the host (e.g. globally singleton). So the dependency can be different instances on every time it’s invoked. Replaced method is a class implements MethodReplacer to replace a method implementation of a delegated object.</td>
+</tr>
+<tr>
+<td>08.What’s the use of bean name alias</td>
+<td>On maintenance to replace existing dependencies with a new name.</td>
+</tr>
+<tr>
+<td>09.How to register shutdown hook</td>
+<td>Runtime::addShutdownHook(Thread) Hooks are invoked when the last non-daemon thread exit.</td>
+</tr>
+<tr>
+<td>10.How to notify a non-critical business logic in Spring</td>
+<td>ApplicationEvent works synchronously. For long-running process, JMS is more suitable.</td>
+</tr>
+<tr>
+<td>11.How to switch different environments for build tools (e.g. Maven)</td>
+<td>@Profile and @ActiveProfiles</td>
+</tr>
+<tr>
+<td>12.What’s the use of afterThrowing in Spring AOP</td>
+<td>Adjust exception hierarchy, centralize exception logging and help debugging live application without modify application code. </td>
+</tr>
+<tr>
+<td>13.How to limit AOP point-cut to the situation when it is called by a specific object</td>
+<td>ControlFlowPointcut Be careful about performance impact.</td>
+</tr>
+<tr>
+<td>14.How to do object modification detection</td>
+<td>AOP on set<em> methods and compare new value with old value (from corresponding get</em> methods).</td>
+</tr>
+<tr>
+<td>15.What is hibernate.max_fetch_depth</td>
+<td>Person.address.city.country, if the depth is 2 then getCountry() will trigger another query.</td>
+</tr>
+<tr>
+<td>16.How to get nice sql generated by hibernate</td>
+<td>hibernate.format_sql</td>
+</tr>
+<tr>
+<td>17.How to map java.util.Date to java.sql.Date/Time/DateTime in hibernate</td>
+<td>@Temporal(TemporalType.DATE)</td>
+</tr>
+<tr>
+<td>18.Optimistic lock in hibernate</td>
+<td>@Version Don’t call setVersion otherwise version check will be disabled. That’s one reason to use annotation on field and make get/set private.</td>
+</tr>
+<tr>
+<td>19.How to ask hibernate to fetch association eagerly for a query</td>
+<td><code>left join fetch person.address</code> </td>
+</tr>
+<tr>
+<td>20.How to support strongly typed criteria API query</td>
+<td>Hibernate metamodel generator can generate @StaticMetamodel (JPA 2)</td>
+</tr>
+<tr>
+<td>21.How to make transaction cross multiple resources</td>
+<td>Use Java Transaction API (JTA) which relies on XA resources to provide distributed transaction implementation.</td>
+</tr>
+<tr>
+<td>22.When to use @AssertTrue and when to custom validation</td>
+<td>@AssertTrue is inside model to provide inner validation, while custom validation can be reused and injected with external services to do complicated check.</td>
+</tr>
+<tr>
+<td>23.Why not to keep JPA EntityManager open for rendering view (on server side)</td>
+<td>Not scalable if multiple requests on the page load big data from DB connection. Prefer to use Ajax requests.</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// 01</div><div class="line">interface Foo ...</div><div class="line">class FooImpl implements Foo ...</div><div class="line">class DynamicProxy implements InvocationHandler &#123;</div><div class="line">  public Object createDynamicProxy() &#123;  </div><div class="line">    return Proxy.newProxyInstance(...);  </div><div class="line">  &#125;</div><div class="line">  @Override public Object invoke(...) throws Throwable &#123;</div><div class="line">    // before ...</div><div class="line">    Object result = method.invoke(this.target, args); </div><div class="line">    // after ...</div><div class="line">    return result;  </div><div class="line">  &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/my-blog/2017/11/10/mind-map-java/" rel="next" title="Java Basic">
+                <i class="fa fa-chevron-left"></i> Java Basic
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/my-blog/2017/12/16/mind-map-fpinjava/" rel="prev" title="Functional Programming in Java">
+                Functional Programming in Java <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80"
+               alt="Yuping Wang" />
+          <p class="site-author-name" itemprop="name">Yuping Wang</p>
+           
+              <p class="site-description motion-element" itemprop="description">85608565</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/my-blog/archives">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/my-blog/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/my-blog/tags">
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sevenbamboos" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/sevenbamboos" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuping Wang</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/my-blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/my-blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/my-blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

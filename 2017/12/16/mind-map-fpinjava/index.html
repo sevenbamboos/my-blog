@@ -1,0 +1,824 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/my-blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/my-blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/my-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/my-blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Based on Functional Programming in Java, a book similar to the red bible of Scala and explains reasons why Scala introduced features like monad Option, List, Stream, Try and comprehension.    Question">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Functional Programming in Java">
+<meta property="og:url" content="https://sevenbamboos.github.com/2017/12/16/mind-map-fpinjava/index.html">
+<meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
+<meta property="og:description" content="Based on Functional Programming in Java, a book similar to the red bible of Scala and explains reasons why Scala introduced features like monad Option, List, Stream, Try and comprehension.    Question">
+<meta property="og:updated_time" content="2017-12-16T04:49:51.151Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Functional Programming in Java">
+<meta name="twitter:description" content="Based on Functional Programming in Java, a book similar to the red bible of Scala and explains reasons why Scala introduced features like monad Option, List, Stream, Try and comprehension.    Question">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/my-blog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sevenbamboos.github.com/2017/12/16/mind-map-fpinjava/"/>
+
+
+
+
+
+  <title> Functional Programming in Java | Sam's Chest of Drawers </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/my-blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sam's Chest of Drawers</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thinking about Programming and Lifestyle</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/my-blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/my-blog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/my-blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/my-blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/12/16/mind-map-fpinjava/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Functional Programming in Java
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-16T12:38:14+08:00">
+                12-16-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Based on Functional Programming in Java, a book similar to the red bible of Scala and explains reasons why Scala introduced features like monad Option, List, Stream, Try and comprehension.</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01.groupBy(value -&gt; key)</td>
+<td><code>Stream::collect(Collectors::groupingBy(value -&gt; key))</code> See also partitioningBy</td>
+</tr>
+<tr>
+<td>02.type alias in Java</td>
+<td>Use interface (see code)</td>
+</tr>
+<tr>
+<td>03.final variable for closure</td>
+<td>Final requirement applies to local variable only (see code)</td>
+</tr>
+<tr>
+<td>04.If closure has reference to non-local variable which is not final, how to make function free of side effects</td>
+<td>Turn implicit variables to explicit arguments of the function (see code)</td>
+</tr>
+<tr>
+<td>05.There are Function and BiFunction. How about TriFunction</td>
+<td>Using curring is another way to avoid TriFunction (see code</td>
+</tr>
+<tr>
+<td>06.Partially bind the first/second parameter</td>
+<td>Deduct from types to create curried function (see code)</td>
+</tr>
+<tr>
+<td>07.The size of a thread</td>
+<td>1064 KB for 64-bit JVM (size of stack)</td>
+</tr>
+<tr>
+<td>08.Give meaningful name for built-in functional interface</td>
+<td>Define new functional interfaces (with same function signature as built-in functional interfaces) and use the new interfaces in class/method definition. Then use anonymous lambda in the application.</td>
+</tr>
+<tr>
+<td>09.Pattern matching in Java</td>
+<td>Define a Case class extended from <code>Tuple&lt;Supplier&lt;Boolean&gt;, Supplier&lt;Result&lt;T&gt;&gt;&gt;</code>. See com.samwang.common.EmailValidation (alg-java in my git)</td>
+</tr>
+<tr>
+<td>10.Handle effects in a loop</td>
+<td>One way is to fold effects into one and execute them afterwards (in a batch mode or delay the execution until necessarily).</td>
+</tr>
+<tr>
+<td>11.Why classes shouldn’t have several properties of the same type (in modeling)</td>
+<td>No compiling error when using an incorrect property. Solution is to use value types like Money, Weight, Age (rather than double, int).</td>
+</tr>
+<tr>
+<td>12.Make recursion function stack-safe</td>
+<td>1) Turn to tail-recursion 2) Use heap-based TailCall, which has two sub-classes: Return and Suspend. See com.samwang.common.TailCall (alg-java in my git)</td>
+</tr>
+<tr>
+<td>13.Turn to tail-recursion</td>
+<td>Define a helper function with an accumulator.</td>
+</tr>
+<tr>
+<td>14.Another way to look at Fibonacci series 0,1,1,2,3,5,8,13</td>
+<td>A series of pairs (tuples): (0,1),(1,1),(1,2),(2,3),(3,5),(5,8),(8,13) And the generation method is <code>x -&gt; new Tuple&lt;&gt;(x._2, x._1 + x._2)</code></td>
+</tr>
+<tr>
+<td>15.Function memorization</td>
+<td>Wrap function in com.samwang.common.Memoizer (alg-java in my git). For functions with more than one parameter, one way is to use Tuple2, Tuple3 (and use these tuples as the key in Memorizer). Another (better) way is to memorize the curried function (see code). In case there are huge different results to be kept in cache, use soft or weak references (and WeakHashMap) in Memorizer.</td>
+</tr>
+<tr>
+<td>16.java.util.Objects</td>
+<td>Helper functions for comparison, equal, hash-code, null-check, etc.</td>
+</tr>
+<tr>
+<td>17.Functional list in Java</td>
+<td>Define abstract class List with two sub-classes Nil and Cons. See com.samwang.common.List (alg-java in my git).</td>
+</tr>
+<tr>
+<td>18.What’s good for StringBuilder::append to return this</td>
+<td>In case StringBuilder is used as an accumulator, it saves one line of code to explicitly return the builder (see code).</td>
+</tr>
+<tr>
+<td>19.Implement foldRight with foldLeft for the purpose of stack safety</td>
+<td><code>list.reverse().foldLeft(identity, x -&gt; y -&gt; f.apply(y).apply(x));</code></td>
+</tr>
+<tr>
+<td>20.Given concat(head, tail), what’s good to implement List::flatMap with foldRight instead of foldLeft</td>
+<td>foldLeft: (((1,2),3),4); foldRight: (1,(2,(3,4))). So foldRight works well with <code>concat(f.apply(element), list_for_accumulation)</code></td>
+</tr>
+<tr>
+<td>21.Implement variance (with mean)</td>
+<td>(see code)</td>
+</tr>
+<tr>
+<td>22.Optional::orElseGet vs orElse</td>
+<td>The former supports laziness which is critical for function evaluation; the latter is suitable for literal (because literal has been evaluated already by compiler).</td>
+</tr>
+<tr>
+<td>23.Exception handling with Result</td>
+<td>See com.samwang.common.Result (alg-java in my git), which is more powerful than Option in that it has 3 subtypes to represent 3 cases:Success, Failure and Empty.</td>
+</tr>
+<tr>
+<td>24.Give meaningful (error) message for Result.Empty or Result.Failure</td>
+<td>abstract Result<t> mapFailure(String message)</t></td>
+</tr>
+<tr>
+<td>25.Find the last one using foldLeft</td>
+<td>(see code)</td>
+</tr>
+<tr>
+<td>26.Loop without loop</td>
+<td>Accumulator + recurrence</td>
+</tr>
+<tr>
+<td>27.Return an item at an index with foldLeft</td>
+<td>fold with a Tuple as identity in the format of (failure + index). See Result::getAt_ (alg-java in my git).</td>
+</tr>
+<tr>
+<td>28.Reason to use joinfork thread pool to do list parallelization.</td>
+<td>Hard to predict computation time so having to divide the list into a large number of sublists. </td>
+</tr>
+<tr>
+<td>29.Algorithm to show the ugliness of imperative style</td>
+<td>Find the first ten primes (see code)</td>
+</tr>
+<tr>
+<td>30.Remove item from Binary Search Tree (BST)</td>
+<td>After removing the item, the left and right node need to be merged. See Tree::remove and Tree::removeMerge (alg-java in my git)</td>
+</tr>
+<tr>
+<td>31.General merge for BST</td>
+<td>See Tree::merge (alg-java in my git)</td>
+</tr>
+<tr>
+<td>32.Day-Stout-Warren algorithm for balanced tree</td>
+<td>1, Rotate left until both branches are nearly equal. 2, Apply rotation to the right branch. 3, Apply right rotation to the left branch. 4, Stop when the height = log2(size)</td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">// 02</div><div class="line">interface BinaryOperator extends Function&lt;Integer, Function&lt;Integer,Integer&gt;&gt; &#123;&#125;</div><div class="line">BinaryOperator add = x -&gt; y -&gt; x + y;</div><div class="line"></div><div class="line">// 03</div><div class="line">void aMethod() &#123;</div><div class="line">  int foo = 1; // final can be omitted as long as no change afterwards</div><div class="line">  Predicate&lt;Integer&gt; greatThanFoo = x -&gt; x &gt; foo;</div><div class="line">  foo = 2; // compile error</div><div class="line">&#125;</div><div class="line"></div><div class="line">int bar = 1; // bar is not a local variable so it has its own lifecycle with method call </div><div class="line">void bMethod() &#123;</div><div class="line">  Predicate&lt;Integer&gt; greatThanBar = x -&gt; x &gt; bar;</div><div class="line">  bar = 2; // no error but bMethod gives different results which is no good </div><div class="line">&#125;</div><div class="line"></div><div class="line">// 04</div><div class="line">Predicate&lt;Tuple&lt;Integer,Integer&gt;&gt; greatThanBar = tpl -&gt; tpl._1 &gt; tpl._2;</div><div class="line">greatThanBar.test(new Tuple&lt;&gt;(x, bar))</div><div class="line">// That&apos;s the reason to introduce BiPredicate to avoid ugly Tuple syntax</div><div class="line"></div><div class="line">// 05</div><div class="line">&lt;A,B,C&gt; Function&lt;Function&lt;A,B&gt;, Function&lt;Function&lt;B,C&gt;,Function&lt;A,C&gt;&gt;&gt; compose() &#123;</div><div class="line">  return a2b -&gt; b2c -&gt; a -&gt; b2c.apply(a2b.apply(a));</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 06</div><div class="line">public static &lt;A,B,C&gt; Function&lt;B,C&gt; partialA(A a, Function&lt;A,Function&lt;B,C&gt;&gt; f) &#123;</div><div class="line">  return f.apply(a);</div><div class="line">&#125;</div><div class="line">public static &lt;A,B,C&gt; Function&lt;A,C&gt; partialB(B b, Function&lt;A,Function&lt;B,C&gt;&gt; f) &#123;</div><div class="line">  return a -&gt; f.apply(a).apply(b);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 15</div><div class="line">Function&lt;Integer, Function&lt;Integer, Integer&gt;&gt; addWithCurry = x -&gt; y -&gt; x + y;</div><div class="line">Function&lt;Integer, Function&lt;Integer, Integer&gt;&gt; addWithCurryWithMemo = memorize(x -&gt; memorize(y -&gt; x + y));</div><div class="line"></div><div class="line">// 18</div><div class="line">TailCall&lt;StringBuilder&gt; toString(StringBuilder acc, List&lt;A&gt; list) &#123;</div><div class="line">  return list.isEmpty()</div><div class="line">    ? ret(acc)</div><div class="line">    : sus(() -&gt; toString(acc.append(list.head()).append(&quot;,&quot;), list.tail()));</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 21</div><div class="line">val sum = list -&gt; list.foldLeft(0, a-&gt;b-&gt;a+b);</div><div class="line">val mean = list -&gt; list.isEmpty ? Optional.empty() : Optional.of(sum.apply(list) / list.length);</div><div class="line">val variance = list -&gt; mean.apply(list).flatMap(m -&gt; mean.apply(list.map(x -&gt; Math.pow(x-m, 2))); </div><div class="line"></div><div class="line">// 25</div><div class="line">Function&lt;Result&lt;A&gt;, Function&lt;A, Result&lt;A&gt;&gt;&gt; f = x -&gt; y -&gt; Result.success(y);</div><div class="line">Result&lt;A&gt; lastOption() &#123; return foldLeft(Result.empty(), f); &#125;</div><div class="line"></div><div class="line">// 29</div><div class="line">// Algorithm description</div><div class="line">// 1. Take a list of integers (positive)</div><div class="line">// 2. Filter the primes</div><div class="line">// 3. Return a list of the first ten results</div><div class="line"></div><div class="line">// Algorithm translated in imperative style</div><div class="line">// 1.  Take the first integer</div><div class="line">// 2.  Check whether it&apos;s a prime</div><div class="line">// 2.a If so, store it in a list</div><div class="line">// 3.  Check whether the resulting list has ten elements</div><div class="line">// 3.a If so, return it as the result</div><div class="line">// 3.b If not, increment the integer by 1 (or 2 to skip even, how to avoid multiples of 3,5,...)</div><div class="line">// 4.  Go to Step 2</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/my-blog/2017/12/10/mind-map-spring/" rel="next" title="Spring 5">
+                <i class="fa fa-chevron-left"></i> Spring 5
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80"
+               alt="Yuping Wang" />
+          <p class="site-author-name" itemprop="name">Yuping Wang</p>
+           
+              <p class="site-description motion-element" itemprop="description">85608565</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/my-blog/archives">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/my-blog/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/my-blog/tags">
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sevenbamboos" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/sevenbamboos" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuping Wang</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/my-blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/my-blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/my-blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

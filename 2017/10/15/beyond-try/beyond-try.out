@@ -1,0 +1,17 @@
+\BOOKMARK [2][]{Outline0.1}{Plain Old Try}{}% 1
+\BOOKMARK [3][]{Outline0.1.1.3}{Checked Exception}{Outline0.1}% 2
+\BOOKMARK [3][]{Outline0.1.2.4}{Unchecked Exception}{Outline0.1}% 3
+\BOOKMARK [3][]{Outline0.1.3.5}{Try-Catch Sample}{Outline0.1}% 4
+\BOOKMARK [2][]{Outline0.2}{Functional Programming}{}% 5
+\BOOKMARK [3][]{Outline0.2.1.6}{Algebraic Data Type \(ADT\)}{Outline0.2}% 6
+\BOOKMARK [3][]{Outline0.2.2.7}{Design Pattern in Functional Programming}{Outline0.2}% 7
+\BOOKMARK [3][]{Outline0.2.3.8}{Better Way in Java 8}{Outline0.2}% 8
+\BOOKMARK [3][]{Outline0.2.4.9}{Problems with Optional}{Outline0.2}% 9
+\BOOKMARK [2][]{Outline0.3}{Monad Try in Action}{}% 10
+\BOOKMARK [3][]{Outline0.3.1.10}{Try}{Outline0.3}% 11
+\BOOKMARK [3][]{Outline0.3.2.11}{Failure}{Outline0.3}% 12
+\BOOKMARK [3][]{Outline0.3.3.12}{Success}{Outline0.3}% 13
+\BOOKMARK [3][]{Outline0.3.4.13}{Try Application}{Outline0.3}% 14
+\BOOKMARK [3][]{Outline0.3.5.14}{Improve Try}{Outline0.3}% 15
+\BOOKMARK [3][]{Outline0.3.6.15}{TryBuilder}{Outline0.3}% 16
+\BOOKMARK [3][]{Outline0.3.7.16}{TryBuilder Application}{Outline0.3}% 17

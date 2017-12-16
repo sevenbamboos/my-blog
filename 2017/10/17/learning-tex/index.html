@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="Question Answer     01.Preamble The part before \begin{document}. It’s for \title, \author and \newcommand that is visible for the whole document.   02.Show title and table-of-contents Make sure bo">
+<meta name="description" content="Q&amp;amp;A   Question Answer     01.Preamble The part before \begin{document}. It’s for \title, \author and \newcommand that is visible for the whole document.   02.Define commands(macro) \newcommand{com">
 <meta name="keywords" content="TeX">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Learning TeX">
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/10/17/learning-tex/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
-<meta property="og:description" content="Question Answer     01.Preamble The part before \begin{document}. It’s for \title, \author and \newcommand that is visible for the whole document.   02.Show title and table-of-contents Make sure bo">
-<meta property="og:updated_time" content="2017-10-17T15:03:58.000Z">
+<meta property="og:description" content="Q&amp;amp;A   Question Answer     01.Preamble The part before \begin{document}. It’s for \title, \author and \newcommand that is visible for the whole document.   02.Define commands(macro) \newcommand{com">
+<meta property="og:updated_time" content="2017-10-18T12:40:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Learning TeX">
-<meta name="twitter:description" content="Question Answer     01.Preamble The part before \begin{document}. It’s for \title, \author and \newcommand that is visible for the whole document.   02.Show title and table-of-contents Make sure bo">
+<meta name="twitter:description" content="Q&amp;amp;A   Question Answer     01.Preamble The part before \begin{document}. It’s for \title, \author and \newcommand that is visible for the whole document.   02.Define commands(macro) \newcommand{com">
 
 
 
@@ -354,7 +354,7 @@
       
 
       
-        <table>
+        <h1 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h1><table>
 <thead>
 <tr>
 <th>Question</th>
@@ -367,8 +367,64 @@
 <td>The part before <code>\begin{document}</code>. It’s for <code>\title</code>, <code>\author</code> and <code>\newcommand</code> that is visible for the whole document.</td>
 </tr>
 <tr>
-<td>02.Show title and table-of-contents</td>
+<td>02.Define commands(macro)</td>
+<td><code>\newcommand{command-name}[parameter-count][optional-parameters]{definition}</code> in preamble</td>
+</tr>
+<tr>
+<td>03.Show title and table-of-contents</td>
 <td>Make sure both of them are after <code>\begin{document}</code></td>
+</tr>
+<tr>
+<td>04.Article outline elements</td>
+<td><code>\chapter \section \subsection</code></td>
+</tr>
+<tr>
+<td>05.Numbered list</td>
+<td><code>\begin{enumerate} \item ... \end{...}</code></td>
+</tr>
+<tr>
+<td>06.Non-numbered list</td>
+<td><code>\begin{itemize} \item ... \end{...}</code></td>
+</tr>
+<tr>
+<td>07.Description list</td>
+<td><code>\begin{description} \item ... \end{...}</code></td>
+</tr>
+<tr>
+<td>08.Table</td>
+<td><code>\begin{tabular} head1 &amp; head2\\ \hline row1-col1 &amp; row1-col2\\ \end{...}</code> Don’t forget \ at the end of each row (including head)</td>
+</tr>
+<tr>
+<td>09.Reference</td>
+<td><code>\label{key} \ref{key} \pageref{key}</code></td>
+</tr>
+<tr>
+<td>10.Bibliography</td>
+<td><code>\begin{thebibliography}{widest label} \bibitem[labelA]{keyA} Author A, Title A, Year A \end{...}</code> Don’t forget the second argument in begin section. <code>\cite{keyA,keyB}</code> to cite the reference(s).</td>
+</tr>
+<tr>
+<td>11.Inline formula</td>
+<td><code>\( ... \)</code></td>
+</tr>
+<tr>
+<td>12.Separate formula</td>
+<td><code>\[ ... \]</code></td>
+</tr>
+<tr>
+<td>13.Numbered formula</td>
+<td><code>\begin{equation} ... \end{...}</code></td>
+</tr>
+<tr>
+<td>14.Multi-line formula</td>
+<td><code>\begin{align} formula1 &amp;= A formula2 &amp;= B \end{...}</code> amsmath provides a <code>align</code> mode to use <code>&amp;</code> to align multi-line formula. </td>
+</tr>
+<tr>
+<td>15.Subscript in formula</td>
+<td>a<em>{subscript} `\lim</em>{n=1,2, \ldots} a_n`</td>
+</tr>
+<tr>
+<td>16.Underline and overline in formula</td>
+<td><code>\overline{} \underline{}_{} \overbrace \underbrace</code></td>
 </tr>
 </tbody>
 </table>
@@ -419,6 +475,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/my-blog/2017/11/05/mind-map-english/" rel="prev" title="Mind Map for English">
+                Mind Map for English <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -464,8 +524,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80"
@@ -480,7 +549,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/my-blog/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -543,6 +612,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Q-amp-A"><span class="nav-number">1.</span> <span class="nav-text">Q&A</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

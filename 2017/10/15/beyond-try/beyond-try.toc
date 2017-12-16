@@ -1,0 +1,17 @@
+\beamer@sectionintoc {1}{Plain Old Try}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Checked Exception}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Unchecked Exception}{4}{0}{1}
+\beamer@subsectionintoc {1}{3}{Try-Catch Sample}{5}{0}{1}
+\beamer@sectionintoc {2}{Functional Programming}{6}{0}{2}
+\beamer@subsectionintoc {2}{1}{Algebraic Data Type (ADT)}{6}{0}{2}
+\beamer@subsectionintoc {2}{2}{Design Pattern in Functional Programming}{7}{0}{2}
+\beamer@subsectionintoc {2}{3}{Better Way in Java 8}{8}{0}{2}
+\beamer@subsectionintoc {2}{4}{Problems with Optional}{9}{0}{2}
+\beamer@sectionintoc {3}{Monad Try in Action}{10}{0}{3}
+\beamer@subsectionintoc {3}{1}{Try}{10}{0}{3}
+\beamer@subsectionintoc {3}{2}{Failure}{11}{0}{3}
+\beamer@subsectionintoc {3}{3}{Success}{12}{0}{3}
+\beamer@subsectionintoc {3}{4}{Try Application}{13}{0}{3}
+\beamer@subsectionintoc {3}{5}{Improve Try}{14}{0}{3}
+\beamer@subsectionintoc {3}{6}{TryBuilder}{15}{0}{3}
+\beamer@subsectionintoc {3}{7}{TryBuilder Application}{16}{0}{3}

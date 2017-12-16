@@ -257,6 +257,854 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/12/16/mind-map-fpinjava/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2017/12/16/mind-map-fpinjava/" itemprop="url">
+                  Functional Programming in Java
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-16T12:38:14+08:00">
+                12-16-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Based on Functional Programming in Java, a book similar to the red bible of Scala and explains reasons why Scala introduced features like monad Option, List, Stream, Try and comprehension.</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01.groupBy(value -&gt; key)</td>
+<td><code>Stream::collect(Collectors::groupingBy(value -&gt; key))</code> See also partitioningBy</td>
+</tr>
+<tr>
+<td>02.type alias in Java</td>
+<td>Use interface (see code)</td>
+</tr>
+<tr>
+<td>03.final variable for closure</td>
+<td>Final requirement applies to local variable only (see code)</td>
+</tr>
+<tr>
+<td>04.If closure has reference to non-local variable which is not final, how to make function free of side effects</td>
+<td>Turn implicit variables to explicit arguments of the function (see code)</td>
+</tr>
+<tr>
+<td>05.There are Function and BiFunction. How about TriFunction</td>
+<td>Using curring is another way to avoid TriFunction (see code</td>
+</tr>
+<tr>
+<td>06.Partially bind the first/second parameter</td>
+<td>Deduct from types to create curried function (see code)</td>
+</tr>
+<tr>
+<td>07.The size of a thread</td>
+<td>1064 KB for 64-bit JVM (size of stack)</td>
+</tr>
+<tr>
+<td>08.Give meaningful name for built-in functional interface</td>
+<td>Define new functional interfaces (with same function signature as built-in functional interfaces) and use the new interfaces in class/method definition. Then use anonymous lambda in the application.</td>
+</tr>
+<tr>
+<td>09.Pattern matching in Java</td>
+<td>Define a Case class extended from <code>Tuple&lt;Supplier&lt;Boolean&gt;, Supplier&lt;Result&lt;T&gt;&gt;&gt;</code>. See com.samwang.common.EmailValidation (alg-java in my git)</td>
+</tr>
+<tr>
+<td>10.Handle effects in a loop</td>
+<td>One way is to fold effects into one and execute them afterwards (in a batch mode or delay the execution until necessarily).</td>
+</tr>
+<tr>
+<td>11.Why classes shouldn’t have several properties of the same type (in modeling)</td>
+<td>No compiling error when using an incorrect property. Solution is to use value types like Money, Weight, Age (rather than double, int).</td>
+</tr>
+<tr>
+<td>12.Make recursion function stack-safe</td>
+<td>1) Turn to tail-recursion 2) Use heap-based TailCall, which has two sub-classes: Return and Suspend. See com.samwang.common.TailCall (alg-java in my git)</td>
+</tr>
+<tr>
+<td>13.Turn to tail-recursion</td>
+<td>Define a helper function with an accumulator.</td>
+</tr>
+<tr>
+<td>14.Another way to look at Fibonacci series 0,1,1,2,3,5,8,13</td>
+<td>A series of pairs (tuples): (0,1),(1,1),(1,2),(2,3),(3,5),(5,8),(8,13) And the generation method is <code>x -&gt; new Tuple&lt;&gt;(x._2, x._1 + x._2)</code></td>
+</tr>
+<tr>
+<td>15.Function memorization</td>
+<td>Wrap function in com.samwang.common.Memoizer (alg-java in my git). For functions with more than one parameter, one way is to use Tuple2, Tuple3 (and use these tuples as the key in Memorizer). Another (better) way is to memorize the curried function (see code). In case there are huge different results to be kept in cache, use soft or weak references (and WeakHashMap) in Memorizer.</td>
+</tr>
+<tr>
+<td>16.java.util.Objects</td>
+<td>Helper functions for comparison, equal, hash-code, null-check, etc.</td>
+</tr>
+<tr>
+<td>17.Functional list in Java</td>
+<td>Define abstract class List with two sub-classes Nil and Cons. See com.samwang.common.List (alg-java in my git).</td>
+</tr>
+<tr>
+<td>18.What’s good for StringBuilder::append to return this</td>
+<td>In case StringBuilder is used as an accumulator, it saves one line of code to explicitly return the builder (see code).</td>
+</tr>
+<tr>
+<td>19.Implement foldRight with foldLeft for the purpose of stack safety</td>
+<td><code>list.reverse().foldLeft(identity, x -&gt; y -&gt; f.apply(y).apply(x));</code></td>
+</tr>
+<tr>
+<td>20.Given concat(head, tail), what’s good to implement List::flatMap with foldRight instead of foldLeft</td>
+<td>foldLeft: (((1,2),3),4); foldRight: (1,(2,(3,4))). So foldRight works well with <code>concat(f.apply(element), list_for_accumulation)</code></td>
+</tr>
+<tr>
+<td>21.Implement variance (with mean)</td>
+<td>(see code)</td>
+</tr>
+<tr>
+<td>22.Optional::orElseGet vs orElse</td>
+<td>The former supports laziness which is critical for function evaluation; the latter is suitable for literal (because literal has been evaluated already by compiler).</td>
+</tr>
+<tr>
+<td>23.Exception handling with Result</td>
+<td>See com.samwang.common.Result (alg-java in my git), which is more powerful than Option in that it has 3 subtypes to represent 3 cases:Success, Failure and Empty.</td>
+</tr>
+<tr>
+<td>24.Give meaningful (error) message for Result.Empty or Result.Failure</td>
+<td>abstract Result<t> mapFailure(String message)</t></td>
+</tr>
+<tr>
+<td>25.Find the last one using foldLeft</td>
+<td>(see code)</td>
+</tr>
+<tr>
+<td>26.Loop without loop</td>
+<td>Accumulator + recurrence</td>
+</tr>
+<tr>
+<td>27.Return an item at an index with foldLeft</td>
+<td>fold with a Tuple as identity in the format of (failure + index). See Result::getAt_ (alg-java in my git).</td>
+</tr>
+<tr>
+<td>28.Reason to use joinfork thread pool to do list parallelization.</td>
+<td>Hard to predict computation time so having to divide the list into a large number of sublists. </td>
+</tr>
+<tr>
+<td>29.Algorithm to show the ugliness of imperative style</td>
+<td>Find the first ten primes (see code)</td>
+</tr>
+<tr>
+<td>30.Remove item from Binary Search Tree (BST)</td>
+<td>After removing the item, the left and right node need to be merged. See Tree::remove and Tree::removeMerge (alg-java in my git)</td>
+</tr>
+<tr>
+<td>31.General merge for BST</td>
+<td>See Tree::merge (alg-java in my git)</td>
+</tr>
+<tr>
+<td>32.Day-Stout-Warren algorithm for balanced tree</td>
+<td>1, Rotate left until both branches are nearly equal. 2, Apply rotation to the right branch. 3, Apply right rotation to the left branch. 4, Stop when the height = log2(size)</td>
+</tr>
+</tbody>
+</table>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/my-blog/2017/12/16/mind-map-fpinjava/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/12/10/mind-map-spring/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2017/12/10/mind-map-spring/" itemprop="url">
+                  Spring 5
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-10T14:38:14+08:00">
+                12-10-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>TODO:</p>
+<p>What’s the use of java.lang.annotation.Target,Retention? In other words, give a practical view of Java Annotation.</p>
+<p>In which case, @Autowired needs to used together with @Qualifier</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/my-blog/2017/12/10/mind-map-spring/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/11/10/mind-map-java/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2017/11/10/mind-map-java/" itemprop="url">
+                  Java Basic
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-10T15:38:14+08:00">
+                11-10-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01.Classloader</td>
+<td>Three classloaders: Bootstrap(rt.jar), extension and application(classpath).</td>
+</tr>
+<tr>
+<td>02.OOPS principles</td>
+<td>Abstraction with encapsulation, (type system supports) inheritance and thus polymorphism.</td>
+</tr>
+<tr>
+<td>03.Object oriented VS object based</td>
+<td>ES5 as object based language, provides abstraction and encapsulation, but no native support of inheritance and polymorphism</td>
+</tr>
+<tr>
+<td>04.What happen if multiple interfaces have the same default method and a class implements these interfaces</td>
+<td>Compile error.</td>
+</tr>
+<tr>
+<td>05.Aggregation VS composition</td>
+<td>Objects get destroyed along with the composite object, while aggregated objects exist.</td>
+</tr>
+<tr>
+<td>06.super() and this()</td>
+<td>They (not both of them) must be the first statement for a constructor.</td>
+</tr>
+<tr>
+<td>07.Execute a program with main method</td>
+<td>No way to do it since Java 7.</td>
+</tr>
+<tr>
+<td>08.Override for static(class) method</td>
+<td>No way as inheritance doesn’t apply to class.</td>
+</tr>
+<tr>
+<td>09.Overloading VS overriding</td>
+<td>Overloading happens at compile time, while overriding at runtime.</td>
+</tr>
+<tr>
+<td>10.Covariant return type</td>
+<td>It’s allowed to return a sub-type in method of sub-class. (see code)</td>
+</tr>
+<tr>
+<td>11.Marker interface VS annotation</td>
+<td>Interface provides static check during compiling, while annotation has to be checked at runtime. (see code)</td>
+</tr>
+<tr>
+<td>12.Pass-by-value or pass-by-reference</td>
+<td>Java is always pass-by-value. (see code)</td>
+</tr>
+<tr>
+<td>13.”foo” VS new String(“foo”)</td>
+<td>The former is in string constant pool, while the latter is a normal string object. (see <a href="http://www.thejavageek.com/2013/06/19/the-string-constant-pool/" target="_blank" rel="external">this</a>) </td>
+</tr>
+<tr>
+<td>14.Comparator VS comparable</td>
+<td>The former is a util interface comparing two objects, while the latter compares another object with itself, which means it is implemented by compared types while comparator is used by sorting functions.</td>
+</tr>
+<tr>
+<td>15.Why Object::hashCode() is native</td>
+<td>Performance concern because it looks for an integer representation of an object reference on the heap. </td>
+</tr>
+<tr>
+<td>16.What’s the benefit of Collections::copy() over collection constructor or addAll</td>
+<td>It doesn’t involve reallocation but instead trigger out-of-index error if happened.</td>
+</tr>
+<tr>
+<td>17.Return value for high-order function</td>
+<td>For functional interface, return a lambda (instead of an anonymous class).</td>
+</tr>
+<tr>
+<td>18.java.time package since Java 8</td>
+<td>LocalDate, Year, MonthDay, DayOfWeek. Also refer to TemporalAccessor for use suggestion (see code)</td>
+</tr>
+<tr>
+<td>19.@SafeVarargs</td>
+<td>For methods with variable number of arguments, JVM uses array under the hood. When the type of arguments is type parameter, JVM uses Object[] which could lead ClassCastException. That’s the reason JVM gives warning during compiling. The annotation is used to by-pass the warning.</td>
+</tr>
+<tr>
+<td>20.Catch uncaught exception for a Thread</td>
+<td>Thread::setUncaughtExceptionHandler(Thread.UncaughtExceptionHandler eh)</td>
+</tr>
+<tr>
+<td>21.Get notification on memory usage</td>
+<td>see MemoryPoolMXBean’s javadoc </td>
+</tr>
+<tr>
+<td>22.Java is a strict language</td>
+<td>Method arguments are passed by value (evaluated first, that’s the reason Scala introduced by-name parameters). In a few places however, Java is lazy: &amp;&amp;, ?:, if…else, foo, while, Java 8 streams.</td>
+</tr>
+<tr>
+<td>23.Advantages to use anonymous lambda (or method references)</td>
+<td>1, No need to declare type explicitly. 2, Named lambdas are compiled to objects.</td>
+</tr>
+<tr>
+<td>24.Add constraints to resource accessing or preventing thread from quitting too early</td>
+<td>Semaphore</td>
+</tr>
+<tr>
+<td>25.How to prevent assertion from being disabled</td>
+<td>Check with a static initializer and quit with RuntimeException (see code)</td>
+</tr>
+</tbody>
+</table>
+<p>Continue at P250</p>
+<p>(To be continued)</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/my-blog/2017/11/10/mind-map-java/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/11/05/mind-map-english/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2017/11/05/mind-map-english/" itemprop="url">
+                  Mind Map for English
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-05T11:38:14+08:00">
+                11-05-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Mind-Map/" itemprop="url" rel="index">
+                    <span itemprop="name">Mind Map</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Category"><a href="#Category" class="headerlink" title="Category"></a>Category</h1><table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>In the office</td>
+<td><a href="#Workload">Workload</a></td>
+</tr>
+<tr>
+<td>At supermarket</td>
+<td><a href="#Supermarket">Supermarket</a></td>
+</tr>
+<tr>
+<td>At Restaurant</td>
+<td><a href="#Order-food">Order food</a> </td>
+</tr>
+</tbody>
+</table>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/my-blog/2017/11/05/mind-map-english/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/10/17/learning-tex/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -356,7 +1204,7 @@
       
         
           
-            <table>
+            <h1 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h1><table>
 <thead>
 <tr>
 <th>Question</th>
@@ -369,8 +1217,64 @@
 <td>The part before <code>\begin{document}</code>. It’s for <code>\title</code>, <code>\author</code> and <code>\newcommand</code> that is visible for the whole document.</td>
 </tr>
 <tr>
-<td>02.Show title and table-of-contents</td>
+<td>02.Define commands(macro)</td>
+<td><code>\newcommand{command-name}[parameter-count][optional-parameters]{definition}</code> in preamble</td>
+</tr>
+<tr>
+<td>03.Show title and table-of-contents</td>
 <td>Make sure both of them are after <code>\begin{document}</code></td>
+</tr>
+<tr>
+<td>04.Article outline elements</td>
+<td><code>\chapter \section \subsection</code></td>
+</tr>
+<tr>
+<td>05.Numbered list</td>
+<td><code>\begin{enumerate} \item ... \end{...}</code></td>
+</tr>
+<tr>
+<td>06.Non-numbered list</td>
+<td><code>\begin{itemize} \item ... \end{...}</code></td>
+</tr>
+<tr>
+<td>07.Description list</td>
+<td><code>\begin{description} \item ... \end{...}</code></td>
+</tr>
+<tr>
+<td>08.Table</td>
+<td><code>\begin{tabular} head1 &amp; head2\\ \hline row1-col1 &amp; row1-col2\\ \end{...}</code> Don’t forget \ at the end of each row (including head)</td>
+</tr>
+<tr>
+<td>09.Reference</td>
+<td><code>\label{key} \ref{key} \pageref{key}</code></td>
+</tr>
+<tr>
+<td>10.Bibliography</td>
+<td><code>\begin{thebibliography}{widest label} \bibitem[labelA]{keyA} Author A, Title A, Year A \end{...}</code> Don’t forget the second argument in begin section. <code>\cite{keyA,keyB}</code> to cite the reference(s).</td>
+</tr>
+<tr>
+<td>11.Inline formula</td>
+<td><code>\( ... \)</code></td>
+</tr>
+<tr>
+<td>12.Separate formula</td>
+<td><code>\[ ... \]</code></td>
+</tr>
+<tr>
+<td>13.Numbered formula</td>
+<td><code>\begin{equation} ... \end{...}</code></td>
+</tr>
+<tr>
+<td>14.Multi-line formula</td>
+<td><code>\begin{align} formula1 &amp;= A formula2 &amp;= B \end{...}</code> amsmath provides a <code>align</code> mode to use <code>&amp;</code> to align multi-line formula. </td>
+</tr>
+<tr>
+<td>15.Subscript in formula</td>
+<td>a<em>{subscript} `\lim</em>{n=1,2, \ldots} a_n`</td>
+</tr>
+<tr>
+<td>16.Underline and overline in formula</td>
+<td><code>\overline{} \underline{}_{} \overbrace \underbrace</code></td>
 </tr>
 </tbody>
 </table>
@@ -671,7 +1575,7 @@
 </tr>
 <tr>
 <td>Python</td>
-<td><a href="#Python-Basic">basic</a></td>
+<td><a href="#Python-Basic">basic</a>, <a href="#Python-Tips">tips</a></td>
 </tr>
 <tr>
 <td>Statistics</td>
@@ -896,7 +1800,7 @@
               
                 
                 <a class="post-title-link" href="/my-blog/2017/09/05/mind-map-scala/" itemprop="url">
-                  Mind Map of Scala
+                  Scala and Functional Programming
                 </a>
               
             
@@ -935,8 +1839,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/my-blog/categories/Mind-Map/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind Map</span>
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
                   </a>
                 </span>
 
@@ -1195,745 +2099,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/07/05/mind-map-backend/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yuping Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sam's Chest of Drawers">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/my-blog/2017/07/05/mind-map-backend/" itemprop="url">
-                  Mind Map of Backend
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-05T11:09:56+08:00">
-                07-05-2017
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/my-blog/categories/Mind-Map/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind Map</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Backend tends to have a totally different topics than Web (frontend). What’s more, before putting too many items into “Mind Map of Web”, creating a new mind-map slot for backend is quite reasonable. Additionally, classical topics about algorithm are also appropriate here for the reason of an obvious different focus from frontend. So all these facts bring about a new mind map for backend.  </p>
-<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><table>
-<thead>
-<tr>
-<th>Keywords</th>
-<th>Comment &amp; Reference</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>distributed system</td>
-<td>Nginx (read as “engine X”) <a href="https://mp.weixin.qq.com/s/5wxIHNMN2MbbSQ6WWA65HQ" target="_blank" rel="external">Concepts of Distributed System</a></td>
-</tr>
-<tr>
-<td>dynamic programming</td>
-<td><a href="#dynamic-programming">Comment</a>, <a href="https://mp.weixin.qq.com/s?__biz=MjM5OTA1MDUyMA==&amp;mid=2655438647&amp;idx=1&amp;sn=4634f712fa4d0236aba60b8e8b7cc2cb&amp;chksm=bd730b408a048256f204695598c0e4f74e75c9582f5b9c740057a69747b306de1a4c308d5388&amp;mpshare=1&amp;scene=1&amp;srcid=0702N84baxNAmMFheg6Ck26Z&amp;key=238113c46368" target="_blank" rel="external">introduction by comic</a></td>
-</tr>
-<tr>
-<td>compile</td>
-<td><a href="http://fullstack.blog/2017/06/24/%E5%A4%A7%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%80%85%E9%9C%80%E8%A6%81%E4%BA%86%E8%A7%A3%E7%9A%84%E5%9F%BA%E7%A1%80%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%92%8C%E8%AF%AD%E8%A8%80%E7%9F%A5%E8%AF%86/?nsukey=9G4zvSOVCA0b49Ng4rhqNHkw55dE1OsVGQ3exvS12Nfchm8N38y5eU8Aw2VaHY72/yPT0cyMQK2ewKJjU6F0EqDj3rkpTv/EFl10CW6zk/29dY8DlDLjxh0YRyQFZvmUN4xWwW3e16mpXMDjKu4LVje6cwykadEMWU4klPXFOXWYLBZKqc1ocxBZCnTAH7ZF" target="_blank" rel="external">compile introduction</a></td>
-</tr>
-<tr>
-<td>bitwise operation</td>
-<td><a href="http://blog.jobbole.com/107689/" target="_blank" rel="external">is-power-of-2</a>, <a href="http://blog.jobbole.com/106521/" target="_blank" rel="external">find-odd-number</a></td>
-</tr>
-<tr>
-<td>greatest common divider</td>
-<td><a href="http://blog.jobbole.com/106315/" target="_blank" rel="external">introduction by comic</a></td>
-</tr>
-<tr>
-<td>max difference within array</td>
-<td><a href="http://blog.jobbole.com/108594/" target="_blank" rel="external">introduction by comic</a></td>
-</tr>
-<tr>
-<td>circular linked list detect</td>
-<td>Given node length known <a href="http://blog.jobbole.com/106227/" target="_blank" rel="external">introduction by comic</a></td>
-</tr>
-<tr>
-<td>js dependency</td>
-<td><a href="#js-dependency">Comment</a> <a href="https://github.com/wearehive/project-guidelines#readme" target="_blank" rel="external">a js project template</a></td>
-</tr>
-<tr>
-<td>git merge rebase fixup autosquash feature branch</td>
-<td>see my post “Feature Branch Workflow”, <a href="https://sentheon.com/blog/git-cheat-sheet.html" target="_blank" rel="external">cheat-sheet</a></td>
-</tr>
-<tr>
-<td>slf4j logback MDC kafka</td>
-<td><a href="#log">Comment</a></td>
-</tr>
-<tr>
-<td>CAP Eventual Consistency nosql kafka RabbitMQ MongoDB HBase Cassandra Redis Neo4j</td>
-<td><a href="#cap-nosql">Comment</a></td>
-</tr>
-<tr>
-<td>https</td>
-<td><a href="https://mp.weixin.qq.com/s/StqqafHePlBkWAPQZg3NrA" target="_blank" rel="external">Introduction</a></td>
-</tr>
-<tr>
-<td>git mergetool kdiff3</td>
-<td><a href="#git-mergetool-kdiff3">Comment</a></td>
-</tr>
-<tr>
-<td>flashcard with Anki and Studies</td>
-<td><a href="https://sspai.com/post/39951" target="_blank" rel="external">Anki</a> <a href="https://sspai.com/post/34411" target="_blank" rel="external">Studies</a></td>
-</tr>
-<tr>
-<td>IDE vim, intellij</td>
-<td><a href="#ide-tips">Comment</a>, <a href="https://stackoverflow.com/questions/29888592/errorjava-javactask-source-release-8-requires-target-release-1-8" target="_blank" rel="external">java8-compile-idea</a></td>
-</tr>
-<tr>
-<td>java nio</td>
-<td><a href="#java-nio">Comment</a></td>
-</tr>
-<tr>
-<td>java concurrency</td>
-<td><a href="#java-concurrency">Comment</a></td>
-</tr>
-<tr>
-<td>linux command</td>
-<td><a href="https://zhuanlan.zhihu.com/p/28674639" target="_blank" rel="external">commands</a></td>
-</tr>
-<tr>
-<td>disk clean (for Mac)</td>
-<td><a href="https://sspai.com/post/40503" target="_blank" rel="external">link</a></td>
-</tr>
-<tr>
-<td>e-book site (for IT)</td>
-<td><a href="http://www.finelybook.com/" target="_blank" rel="external">finelybook</a> (down since 2017.9, not sure the future), <a href="http://www.salttiger.com" target="_blank" rel="external">salttiger</a>, <a href="https://archive.org/" target="_blank" rel="external">archive.org</a></td>
-</tr>
-<tr>
-<td>math support for markdown</td>
-<td><a href="http://www.codecogs.com/latex/eqneditor.php" target="_blank" rel="external">codecogs.com</a></td>
-</tr>
-</tbody>
-</table>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/my-blog/2017/07/05/mind-map-backend/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/07/01/mind-map-web/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yuping Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sam's Chest of Drawers">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/my-blog/2017/07/01/mind-map-web/" itemprop="url">
-                  Mind Map of Web
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-01T17:09:56+08:00">
-                07-01-2017
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/my-blog/categories/Mind-Map/" itemprop="url" rel="index">
-                    <span itemprop="name">Mind Map</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Tips and references from articles about web programming. It’s called mind map not because of the mind map drawing, but due to the similarity of the data structure “map”. Given a keyword, I can find the read articles within a constant time (O(1)), just as <code>map.for(key:) -&gt; &lt;Value?&gt;</code>.</p>
-<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><table>
-<thead>
-<tr>
-<th>Keywords</th>
-<th>Comment &amp; Reference</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Webpack Gulp</td>
-<td><a href="#webpack-babel">Comment</a>, <a href="https://www.liquidlight.co.uk/blog/article/getting-started-with-webpack-3/" target="_blank" rel="external">Webpack 3 with Gulp</a></td>
-</tr>
-<tr>
-<td>module.exports exports</td>
-<td><a href="#module-exports">Comment</a></td>
-</tr>
-<tr>
-<td>MVC MVP MVVM</td>
-<td><a href="#mvp-mvvm">Comment</a>, <a href="https://medium.com/ios-os-x-development/ios-architecture-patterns-ecba4c38de52" target="_blank" rel="external">iOS architecture</a>, <a href="https://medium.com/monitisemea/using-redux-with-mvvm-on-ios-18212454d676" target="_blank" rel="external">MVVM + Redux</a>, <a href="https://www.cocoawithlove.com/blog/mvc-and-cocoa.html" target="_blank" rel="external">mvc and cocoa</a>, <a href="https://juejin.im/post/593021272f301e0058273468" target="_blank" rel="external">mvc/mvp/mvvm</a></td>
-</tr>
-<tr>
-<td>flatMap</td>
-<td><a href="#flatMap">Comment</a> <a href="http://2ality.com/2017/04/flatmap.html" target="_blank" rel="external">flatMap</a></td>
-</tr>
-<tr>
-<td>await async Promise</td>
-<td><a href="#await-async-Promise">Comment</a>, <a href="https://medium.com/@bluepnume/learn-about-promises-before-you-start-using-async-await-eb148164a9c8" target="_blank" rel="external">learn about promises</a></td>
-</tr>
-<tr>
-<td>put post</td>
-<td><a href="#put-post">Comment</a>, <a href="http://restcookbook.com/HTTP%20Methods/put-vs-post/" target="_blank" rel="external">RESTful cookbook</a></td>
-</tr>
-<tr>
-<td>event bubbling</td>
-<td><a href="#event-bubbling">Comment</a>, <a href="https://www.sitepoint.com/event-bubbling-javascript/" target="_blank" rel="external">Event Propagation Explained</a></td>
-</tr>
-<tr>
-<td>console.log</td>
-<td><a href="#console-log">Comment</a>, <a href="https://medium.freecodecamp.org/how-to-get-the-most-out-of-the-javascript-console-b57ca9db3e6d" target="_blank" rel="external">Javascript console</a></td>
-</tr>
-<tr>
-<td>partial curry high order Lodash</td>
-<td><a href="#high-order-lodash">Comment</a>, <a href="https://blog.pragmatists.com/higher-order-functions-in-lodash-3283b7625175" target="_blank" rel="external">Higher order in Lodash</a></td>
-</tr>
-</tbody>
-</table>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/my-blog/2017/07/01/mind-map-web/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/05/23/sorting/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yuping Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sam's Chest of Drawers">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/my-blog/2017/05/23/sorting/" itemprop="url">
-                  Sorting Performance
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-23T11:31:45+08:00">
-                05-23-2017
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
-                    <span itemprop="name">Programming</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Recently, I did some study on sorting algorithms and I’m amazed to find that the sort from standard Java Runtime Environment (JRE) is <em>NOT</em> as efficient as I expected. According to Java-DOC’s description:</p>
-<p><code>public static &lt;T&gt; void sort(T[] a, Comparator&lt;? super T&gt; c)</code></p>
-<blockquote>
-<p>Sorts the specified array of objects according to the order induced by the specified comparator. All elements in the array must be mutually comparable by the specified comparator (that is, c.compare(e1, e2) must not throw a ClassCastException for any elements e1 and e2 in the array).</p>
-<p>This sort is guaranteed to be stable: equal elements will not be reordered as a result of the sort.<br>Implementation note: This implementation is a stable, adaptive, iterative mergesort that requires far fewer than n lg(n) comparisons when the input array is partially sorted, while offering the performance of a traditional mergesort when the input array is randomly ordered. If the input array is nearly sorted, the implementation requires approximately n comparisons. Temporary storage requirements vary from a small constant for nearly sorted input arrays to n/2 object references for randomly ordered input arrays.</p>
-<p>The implementation takes equal advantage of ascending and descending order in its input array, and can take advantage of ascending and descending order in different parts of the the same input array. It is well-suited to merging two or more sorted arrays: simply concatenate the arrays and sort the resulting array.</p>
-<p>The implementation was adapted from Tim Peters’s list sort for Python ( TimSort). It uses techniques from Peter McIlroy’s “Optimistic Sorting and Information Theoretic Complexity”, in Proceedings of the Fourth Annual ACM-SIAM Symposium on Discrete Algorithms, pp 467-474, January 1993.</p>
-</blockquote>
-<p>I have checked another sort method’s description:</p>
-<blockquote>
-<p>Implementation note: The sorting algorithm is a Dual-Pivot Quicksort by Vladimir Yaroslavskiy, Jon Bentley, and Joshua Bloch. This algorithm offers O(n log(n)) performance on many data sets that cause other quicksorts to degrade to quadratic performance, and is typically faster than traditional (one-pivot) Quicksort implementations.</p>
-</blockquote>
-<p>So I’m curious to know how good the built-in sort is and whether my home-made sort can defeat it. It sounds like playing with AlphaGo, but I still decide to have a go. For the completeness, I include elementary sorting methods e.g. select sort, insert sort and shell sort, which have the performance of<br><img src="/my-blog/2017/05/23/sorting/o_n_2.png" alt="o_n_2.png" title="">,<br>as well as more advanced sort e.g. merge sort and quick sort with the performance of<br><img src="/my-blog/2017/05/23/sorting/o_n_lgn.png" alt="o_n_lgn.png" title="">.<br>Here is the detailed source code.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/my-blog/2017/05/23/sorting/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/05/15/mvx/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yuping Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sam's Chest of Drawers">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/my-blog/2017/05/15/mvx/" itemprop="url">
-                  MVC, MVP, MVVM and Redux
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-15T22:17:20+08:00">
-                05-15-2017
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
-                    <span itemprop="name">Programming</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><ul>
-<li>View controller is getting bigger and bigger</li>
-<li>View controller keeps data (or cached data)</li>
-<li>View controller is NOT testable</li>
-<li>View controllers tend to have complicated interaction</li>
-<li>Model is dumb data structure</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/my-blog/2017/05/15/mvx/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/my-blog/page/2/">2</a><a class="page-number" href="/my-blog/page/3/">3</a><a class="extend next" rel="next" href="/my-blog/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/my-blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/my-blog/page/4/">4</a><a class="extend next" rel="next" href="/my-blog/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1978,7 +2148,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/my-blog/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

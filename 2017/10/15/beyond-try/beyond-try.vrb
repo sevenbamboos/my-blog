@@ -1,0 +1,18 @@
+\frametitle{TryBuilder Application}
+\begin{lstlisting}[language=Java]
+try2(() -> Integer.parseInt(age),
+     () -> dateFormat.parse(created))
+
+  .yield((a,c) -> {
+      a = a & 0x7F;
+      c = c.later(today) ? today : c;
+      return patientService.search(a,c);})
+
+  .andThen(
+      patientList -> ... ,
+      exception -> ...
+  );
+\end{lstlisting}
+  \begin{block}{Next Step}
+  \alert{Monad Validation} to support exception accumulation and return them once for all
+  \end{block}
