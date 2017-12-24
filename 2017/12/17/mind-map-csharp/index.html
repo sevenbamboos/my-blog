@@ -1,0 +1,843 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/my-blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/my-blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/my-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/my-blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="It’s based on C# 7.0, which is the latest version with VS 2017. I list the feature unfamiliar to Java programmer. Sections   Title Reference     Language Basic Language Basic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C# For Java Programmer">
+<meta property="og:url" content="https://sevenbamboos.github.com/2017/12/17/mind-map-csharp/index.html">
+<meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
+<meta property="og:description" content="It’s based on C# 7.0, which is the latest version with VS 2017. I list the feature unfamiliar to Java programmer. Sections   Title Reference     Language Basic Language Basic">
+<meta property="og:updated_time" content="2017-12-24T01:21:46.521Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C# For Java Programmer">
+<meta name="twitter:description" content="It’s based on C# 7.0, which is the latest version with VS 2017. I list the feature unfamiliar to Java programmer. Sections   Title Reference     Language Basic Language Basic">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/my-blog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sevenbamboos.github.com/2017/12/17/mind-map-csharp/"/>
+
+
+
+
+
+  <title> C# For Java Programmer | Sam's Chest of Drawers </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/my-blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sam's Chest of Drawers</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thinking about Programming and Lifestyle</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/my-blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/my-blog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/my-blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/my-blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/12/17/mind-map-csharp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C# For Java Programmer
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-17T09:38:14+08:00">
+                12-17-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>It’s based on C# 7.0, which is the latest version with VS 2017. I list the feature unfamiliar to Java programmer.</p>
+<h1 id="Sections"><a href="#Sections" class="headerlink" title="Sections"></a>Sections</h1><table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Language Basic</td>
+<td><a href="#language-basic">Language Basic</a></td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<h1 id="language-basic"><a href="#language-basic" class="headerlink" title="language basic"></a>language basic</h1><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01.Losing precision:convert int to float and again back to int</td>
+<td>floating-point has less precision than integer. Double has NO such issue.</td>
+</tr>
+<tr>
+<td>02.Rounding errors from float and double</td>
+<td>Both are in base 2, so can lose precision for base 10 figures. decimal is base 10, but 10 times slower due to the lack of native support of CPU.</td>
+</tr>
+<tr>
+<td>03.Matrix (vs jagged arrays)</td>
+<td>(see code) At least one int[,] can be omitted, but not both. Jagged arrays have the syntax like int[][].</td>
+</tr>
+<tr>
+<td>04.ref and out parameter</td>
+<td>out differs from ref modifier in that out arguments can be declared when being used in method invocation.</td>
+</tr>
+<tr>
+<td>05.Named arguments and optional parameters</td>
+<td>For methods has several optional parameters, use named arguments for the sake of clarity.</td>
+</tr>
+<tr>
+<td>06.Null operators ? and ??</td>
+<td>? turns an expression’s result to <code>Option</code>, while ?? does one more step further to call <code>orElseGet</code> method with laziness enabled.</td>
+</tr>
+<tr>
+<td>07.switch with patterns</td>
+<td>switch supports types and null (C# 7, see code)</td>
+</tr>
+<tr>
+<td>08.Renaming imported types and namespaces</td>
+<td><code>using NewType1 = Some.Namespace.Type1</code> and <code>using NewNamespace = Some.Namespace</code></td>
+</tr>
+<tr>
+<td>09.One-line expression syntax</td>
+<td><code>int triple(int x) =&gt; x*3</code></td>
+</tr>
+<tr>
+<td>10.Overloading constructors</td>
+<td><code>Person(String name, int age) : this(name) { ... }</code> For subclass, use base() and it enforces constructor in super class is invoked first.</td>
+</tr>
+<tr>
+<td>11.Deconstructor</td>
+<td><code>var (firstName, lastName) = aPersonName</code> (C# 7, see code)</td>
+</tr>
+<tr>
+<td>12.Object initializers</td>
+<td>Constructor has an advantage over object initializer in that for immutable object, fields/properties can be declared as read-only and initialized in constructor (see code)</td>
+</tr>
+<tr>
+<td>13.Indexers</td>
+<td><code>string this [int index] { get {...} set {...}}</code></td>
+</tr>
+<tr>
+<td>14.Static constructors</td>
+<td><code>static PersonName() {...}</code> Acted as static block which get executed once per type after static field initializers.</td>
+</tr>
+<tr>
+<td>15.nameof operator</td>
+<td><code>string foo = nameof (aPersonName)</code> foo will be updated after renaming aPersonName</td>
+</tr>
+<tr>
+<td>16.is operator</td>
+<td>Useful to have a casted variable even in an outer scope (see code)</td>
+</tr>
+<tr>
+<td>17.Hiding inherited members instead of override</td>
+<td><code>public new void Foo() {...}</code> (see code)</td>
+</tr>
+<tr>
+<td>18.Initialization order</td>
+<td>1.Fields in subclass, 2.Arguments to base class constructor, 3.Fields in base class, 4.base class constructor, 5.subclass constructor.</td>
+</tr>
+<tr>
+<td>19.virtual, override and sealed</td>
+<td>virtual and override make the method in subclass override the one in base class (see code) </td>
+</tr>
+<tr>
+<td>20.reimplement (new)</td>
+<td>reimplemented method visible in subclass ONLY, also note without visual subclass can’t override (see code)</td>
+</tr>
+<tr>
+<td>21.explicit implement</td>
+<td>It solves method conflict from multiple interfaces by asking caller to cast instance to interface to be able to call the method. Otherwise the implementation is INVISIBLE in the class itself (see code)</td>
+</tr>
+<tr>
+<td>22.class VS interface</td>
+<td>Use (sub)classes when they naturally share an implementation; use interface when they have independent implementations.</td>
+</tr>
+<tr>
+<td>23.Covariance VS contravariance</td>
+<td>Covariance (out) is generic type used in return value, means <code>IPopable&lt;Animal&gt; obj = instance; // instance is IPopable&lt;Cat&gt;</code> because Cat is instance of Animal. Contravariance (in) is generic type used in parameters, means <code>IPushable&lt;Cat&gt; obj = instance; // instance is IPushable&lt;Animal&gt;</code> because Cat can always be used as method argument when parameter type is Animal (see code)</td>
+</tr>
+<tr>
+<td>24.delegate as Func and Action in System namespace</td>
+<td>delegate acts as class (generated by compiler) captured surrounding variables, used like <code>public delegate void Foo(); Foo aDelegate = methodName, aDelegate += anotherMethodName</code> Note Foo can be delcared by System.Action, which is <code>delegate void Action();</code>. Also note delegate can be multicast.</td>
+</tr>
+<tr>
+<td>25.Standard event pattern</td>
+<td>1.MyEventArgs : System.EventArgs, which is marker class. 2.Use generic delegate System.EventHandler and method to fire event (see code)</td>
+</tr>
+<tr>
+<td>26.Variables captured by delegate</td>
+<td>Not evaluated until the delegate is actually invoked. (see code)</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div></pre></td><td class="code"><pre><div class="line">// 03</div><div class="line">int[,] matrix = new int[,]</div><div class="line">&#123;</div><div class="line">	&#123;1,2,3&#125;,</div><div class="line">	&#123;2,4,6&#125;,</div><div class="line">	&#123;1,4,8&#125;,</div><div class="line">&#125;;</div><div class="line"></div><div class="line">// 07</div><div class="line">switch (age) &#123;</div><div class="line">	case int child when child &lt; 18:</div><div class="line">		...</div><div class="line">		break;</div><div class="line">	case null:</div><div class="line">		...</div><div class="line">		break; </div><div class="line">&#125;</div><div class="line"></div><div class="line">// 11</div><div class="line">class PersonName &#123;</div><div class="line">	...</div><div class="line">	public void Deconstruct (out string firstName, out string lastName) &#123;</div><div class="line">		firstName = givenName;</div><div class="line">		lastName = familyName;</div><div class="line">	&#125;</div><div class="line">	...</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 12</div><div class="line">Person p1 = new Person(&quot;John Doe&quot;) &#123; Age = 21 &#125;;</div><div class="line">Person p2 = new Person(&quot;Tom Zhang&quot;, 35);</div><div class="line"></div><div class="line">// 16</div><div class="line">if (foo is Bar bar &amp;&amp; bar.Size &gt; 0)</div><div class="line">	...</div><div class="line">Console.WriteLine (bar.Name); // bar still in scope</div><div class="line"></div><div class="line">// 17</div><div class="line">Subclass sub = new Subclass();</div><div class="line">sub.Foo(); // Foo from subclass</div><div class="line">Superclass superClass = sub;</div><div class="line">superClass.Foo(); // Foo from super class</div><div class="line"></div><div class="line">// 19</div><div class="line">interface ICanFly &#123;</div><div class="line">	void FlyAndCry();</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Bird : ICanFly &#123;</div><div class="line">	public virtual void FlyAndCry() &#123; WriteLine(&quot;Bird&apos;s cry&quot;); &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Falcon : Bird &#123;</div><div class="line">	public sealed override void FlyAndCry() &#123; WriteLine(&quot;Falcon !!!&quot;); &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class SonOfFalcon : Falcon &#123;</div><div class="line">	// compile error because of sealed attribute in Falcon::FlyAndCry</div><div class="line">	public override void FlyAndCry() &#123; WriteLine(&quot;Son of Falcon&quot;); &#125; </div><div class="line">&#125;</div><div class="line"></div><div class="line">Falcon f = new Falcon();</div><div class="line">f.FlyAndCry(); // Falcon !!!</div><div class="line">(f as Bird).FlyAndCry(); // Falcon !!!</div><div class="line">(f as ICanFly).FlyAndCry(); // Falcon !!!</div><div class="line"></div><div class="line">// 20</div><div class="line">interface ICanFly &#123;</div><div class="line">	void FlyAndCry();</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Bird : ICanFly &#123;</div><div class="line">	// virtual doesn&apos;t matter in this case</div><div class="line">	// but if omitted, it acts like sealed and override is NOT allowed in subclass</div><div class="line">	public virtual void FlyAndCry() &#123; WriteLine(&quot;Bird&apos;s cry&quot;); &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Falcon : Bird &#123;</div><div class="line">	// compiler warning if new is omitted</div><div class="line">	public new void FlyAndCry() &#123; WriteLine(&quot;Falcon !!!&quot;); &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Falcon f = new Falcon();</div><div class="line">f.FlyAndCry(); // Falcon !!!</div><div class="line">(f as Bird).FlyAndCry(); // Bird&apos;s cry</div><div class="line">(f as ICanFly).FlyAndCry(); // Bird&apos;s cry</div><div class="line"></div><div class="line">// 21</div><div class="line">interface ICanFly &#123;</div><div class="line">	void FlyAndCry();</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Bird : ICanFly &#123;</div><div class="line">	public void FlyAndCry() &#123; WriteLine(&quot;Bird&apos;s cry&quot;); &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Falcon : Bird, ICanFly &#123; // the interface also needs to be delcared explicitly</div><div class="line">	// attributes like public, new or override not allowed for explicit implement</div><div class="line">	void ICanFly.FlyAndCry() &#123; WriteLine(&quot;Falcon !!!&quot;); &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Falcon f = new Falcon();</div><div class="line">f.FlyAndCry(); // Bird&apos;s cry</div><div class="line">(f as Bird).FlyAndCry(); // Bird&apos;s cry</div><div class="line">(f as ICanFly).FlyAndCry(); // Falcon !!!</div><div class="line"></div><div class="line">// 22</div><div class="line">class Animal &#123; &#125;</div><div class="line">class Cat : Animal &#123; &#125;</div><div class="line"></div><div class="line">interface IPopable&lt;out R&gt; &#123; R Pop(); &#125;</div><div class="line">interface IPushable&lt;in T&gt; &#123; void Push(T t);  &#125;</div><div class="line"></div><div class="line">class MyStack&lt;T&gt; : IPushable&lt;T&gt;, IPopable&lt;T&gt; &#123;</div><div class="line">	public T Pop() &#123; WriteLine(&quot;Pop &quot; + typeof(T)); return default(T); &#125;</div><div class="line">	public void Push(T t) &#123; WriteLine(&quot;Push &quot; + typeof(T)); &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">IPushable&lt;Cat&gt; stack = new MyStack&lt;Animal&gt;();</div><div class="line">stack.Push(new Cat());</div><div class="line"></div><div class="line">IPopable&lt;Animal&gt; stack2 = new MyStack&lt;Cat&gt;();</div><div class="line">WriteLine(stack2.Pop());</div><div class="line"></div><div class="line">// 25</div><div class="line">public class PriceChangedEventArgs : EventArgs &#123;</div><div class="line">	public readonly decimal OldPrice;</div><div class="line">	public readonly decimal NewPrice;</div><div class="line">	public PriceChangedEventArgs(decimal oldValue, decimal newValue) &#123;</div><div class="line">		OldPrice = oldValue;</div><div class="line">		NewPrice = newValue;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class Stock &#123;</div><div class="line">	decimal price;</div><div class="line">	public event EventHandler&lt;PriceChangedEventArgs&gt; PriceChagned;</div><div class="line"></div><div class="line">	// Note null-conditional operator, which is thread-safe.</div><div class="line">	protected virtual void OnPriceChanged(PriceChangedEventArgs e) &#123; PriceChagned?.Invoke(this, e); &#125;</div><div class="line"></div><div class="line">	public decimal Price &#123;</div><div class="line">		get &#123; return price; &#125;</div><div class="line">		set &#123;</div><div class="line">			if (price == value) return;</div><div class="line">			decimal oldValue = price;</div><div class="line">			price = value;</div><div class="line">			OnPriceChanged(new PriceChangedEventArgs(oldValue, price));</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Stock stock = new Stock();</div><div class="line">stock.Price = 20m;</div><div class="line">// Note local method is better than the following EventHandler, in that putting name into lambda type makes code more readable</div><div class="line">// EventHandler&lt;PriceChangedEventArgs&gt; printPrice = (o, e) =&gt; WriteLine($&quot;old price = &#123;e.OldPrice&#125;, new price = &#123;e.NewPrice&#125;&quot;); </div><div class="line">void printPrice(object o, PriceChangedEventArgs e) =&gt; WriteLine($&quot;old price = &#123;e.OldPrice&#125;, new price = &#123;e.NewPrice&#125;&quot;);</div><div class="line">stock.PriceChagned += printPrice;</div><div class="line">stock.Price = 25m; // printPrice works</div><div class="line">stock.Price = 30m; // printPrice works</div><div class="line">stock.PriceChagned -= printPrice;</div><div class="line">stock.Price = 10m; // printPrice doesn&apos;t work anymore</div><div class="line"></div><div class="line">// 26</div><div class="line">Action[] actions = new Action[3];</div><div class="line">for (int i = 0; i &lt; 3; i++)</div><div class="line">	actions[i] = () =&gt; Write(i);</div><div class="line">foreach (var a in actions) a(); </div><div class="line">// 333 because i is captured as variable outside the loop, which means the same variable captured in each iteration. </div><div class="line"></div><div class="line">int i = 0;</div><div class="line">foreach (char c in &quot;abc&quot;)</div><div class="line">	actions[i++] = () =&gt; WriteLine(c);</div><div class="line">foreach (var a in actions) a();</div><div class="line">// abc instead of ccc because since C# 5, variable declared in foreach is captured as separate variables.</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/my-blog/2017/12/16/mind-map-fpinjava/" rel="next" title="Functional Programming in Java">
+                <i class="fa fa-chevron-left"></i> Functional Programming in Java
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/my-blog/2017/12/24/safe-property-accessor/" rel="prev" title="Safer Property Accessor">
+                Safer Property Accessor <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80"
+               alt="Yuping Wang" />
+          <p class="site-author-name" itemprop="name">Yuping Wang</p>
+           
+              <p class="site-description motion-element" itemprop="description">85608565</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/my-blog/archives">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/my-blog/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/my-blog/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sevenbamboos" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/sevenbamboos" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sections"><span class="nav-number">1.</span> <span class="nav-text">Sections</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#language-basic"><span class="nav-number">2.</span> <span class="nav-text">language basic</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuping Wang</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/my-blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/my-blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/my-blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

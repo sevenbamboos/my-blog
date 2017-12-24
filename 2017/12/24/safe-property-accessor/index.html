@@ -1,0 +1,738 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/my-blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/my-blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/my-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Clean Code," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/my-blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="What is the problemSuppose we have models like this:1234567891011121314151617class Student &amp;#123;  private Teacher teacher;  public Teacher getTeacher() &amp;#123; return teacher; &amp;#125;  public void set">
+<meta name="keywords" content="Clean Code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Safer Property Accessor">
+<meta property="og:url" content="https://sevenbamboos.github.com/2017/12/24/safe-property-accessor/index.html">
+<meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
+<meta property="og:description" content="What is the problemSuppose we have models like this:1234567891011121314151617class Student &amp;#123;  private Teacher teacher;  public Teacher getTeacher() &amp;#123; return teacher; &amp;#125;  public void set">
+<meta property="og:image" content="https://sevenbamboos.github.com/2017/12/24/safe-property-accessor/safe-property-accessor/property_accessor.png">
+<meta property="og:updated_time" content="2017-12-24T12:04:38.160Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Safer Property Accessor">
+<meta name="twitter:description" content="What is the problemSuppose we have models like this:1234567891011121314151617class Student &amp;#123;  private Teacher teacher;  public Teacher getTeacher() &amp;#123; return teacher; &amp;#125;  public void set">
+<meta name="twitter:image" content="https://sevenbamboos.github.com/2017/12/24/safe-property-accessor/safe-property-accessor/property_accessor.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/my-blog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sevenbamboos.github.com/2017/12/24/safe-property-accessor/"/>
+
+
+
+
+
+  <title> Safer Property Accessor | Sam's Chest of Drawers </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/my-blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sam's Chest of Drawers</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thinking about Programming and Lifestyle</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/my-blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/my-blog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/my-blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/my-blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/12/24/safe-property-accessor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Safer Property Accessor
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-24T09:28:22+08:00">
+                12-24-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h1 id="What-is-the-problem"><a href="#What-is-the-problem" class="headerlink" title="What is the problem"></a>What is the problem</h1><p>Suppose we have models like this:<br><img src="safe-property-accessor/property_accessor.png" alt="img"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">class Student &#123;</div><div class="line">  private Teacher teacher;</div><div class="line">  public Teacher getTeacher() &#123; return teacher; &#125;</div><div class="line">  public void setTeacher(Teacher teacher) &#123; this.teacher = teacher; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Teacher &#123;</div><div class="line">  private Email email;</div><div class="line">  public Email getEmail() &#123; return email; &#125;</div><div class="line">  public void setEmail(Email email) &#123; this.email = email; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Email &#123;</div><div class="line">  private String address;</div><div class="line">  public String getAddress() &#123; return address; &#125;</div><div class="line">  public void setAddress(String address) &#123; this.address = address; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>(Not domain model actually, just poor data container. I’ll come back to this topic later.)</p>
+<p>Now given a student instance, I need to do some change to the teacher’s email. How can I do? Firstly I need a way to retrieve the mail address.</p>
+<a id="more"></a>
+<h1 id="First-try"><a href="#First-try" class="headerlink" title="First try"></a>First try</h1><p>The first approach is like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String teacherEmailWithEarlyBreak(Student student) &#123;</div><div class="line">  if (student == null) return null;</div><div class="line">  if (student.getTeacher() == null) return null;</div><div class="line">  if (student.getTeacher().getEmail( == null) return null;</div><div class="line">  return student.getTeacher().getEmail().getAddress();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>I’m an experienced and careful programmer and I know all the traps about NullPointerException (NPE). I prepared a couple of null checks at the beginning of the retriever method. I’m not happy that I have to type <code>student.getTeacher().getEmail()</code> twice and <code>student.getTeacher()</code> three times because I’m so lazy a person. I’m also not comfortable with so many early breaks inside a method, which is hard to maintain in comparison with expression-oriented style. So I tried a different way.</p>
+<h1 id="Second-try"><a href="#Second-try" class="headerlink" title="Second try"></a>Second try</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">String teacherEmailWithIf(Student student) &#123;</div><div class="line">  if (student != null</div><div class="line">      &amp;&amp; student.getTeacher() != null</div><div class="line">      &amp;&amp; student.getTeacher().getEmail() != null) &#123;</div><div class="line">      return student.getTeacher().getEmail().getAddress();</div><div class="line">  &#125; else &#123;</div><div class="line">      return null;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>I can even use ternary operator but it looks messy with those null checkings. Now I understand what the problem is. It’s null checking which is tedious to write, easy to forget and hard to make it right. But I really need them, do I?</p>
+<h1 id="Other-thoughts"><a href="#Other-thoughts" class="headerlink" title="Other thoughts"></a>Other thoughts</h1><p>I saw IOS programmers advocate the guard clause in Swift:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">teacherEmailWithGuard(student: Student?): String &#123;</div><div class="line">  guard let student = student where student != nil, </div><div class="line">        let teacher = student.getTeacher() where teacher != nil,</div><div class="line">        let email = teacher.getEmail() where email != nil</div><div class="line">        else &#123;</div><div class="line">          return nil</div><div class="line">        &#125;</div><div class="line"></div><div class="line">  return email;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Correct me if I’m wrong with the syntax. It’s been ages since I wrote Swift code. Basically, the code is still messy. I happen to know one thing called null-conditional operator, which is available in modern languages. For example in C#:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">string TeacherEmailWithNullOperator(Student student) &#123;</div><div class="line">  return student?.Teacher?.Email; // won&apos;t compile</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>It looks wonderful but actually C# doesn’t support the null operator for reference null. Anyway, I think it is the right direction I’m looking for. Let me write down the ideal application code (in Java).</p>
+<h1 id="The-right-direction"><a href="#The-right-direction" class="headerlink" title="The right direction"></a>The right direction</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">String oldMail = &quot;icanfly@qq.com&quot;;</div><div class="line"></div><div class="line">Email aEmail = new Email();</div><div class="line">aEmail.setAddress(oldMail); // 1</div><div class="line"></div><div class="line">Teacher aTeacher = new Teacher();</div><div class="line">aTeacher.setEmail(aEmail); // 2</div><div class="line"></div><div class="line">Student aStudent = new Student();</div><div class="line">aStudent.setTeacher(aTeacher); // 3</div><div class="line"></div><div class="line">get(student,</div><div class="line">  Student::getTeacher,</div><div class="line">  Teacher::getEmail,</div><div class="line">  Email::getAddress)</div><div class="line">  .map(mail -&gt; mail.replaceFirst(&quot;qq.com&quot;, &quot;163.com&quot;))</div><div class="line">  .ifPresent(System.out::println); // icanfly@163.com</div></pre></td></tr></table></figure>
+<p>Note that if I comment out any of the lines of 1, 2 or 3, I won’t get NPE but an empty print instead. So how can I create the get function so that it can access properties in any level from a root object in a NPE-free style?</p>
+<h1 id="Property-accessor"><a href="#Property-accessor" class="headerlink" title="Property accessor"></a>Property accessor</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public static &lt;R,T1&gt; Optional&lt;R&gt; get(T1 root, Function&lt;T1,R&gt; prop1) &#123;</div><div class="line">  return root == null</div><div class="line">    ? Optional.empty()</div><div class="line">    : Optional.ofNullable(prop1.apply(root));</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static &lt;R,T1,T2&gt; Optional&lt;R&gt; get(T1 root, Function&lt;T1,T2&gt; prop1, Function&lt;T2,R&gt; prop2) &#123;</div><div class="line">  return get(root, prop1).map(t -&gt; prop2.apply(t));</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static &lt;R,T1,T2,T3&gt; Optional&lt;R&gt; get(T1 root, Function&lt;T1,T2&gt; prop1, Function&lt;T2,T3&gt; prop2, Function&lt;T3,R&gt; prop3) &#123;</div><div class="line">  return get(root, prop1, prop2).map(t -&gt; prop3.apply(t));</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static &lt;R,T1,T2,T3,T4&gt; Optional&lt;R&gt; get(T1 root, Function&lt;T1,T2&gt; prop1, Function&lt;T2,T3&gt; prop2, Function&lt;T3,T4&gt; prop3, Function&lt;T4,R&gt; prop4) &#123;</div><div class="line">  return get(root, prop1, prop2, prop3).map(t -&gt; prop4.apply(t));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Note: </p>
+<ol>
+<li>continue with more get functions until T16 is sufficient in most scenarios.</li>
+<li>it’s strong-typed so that compiler is able to find the problem if a property accessor is incompatible with its previous or its successor.</li>
+</ol>
+<p>That’s it.<br>以上.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/my-blog/tags/Clean-Code/" rel="tag"># Clean Code</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/my-blog/2017/12/17/mind-map-csharp/" rel="next" title="C# For Java Programmer">
+                <i class="fa fa-chevron-left"></i> C# For Java Programmer
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80"
+               alt="Yuping Wang" />
+          <p class="site-author-name" itemprop="name">Yuping Wang</p>
+           
+              <p class="site-description motion-element" itemprop="description">85608565</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/my-blog/archives">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/my-blog/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/my-blog/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sevenbamboos" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/sevenbamboos" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-the-problem"><span class="nav-number">1.</span> <span class="nav-text">What is the problem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#First-try"><span class="nav-number">2.</span> <span class="nav-text">First try</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Second-try"><span class="nav-number">3.</span> <span class="nav-text">Second try</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other-thoughts"><span class="nav-number">4.</span> <span class="nav-text">Other thoughts</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-right-direction"><span class="nav-number">5.</span> <span class="nav-text">The right direction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Property-accessor"><span class="nav-number">6.</span> <span class="nav-text">Property accessor</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuping Wang</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/my-blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/my-blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/my-blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
