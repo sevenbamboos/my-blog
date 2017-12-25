@@ -257,6 +257,158 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/12/25/data-provider-with-currying/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2017/12/25/data-provider-with-currying/" itemprop="url">
+                  Data Provider with Currying
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-25T11:28:22+08:00">
+                12-25-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="What-is-the-problem"><a href="#What-is-the-problem" class="headerlink" title="What is the problem"></a>What is the problem</h1><p>Suppose we have a Person model like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">	private ID id;</div><div class="line">	private PersonName name;</div><div class="line">	private BirthDate dateOfBirth;</div><div class="line">	private TransactionalDate lastModified;</div><div class="line">	private List&lt;Contact&gt; contacts;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Something additional about the way of modeling. I could create the same Person in this way:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">	private long id;</div><div class="line">	private String name;</div><div class="line">	private Date dateOfBirth;</div><div class="line">	private Date lastModified;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>The benefit of using ID, PersonName and BirthDate instead of long, String and Date respectively is that:</p>
+<ol>
+<li>These basic types could be very likely reused in other models. Having a separate definition gives them a place to hold their own business logic other than the generic type shipped with language library. For example, ID is a numeric long greater than zero (due to the fact of incremental primary key in database). ID could have a property ‘Empty’ to indicate the data has not been persisted yet, which is better than using expression <code>if (id &gt; 0)</code> that leaks too much technical details. And for BirthDate, we can apply a constraint on it due to the limit of human being’s age; while for TransactionalDate, it could have a default value as the current date, which represents the timing of a business transaction.</li>
+<li>Less possibility of using a wrong field because most fields have a different type so that compiler can easily detect such error. That’s where the misleading practice, ‘Don’t use the same type for different fields when modeling a business object’, comes from.</li>
+</ol>
+<p>And in application code we need to send person data to an external service like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">externalService.consumePerson(long personID, String name, Date birthDate, ...);</div><div class="line">externalService.consumePersonAndContact(long personID, String name, List&lt;ContactInfo&gt; contacts, ...);</div></pre></td></tr></table></figure></p>
+<p>Note external service has a slightly different understanding of person data. What’s more, different services ask for different data. How to do this with clean code? </p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/my-blog/2017/12/25/data-provider-with-currying/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/12/24/safe-property-accessor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -355,8 +507,7 @@
 
       
         
-          <hr>
-<h1 id="What-is-the-problem"><a href="#What-is-the-problem" class="headerlink" title="What is the problem"></a>What is the problem</h1><p>Suppose we have models like this:<br><img src="property_accessor.png" alt="img"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">class Student &#123;</div><div class="line">  private Teacher teacher;</div><div class="line">  public Teacher getTeacher() &#123; return teacher; &#125;</div><div class="line">  public void setTeacher(Teacher teacher) &#123; this.teacher = teacher; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Teacher &#123;</div><div class="line">  private Email email;</div><div class="line">  public Email getEmail() &#123; return email; &#125;</div><div class="line">  public void setEmail(Email email) &#123; this.email = email; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Email &#123;</div><div class="line">  private String address;</div><div class="line">  public String getAddress() &#123; return address; &#125;</div><div class="line">  public void setAddress(String address) &#123; this.address = address; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+          <h1 id="What-is-the-problem"><a href="#What-is-the-problem" class="headerlink" title="What is the problem"></a>What is the problem</h1><p>Suppose we have models like this:<br><img src="property_accessor.png" alt="img"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">class Student &#123;</div><div class="line">  private Teacher teacher;</div><div class="line">  public Teacher getTeacher() &#123; return teacher; &#125;</div><div class="line">  public void setTeacher(Teacher teacher) &#123; this.teacher = teacher; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Teacher &#123;</div><div class="line">  private Email email;</div><div class="line">  public Email getEmail() &#123; return email; &#125;</div><div class="line">  public void setEmail(Email email) &#123; this.email = email; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Email &#123;</div><div class="line">  private String address;</div><div class="line">  public String getAddress() &#123; return address; &#125;</div><div class="line">  public void setAddress(String address) &#123; this.address = address; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>(Not domain model actually, just poor data container. I’ll come back to this topic later.)</p>
 <p>Now given a student instance, I need to do some change to the teacher’s email. How can I do? Firstly I need a way to retrieve the mail address.</p>
           <!--noindex-->
@@ -1928,151 +2079,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/09/17/promise-and-future/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yuping Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sam's Chest of Drawers">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/my-blog/2017/09/17/promise-and-future/" itemprop="url">
-                  Promise and Future
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-17T11:09:56+08:00">
-                09-17-2017
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
-                    <span itemprop="name">Programming</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="What-is-Future"><a href="#What-is-Future" class="headerlink" title="What is Future"></a>What is Future</h1><p>Future is a place to hold a value (that may not be available yet). Future has two parts: asynchronized computation (a block provided by application) and the computation result.</p>
-<h2 id="Future’s-computation"><a href="#Future’s-computation" class="headerlink" title="Future’s computation"></a>Future’s computation</h2><p>In language such as Scala, a block of computation is actually by-name parameter like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">val fetchPatientDetails = Future&#123;</div><div class="line">  val session = getSession(credential)</div><div class="line">  session.getPatientInfo(id)</div><div class="line">&#125; // it&apos;s Future&lt;PatientInfo&gt;</div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/my-blog/2017/09/17/promise-and-future/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2122,7 +2128,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/my-blog/archives">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
