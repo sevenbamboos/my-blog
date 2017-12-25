@@ -94,7 +94,7 @@
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/12/25/data-provider-with-currying/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
 <meta property="og:description" content="What is the problemSuppose we have a Person model like this:12345678class Person &amp;#123;	private ID id;	private PersonName name;	private BirthDate dateOfBirth;	private TransactionalDate lastModified;	p">
-<meta property="og:updated_time" content="2017-12-25T07:28:06.502Z">
+<meta property="og:updated_time" content="2017-12-25T07:29:19.295Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Data Provider with Currying">
 <meta name="twitter:description" content="What is the problemSuppose we have a Person model like this:12345678class Person &amp;#123;	private ID id;	private PersonName name;	private BirthDate dateOfBirth;	private TransactionalDate lastModified;	p">
@@ -383,7 +383,7 @@
 <p>First, if domain model can have part of data conversion logic like full name or birthday (not including ContactInfo because domain model has no dependency to it and doesn’t know it), then these logic can be put in bind methods and we don’t need to repeat it in every place that use it. Then it can save us some duplicated code.</p>
 <p>Second, for computational property, the currying solution provides the flexibility. For example, if external service needs person age instead of birthday, then Person model doesn’t need to be aware of it and just exposes birthday and let application code to compute the age (with local timezone). Someone would argue that domain model can include computational property but it doesn’t always work. The main idea is that with currying solution, application code doesn’t know too much about the internal details of domain model, just the enough information provided from the currying functions. And compared with view objects, currying functions are much lightweight. Actually, if Java compiler supports a better type interference (for example, use <code>var</code> in variable deceleration), I don’t need those currying functions because I can create them on the fly.</p>
 <p>In conclusion, introducing currying functions breaks the strong coupling between domain model and application code. </p>
-<p>That’s it.<br>以上.</p>
+<p>以上.</p>
 
       
     </div>
