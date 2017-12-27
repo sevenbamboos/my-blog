@@ -94,7 +94,7 @@
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/12/26/domain-model-in-practice/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
 <meta property="og:description" content="What is the problemSuppose we have domain models like this:12345678910111213141516class Person &amp;#123;  ID id;  PersonName name;  Gender gender;&amp;#125;class Mail &amp;#123;  Address address;  MailGroup grou">
-<meta property="og:updated_time" content="2017-12-26T00:34:45.007Z">
+<meta property="og:updated_time" content="2017-12-27T00:21:02.609Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Domain Model in Practice">
 <meta name="twitter:description" content="What is the problemSuppose we have domain models like this:12345678910111213141516class Person &amp;#123;  ID id;  PersonName name;  Gender gender;&amp;#125;class Mail &amp;#123;  Address address;  MailGroup grou">
@@ -371,7 +371,6 @@
 <h1 id="How-to-use-domain-model"><a href="#How-to-use-domain-model" class="headerlink" title="How to use domain model"></a>How to use domain model</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Supplier&lt;List&lt;Person&gt;&gt; femaleMemberOfGroup(String groupName) &#123;</div><div class="line">  return GroupMemberObject.apply(mailRepo, personRepo, groupName);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>It doesn’t matter whether we need to cover it with unit test since there is almost no logic inside. Also note I adapt the return value from materialized list to a lazy-evaluated supplier, which can postpone the execution of the real service method until the  moment when it’s used by application code. A potential advantage is I can add cache support (memorize computational result, maybe as the next topic) or even I can find a way to group multiple callings into one for better performance.</p>
 <p>To sum up, domain model is everywhere. It’s invisible to the eyes only with CRUD and get/set.</p>
-<p>以上.</p>
 
       
     </div>
@@ -417,6 +416,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/my-blog/2017/12/27/memorizer/" rel="prev" title="Memorizer">
+                Memorizer <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -488,7 +491,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/my-blog/archives">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

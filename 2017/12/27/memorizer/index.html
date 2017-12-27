@@ -71,7 +71,7 @@
 <link href="/my-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Angular,Zone," />
+  <meta name="keywords" content="Clean Code," />
 
 
 
@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="The Timing of CDDuring asynchronous events:    Events (button click…)    XHR requests    setTimeout How CD WorksTrigger from  and flow one-way down the component tree">
-<meta name="keywords" content="Angular,Zone">
+<meta name="description" content="What is the problemContinue with the last topic about domain model, there is a performance problem. See the code: 123456789101112131415161718public Supplier&amp;lt;List&amp;lt;Person&amp;gt;&amp;gt; femaleMembers() &amp;">
+<meta name="keywords" content="Clean Code">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Change Detection in Angular">
-<meta property="og:url" content="https://sevenbamboos.github.com/2017/04/20/Change-Detection-in-Angular/index.html">
+<meta property="og:title" content="Memorizer">
+<meta property="og:url" content="https://sevenbamboos.github.com/2017/12/27/memorizer/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
-<meta property="og:description" content="The Timing of CDDuring asynchronous events:    Events (button click…)    XHR requests    setTimeout How CD WorksTrigger from  and flow one-way down the component tree">
-<meta property="og:updated_time" content="2017-04-20T11:18:00.000Z">
+<meta property="og:description" content="What is the problemContinue with the last topic about domain model, there is a performance problem. See the code: 123456789101112131415161718public Supplier&amp;lt;List&amp;lt;Person&amp;gt;&amp;gt; femaleMembers() &amp;">
+<meta property="og:updated_time" content="2017-12-27T00:20:47.705Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Change Detection in Angular">
-<meta name="twitter:description" content="The Timing of CDDuring asynchronous events:    Events (button click…)    XHR requests    setTimeout How CD WorksTrigger from  and flow one-way down the component tree">
+<meta name="twitter:title" content="Memorizer">
+<meta name="twitter:description" content="What is the problemContinue with the last topic about domain model, there is a performance problem. See the code: 123456789101112131415161718public Supplier&amp;lt;List&amp;lt;Person&amp;gt;&amp;gt; femaleMembers() &amp;">
 
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="https://sevenbamboos.github.com/2017/04/20/Change-Detection-in-Angular/"/>
+  <link rel="canonical" href="https://sevenbamboos.github.com/2017/12/27/memorizer/"/>
 
 
 
 
 
-  <title> Change Detection in Angular | Sam's Chest of Drawers </title>
+  <title> Memorizer | Sam's Chest of Drawers </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -260,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/04/20/Change-Detection-in-Angular/">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/12/27/memorizer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yuping Wang">
@@ -281,7 +281,7 @@
             
             
               
-                Change Detection in Angular
+                Memorizer
               
             
           </h1>
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-20T19:13:35+08:00">
-                04-20-2017
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-27T16:44:00+08:00">
+                12-27-2017
               </time>
             
 
@@ -354,15 +354,16 @@
       
 
       
-        <h1 id="The-Timing-of-CD"><a href="#The-Timing-of-CD" class="headerlink" title="The Timing of CD"></a>The Timing of CD</h1><p>During asynchronous events:<br>    Events (button click…)<br>    XHR requests<br>    setTimeout</p>
-<h1 id="How-CD-Works"><a href="#How-CD-Works" class="headerlink" title="How CD Works"></a>How CD Works</h1><p>Trigger from <app-root> and flow one-way down the component tree</app-root></p>
+        <h1 id="What-is-the-problem"><a href="#What-is-the-problem" class="headerlink" title="What is the problem"></a>What is the problem</h1><p>Continue with the last topic about domain model, there is a performance problem. See the code:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public Supplier&lt;List&lt;Person&gt;&gt; femaleMembers() &#123;</div><div class="line"></div><div class="line">  return () -&gt; &#123;</div><div class="line"></div><div class="line">    List&lt;ID&gt; idOfAdmins = loadGroup.apply(groupName).admin.stream()</div><div class="line">      .map(admin -&gt; admin.id);</div><div class="line"></div><div class="line">    Predicate&lt;ID&gt; isAdmin = id -&gt; </div><div class="line">      idOfAdmins.stream().anyMatch(adminId -&gt; adminId != id); </div><div class="line"></div><div class="line">    List&lt;ID&gt; idOfOwners = getMails.apply(groupName).stream()</div><div class="line">      .map(mail -&gt; mail.idOfOwner.orElse(null))</div><div class="line">      .filter(id -&gt; isAdmin.andThen(ID::isNotEmpty).test(id)));</div><div class="line">  </div><div class="line">    return getPersons.apply(idOfOwners).stream()</div><div class="line">      .filter(person -&gt; person.gender == FEMALE); </div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Given the same groupName, if femaleMembers is invoked by more than one place within the same transaction, it will trigger the query each time even when the result is almost identical. So how to improve the performance?</p>
 <a id="more"></a>
-<h1 id="Strategy-A-Immutable-ChangeDetectionStrategy-OnPush"><a href="#Strategy-A-Immutable-ChangeDetectionStrategy-OnPush" class="headerlink" title="Strategy A: Immutable +  ChangeDetectionStrategy.OnPush"></a>Strategy A: Immutable +  ChangeDetectionStrategy.OnPush</h1><p>CD only happens when the object reference has been changed. If template binding (e.g. methods or variable used by ngIf) won’t be updated, check whether the reference has been changed (or try to mark it as markForCheck with ChangeDetectorRef).</p>
-<h1 id="Strategy-B-Observable-ChangeDetectionStrategy-OnPush-ChangeDetectorRef"><a href="#Strategy-B-Observable-ChangeDetectionStrategy-OnPush-ChangeDetectorRef" class="headerlink" title="Strategy B: Observable + ChangeDetectionStrategy.OnPush + ChangeDetectorRef"></a>Strategy B: Observable + ChangeDetectionStrategy.OnPush + ChangeDetectorRef</h1><p>@Input is an observable<br>An inner variable is linked to the incoming value (from the stream) via subscribe().<br>In case CD isn’t triggered (because of no reference change of template binding?), use ChangeDetectorRef::markForCheck()</p>
-<h1 id="Strategy-C-Fine-tune-ChangeDetectorRef"><a href="#Strategy-C-Fine-tune-ChangeDetectorRef" class="headerlink" title="Strategy C: Fine-tune ChangeDetectorRef"></a>Strategy C: Fine-tune ChangeDetectorRef</h1><p>ChangeDetectorRef::detach() to prevent CD from happening (during large amount of data change).<br>ChangeDetectorRef::reattach() to enable CD again.</p>
-<h1 id="Nice-charts-about-how-different-JS-libraries-do-CD-from"><a href="#Nice-charts-about-how-different-JS-libraries-do-CD-from" class="headerlink" title="Nice charts about how different JS libraries do CD from"></a>Nice charts about how different JS libraries do CD from</h1><p><a href="http://teropa.info/blog/2015/03/02/change-and-its-detection-in-javascript-frameworks.html" target="_blank" rel="external">http://teropa.info/blog/2015/03/02/change-and-its-detection-in-javascript-frameworks.html</a></p>
-<h1 id="The-Underlying-Zone"><a href="#The-Underlying-Zone" class="headerlink" title="The Underlying Zone"></a>The Underlying Zone</h1><p>Zone add hooks (e.g. before, after, error) to async calls.<br>Angular has its own zone (see NgZone) to trigger CD.<br>In certain circumstances, it’s convenient to disable CD at some point and enable it after some time to have a better user experience. (see here for an example<br><a href="https://blog.thoughtram.io/angular/2017/02/21/using-zones-in-angular-for-better-performance.html" target="_blank" rel="external">https://blog.thoughtram.io/angular/2017/02/21/using-zones-in-angular-for-better-performance.html</a> )</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://dzone.com/articles/tuning-angulars-change-detection" target="_blank" rel="external">https://dzone.com/articles/tuning-angulars-change-detection</a><br><a href="https://blog.thoughtram.io/angular/2016/02/22/angular-2-change-detection-explained.html" target="_blank" rel="external">https://blog.thoughtram.io/angular/2016/02/22/angular-2-change-detection-explained.html</a></p>
+<h1 id="Memorizer-pattern"><a href="#Memorizer-pattern" class="headerlink" title="Memorizer pattern"></a>Memorizer pattern</h1><p>It’s tempted to introduce a cache (groupName -&gt; List<person>) for the domain model. But it means every time there is a requirement to memorize computational result, I need to add a dedicated cache. What about a cache with global access and management? It’s clumsy and also not test friendly. The cache should be as near as possible to the actual computation and as generic as possible to be reused for other scenarios. See the following memorizer pattern (adapted from the pattern with the same name from ‘Functional programming in Java’):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">public class Memoizer&lt;T, U&gt; &#123;</div><div class="line"></div><div class="line">	private final Map&lt;T, U&gt; cache = new ConcurrentHashMap&lt;&gt;();</div><div class="line"></div><div class="line">	private Memoizer() &#123;&#125;</div><div class="line"></div><div class="line">	public Function&lt;T, U&gt; memoize(Function&lt;T, U&gt; function) &#123;</div><div class="line">			return input -&gt; cache.computeIfAbsent(input, function::apply);</div><div class="line">	&#125;</div><div class="line">    </div><div class="line">	public Supplier&lt;U&gt; memoize(T key, Supplier&lt;U&gt; supplier) &#123;</div><div class="line">	  	return toSupplier(key, memoize(toFunc(supplier)));</div><div class="line">	&#125;</div><div class="line">	    </div><div class="line">	private Function&lt;T, U&gt; toFunc(Supplier&lt;U&gt; supplier) &#123;</div><div class="line">	   	return _ignored -&gt; supplier.get();</div><div class="line">	&#125;</div><div class="line">	    </div><div class="line">	private Supplier&lt;U&gt; toSupplier(T t, Function&lt;T, U&gt; func) &#123;</div><div class="line">		return () -&gt; func.apply(t);</div><div class="line">	&#125;    </div><div class="line">&#125;</div></pre></td></tr></table></figure></person></p>
+<p>It supports both <code>java.util.function.Function</code> and <code>java.util.function.Supplier</code>. To help test the result, I also introduce a helper counter and doMemorize has been adapted:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">private int executedCount = 0;</div><div class="line">private int count = 0;  </div><div class="line"></div><div class="line">public Function&lt;T, U&gt; memoize(Function&lt;T, U&gt; function) &#123;</div><div class="line">	return input -&gt; &#123;</div><div class="line">		++count;</div><div class="line">		return cache.computeIfAbsent(input, k -&gt; &#123;</div><div class="line">			++executedCount;</div><div class="line">			return function.apply(k);</div><div class="line">		&#125;);</div><div class="line">	&#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">   public MemoizerCounter counter() &#123;</div><div class="line">    return new MemoizerCounter() &#123;</div><div class="line">			@Override public int executed() &#123; return executedCount; &#125;</div><div class="line">			@Override public int total() &#123; return count; &#125;</div><div class="line">    &#125;;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<h1 id="How-to-use-the-pattern"><a href="#How-to-use-the-pattern" class="headerlink" title="How to use the pattern"></a>How to use the pattern</h1><p>For the above domain model, to use the memorizer pattern, first is to add a field:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private final Memoizer&lt;String, List&lt;Person&gt;&gt; memoizer = new Memoizer&lt;&gt;();</div></pre></td></tr></table></figure></p>
+<p>Note the type of memorizer indicates how the cache is organized (from group name to a list of members). And femaleMembers is adapted:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public Supplier&lt;List&lt;Person&gt;&gt; femaleMembers() &#123;</div><div class="line"></div><div class="line">  return memoizer.memoize(groupName, () -&gt; &#123;</div><div class="line"></div><div class="line">    List&lt;ID&gt; idOfAdmins = loadGroup.apply(groupName).admin.stream()</div><div class="line">      .map(admin -&gt; admin.id);</div><div class="line"></div><div class="line">    Predicate&lt;ID&gt; isAdmin = id -&gt; </div><div class="line">      idOfAdmins.stream().anyMatch(adminId -&gt; adminId != id); </div><div class="line"></div><div class="line">    List&lt;ID&gt; idOfOwners = getMails.apply(groupName).stream()</div><div class="line">      .map(mail -&gt; mail.idOfOwner.orElse(null))</div><div class="line">      .filter(id -&gt; isAdmin.andThen(ID::isNotEmpty).test(id)));</div><div class="line">  </div><div class="line">    return getPersons.apply(idOfOwners).stream()</div><div class="line">      .filter(person -&gt; person.gender == FEMALE); </div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>It’s almost the same as before, just being wrapped in memoizer’s doMemoize method. The advantage of the memorizer pattern is that different memorizer instances have no correlation and therefore no need to worry about memory leak or stale objects in cache. On the other hand, the memorizer stays close with each model and is test-friendly.</p>
 
       
     </div>
@@ -386,9 +387,7 @@
       
         <div class="post-tags">
           
-            <a href="/my-blog/tags/Angular/" rel="tag"># Angular</a>
-          
-            <a href="/my-blog/tags/Zone/" rel="tag"># Zone</a>
+            <a href="/my-blog/tags/Clean-Code/" rel="tag"># Clean Code</a>
           
         </div>
       
@@ -401,8 +400,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/my-blog/2017/04/10/Reactive-Form-in-Angular/" rel="next" title="Reactive Form in Angular">
-                <i class="fa fa-chevron-left"></i> Reactive Form in Angular
+              <a href="/my-blog/2017/12/26/domain-model-in-practice/" rel="next" title="Domain Model in Practice">
+                <i class="fa fa-chevron-left"></i> Domain Model in Practice
               </a>
             
           </div>
@@ -410,10 +409,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/my-blog/2017/05/07/swift-for-java-programer/" rel="prev" title="Swift For Java Programer 1">
-                Swift For Java Programer 1 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -558,7 +553,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Timing-of-CD"><span class="nav-number">1.</span> <span class="nav-text">The Timing of CD</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-CD-Works"><span class="nav-number">2.</span> <span class="nav-text">How CD Works</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Strategy-A-Immutable-ChangeDetectionStrategy-OnPush"><span class="nav-number">3.</span> <span class="nav-text">Strategy A: Immutable +  ChangeDetectionStrategy.OnPush</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Strategy-B-Observable-ChangeDetectionStrategy-OnPush-ChangeDetectorRef"><span class="nav-number">4.</span> <span class="nav-text">Strategy B: Observable + ChangeDetectionStrategy.OnPush + ChangeDetectorRef</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Strategy-C-Fine-tune-ChangeDetectorRef"><span class="nav-number">5.</span> <span class="nav-text">Strategy C: Fine-tune ChangeDetectorRef</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nice-charts-about-how-different-JS-libraries-do-CD-from"><span class="nav-number">6.</span> <span class="nav-text">Nice charts about how different JS libraries do CD from</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Underlying-Zone"><span class="nav-number">7.</span> <span class="nav-text">The Underlying Zone</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">8.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-the-problem"><span class="nav-number">1.</span> <span class="nav-text">What is the problem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Memorizer-pattern"><span class="nav-number">2.</span> <span class="nav-text">Memorizer pattern</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-use-the-pattern"><span class="nav-number">3.</span> <span class="nav-text">How to use the pattern</span></a></li></ol></div>
             
 
           </div>
