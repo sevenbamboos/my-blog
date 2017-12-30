@@ -1,0 +1,748 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/my-blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/my-blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/my-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Clean Code," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/my-blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="For many programmers of younger generation, career started with object-oriented programming. And modern languages provide easy ways to create objects (and destroy them after the use). As a result, pro">
+<meta name="keywords" content="Clean Code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Composition over inheritance">
+<meta property="og:url" content="https://sevenbamboos.github.com/2017/12/31/composition-inheritance/index.html">
+<meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
+<meta property="og:description" content="For many programmers of younger generation, career started with object-oriented programming. And modern languages provide easy ways to create objects (and destroy them after the use). As a result, pro">
+<meta property="og:image" content="https://sevenbamboos.github.com/2017/12/31/composition-inheritance/class_diagram.png">
+<meta property="og:updated_time" content="2017-12-30T10:49:56.429Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Composition over inheritance">
+<meta name="twitter:description" content="For many programmers of younger generation, career started with object-oriented programming. And modern languages provide easy ways to create objects (and destroy them after the use). As a result, pro">
+<meta name="twitter:image" content="https://sevenbamboos.github.com/2017/12/31/composition-inheritance/class_diagram.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/my-blog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sevenbamboos.github.com/2017/12/31/composition-inheritance/"/>
+
+
+
+
+
+  <title> Composition over inheritance | Sam's Chest of Drawers </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/my-blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sam's Chest of Drawers</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thinking about Programming and Lifestyle</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/my-blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/my-blog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/my-blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/my-blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/12/31/composition-inheritance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Composition over inheritance
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-31T13:15:33+08:00">
+                12-31-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>For many programmers of younger generation, career started with object-oriented programming. And modern languages provide easy ways to create objects (and destroy them after the use). As a result, programs are pushed to the limit to make use of encapsulation and polymorphism and therefore sometimes tend to be unnecessarily complicated and hard to maintain. Let’s use an example to illustrate when and when not to (over)use object-oriented programming. </p>
+<a id="more"></a>
+<h1 id="What’s-the-problem"><a href="#What’s-the-problem" class="headerlink" title="What’s the problem"></a>What’s the problem</h1><p>Given a legacy data which provides a strange API like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">public class LegacyData &#123;</div><div class="line"></div><div class="line">  enum Type &#123;</div><div class="line">    INT,FLOAT,TEXT;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  private int intField;</div><div class="line">  private float floatField;</div><div class="line">  private String textField;</div><div class="line"></div><div class="line"></div><div class="line">  public LegacyData setInt(int value) &#123;</div><div class="line">    return set(INT, value);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public LegacyData setFloat(float value) &#123;</div><div class="line">    return set(FLOAT, value);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public LegacyData setText(String value) &#123;</div><div class="line">    return set(TEXT, value);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  private &lt;T&gt; LegacyData set(Type type, T value) &#123;</div><div class="line">    switch (type) &#123;</div><div class="line">      case INT:</div><div class="line">      ...</div><div class="line">    &#125;</div><div class="line">    return this;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public LegacyData clear(Type type) &#123;</div><div class="line">    switch (type) &#123;</div><div class="line">      case INT:</div><div class="line">      ...</div><div class="line">    &#125;</div><div class="line">    return this;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>The requirement includes:</p>
+<blockquote>
+<p>For text contents, the length needs to be at least 5.<br>For integers and floats, number format exception needs to be captured and log.</p>
+</blockquote>
+<p>I simplify the API for clarity. There are actually dozens of types and most of them have their own validation logic.</p>
+<h1 id="Straightforward-implementation"><a href="#Straightforward-implementation" class="headerlink" title="Straightforward implementation"></a>Straightforward implementation</h1><p>Although the API looking strange, a straightforward implementation is not too hard to imagine:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">LegacyData.Type type = INT;</div><div class="line">String value = &quot;123&quot;;</div><div class="line">LegacyData data = new LegacyData();</div><div class="line"></div><div class="line">try &#123;</div><div class="line">  switch (type) &#123;</div><div class="line">    case INT:</div><div class="line">      data.setInt(Integer.parseInt(value));</div><div class="line">      break;</div><div class="line">    case FLOAT:</div><div class="line">      data.setFloat(Float.parseFloat(value));</div><div class="line">      break;</div><div class="line">    case TEXT:</div><div class="line">      data.setText(value);</div><div class="line">      break;</div><div class="line">    default:</div><div class="line">      // do nothing?</div><div class="line">    &#125;</div><div class="line">&#125; catch (Exception e) &#123;</div><div class="line">  // log ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>There are two problems with the above code:</p>
+<ol>
+<li>The long switch exposes too much details of LegacyData. </li>
+<li>The outermost try…catch can’t make difference of exception during parsing and exception during set method. What’s more, the application code with too many indents is an indication of lack of encapsulation. Abstraction is needed to simplify the application code.</li>
+</ol>
+<h1 id="An-inheritance-approach"><a href="#An-inheritance-approach" class="headerlink" title="An inheritance approach"></a>An inheritance approach</h1><p>The first thought is to encapsulate the switch. For the sake of this, I introduce an abstract class DataSetter:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">abstract class DataSetter &#123;</div><div class="line"></div><div class="line">  protected final Type type;</div><div class="line">  protected final String value;</div><div class="line"></div><div class="line">  public void checkAndApply(LegacyData data) &#123;</div><div class="line">    if (check()) &#123;</div><div class="line">      doSet(data);</div><div class="line">    &#125; else &#123;</div><div class="line">      // log</div><div class="line">      doClear(data);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  protected boolean check() &#123; return true; &#125;</div><div class="line"></div><div class="line">  protected void doSet(LegacyData data) &#123; data.setText(value); &#125;</div><div class="line"></div><div class="line">  protected void doClear(LegacyData data) &#123; data.clear(type); &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>For each case of switch, I need a subclass of DataSetter:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">class TextSetter extends DataSetter &#123;</div><div class="line">  boolean check() &#123; return value.length() &gt; 0; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">abstract class ParseAndSetter&lt;T&gt; extends DataSetter &#123;</div><div class="line">  protected T parsedValue;</div><div class="line"></div><div class="line">  boolean check() &#123;</div><div class="line">    try &#123;</div><div class="line">      parsedValue = parseMethod(); return true;</div><div class="line">    &#125; catch (Exception e) &#123; return false; &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  protected abstract T parseMethod();</div><div class="line">&#125;</div><div class="line"></div><div class="line">class IntSetter extends ParseAndSetter&lt;Integer&gt; &#123;</div><div class="line">  @Override protected Integer parseMethod() &#123;</div><div class="line">    return Integer.parseInt(value);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Override protected void doSet(LegacyData data) &#123;</div><div class="line">    data.setInt(parsedValue);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class FloatSetter extends ParseAndSetter&lt;Float&gt; &#123;</div><div class="line">  @Override protected Float parseMethod() &#123;</div><div class="line">    return Float.parseFloat(value);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Override protected void doSet(LegacyData data) &#123;</div><div class="line">    data.setFloat(parsedValue);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Note to reuse the similar logic of numeric value, <code>abstract class ParseAndSetter&lt;T&gt;</code> is introduced as the super-class of IntSetter and FloatSetter. This additional abstraction encourages code re-use and at the same time adds complex by adding its own abstract method. Programmers other than author may fell confused without the help of documentation.</p>
+<p>Anyway, given the inheritance hierarchy, DataSetter can have factory method to wrap the switch clause:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public static DataSetter of(Type type, String value) &#123;</div><div class="line">  switch (type) &#123;</div><div class="line">    case INT:</div><div class="line">      return new IntSetter(value);</div><div class="line">    case FLOAT:</div><div class="line">      return new FloatSetter(value);</div><div class="line">    case TEXT:</div><div class="line">      return new TextSetter(value);</div><div class="line">    default:</div><div class="line">      throw new IllegalArgumentException(&quot;Unknown type:&quot; + type);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>The application code looks much cleaner when using DataSetter to set value to LegacyData:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DataSetter.of(type, value).checkAndApply(data);</div></pre></td></tr></table></figure></p>
+<p>The result looks OK but I’m not comfortable with the inheritance hierarchy. It’s a bit complicated for such a task. What’s more, more requirements came after I finished this version.</p>
+<blockquote>
+<p>Text contents need to exclude invalid characters…and more and more validation for other types.</p>
+</blockquote>
+<p>Either I need to extend the current subclasses and may need to add more to satisfy new requirement. Is it necessary to define check and set methods in super-class and let subclasses to extend them? Or is there a better approach to tackle this?</p>
+<h1 id="A-composition-approach"><a href="#A-composition-approach" class="headerlink" title="A composition approach"></a>A composition approach</h1><p>I chose this approach to refactor the code because each subclass behaves the same. The difference lies in the check and set methods. Composition should provide a clearer and more flexible solution to this situation.</p>
+<p>First, I need an abstraction of check method, which does check on input and keeps the result for later use. The result is empty if the check fails. That’s the reason to use Optional<t> instead of a simple boolean.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">interface Checker&lt;T&gt; extends Function&lt;String, Optional&lt;T&gt;&gt; &#123;</div><div class="line"></div><div class="line">  default &lt;T2&gt; Checker&lt;T2&gt; and(Checker&lt;T2&gt; chk) &#123;</div><div class="line">    return str -&gt; apply(str)</div><div class="line">        .map(_ignored -&gt; chk.apply(str))</div><div class="line">        .orElse(Optional.empty());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  static Checker&lt;String&gt; len(int min) &#123;</div><div class="line">    return str -&gt; str.length() &gt;= min</div><div class="line">        ? Optional.of(str)</div><div class="line">        : Optional.empty();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  static Checker&lt;String&gt; invalid(int... chars) &#123;</div><div class="line">    return str -&gt; str.chars().allMatch(s -&gt; Arrays.stream(chars).allMatch(c -&gt; s != c))</div><div class="line">        ? Optional.of(str)</div><div class="line">        : Optional.empty();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  static Checker&lt;Integer&gt; isInt() &#123;</div><div class="line">    return str -&gt; &#123;</div><div class="line">        try &#123;</div><div class="line">          return Optional.of(Integer.parseInt(str));</div><div class="line">        &#125; catch (NumberFormatException e) &#123;</div><div class="line">          return Optional.empty();</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  static Checker&lt;Float&gt; isFloat() &#123;</div><div class="line">    return str -&gt; &#123;</div><div class="line">        try &#123;</div><div class="line">          return Optional.of(Float.parseFloat(str));</div><div class="line">        &#125; catch (NumberFormatException e) &#123;</div><div class="line">          return Optional.empty();</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></t></p>
+<p>Note the and method is to help one Checker to compose with other Checkers to build up a more sophisticated check method, which is the real power of composition. Similarly, set method can be represented as:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">interface Setter&lt;T&gt; extends Function&lt;LegacyData,Function&lt;T,LegacyData&gt;&gt; &#123;</div><div class="line">  static Setter&lt;String&gt; setText() &#123;</div><div class="line">    return data -&gt; value -&gt; data.setText(value);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  static Setter&lt;Integer&gt; setInt() &#123;</div><div class="line">    return data -&gt; value -&gt; data.setInt(value);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  static Setter&lt;Float&gt; setFloat() &#123;</div><div class="line">    return data -&gt; value -&gt; data.setFloat(value);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>The static methods in the above two inferfaces are for the different validation and hiding the communication of legacy API. More requirement can be fulfilled by adding more static methods, which conforms to open-close principle. The new data setter is:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">public class DataSetter&lt;TParsed&gt; &#123;</div><div class="line">  private final Type type;</div><div class="line">  private final String value;</div><div class="line">  private final Checker&lt;TParsed&gt; checker;</div><div class="line">  private final Setter&lt;TParsed&gt; setter;</div><div class="line"></div><div class="line">  public void checkAndApply(LegacyData data) &#123;</div><div class="line">    checker.apply(value)</div><div class="line">        .map(parsed -&gt; setter.apply(data).apply(parsed))</div><div class="line">        .orElseGet(() -&gt; &#123;</div><div class="line">            // log</div><div class="line">            return data.clear(type);</div><div class="line">        &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public static DataSetter of(Type type, String value) &#123;</div><div class="line">    switch (type) &#123;</div><div class="line">      case INT:</div><div class="line">        return new NewDataSetter&lt;&gt;(type, value, isInt(), setInt());</div><div class="line">      case FLOAT:</div><div class="line">        return new NewDataSetter&lt;&gt;(type, value, isFloat(), setFloat());</div><div class="line">      case TEXT:</div><div class="line">        return new NewDataSetter&lt;&gt;(type, value, len(5).and(invalid(&apos;a&apos;, &apos;e&apos;, &apos;i&apos;, &apos;o&apos;, &apos;u&apos;)), setText());</div><div class="line">      default:</div><div class="line">        throw new IllegalArgumentException(&quot;Unknown type:&quot; + type);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>It looks much easier in comparison with the previous version, without the necessary of inheritance. It’s a huge improvement in the long term of maintenance. The application code is exactly same so I won’t repeat it.</p>
+<p>So is it a typical example that composition is over inheritance? In my view, it is because I believe every abstraction is leaky to some extents. The more abstraction (e.g. super-class and subclass) we introduce, the less flexible and complicated the program is. The composition approach, however, provides a flat hierarchy with only one base class and gives the same output in application code. That’s the reason I prefer composition to inheritance in this case. Life is so short not to create too many objects (classes) to waste the time.</p>
+<p>See the full class diagram for details:<br><img src="class_diagram.png" alt="img"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/my-blog/tags/Clean-Code/" rel="tag"># Clean Code</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/my-blog/2017/12/30/asp.net/" rel="next" title="ASP.NET For JavaEE Programmer">
+                <i class="fa fa-chevron-left"></i> ASP.NET For JavaEE Programmer
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80"
+               alt="Yuping Wang" />
+          <p class="site-author-name" itemprop="name">Yuping Wang</p>
+           
+              <p class="site-description motion-element" itemprop="description">85608565</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/my-blog/archives">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/my-blog/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/my-blog/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sevenbamboos" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/sevenbamboos" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What’s-the-problem"><span class="nav-number">1.</span> <span class="nav-text">What’s the problem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Straightforward-implementation"><span class="nav-number">2.</span> <span class="nav-text">Straightforward implementation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#An-inheritance-approach"><span class="nav-number">3.</span> <span class="nav-text">An inheritance approach</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#A-composition-approach"><span class="nav-number">4.</span> <span class="nav-text">A composition approach</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuping Wang</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/my-blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/my-blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/my-blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
