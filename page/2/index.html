@@ -257,6 +257,261 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/11/10/mind-map-java/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2017/11/10/mind-map-java/" itemprop="url">
+                  Java Basic
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-10T15:38:14+08:00">
+                11-10-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01.Classloader</td>
+<td>Three classloaders: Bootstrap(rt.jar), extension and application(classpath).</td>
+</tr>
+<tr>
+<td>02.OOPS principles</td>
+<td>Abstraction with encapsulation, (type system supports) inheritance and thus polymorphism.</td>
+</tr>
+<tr>
+<td>03.Object oriented VS object based</td>
+<td>ES5 as object based language, provides abstraction and encapsulation, but no native support of inheritance and polymorphism</td>
+</tr>
+<tr>
+<td>04.What happen if multiple interfaces have the same default method and a class implements these interfaces</td>
+<td>Compile error.</td>
+</tr>
+<tr>
+<td>05.Aggregation VS composition</td>
+<td>Objects get destroyed along with the composite object, while aggregated objects exist.</td>
+</tr>
+<tr>
+<td>06.super() and this()</td>
+<td>They (not both of them) must be the first statement for a constructor.</td>
+</tr>
+<tr>
+<td>07.Execute a program with main method</td>
+<td>No way to do it since Java 7.</td>
+</tr>
+<tr>
+<td>08.Override for static(class) method</td>
+<td>No way as inheritance doesn’t apply to class.</td>
+</tr>
+<tr>
+<td>09.Overloading VS overriding</td>
+<td>Overloading happens at compile time, while overriding at runtime.</td>
+</tr>
+<tr>
+<td>10.Covariant return type</td>
+<td>It’s allowed to return a sub-type in method of sub-class. (see code)</td>
+</tr>
+<tr>
+<td>11.Marker interface VS annotation</td>
+<td>Interface provides static check during compiling, while annotation has to be checked at runtime. (see code)</td>
+</tr>
+<tr>
+<td>12.Pass-by-value or pass-by-reference</td>
+<td>Java is always pass-by-value. (see code)</td>
+</tr>
+<tr>
+<td>13.”foo” VS new String(“foo”)</td>
+<td>The former is in string constant pool, while the latter is a normal string object. (see <a href="http://www.thejavageek.com/2013/06/19/the-string-constant-pool/" target="_blank" rel="external">this</a>) </td>
+</tr>
+<tr>
+<td>14.Comparator VS comparable</td>
+<td>The former is a util interface comparing two objects, while the latter compares another object with itself, which means it is implemented by compared types while comparator is used by sorting functions.</td>
+</tr>
+<tr>
+<td>15.Why Object::hashCode() is native</td>
+<td>Performance concern because it looks for an integer representation of an object reference on the heap. </td>
+</tr>
+<tr>
+<td>16.What’s the benefit of Collections::copy() over collection constructor or addAll</td>
+<td>It doesn’t involve reallocation but instead trigger out-of-index error if happened.</td>
+</tr>
+<tr>
+<td>17.Return value for high-order function</td>
+<td>For functional interface, return a lambda (instead of an anonymous class).</td>
+</tr>
+<tr>
+<td>18.java.time package since Java 8</td>
+<td>LocalDate, Year, MonthDay, DayOfWeek. Also refer to TemporalAccessor for use suggestion (see code)</td>
+</tr>
+<tr>
+<td>19.@SafeVarargs</td>
+<td>For methods with variable number of arguments, JVM uses array under the hood. When the type of arguments is type parameter, JVM uses Object[] which could lead ClassCastException. That’s the reason JVM gives warning during compiling. The annotation is used to by-pass the warning.</td>
+</tr>
+<tr>
+<td>20.Catch uncaught exception for a Thread</td>
+<td>Thread::setUncaughtExceptionHandler(Thread.UncaughtExceptionHandler eh)</td>
+</tr>
+<tr>
+<td>21.Get notification on memory usage</td>
+<td>see MemoryPoolMXBean’s javadoc </td>
+</tr>
+<tr>
+<td>22.Java is a strict language</td>
+<td>Method arguments are passed by value (evaluated first, that’s the reason Scala introduced by-name parameters). In a few places however, Java is lazy: &amp;&amp;, ?:, if…else, foo, while, Java 8 streams.</td>
+</tr>
+<tr>
+<td>23.Advantages to use anonymous lambda (or method references)</td>
+<td>1, No need to declare type explicitly. 2, Named lambdas are compiled to objects.</td>
+</tr>
+<tr>
+<td>24.Add constraints to resource accessing or preventing thread from quitting too early</td>
+<td>Semaphore</td>
+</tr>
+<tr>
+<td>25.How to prevent assertion from being disabled</td>
+<td>Check with a static initializer and quit with RuntimeException (see code)</td>
+</tr>
+</tbody>
+</table>
+<p>Continue at P250</p>
+<p>(To be continued)</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/my-blog/2017/11/10/mind-map-java/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/11/05/mind-map-english/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1848,162 +2103,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/05/23/sorting/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yuping Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sam's Chest of Drawers">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/my-blog/2017/05/23/sorting/" itemprop="url">
-                  Sorting Performance
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-23T11:31:45+08:00">
-                05-23-2017
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
-                    <span itemprop="name">Programming</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Recently, I did some study on sorting algorithms and I’m amazed to find that the sort from standard Java Runtime Environment (JRE) is <em>NOT</em> as efficient as I expected. According to Java-DOC’s description:</p>
-<p><code>public static &lt;T&gt; void sort(T[] a, Comparator&lt;? super T&gt; c)</code></p>
-<blockquote>
-<p>Sorts the specified array of objects according to the order induced by the specified comparator. All elements in the array must be mutually comparable by the specified comparator (that is, c.compare(e1, e2) must not throw a ClassCastException for any elements e1 and e2 in the array).</p>
-<p>This sort is guaranteed to be stable: equal elements will not be reordered as a result of the sort.<br>Implementation note: This implementation is a stable, adaptive, iterative mergesort that requires far fewer than n lg(n) comparisons when the input array is partially sorted, while offering the performance of a traditional mergesort when the input array is randomly ordered. If the input array is nearly sorted, the implementation requires approximately n comparisons. Temporary storage requirements vary from a small constant for nearly sorted input arrays to n/2 object references for randomly ordered input arrays.</p>
-<p>The implementation takes equal advantage of ascending and descending order in its input array, and can take advantage of ascending and descending order in different parts of the the same input array. It is well-suited to merging two or more sorted arrays: simply concatenate the arrays and sort the resulting array.</p>
-<p>The implementation was adapted from Tim Peters’s list sort for Python ( TimSort). It uses techniques from Peter McIlroy’s “Optimistic Sorting and Information Theoretic Complexity”, in Proceedings of the Fourth Annual ACM-SIAM Symposium on Discrete Algorithms, pp 467-474, January 1993.</p>
-</blockquote>
-<p>I have checked another sort method’s description:</p>
-<blockquote>
-<p>Implementation note: The sorting algorithm is a Dual-Pivot Quicksort by Vladimir Yaroslavskiy, Jon Bentley, and Joshua Bloch. This algorithm offers O(n log(n)) performance on many data sets that cause other quicksorts to degrade to quadratic performance, and is typically faster than traditional (one-pivot) Quicksort implementations.</p>
-</blockquote>
-<p>So I’m curious to know how good the built-in sort is and whether my home-made sort can defeat it. It sounds like playing with AlphaGo, but I still decide to have a go. For the completeness, I include elementary sorting methods e.g. select sort, insert sort and shell sort, which have the performance of<br><img src="/my-blog/2017/05/23/sorting/o_n_2.png" alt="o_n_2.png" title="">,<br>as well as more advanced sort e.g. merge sort and quick sort with the performance of<br><img src="/my-blog/2017/05/23/sorting/o_n_lgn.png" alt="o_n_lgn.png" title="">.<br>Here is the detailed source code.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/my-blog/2017/05/23/sorting/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2053,7 +2152,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/my-blog/archives">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -2133,7 +2232,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
