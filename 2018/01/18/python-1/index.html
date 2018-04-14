@@ -1,0 +1,857 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/my-blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/my-blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/my-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/my-blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Tips of Anaconda installationFor Anaconda distribution, this (mirror)[https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/] could be faster than the official.(numpy tutorial)[https://docs.scipy.org/">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python for Java Programmer - 1">
+<meta property="og:url" content="https://sevenbamboos.github.com/2018/01/18/python-1/index.html">
+<meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
+<meta property="og:description" content="Tips of Anaconda installationFor Anaconda distribution, this (mirror)[https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/] could be faster than the official.(numpy tutorial)[https://docs.scipy.org/">
+<meta property="og:updated_time" content="2018-02-04T11:12:05.956Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python for Java Programmer - 1">
+<meta name="twitter:description" content="Tips of Anaconda installationFor Anaconda distribution, this (mirror)[https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/] could be faster than the official.(numpy tutorial)[https://docs.scipy.org/">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/my-blog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sevenbamboos.github.com/2018/01/18/python-1/"/>
+
+
+
+
+
+  <title> Python for Java Programmer - 1 | Sam's Chest of Drawers </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/my-blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sam's Chest of Drawers</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thinking about Programming and Lifestyle</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/my-blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/my-blog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/my-blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/my-blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2018/01/18/python-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python for Java Programmer - 1
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-18T14:09:56+13:00">
+                01-18-2018
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Tips-of-Anaconda-installation"><a href="#Tips-of-Anaconda-installation" class="headerlink" title="Tips of Anaconda installation"></a>Tips of Anaconda installation</h1><p>For Anaconda distribution, this (mirror)[<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/" target="_blank" rel="external">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/</a>] could be faster than the official.<br>(numpy tutorial)[<a href="https://docs.scipy.org/doc/numpy-dev/user/quickstart.html" target="_blank" rel="external">https://docs.scipy.org/doc/numpy-dev/user/quickstart.html</a>]</p>
+<p>matrix with Jupyter<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">%matplotlib inline</div><div class="line">import sympy as sympy</div><div class="line">import numpy as np</div><div class="line">import matplotlib.pyplot as plt</div><div class="line">import seaborn as sbn</div><div class="line">from scipy import *</div><div class="line"></div><div class="line">A = np.array(([.8,.3],[.2,.7]))</div><div class="line">A.dot(x1)</div></pre></td></tr></table></figure></p>
+<h1 id="Language-Basic"><a href="#Language-Basic" class="headerlink" title="Language Basic"></a>Language Basic</h1><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01.Access the last element of a list</td>
+<td><code>aList[-1]</code> // it can be interpreted as <code>aList[len(aList)-1]</code></td>
+</tr>
+<tr>
+<td>02.Remove an element from a list</td>
+<td><code>previousLastOne = aList.pop()</code> or <code>del aList[-1]</code> The first one can get the removed one.</td>
+</tr>
+<tr>
+<td>03.Is it accessible for a (loop) variable after the loop (e.g. for ele in elements:)</td>
+<td>Sadly, it is (e.g. ele). How to get rid of it? (<code>del ele</code>, ugly workaround)</td>
+</tr>
+<tr>
+<td>04.How to turn a range object to a list</td>
+<td><code>list(range(1,5))</code> // range() returns a range object (iterable) and passed to list() to become a list</td>
+</tr>
+<tr>
+<td>05.How to slice a list</td>
+<td><code>aList[-3:]</code> // obviously here : needs specific syntax support</td>
+</tr>
+<tr>
+<td>06.Find if an element exists in a list/string</td>
+<td><code>element in aList</code> or <code>sub_string in aString</code> // it returns a boolean, a syntax keyword</td>
+</tr>
+<tr>
+<td>07.How to check empty string/list</td>
+<td><code>if aList:</code> or <code>if aString:</code> // empty string/list is false in for and if</td>
+</tr>
+<tr>
+<td>08.Loop through a dictionary</td>
+<td><code>for k, v in aDict.items()</code></td>
+</tr>
+<tr>
+<td>09.Provide a description to a function/class/module</td>
+<td>Put <code>&quot;&quot;&quot;...&quot;&quot;&quot;</code> (docstring) below a function/class or at the beginning of a module</td>
+</tr>
+<tr>
+<td>10.Flexible number of function parameters</td>
+<td><code>def foo(p, *pa):</code> // put *pa after positioned parameters</td>
+</tr>
+<tr>
+<td>11.Flexible number of named parameters</td>
+<td><code>def foo(**user_info)</code> // Note the call side doesn’t need to create a dictionary to use user_info (see source code)</td>
+</tr>
+<tr>
+<td>12.Import a function with another name from a module</td>
+<td><code>from a_module import function_a as function_b</code></td>
+</tr>
+<tr>
+<td>13.Arrange function parameters in multiple lines</td>
+<td>use two TAB to make parameters look different from function body (see source code) </td>
+</tr>
+<tr>
+<td>14.Call methods of super class</td>
+<td><code>super().__init__(...)</code></td>
+</tr>
+<tr>
+<td>15.Open a file without closing it explicitly</td>
+<td><code>with open(&#39;file_name&#39;) as file_object:</code></td>
+</tr>
+<tr>
+<td>16.Loop through file object line by line</td>
+<td><code>for line in file_object:</code></td>
+</tr>
+<tr>
+<td>17.Exception handling</td>
+<td>try-except-else-finally block. Use pass in except branch to fail silently.</td>
+</tr>
+<tr>
+<td>18.Is there concept of Option</td>
+<td>No. None is same as null.</td>
+</tr>
+<tr>
+<td>19.Check if variable is None</td>
+<td><code>a is None</code> // is not is to check the opposite</td>
+</tr>
+<tr>
+<td>20.Unpack sequence</td>
+<td><code>a,b,*_ = (&quot;foo&quot;,&quot;bar&quot;,1,2)</code> // _ =&gt; [1,2]</td>
+</tr>
+<tr>
+<td>21.Performance of list insert, pop and in</td>
+<td>For non-last element, it’s O(n) while n is the size of the list</td>
+</tr>
+<tr>
+<td>22.For loop with index</td>
+<td><code>for i,value in enumerate(seq):</code></td>
+</tr>
+<tr>
+<td>23.Convert a list of rows into a list of columns</td>
+<td><code>zip(*seq)</code> //see source code</td>
+</tr>
+<tr>
+<td>24.Objects can be put in dictionary as key</td>
+<td>number, string, tuple (immutable) or anything else has fixed value of <code>hash(obj)</code></td>
+</tr>
+<tr>
+<td>25.Nested for comprehension</td>
+<td><code>[v2 for v1 in s1 if ... for v2 in v1 if ...]</code></td>
+</tr>
+<tr>
+<td>26.Variable scope</td>
+<td>There are two scopes: local and global. class, function can create nested scope, but not if/for/while.</td>
+</tr>
+<tr>
+<td>27.Currying</td>
+<td><code>from functools import partial</code> and <code>partial(foo, some_variable)</code></td>
+</tr>
+<tr>
+<td>28.Generator in for comprehension</td>
+<td><code>(x for x in ... if ...)</code> or use <code>yield</code> in generator function</td>
+</tr>
+<tr>
+<td>29.Anonymous function</td>
+<td><code>lambda x: x[0]</code></td>
+</tr>
+<tr>
+<td>30.Generator from itertools</td>
+<td>groupby, combinations, product, permutations, etc.</td>
+</tr>
+<tr>
+<td>31.Catch multiple errors</td>
+<td><code>except (TypeError, ValueError):</code></td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">// 11</div><div class="line">def foo(**user_info):</div><div class="line">    res = &#123;&#125;</div><div class="line">    for k, v in user_info.items():</div><div class="line">        res[k] = v</div><div class="line">    return res</div><div class="line"></div><div class="line"></div><div class="line">user = foo(lastName=&quot;Foo&quot;, firstName=&quot;Bar&quot;)</div><div class="line">for k, v in user.items():</div><div class="line">    print(&quot;&#123;&#125; -&gt; &#123;&#125;&quot;.format(k, v))</div><div class="line"></div><div class="line">// 13</div><div class="line">def foo(</div><div class="line">        param1,</div><div class="line">        param2,</div><div class="line">        param3):</div><div class="line">    // function body</div><div class="line"></div><div class="line">// 23</div><div class="line">names = [(&quot;Tony&quot;,&quot;Zhang&quot;),(&quot;Anri&quot;,&quot;Liu&quot;),(&quot;Charry&quot;,&quot;Y&quot;)]</div><div class="line">fns, lns = zip(*names)</div><div class="line">fns // (&quot;Tony&quot;,&quot;Anri&quot;,&quot;Charry&quot;)</div><div class="line">lns // (&quot;Zhang&quot;,&quot;Liu&quot;,&quot;Y&quot;)</div></pre></td></tr></table></figure>
+<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><p><a href="http://scikit-learn.org" target="_blank" rel="external">scikit</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/my-blog/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/my-blog/2018/01/07/async-in-action/" rel="next" title="Async in action">
+                <i class="fa fa-chevron-left"></i> Async in action
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/my-blog/2018/01/20/python-2/" rel="prev" title="Python for Java Programmer - 2">
+                Python for Java Programmer - 2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80"
+               alt="Yuping Wang" />
+          <p class="site-author-name" itemprop="name">Yuping Wang</p>
+           
+              <p class="site-description motion-element" itemprop="description">85608565</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/my-blog/archives">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/my-blog/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/my-blog/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sevenbamboos" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/sevenbamboos" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tips-of-Anaconda-installation"><span class="nav-number">1.</span> <span class="nav-text">Tips of Anaconda installation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Language-Basic"><span class="nav-number">2.</span> <span class="nav-text">Language Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">2.1.</span> <span class="nav-text">reference</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuping Wang</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/my-blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/my-blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/my-blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

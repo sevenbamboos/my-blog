@@ -257,6 +257,903 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/12/16/mind-map-fpinjava/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2017/12/16/mind-map-fpinjava/" itemprop="url">
+                  Functional Programming in Java
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-16T12:38:14+13:00">
+                12-16-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Based on Functional Programming in Java, a book similar to the red bible of Scala and explains reasons why Scala introduced features like monad Option, List, Stream, Try and comprehension.</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01.groupBy(value -&gt; key)</td>
+<td><code>Stream::collect(Collectors::groupingBy(value -&gt; key))</code> See also partitioningBy</td>
+</tr>
+<tr>
+<td>02.type alias in Java</td>
+<td>Use interface (see code)</td>
+</tr>
+<tr>
+<td>03.final variable for closure</td>
+<td>Final requirement applies to local variable only (see code)</td>
+</tr>
+<tr>
+<td>04.If closure has reference to non-local variable which is not final, how to make function free of side effects</td>
+<td>Turn implicit variables to explicit arguments of the function (see code)</td>
+</tr>
+<tr>
+<td>05.There are Function and BiFunction. How about TriFunction</td>
+<td>Using curring is another way to avoid TriFunction (see code</td>
+</tr>
+<tr>
+<td>06.Partially bind the first/second parameter</td>
+<td>Deduct from types to create curried function (see code)</td>
+</tr>
+<tr>
+<td>07.The size of a thread</td>
+<td>1064 KB for 64-bit JVM (size of stack)</td>
+</tr>
+<tr>
+<td>08.Give meaningful name for built-in functional interface</td>
+<td>Define new functional interfaces (with same function signature as built-in functional interfaces) and use the new interfaces in class/method definition. Then use anonymous lambda in the application.</td>
+</tr>
+<tr>
+<td>09.Pattern matching in Java</td>
+<td>Define a Case class extended from <code>Tuple&lt;Supplier&lt;Boolean&gt;, Supplier&lt;Result&lt;T&gt;&gt;&gt;</code>. See com.samwang.common.EmailValidation (alg-java in my git)</td>
+</tr>
+<tr>
+<td>10.Handle effects in a loop</td>
+<td>One way is to fold effects into one and execute them afterwards (in a batch mode or delay the execution until necessarily).</td>
+</tr>
+<tr>
+<td>11.Why classes shouldn’t have several properties of the same type (in modeling)</td>
+<td>No compiling error when using an incorrect property. Solution is to use value types like Money, Weight, Age (rather than double, int).</td>
+</tr>
+<tr>
+<td>12.Make recursion function stack-safe</td>
+<td>1) Turn to tail-recursion 2) Use heap-based TailCall, which has two sub-classes: Return and Suspend. See com.samwang.common.TailCall (alg-java in my git)</td>
+</tr>
+<tr>
+<td>13.Turn to tail-recursion</td>
+<td>Define a helper function with an accumulator.</td>
+</tr>
+<tr>
+<td>14.Another way to look at Fibonacci series 0,1,1,2,3,5,8,13</td>
+<td>A series of pairs (tuples): (0,1),(1,1),(1,2),(2,3),(3,5),(5,8),(8,13) And the generation method is <code>x -&gt; new Tuple&lt;&gt;(x._2, x._1 + x._2)</code></td>
+</tr>
+<tr>
+<td>15.Function memorization</td>
+<td>Wrap function in com.samwang.common.Memoizer (alg-java in my git). For functions with more than one parameter, one way is to use Tuple2, Tuple3 (and use these tuples as the key in Memorizer). Another (better) way is to memorize the curried function (see code). In case there are huge different results to be kept in cache, use soft or weak references (and WeakHashMap) in Memorizer.</td>
+</tr>
+<tr>
+<td>16.java.util.Objects</td>
+<td>Helper functions for comparison, equal, hash-code, null-check, etc.</td>
+</tr>
+<tr>
+<td>17.Functional list in Java</td>
+<td>Define abstract class List with two sub-classes Nil and Cons. See com.samwang.common.List (alg-java in my git).</td>
+</tr>
+<tr>
+<td>18.What’s good for StringBuilder::append to return this</td>
+<td>In case StringBuilder is used as an accumulator, it saves one line of code to explicitly return the builder (see code).</td>
+</tr>
+<tr>
+<td>19.Implement foldRight with foldLeft for the purpose of stack safety</td>
+<td><code>list.reverse().foldLeft(identity, x -&gt; y -&gt; f.apply(y).apply(x));</code></td>
+</tr>
+<tr>
+<td>20.Given concat(head, tail), what’s good to implement List::flatMap with foldRight instead of foldLeft</td>
+<td>foldLeft: (((1,2),3),4); foldRight: (1,(2,(3,4))). So foldRight works well with <code>concat(f.apply(element), list_for_accumulation)</code></td>
+</tr>
+<tr>
+<td>21.Implement variance (with mean)</td>
+<td>(see code)</td>
+</tr>
+<tr>
+<td>22.Optional::orElseGet vs orElse</td>
+<td>The former supports laziness which is critical for function evaluation; the latter is suitable for literal (because literal has been evaluated already by compiler).</td>
+</tr>
+<tr>
+<td>23.Exception handling with Result</td>
+<td>See com.samwang.common.Result (alg-java in my git), which is more powerful than Option in that it has 3 subtypes to represent 3 cases:Success, Failure and Empty.</td>
+</tr>
+<tr>
+<td>24.Give meaningful (error) message for Result.Empty or Result.Failure</td>
+<td>abstract Result<t> mapFailure(String message)</t></td>
+</tr>
+<tr>
+<td>25.Find the last one using foldLeft</td>
+<td>(see code)</td>
+</tr>
+<tr>
+<td>26.Loop without loop</td>
+<td>Accumulator + recurrence</td>
+</tr>
+<tr>
+<td>27.Return an item at an index with foldLeft</td>
+<td>fold with a Tuple as identity in the format of (failure + index). See Result::getAt_ (alg-java in my git).</td>
+</tr>
+<tr>
+<td>28.Reason to use joinfork thread pool to do list parallelization.</td>
+<td>Hard to predict computation time so having to divide the list into a large number of sublists. </td>
+</tr>
+<tr>
+<td>29.Algorithm to show the ugliness of imperative style</td>
+<td>Find the first ten primes (see code)</td>
+</tr>
+<tr>
+<td>30.Remove item from Binary Search Tree (BST)</td>
+<td>After removing the item, the left and right node need to be merged. See Tree::remove and Tree::removeMerge (alg-java in my git)</td>
+</tr>
+<tr>
+<td>31.General merge for BST</td>
+<td>See Tree::merge (alg-java in my git)</td>
+</tr>
+<tr>
+<td>32.Day-Stout-Warren algorithm for balanced tree</td>
+<td>1, Rotate left until both branches are nearly equal. 2, Apply rotation to the right branch. 3, Apply right rotation to the left branch. 4, Stop when the height = log2(size)</td>
+</tr>
+</tbody>
+</table>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/my-blog/2017/12/16/mind-map-fpinjava/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/12/10/mind-map-spring/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2017/12/10/mind-map-spring/" itemprop="url">
+                  Spring 5
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-10T14:38:14+13:00">
+                12-10-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>TODO:</p>
+<p>What’s the use of java.lang.annotation.Target,Retention? In other words, give a practical view of Java Annotation.</p>
+<p>In which case, @Autowired needs to used together with @Qualifier</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/my-blog/2017/12/10/mind-map-spring/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/11/10/mind-map-java/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2017/11/10/mind-map-java/" itemprop="url">
+                  Java Basic
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-10T15:38:14+13:00">
+                11-10-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01.Classloader</td>
+<td>Three classloaders: Bootstrap(rt.jar), extension and application(classpath).</td>
+</tr>
+<tr>
+<td>02.OOPS principles</td>
+<td>Abstraction with encapsulation, (type system supports) inheritance and thus polymorphism.</td>
+</tr>
+<tr>
+<td>03.Object oriented VS object based</td>
+<td>ES5 as object based language, provides abstraction and encapsulation, but no native support of inheritance and polymorphism</td>
+</tr>
+<tr>
+<td>04.What happen if multiple interfaces have the same default method and a class implements these interfaces</td>
+<td>Compile error.</td>
+</tr>
+<tr>
+<td>05.Aggregation VS composition</td>
+<td>Objects get destroyed along with the composite object, while aggregated objects exist.</td>
+</tr>
+<tr>
+<td>06.super() and this()</td>
+<td>They (not both of them) must be the first statement for a constructor.</td>
+</tr>
+<tr>
+<td>07.Execute a program with main method</td>
+<td>No way to do it since Java 7.</td>
+</tr>
+<tr>
+<td>08.Override for static(class) method</td>
+<td>No way as inheritance doesn’t apply to class.</td>
+</tr>
+<tr>
+<td>09.Overloading VS overriding</td>
+<td>Overloading happens at compile time, while overriding at runtime.</td>
+</tr>
+<tr>
+<td>10.Covariant return type</td>
+<td>It’s allowed to return a sub-type in method of sub-class. (see code)</td>
+</tr>
+<tr>
+<td>11.Marker interface VS annotation</td>
+<td>Interface provides static check during compiling, while annotation has to be checked at runtime. (see code)</td>
+</tr>
+<tr>
+<td>12.Pass-by-value or pass-by-reference</td>
+<td>Java is always pass-by-value. (see code)</td>
+</tr>
+<tr>
+<td>13.”foo” VS new String(“foo”)</td>
+<td>The former is in string constant pool, while the latter is a normal string object. (see <a href="http://www.thejavageek.com/2013/06/19/the-string-constant-pool/" target="_blank" rel="external">this</a>) </td>
+</tr>
+<tr>
+<td>14.Comparator VS comparable</td>
+<td>The former is a util interface comparing two objects, while the latter compares another object with itself, which means it is implemented by compared types while comparator is used by sorting functions.</td>
+</tr>
+<tr>
+<td>15.Why Object::hashCode() is native</td>
+<td>Performance concern because it looks for an integer representation of an object reference on the heap. </td>
+</tr>
+<tr>
+<td>16.What’s the benefit of Collections::copy() over collection constructor or addAll</td>
+<td>It doesn’t involve reallocation but instead trigger out-of-index error if happened.</td>
+</tr>
+<tr>
+<td>17.Return value for high-order function</td>
+<td>For functional interface, return a lambda (instead of an anonymous class).</td>
+</tr>
+<tr>
+<td>18.java.time package since Java 8</td>
+<td>LocalDate, Year, MonthDay, DayOfWeek. Also refer to TemporalAccessor for use suggestion (see code)</td>
+</tr>
+<tr>
+<td>19.@SafeVarargs</td>
+<td>For methods with variable number of arguments, JVM uses array under the hood. When the type of arguments is type parameter, JVM uses Object[] which could lead ClassCastException. That’s the reason JVM gives warning during compiling. The annotation is used to by-pass the warning.</td>
+</tr>
+<tr>
+<td>20.Catch uncaught exception for a Thread</td>
+<td>Thread::setUncaughtExceptionHandler(Thread.UncaughtExceptionHandler eh)</td>
+</tr>
+<tr>
+<td>21.Get notification on memory usage</td>
+<td>see MemoryPoolMXBean’s javadoc </td>
+</tr>
+<tr>
+<td>22.Java is a strict language</td>
+<td>Method arguments are passed by value (evaluated first, that’s the reason Scala introduced by-name parameters). In a few places however, Java is lazy: &amp;&amp;, ?:, if…else, foo, while, Java 8 streams.</td>
+</tr>
+<tr>
+<td>23.Advantages to use anonymous lambda (or method references)</td>
+<td>1, No need to declare type explicitly. 2, Named lambdas are compiled to objects.</td>
+</tr>
+<tr>
+<td>24.Add constraints to resource accessing or preventing thread from quitting too early</td>
+<td>Semaphore</td>
+</tr>
+<tr>
+<td>25.How to prevent assertion from being disabled</td>
+<td>Check with a static initializer and quit with RuntimeException (see code)</td>
+</tr>
+</tbody>
+</table>
+<p>Continue at P250</p>
+<p>(To be continued)</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/my-blog/2017/11/10/mind-map-java/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/10/17/learning-tex/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2017/10/17/learning-tex/" itemprop="url">
+                  Learning TeX
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-17T22:59:56+13:00">
+                10-17-2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Lifestyle/" itemprop="url" rel="index">
+                    <span itemprop="name">Lifestyle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h1><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01.Preamble</td>
+<td>The part before <code>\begin{document}</code>. It’s for <code>\title</code>, <code>\author</code> and <code>\newcommand</code> that is visible for the whole document.</td>
+</tr>
+<tr>
+<td>02.Define commands(macro)</td>
+<td><code>\newcommand{command-name}[parameter-count][optional-parameters]{definition}</code> in preamble</td>
+</tr>
+<tr>
+<td>03.Show title and table-of-contents</td>
+<td>Make sure both of them are after <code>\begin{document}</code></td>
+</tr>
+<tr>
+<td>04.Article outline elements</td>
+<td><code>\chapter \section \subsection</code></td>
+</tr>
+<tr>
+<td>05.Numbered list</td>
+<td><code>\begin{enumerate} \item ... \end{...}</code></td>
+</tr>
+<tr>
+<td>06.Non-numbered list</td>
+<td><code>\begin{itemize} \item ... \end{...}</code></td>
+</tr>
+<tr>
+<td>07.Description list</td>
+<td><code>\begin{description} \item ... \end{...}</code></td>
+</tr>
+<tr>
+<td>08.Table</td>
+<td><code>\begin{tabular} head1 &amp; head2\\ \hline row1-col1 &amp; row1-col2\\ \end{...}</code> Don’t forget \ at the end of each row (including head)</td>
+</tr>
+<tr>
+<td>09.Reference</td>
+<td><code>\label{key} \ref{key} \pageref{key}</code></td>
+</tr>
+<tr>
+<td>10.Bibliography</td>
+<td><code>\begin{thebibliography}{widest label} \bibitem[labelA]{keyA} Author A, Title A, Year A \end{...}</code> Don’t forget the second argument in begin section. <code>\cite{keyA,keyB}</code> to cite the reference(s).</td>
+</tr>
+<tr>
+<td>11.Inline formula</td>
+<td><code>\( ... \)</code></td>
+</tr>
+<tr>
+<td>12.Separate formula</td>
+<td><code>\[ ... \]</code></td>
+</tr>
+<tr>
+<td>13.Numbered formula</td>
+<td><code>\begin{equation} ... \end{...}</code></td>
+</tr>
+<tr>
+<td>14.Multi-line formula</td>
+<td><code>\begin{align} formula1 &amp;= A formula2 &amp;= B \end{...}</code> amsmath provides a <code>align</code> mode to use <code>&amp;</code> to align multi-line formula. </td>
+</tr>
+<tr>
+<td>15.Subscript in formula</td>
+<td>a<em>{subscript} `\lim</em>{n=1,2, \ldots} a_n`</td>
+</tr>
+<tr>
+<td>16.Underline and overline in formula</td>
+<td><code>\overline{} \underline{}_{} \overbrace \underbrace</code></td>
+</tr>
+</tbody>
+</table>
+<p>See <a href="2017/10/17/learning-tex/learning-tex.pdf">PDF</a> and <a href="2017/10/17/learning-tex/learning-tex.tex">TEX</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/10/15/beyond-try/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -296,7 +1193,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-15T20:40:53+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-15T20:40:53+13:00">
                 10-15-2017
               </time>
             
@@ -436,7 +1333,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-17T11:09:56+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-17T11:09:56+12:00">
                 09-17-2017
               </time>
             
@@ -581,7 +1478,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-05T21:09:56+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-05T21:09:56+12:00">
                 09-05-2017
               </time>
             
@@ -766,7 +1663,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-15T15:09:56+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-15T15:09:56+12:00">
                 07-15-2017
               </time>
             
@@ -912,7 +1809,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-05T11:09:56+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-05T11:09:56+12:00">
                 07-05-2017
               </time>
             
@@ -1064,6 +1961,10 @@
 <td>math support for markdown</td>
 <td><a href="http://www.codecogs.com/latex/eqneditor.php" target="_blank" rel="external">codecogs.com</a></td>
 </tr>
+<tr>
+<td>unicode</td>
+<td>[unicode][#unicode]</td>
+</tr>
 </tbody>
 </table>
           <!--noindex-->
@@ -1150,7 +2051,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-23T11:31:45+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-23T11:31:45+12:00">
                 05-23-2017
               </time>
             
@@ -1258,622 +2159,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/05/15/mvx/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yuping Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sam's Chest of Drawers">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/my-blog/2017/05/15/mvx/" itemprop="url">
-                  MVC, MVP, MVVM and Redux
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-15T22:17:20+08:00">
-                05-15-2017
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
-                    <span itemprop="name">Programming</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><ul>
-<li>View controller is getting bigger and bigger</li>
-<li>View controller keeps data (or cached data)</li>
-<li>View controller is NOT testable</li>
-<li>View controllers tend to have complicated interaction</li>
-<li>Model is dumb data structure</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/my-blog/2017/05/15/mvx/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/05/10/swift-for-java-programmer-4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yuping Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sam's Chest of Drawers">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/my-blog/2017/05/10/swift-for-java-programmer-4/" itemprop="url">
-                  Swift For Java Programmer 4
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-10T21:27:08+08:00">
-                05-10-2017
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
-                    <span itemprop="name">Programming</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Let’s focus on Pattern matching, a powerful language feature in Swift. When I first saw this in blogs or articles, I felt confused and even complained about why people added this into Swift so that more often than not there are more than one way to achieve the same thing. For programmers from other world (like Java), it’s hard to accept since most of them believe in the principle that simplicity is beauty. </p>
-<blockquote>
-<p>I find this <a href="http://alisoftware.github.io/swift/pattern-matching/2016/03/27/pattern-matching-1/" target="_blank" rel="external">tutorial</a> very helpful and use an <a href="https://iswift.org/playground" target="_blank" rel="external">online Swift runner</a> due to the lack of Swift compiler implementation on Windows. Note this is the only runner that supports Foundations.</p>
-<p>Edited on [May 11, 2017]: another thorough <a href="https://appventure.me/2015/08/20/swift-pattern-matching-in-detail/" target="_blank" rel="external">tutorial</a></p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/my-blog/2017/05/10/swift-for-java-programmer-4/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/05/09/swift-for-java-programmer-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yuping Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sam's Chest of Drawers">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/my-blog/2017/05/09/swift-for-java-programmer-3/" itemprop="url">
-                  Swift For Java Programmer 3
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-09T22:47:07+08:00">
-                05-09-2017
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
-                    <span itemprop="name">Programming</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>In the third series, let’s start the part of class. In Swift, class is reference type, which has a lot in common with this concept in other programming language like Java, c# and Javascript.</p>
-<h1 id="super"><a href="#super" class="headerlink" title="super"></a>super</h1><p>For a normal override method in sub-class, it’s always better to call its super method at the very beginning of the method. Otherwise, the logic in sub-class could get overwritten by the base class.</p>
-<p>For the same reason, inside init, sub-class MUST call <code>super.init</code> before returning. It’s called two-phase initialization.</p>
-<pre><code>class SubClass: BaseClass {
-  var sth: String
-  init(...) {
-    // phase 1 start
-    self.sth = ...
-    super.init(...)
-    // phase 2 start
-    self.foo()
-  }
-  foo() {...}
-}
-</code></pre><p>We can’t call any instance method until phase 2 because at that time the initialization has been completed.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/my-blog/2017/05/09/swift-for-java-programmer-3/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/05/08/swift-for-java-programmer-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yuping Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sam's Chest of Drawers">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/my-blog/2017/05/08/swift-for-java-programmer-2/" itemprop="url">
-                  Swift For Java Programmer 2
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-08T23:20:36+08:00">
-                05-08-2017
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
-                    <span itemprop="name">Programming</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>In this second series, I want to talk about struct, which is a rather new concept for Java programmer.</p>
-<h1 id="Value-type"><a href="#Value-type" class="headerlink" title="Value type"></a>Value type</h1><p>First of all, remember struct is value type (in comparison with reference type as class) so that on assignment instances are COPIED. It has the following impact:</p>
-<ol>
-<li><p>The instance will be allocated in stack (instead of heap), which means it could be fast and has trouble-free for memory management.</p>
-</li>
-<li><p>If the variable is declared as <code>let instance = ...</code>, then there is no way to modify the value, including its properties. The fix is to use <code>var instance = ...</code>.</p>
-</li>
-<li><p>The above case is for the case that we modify the struct instance by changing the property. If the change is via a method, then the method needs to be marked as <code>mutating</code>(so that the compiler knows it can’t be called for a constant struct instance).</p>
-</li>
-<li><p>Other instances, which were copied from the original instance, have no impact if the original instance get changed. The same behavior as integer, boolean and string in Java. That’s also the reason that in Swift, Int, Bool and String (and other primitives) are defined as struct.</p>
-</li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/my-blog/2017/05/08/swift-for-java-programmer-2/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/my-blog/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/my-blog/">1</a><span class="page-number current">2</span><a class="page-number" href="/my-blog/page/3/">3</a><a class="page-number" href="/my-blog/page/4/">4</a><a class="extend next" rel="next" href="/my-blog/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/my-blog/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/my-blog/">1</a><span class="page-number current">2</span><a class="page-number" href="/my-blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/my-blog/page/5/">5</a><a class="extend next" rel="next" href="/my-blog/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1918,7 +2208,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/my-blog/archives">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1936,7 +2226,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/my-blog/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

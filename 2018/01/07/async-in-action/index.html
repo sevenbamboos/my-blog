@@ -1,0 +1,741 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/my-blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/my-blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/my-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/my-blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Multithreading, Parallel and AsyncMultithreading  A form of concurrency that uses multiple threads of execution.   Thread, BackgroundWorker, low-level, best to start with high-level abstractions like">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Async in action">
+<meta property="og:url" content="https://sevenbamboos.github.com/2018/01/07/async-in-action/index.html">
+<meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
+<meta property="og:description" content="Multithreading, Parallel and AsyncMultithreading  A form of concurrency that uses multiple threads of execution.   Thread, BackgroundWorker, low-level, best to start with high-level abstractions like">
+<meta property="og:updated_time" content="2018-01-13T00:45:06.728Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Async in action">
+<meta name="twitter:description" content="Multithreading, Parallel and AsyncMultithreading  A form of concurrency that uses multiple threads of execution.   Thread, BackgroundWorker, low-level, best to start with high-level abstractions like">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/my-blog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sevenbamboos.github.com/2018/01/07/async-in-action/"/>
+
+
+
+
+
+  <title> Async in action | Sam's Chest of Drawers </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/my-blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sam's Chest of Drawers</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thinking about Programming and Lifestyle</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/my-blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/my-blog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/my-blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/my-blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2018/01/07/async-in-action/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Async in action
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-07T10:13:33+13:00">
+                01-07-2018
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Multithreading-Parallel-and-Async"><a href="#Multithreading-Parallel-and-Async" class="headerlink" title="Multithreading, Parallel and Async"></a>Multithreading, Parallel and Async</h1><p>Multithreading</p>
+<blockquote>
+<p>A form of concurrency that uses multiple threads of execution. </p>
+</blockquote>
+<p><code>Thread</code>, <code>BackgroundWorker</code>, low-level, best to start with high-level abstractions like thread pool.</p>
+<p>Parallel</p>
+<blockquote>
+<p>Divide work among multiple threads that run concurrently.</p>
+</blockquote>
+<p>Maximize the use of multiple processors of CPU. In most cases, work against built-in parallelism on server-side.</p>
+<p>Async</p>
+<blockquote>
+<p>Use futures or callbacks to avoid unnecessary threads.</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="Async-with-callback"><a href="#Async-with-callback" class="headerlink" title="Async with callback"></a>Async with callback</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function doTaskAsync(msg, cb) &#123;</div><div class="line">	console.log(msg);</div><div class="line">	setTimeout(cb, 0);</div><div class="line">&#125;</div><div class="line"></div><div class="line">doTaskAsync(&quot;a&quot;, function() &#123;</div><div class="line">	console.log(&quot;b&quot;);</div><div class="line">	doTaskAsnyc(&quot;c&quot;, function() &#123;</div><div class="line">		console.log(&quot;d&quot;);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div><div class="line">console.log(&quot;e&quot;);</div><div class="line"></div><div class="line">// a -&gt; e -&gt; b -&gt; c -&gt; d</div></pre></td></tr></table></figure>
+<p>Drawbacks:</p>
+<ol>
+<li>Not sequential</li>
+<li>Inversion of control<br>Callback executed too early/late, too few/many times, swallow errors, …</li>
+</ol>
+<h1 id="Async-with-Promise"><a href="#Async-with-Promise" class="headerlink" title="Async with Promise"></a>Async with Promise</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">function doTaskAsync(msg) &#123;</div><div class="line">	console.log(msg);</div><div class="line">	return new Promise( function(resolve, reject) &#123;</div><div class="line">		setTimeout(resolve, 0);		</div><div class="line">	&#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">doTaskAsync(&quot;a&quot;)</div><div class="line">.then( function () &#123;</div><div class="line">	console.log(&quot;b&quot;);</div><div class="line">	return doTaskAsync(&quot;c&quot;);</div><div class="line">&#125;)</div><div class="line">.then( function () &#123;</div><div class="line">	console.log(&quot;d&quot;);</div><div class="line">&#125;)</div><div class="line">.catch( function () &#123;...&#125; );</div><div class="line"></div><div class="line">console.log(&quot;e&quot;);</div><div class="line"></div><div class="line">// a -&gt; e -&gt; b -&gt; c -&gt; d</div></pre></td></tr></table></figure>
+<h1 id="Async-in-ES7-C-5-0"><a href="#Async-in-ES7-C-5-0" class="headerlink" title="Async in ES7 (C# 5.0)"></a>Async in ES7 (C# 5.0)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">async function doTasks() &#123;</div><div class="line">	try &#123;</div><div class="line">		await doTaskAsync(&quot;a&quot;);</div><div class="line">		console.log(&quot;b&quot;);</div><div class="line">		await doTaskAsync(&quot;c&quot;);</div><div class="line">		console.log(&quot;d&quot;);</div><div class="line">	&#125;</div><div class="line">	catch (err) &#123;</div><div class="line">		...</div><div class="line">	&#125;</div><div class="line">	console.log(&quot;e&quot;);</div><div class="line">&#125;</div><div class="line">doTasks();</div><div class="line"></div><div class="line">// a -&gt; b -&gt; c -&gt; d -&gt; e</div></pre></td></tr></table></figure>
+<h1 id="Async-in-Scala"><a href="#Async-in-Scala" class="headerlink" title="Async in Scala"></a>Async in Scala</h1><p>(see Promise and Future)</p>
+<h1 id="Async-in-Java"><a href="#Async-in-Java" class="headerlink" title="Async in Java"></a>Async in Java</h1><h2 id="Java-5"><a href="#Java-5" class="headerlink" title="Java 5"></a>Java 5</h2><p><code>interface java.util.concurrent.Future&lt;T&gt;::get()</code> is a blocking method.</p>
+<h2 id="Java-8"><a href="#Java-8" class="headerlink" title="Java 8"></a>Java 8</h2><p><code>interface java.util.concurrent.CompletionStage&lt;T&gt;</code> is Promise</p>
+<p><code>class java.util.concurrent.CompletableFuture&lt;T&gt; implements Future&lt;T&gt;, CompletionStage&lt;T&gt;</code></p>
+<p>That’s all.</p>
+<h1 id="Async-and-Reactive"><a href="#Async-and-Reactive" class="headerlink" title="Async and Reactive"></a>Async and Reactive</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Rx.Observable.fromEvent(..., &quot;event a&quot;)</div><div class="line">	.do(x =&gt; console.log(&quot;b&quot;))</div><div class="line">	.switchMap(x =&gt; Rx.Observable.fromEvent(..., &quot;event c&quot;))</div><div class="line">	.do(x =&gt; &#123; console.log(&quot;d&quot;); console.log(&quot;e&quot;); &#125;);</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/my-blog/2017/12/31/composition-inheritance/" rel="next" title="Composition over inheritance">
+                <i class="fa fa-chevron-left"></i> Composition over inheritance
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/my-blog/2018/01/18/python-1/" rel="prev" title="Python for Java Programmer - 1">
+                Python for Java Programmer - 1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80"
+               alt="Yuping Wang" />
+          <p class="site-author-name" itemprop="name">Yuping Wang</p>
+           
+              <p class="site-description motion-element" itemprop="description">85608565</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/my-blog/archives">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/my-blog/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/my-blog/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sevenbamboos" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/sevenbamboos" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Multithreading-Parallel-and-Async"><span class="nav-number">1.</span> <span class="nav-text">Multithreading, Parallel and Async</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Async-with-callback"><span class="nav-number">2.</span> <span class="nav-text">Async with callback</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Async-with-Promise"><span class="nav-number">3.</span> <span class="nav-text">Async with Promise</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Async-in-ES7-C-5-0"><span class="nav-number">4.</span> <span class="nav-text">Async in ES7 (C# 5.0)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Async-in-Scala"><span class="nav-number">5.</span> <span class="nav-text">Async in Scala</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Async-in-Java"><span class="nav-number">6.</span> <span class="nav-text">Async in Java</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-5"><span class="nav-number">6.1.</span> <span class="nav-text">Java 5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-8"><span class="nav-number">6.2.</span> <span class="nav-text">Java 8</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Async-and-Reactive"><span class="nav-number">7.</span> <span class="nav-text">Async and Reactive</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuping Wang</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/my-blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/my-blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/my-blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
