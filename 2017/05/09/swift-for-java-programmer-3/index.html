@@ -94,6 +94,7 @@
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/05/09/swift-for-java-programmer-3/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
 <meta property="og:description" content="In the third series, let’s start the part of class. In Swift, class is reference type, which has a lot in common with this concept in other programming language like Java, c# and Javascript. superFor">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-06-14T14:24:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift For Java Programmer 3">
@@ -370,7 +371,7 @@
 }
 </code></pre><p>We can’t call any instance method until phase 2 because at that time the initialization has been completed.</p>
 <a id="more"></a>
-<h1 id="Designated-init-vs-convenience-init"><a href="#Designated-init-vs-convenience-init" class="headerlink" title="Designated init vs convenience init"></a>Designated init vs convenience init</h1><p>It’s better to illustrate the rules and constraints via the diagrams from <a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Initialization.html" target="_blank" rel="external">Apple’s official document</a> I try to explain with a doctor-is-a-person example.</p>
+<h1 id="Designated-init-vs-convenience-init"><a href="#Designated-init-vs-convenience-init" class="headerlink" title="Designated init vs convenience init"></a>Designated init vs convenience init</h1><p>It’s better to illustrate the rules and constraints via the diagrams from <a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Initialization.html" target="_blank" rel="noopener">Apple’s official document</a> I try to explain with a doctor-is-a-person example.</p>
 <blockquote>
 <p>Note the comments I add in Doctor class</p>
 </blockquote>
@@ -424,7 +425,7 @@ class Doctor : Person {
         self.init(fn: arr[1], ln: arr[2], title: arr[0])
     }    
 }
-</code></pre><p>Briefly, a quick review can be found in this <a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Art/initializerDelegation02_2x.png" target="_blank" rel="external">diagram</a></p>
+</code></pre><p>Briefly, a quick review can be found in this <a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Art/initializerDelegation02_2x.png" target="_blank" rel="noopener">diagram</a></p>
 <h1 id="Required-init"><a href="#Required-init" class="headerlink" title="Required init"></a>Required init</h1><p>To make things more complicated, <code>required init</code> could be quite confusing if we see it together with designated or convenience init. In fact, it is for a different purpose: to enforce sub-class to provide a certain init. It defers from normal override method in that sub-class MUST use <code>required</code> instead of <code>override</code> modifier before the init. See the below example:</p>
 <blockquote>
 <p>Note the comments I add to Person class.</p>
@@ -514,7 +515,7 @@ class Report {
         self.name ... // to access property or method from host, self should be used
     }
 }
-</code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/AutomaticReferenceCounting.html" target="_blank" rel="external">ARC in Swift official documentation</a></p>
+</code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/AutomaticReferenceCounting.html" target="_blank" rel="noopener">ARC in Swift official documentation</a></p>
 
       
     </div>
@@ -635,7 +636,7 @@ class Report {
           
             <div class="site-state-item site-state-posts">
               <a href="/my-blog/archives">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

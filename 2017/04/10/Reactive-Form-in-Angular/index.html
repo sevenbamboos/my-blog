@@ -94,6 +94,7 @@
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/04/10/Reactive-Form-in-Angular/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
 <meta property="og:description" content="FormControl’s valueChangesIt gives Observable, which takes us from plain event data into observable data flow. It’s one way for child components to have (local) communication between themselves. switc">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-04-20T11:10:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Reactive Form in Angular">
@@ -359,7 +360,7 @@
 <a id="more"></a>
 <h1 id="Data-binding"><a href="#Data-binding" class="headerlink" title="Data binding"></a>Data binding</h1><p>It’s possible to use ngModel together with reactive form. To avoid mutate the data property (via two way binding of ngModel), one way is to clone the raw model and adapt it to a view model and bind it to form controls.</p>
 <h1 id="Data-flow"><a href="#Data-flow" class="headerlink" title="Data flow"></a>Data flow</h1><p>Child components can get a model reference from parent component via @Input. Compute property (e.g. full name from first name + last name) can be provided as a method of component (otherwise it is difficult to detect the input’s change value other than ngOnChanges).<br>But if the input property is a primitive property like boolean, number or string, the change inside the child component won’t get reflected on its parent, not even with ngModel. The solution is to pass in a reference of an object</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.thoughtram.io/angular/2016/01/06/taking-advantage-of-observables-in-angular2.html" target="_blank" rel="external">https://blog.thoughtram.io/angular/2016/01/06/taking-advantage-of-observables-in-angular2.html</a></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.thoughtram.io/angular/2016/01/06/taking-advantage-of-observables-in-angular2.html" target="_blank" rel="noopener">https://blog.thoughtram.io/angular/2016/01/06/taking-advantage-of-observables-in-angular2.html</a></p>
 
       
     </div>
@@ -480,7 +481,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/my-blog/archives">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

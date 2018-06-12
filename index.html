@@ -91,6 +91,7 @@
 <meta property="og:title" content="Sam&#39;s Chest of Drawers">
 <meta property="og:url" content="https://sevenbamboos.github.com/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
+<meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sam&#39;s Chest of Drawers">
 
@@ -247,6 +248,150 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2018/06/09/groovy-style/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/my-blog/2018/06/09/groovy-style/" itemprop="url">
+                  Single Script Pattern in Groovy and Style Suggestion
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-09T20:52:00+12:00">
+                06-09-2018
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>In some cases, Groovy scripts are loaded (by script engine of the hosted application server) as a single piece and have no dependency to other shared libraries. In this situation, the scripts need to be self-contained with both application code and support code. How to split these two parts of code and how to make use of Groovy’s dynamic language features is the main topic of this blog. There are also some suggestions of what is good code style about Groovy (for Java programmers).</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/my-blog/2018/06/09/groovy-style/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -814,7 +959,7 @@
 </tr>
 </tbody>
 </table>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 01</div><div class="line">Name = collections.namedtuple(&apos;Name&apos;, [&apos;first&apos;,&apos;last&apos;])</div><div class="line">aName = Name(&apos;John&apos;, &apos;Doe&apos;)</div><div class="line"># first = John, last = Doe</div><div class="line"></div><div class="line"># 05</div><div class="line">def score2grade(score, ranges=[60,70,80,90],grades=[E,D,C,B,A]):</div><div class="line">	i = bisect.bisect(ranges,score)</div><div class="line">	return grades[i]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 01</span><br><span class="line">Name = collections.namedtuple(&apos;Name&apos;, [&apos;first&apos;,&apos;last&apos;])</span><br><span class="line">aName = Name(&apos;John&apos;, &apos;Doe&apos;)</span><br><span class="line"># first = John, last = Doe</span><br><span class="line"></span><br><span class="line"># 05</span><br><span class="line">def score2grade(score, ranges=[60,70,80,90],grades=[E,D,C,B,A]):</span><br><span class="line">	i = bisect.bisect(ranges,score)</span><br><span class="line">	return grades[i]</span><br></pre></td></tr></table></figure>
 <h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><p>Fluent Python 2015.7</p>
 
           
@@ -955,8 +1100,8 @@
       
         
           
-            <h1 id="Tips-of-Anaconda-installation"><a href="#Tips-of-Anaconda-installation" class="headerlink" title="Tips of Anaconda installation"></a>Tips of Anaconda installation</h1><p>For Anaconda distribution, this (mirror)[<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/" target="_blank" rel="external">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/</a>] could be faster than the official.<br>(numpy tutorial)[<a href="https://docs.scipy.org/doc/numpy-dev/user/quickstart.html" target="_blank" rel="external">https://docs.scipy.org/doc/numpy-dev/user/quickstart.html</a>]</p>
-<p>matrix with Jupyter<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">%matplotlib inline</div><div class="line">import sympy as sympy</div><div class="line">import numpy as np</div><div class="line">import matplotlib.pyplot as plt</div><div class="line">import seaborn as sbn</div><div class="line">from scipy import *</div><div class="line"></div><div class="line">A = np.array(([.8,.3],[.2,.7]))</div><div class="line">A.dot(x1)</div></pre></td></tr></table></figure></p>
+            <h1 id="Tips-of-Anaconda-installation"><a href="#Tips-of-Anaconda-installation" class="headerlink" title="Tips of Anaconda installation"></a>Tips of Anaconda installation</h1><p>For Anaconda distribution, this (mirror)[<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/]" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/]</a> could be faster than the official.<br>(numpy tutorial)[<a href="https://docs.scipy.org/doc/numpy-dev/user/quickstart.html]" target="_blank" rel="noopener">https://docs.scipy.org/doc/numpy-dev/user/quickstart.html]</a></p>
+<p>matrix with Jupyter<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line">import sympy as sympy</span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import seaborn as sbn</span><br><span class="line">from scipy import *</span><br><span class="line"></span><br><span class="line">A = np.array(([.8,.3],[.2,.7]))</span><br><span class="line">A.dot(x1)</span><br></pre></td></tr></table></figure></p>
 <h1 id="Language-Basic"><a href="#Language-Basic" class="headerlink" title="Language Basic"></a>Language Basic</h1><table>
 <thead>
 <tr>
@@ -1091,8 +1236,8 @@
 </tr>
 </tbody>
 </table>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">// 11</div><div class="line">def foo(**user_info):</div><div class="line">    res = &#123;&#125;</div><div class="line">    for k, v in user_info.items():</div><div class="line">        res[k] = v</div><div class="line">    return res</div><div class="line"></div><div class="line"></div><div class="line">user = foo(lastName=&quot;Foo&quot;, firstName=&quot;Bar&quot;)</div><div class="line">for k, v in user.items():</div><div class="line">    print(&quot;&#123;&#125; -&gt; &#123;&#125;&quot;.format(k, v))</div><div class="line"></div><div class="line">// 13</div><div class="line">def foo(</div><div class="line">        param1,</div><div class="line">        param2,</div><div class="line">        param3):</div><div class="line">    // function body</div><div class="line"></div><div class="line">// 23</div><div class="line">names = [(&quot;Tony&quot;,&quot;Zhang&quot;),(&quot;Anri&quot;,&quot;Liu&quot;),(&quot;Charry&quot;,&quot;Y&quot;)]</div><div class="line">fns, lns = zip(*names)</div><div class="line">fns // (&quot;Tony&quot;,&quot;Anri&quot;,&quot;Charry&quot;)</div><div class="line">lns // (&quot;Zhang&quot;,&quot;Liu&quot;,&quot;Y&quot;)</div></pre></td></tr></table></figure>
-<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><p><a href="http://scikit-learn.org" target="_blank" rel="external">scikit</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// 11</span><br><span class="line">def foo(**user_info):</span><br><span class="line">    res = &#123;&#125;</span><br><span class="line">    for k, v in user_info.items():</span><br><span class="line">        res[k] = v</span><br><span class="line">    return res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">user = foo(lastName=&quot;Foo&quot;, firstName=&quot;Bar&quot;)</span><br><span class="line">for k, v in user.items():</span><br><span class="line">    print(&quot;&#123;&#125; -&gt; &#123;&#125;&quot;.format(k, v))</span><br><span class="line"></span><br><span class="line">// 13</span><br><span class="line">def foo(</span><br><span class="line">        param1,</span><br><span class="line">        param2,</span><br><span class="line">        param3):</span><br><span class="line">    // function body</span><br><span class="line"></span><br><span class="line">// 23</span><br><span class="line">names = [(&quot;Tony&quot;,&quot;Zhang&quot;),(&quot;Anri&quot;,&quot;Liu&quot;),(&quot;Charry&quot;,&quot;Y&quot;)]</span><br><span class="line">fns, lns = zip(*names)</span><br><span class="line">fns // (&quot;Tony&quot;,&quot;Anri&quot;,&quot;Charry&quot;)</span><br><span class="line">lns // (&quot;Zhang&quot;,&quot;Liu&quot;,&quot;Y&quot;)</span><br></pre></td></tr></table></figure>
+<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><p><a href="http://scikit-learn.org" target="_blank" rel="noopener">scikit</a></p>
 
           
         
@@ -1533,7 +1678,7 @@
       
         
           <h1 id="What-is-the-problem"><a href="#What-is-the-problem" class="headerlink" title="What is the problem"></a>What is the problem</h1><p>Continue with the last topic about domain model, there is a performance problem. See the code:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public Supplier&lt;List&lt;Person&gt;&gt; femaleMembers() &#123;</div><div class="line"></div><div class="line">  return () -&gt; &#123;</div><div class="line"></div><div class="line">    List&lt;ID&gt; idOfAdmins = loadGroup.apply(groupName).admin.stream()</div><div class="line">      .map(admin -&gt; admin.id);</div><div class="line"></div><div class="line">    Predicate&lt;ID&gt; isAdmin = id -&gt; </div><div class="line">      idOfAdmins.stream().anyMatch(adminId -&gt; adminId != id); </div><div class="line"></div><div class="line">    List&lt;ID&gt; idOfOwners = getMails.apply(groupName).stream()</div><div class="line">      .map(mail -&gt; mail.idOfOwner.orElse(null))</div><div class="line">      .filter(id -&gt; isAdmin.andThen(ID::isNotEmpty).test(id)));</div><div class="line">  </div><div class="line">    return getPersons.apply(idOfOwners).stream()</div><div class="line">      .filter(person -&gt; person.gender == FEMALE); </div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public Supplier&lt;List&lt;Person&gt;&gt; femaleMembers() &#123;</span><br><span class="line"></span><br><span class="line">  return () -&gt; &#123;</span><br><span class="line"></span><br><span class="line">    List&lt;ID&gt; idOfAdmins = loadGroup.apply(groupName).admin.stream()</span><br><span class="line">      .map(admin -&gt; admin.id);</span><br><span class="line"></span><br><span class="line">    Predicate&lt;ID&gt; isAdmin = id -&gt; </span><br><span class="line">      idOfAdmins.stream().anyMatch(adminId -&gt; adminId != id); </span><br><span class="line"></span><br><span class="line">    List&lt;ID&gt; idOfOwners = getMails.apply(groupName).stream()</span><br><span class="line">      .map(mail -&gt; mail.idOfOwner.orElse(null))</span><br><span class="line">      .filter(id -&gt; isAdmin.andThen(ID::isNotEmpty).test(id)));</span><br><span class="line">  </span><br><span class="line">    return getPersons.apply(idOfOwners).stream()</span><br><span class="line">      .filter(person -&gt; person.gender == FEMALE); </span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Given the same groupName, if femaleMembers is invoked by more than one place within the same transaction, it will trigger the query each time even when the result is almost identical. So how to improve the performance?</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1678,7 +1823,7 @@
 
       
         
-          <h1 id="What-is-the-problem"><a href="#What-is-the-problem" class="headerlink" title="What is the problem"></a>What is the problem</h1><p>Suppose we have domain models like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">  ID id;</div><div class="line">  PersonName name;</div><div class="line">  Gender gender;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Mail &#123;</div><div class="line">  Address address;</div><div class="line">  MailGroup group;</div><div class="line">  ID? idOfOwner;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class MailGroup &#123;</div><div class="line">  String name;</div><div class="line">  Person[] admin;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+          <h1 id="What-is-the-problem"><a href="#What-is-the-problem" class="headerlink" title="What is the problem"></a>What is the problem</h1><p>Suppose we have domain models like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">  ID id;</span><br><span class="line">  PersonName name;</span><br><span class="line">  Gender gender;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Mail &#123;</span><br><span class="line">  Address address;</span><br><span class="line">  MailGroup group;</span><br><span class="line">  ID? idOfOwner;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MailGroup &#123;</span><br><span class="line">  String name;</span><br><span class="line">  Person[] admin;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>One day, product owner asked me to do a story with the following requirement:</p>
 <blockquote>
 <p>Given a mail group, list female owners of mail addresses in this group. The list should exclude the admin of this mail group for whatever reason.</p>
@@ -1686,158 +1831,6 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/my-blog/2017/12/26/domain-model-in-practice/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2017/12/25/data-provider-with-currying/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yuping Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sam's Chest of Drawers">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/my-blog/2017/12/25/data-provider-with-currying/" itemprop="url">
-                  Data Provider with Currying
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-25T11:28:22+13:00">
-                12-25-2017
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
-                    <span itemprop="name">Programming</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="What-is-the-problem"><a href="#What-is-the-problem" class="headerlink" title="What is the problem"></a>What is the problem</h1><p>Suppose we have a Person model like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">	private ID id;</div><div class="line">	private PersonName name;</div><div class="line">	private BirthDate dateOfBirth;</div><div class="line">	private TransactionalDate lastModified;</div><div class="line">	private List&lt;Contact&gt; contacts;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>Something additional about the way of modeling. I could create the same Person in this way:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">	private long id;</div><div class="line">	private String name;</div><div class="line">	private Date dateOfBirth;</div><div class="line">	private Date lastModified;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>The benefit of using ID, PersonName and BirthDate instead of long, String and Date respectively is that:</p>
-<ol>
-<li>These basic types could be very likely reused in other models. Having a separate definition gives them a place to hold their own business logic other than the generic type shipped with language library. For example, ID is a numeric long greater than zero (due to the fact of incremental primary key in database). ID could have a property ‘Empty’ to indicate the data has not been persisted yet, which is better than using expression <code>if (id &gt; 0)</code> that leaks too much technical details. And for BirthDate, we can apply a constraint on it due to the limit of human being’s age; while for TransactionalDate, it could have a default value as the current date, which represents the timing of a business transaction.</li>
-<li>Less possibility of using a wrong field because most fields have a different type so that compiler can easily detect such error. That’s where the misleading practice, ‘Don’t use the same type for different fields when modeling a business object’, comes from.</li>
-</ol>
-<p>And in application code we need to send person data to an external service like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">externalService.consumePerson(long personID, String name, Date birthDate, ...);</div><div class="line">externalService.consumePersonAndContact(long personID, String name, List&lt;ContactInfo&gt; contacts, ...);</div></pre></td></tr></table></figure></p>
-<p>Note external service has a slightly different understanding of person data. What’s more, different services ask for different data. How to do this with clean code? </p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/my-blog/2017/12/25/data-provider-with-currying/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1920,7 +1913,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/my-blog/archives">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

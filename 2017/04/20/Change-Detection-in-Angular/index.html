@@ -94,6 +94,7 @@
 <meta property="og:url" content="https://sevenbamboos.github.com/2017/04/20/Change-Detection-in-Angular/index.html">
 <meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
 <meta property="og:description" content="The Timing of CDDuring asynchronous events:    Events (button click…)    XHR requests    setTimeout How CD WorksTrigger from  and flow one-way down the component tree">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-04-20T11:18:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Change Detection in Angular">
@@ -360,9 +361,9 @@
 <h1 id="Strategy-A-Immutable-ChangeDetectionStrategy-OnPush"><a href="#Strategy-A-Immutable-ChangeDetectionStrategy-OnPush" class="headerlink" title="Strategy A: Immutable +  ChangeDetectionStrategy.OnPush"></a>Strategy A: Immutable +  ChangeDetectionStrategy.OnPush</h1><p>CD only happens when the object reference has been changed. If template binding (e.g. methods or variable used by ngIf) won’t be updated, check whether the reference has been changed (or try to mark it as markForCheck with ChangeDetectorRef).</p>
 <h1 id="Strategy-B-Observable-ChangeDetectionStrategy-OnPush-ChangeDetectorRef"><a href="#Strategy-B-Observable-ChangeDetectionStrategy-OnPush-ChangeDetectorRef" class="headerlink" title="Strategy B: Observable + ChangeDetectionStrategy.OnPush + ChangeDetectorRef"></a>Strategy B: Observable + ChangeDetectionStrategy.OnPush + ChangeDetectorRef</h1><p>@Input is an observable<br>An inner variable is linked to the incoming value (from the stream) via subscribe().<br>In case CD isn’t triggered (because of no reference change of template binding?), use ChangeDetectorRef::markForCheck()</p>
 <h1 id="Strategy-C-Fine-tune-ChangeDetectorRef"><a href="#Strategy-C-Fine-tune-ChangeDetectorRef" class="headerlink" title="Strategy C: Fine-tune ChangeDetectorRef"></a>Strategy C: Fine-tune ChangeDetectorRef</h1><p>ChangeDetectorRef::detach() to prevent CD from happening (during large amount of data change).<br>ChangeDetectorRef::reattach() to enable CD again.</p>
-<h1 id="Nice-charts-about-how-different-JS-libraries-do-CD-from"><a href="#Nice-charts-about-how-different-JS-libraries-do-CD-from" class="headerlink" title="Nice charts about how different JS libraries do CD from"></a>Nice charts about how different JS libraries do CD from</h1><p><a href="http://teropa.info/blog/2015/03/02/change-and-its-detection-in-javascript-frameworks.html" target="_blank" rel="external">http://teropa.info/blog/2015/03/02/change-and-its-detection-in-javascript-frameworks.html</a></p>
-<h1 id="The-Underlying-Zone"><a href="#The-Underlying-Zone" class="headerlink" title="The Underlying Zone"></a>The Underlying Zone</h1><p>Zone add hooks (e.g. before, after, error) to async calls.<br>Angular has its own zone (see NgZone) to trigger CD.<br>In certain circumstances, it’s convenient to disable CD at some point and enable it after some time to have a better user experience. (see here for an example<br><a href="https://blog.thoughtram.io/angular/2017/02/21/using-zones-in-angular-for-better-performance.html" target="_blank" rel="external">https://blog.thoughtram.io/angular/2017/02/21/using-zones-in-angular-for-better-performance.html</a> )</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://dzone.com/articles/tuning-angulars-change-detection" target="_blank" rel="external">https://dzone.com/articles/tuning-angulars-change-detection</a><br><a href="https://blog.thoughtram.io/angular/2016/02/22/angular-2-change-detection-explained.html" target="_blank" rel="external">https://blog.thoughtram.io/angular/2016/02/22/angular-2-change-detection-explained.html</a></p>
+<h1 id="Nice-charts-about-how-different-JS-libraries-do-CD-from"><a href="#Nice-charts-about-how-different-JS-libraries-do-CD-from" class="headerlink" title="Nice charts about how different JS libraries do CD from"></a>Nice charts about how different JS libraries do CD from</h1><p><a href="http://teropa.info/blog/2015/03/02/change-and-its-detection-in-javascript-frameworks.html" target="_blank" rel="noopener">http://teropa.info/blog/2015/03/02/change-and-its-detection-in-javascript-frameworks.html</a></p>
+<h1 id="The-Underlying-Zone"><a href="#The-Underlying-Zone" class="headerlink" title="The Underlying Zone"></a>The Underlying Zone</h1><p>Zone add hooks (e.g. before, after, error) to async calls.<br>Angular has its own zone (see NgZone) to trigger CD.<br>In certain circumstances, it’s convenient to disable CD at some point and enable it after some time to have a better user experience. (see here for an example<br><a href="https://blog.thoughtram.io/angular/2017/02/21/using-zones-in-angular-for-better-performance.html" target="_blank" rel="noopener">https://blog.thoughtram.io/angular/2017/02/21/using-zones-in-angular-for-better-performance.html</a> )</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://dzone.com/articles/tuning-angulars-change-detection" target="_blank" rel="noopener">https://dzone.com/articles/tuning-angulars-change-detection</a><br><a href="https://blog.thoughtram.io/angular/2016/02/22/angular-2-change-detection-explained.html" target="_blank" rel="noopener">https://blog.thoughtram.io/angular/2016/02/22/angular-2-change-detection-explained.html</a></p>
 
       
     </div>
@@ -485,7 +486,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/my-blog/archives">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
