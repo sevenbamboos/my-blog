@@ -1,0 +1,785 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/my-blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/my-blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/my-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/my-blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="It’s a summary and abstraction of “Design Data-intensive Applications” (DDIA), which is an excellent book covering a vast majority domain of database administration and distribute systems.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Memo of Design Data-intensive Applications">
+<meta property="og:url" content="https://sevenbamboos.github.com/2018/02/02/ddia/index.html">
+<meta property="og:site_name" content="Sam&#39;s Chest of Drawers">
+<meta property="og:description" content="It’s a summary and abstraction of “Design Data-intensive Applications” (DDIA), which is an excellent book covering a vast majority domain of database administration and distribute systems.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-10-22T02:19:18.878Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Memo of Design Data-intensive Applications">
+<meta name="twitter:description" content="It’s a summary and abstraction of “Design Data-intensive Applications” (DDIA), which is an excellent book covering a vast majority domain of database administration and distribute systems.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/my-blog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sevenbamboos.github.com/2018/02/02/ddia/"/>
+
+
+
+
+
+  <title> Memo of Design Data-intensive Applications | Sam's Chest of Drawers </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/my-blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sam's Chest of Drawers</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thinking about Programming and Lifestyle</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/my-blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/my-blog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/my-blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/my-blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevenbamboos.github.com/my-blog/2018/02/02/ddia/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuping Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam's Chest of Drawers">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Memo of Design Data-intensive Applications
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-02T10:13:33+13:00">
+                02-02-2018
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/my-blog/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>It’s a summary and abstraction of “Design Data-intensive Applications” (DDIA), which is an excellent book covering a vast majority domain of database administration and distribute systems.</p>
+<a id="more"></a>
+<h1 id="Chapter-1-Reliable-scalable-and-maintainable"><a href="#Chapter-1-Reliable-scalable-and-maintainable" class="headerlink" title="Chapter 1. Reliable, scalable, and maintainable"></a>Chapter 1. Reliable, scalable, and maintainable</h1><h2 id="Latency-and-response-time"><a href="#Latency-and-response-time" class="headerlink" title="Latency and response time"></a>Latency and response time</h2><p>Latency = network delay of request + wait time of be handled.</p>
+<p>Response time = Latency + service time + network delay of response.</p>
+<h2 id="Mean-median-and-percentile"><a href="#Mean-median-and-percentile" class="headerlink" title="Mean, median and percentile"></a>Mean, median and percentile</h2><p>To describe performance, mean (average) is not good enough for a typical response time.<br>Median is the performance of half of response.</p>
+<p>Percentile is the performance of xx% of response. For example, p95 is the threshold that 95% responses are faster than that figure.</p>
+<h1 id="Chapter-2-Data-Model-and-query-language"><a href="#Chapter-2-Data-Model-and-query-language" class="headerlink" title="Chapter 2. Data Model and query language"></a>Chapter 2. Data Model and query language</h1><p>Document database targets self-contained documents and relationships between documents are rare.</p>
+<p>Rational database can handle all kinds of relationships.</p>
+<p>Graph database targets use cases where anything is potentially related to everything.</p>
+<p>Rational database enforces an explicit schema (data processing on write), while NoSQL needs an implicit schema (handled on read by application code). The comparison looks like static-type language with the help of compiler and dynamic-type language needs runtime check by application code.</p>
+<p>Rational database has another advantage in that the query language, SQL, is declarative and conform to standard. </p>
+<h1 id="Chapter-3-Storage-and-retrieval"><a href="#Chapter-3-Storage-and-retrieval" class="headerlink" title="Chapter 3. Storage and retrieval"></a>Chapter 3. Storage and retrieval</h1><h2 id="Two-categories-of-storage-engines"><a href="#Two-categories-of-storage-engines" class="headerlink" title="Two categories of storage engines"></a>Two categories of storage engines</h2><p>Online transaction processing (OLTP) handles a huge volume of requests and each of them asks for a small number of records using a key (with the help of index). Disk seek time is the bottleneck.</p>
+<p>Online analytics processing (OLAP) handles requests that ask for many records. Disk bandwidth is the bottleneck.</p>
+<h2 id="Two-categories-of-OLTP-storage-engines"><a href="#Two-categories-of-OLTP-storage-engines" class="headerlink" title="Two categories of OLTP storage engines"></a>Two categories of OLTP storage engines</h2><p>Log-structured which appends to files and deletes obsolete files, but never updates a file in place. It turns random-access writes into sequential writes on disk, which improves write throughput.</p>
+<p>B-tree which treats disk as fixed-size pages and is used by most databases.</p>
+<h2 id="Details-of-SSTable-and-LSM-tree"><a href="#Details-of-SSTable-and-LSM-tree" class="headerlink" title="Details of SSTable and LSM-tree"></a>Details of SSTable and LSM-tree</h2><p>Keep sorted sequences of key-value pairs (called Sorted String Table SST) in memory. Periodically, SST segments are merged together in the way of mergesort. When the same key exists in multiple segments, use the value from the latest segment (because segments are created and written one at a time). The segments can be saved on disk. Anyway, there is a sparse index in memory, keeping offsets to some keys (not all the keys because it’s not necessary).</p>
+<p>To prevent data loss of SST (before being saved on disk), save a temporary log file (not in a sorted order because it should have too much data and the purpose is to replay them one by one to restore the lost SST).</p>
+<h3 id="TODO-Bloom-filter"><a href="#TODO-Bloom-filter" class="headerlink" title="TODO Bloom filter"></a>TODO Bloom filter</h3><p>How to effectively perform the query of a non-existing key? <em>Bloom filter</em> seems an memory-efficient data structure to handle the problem with set operations.</p>
+<h2 id="Details-of-B-Tree"><a href="#Details-of-B-Tree" class="headerlink" title="Details of B-Tree"></a>Details of B-Tree</h2><p>Break database into fixed-size pages (usually 4KB in size) and read or write one page at a time. Pages are on disk and there is a root page, from which a sparse index of all other pages can be found. Each page can be located from a reference from its parent page and values are kept leaf pages. </p>
+<p>Each page has a fixed size, which means at the beginning, there would be some unused space and when there is no more room for a new key-value (or key-reference), the page will be split into two. As a result, the whole tree remains balanced with a depth of O(lgn).</p>
+<p>Please note that according to the insert order, the keys on a page are not necessary sequential. There can be holes that could be used in later insert.  </p>
+<h3 id="Tip-of-date-table"><a href="#Tip-of-date-table" class="headerlink" title="Tip of date table"></a>Tip of date table</h3><p>Design a date table with columns: pk, year, month, day, weekday, is_holiday. It has two advantages: efficient for query by time (year/month/day/weekday) and have a place to put additional date info like is_holiday.</p>
+<h3 id="TODO-R-trees"><a href="#TODO-R-trees" class="headerlink" title="TODO R-trees"></a>TODO R-trees</h3><p>Multi-column index can be done by concatenated index, which explains why columns have to be in a fixed order in a query to make the index work.</p>
+<p>Multi-dimensional index is a more general index. The idea is to translate multi-dimensional data into one figure to be used as an index. Refer to <em>R-trees</em>.</p>
+<h2 id="Column-oriented-storage"><a href="#Column-oriented-storage" class="headerlink" title="Column-oriented storage"></a>Column-oriented storage</h2><p>For a big table with many columns and not all of the columns are used in each query, store each column in a separate file. The advantage is column data can be compressed, especially for the major column that’s used to sort and the column data is saved in an order.</p>
+<p>It’s less efficient for writing data to column-oriented storage. Normally, LSM-trees are kept in memory after a write and be persisted on disk by a background process.</p>
+<h1 id="Chapter-4-Encoding-and-evolution"><a href="#Chapter-4-Encoding-and-evolution" class="headerlink" title="Chapter 4. Encoding and evolution"></a>Chapter 4. Encoding and evolution</h1><h2 id="JSON-and-XML"><a href="#JSON-and-XML" class="headerlink" title="JSON and XML"></a>JSON and XML</h2><p>XML can’t distinguish a number and a string that happens to have digits.</p>
+<p>JSON can’t distinguish integers and floating-point numbers. For Javascript, integers greater than power(2, 53) can’t be exactly represented in double-precision floating-point number so it becomes inaccurate after the parsing.</p>
+<p>Binary strings (bytes sequence without a character encoding) in JSON and XML can be encoded using Base64 with a penalty of increasing size of 33%.</p>
+<h2 id="Binary-encoding-libraries"><a href="#Binary-encoding-libraries" class="headerlink" title="Binary encoding libraries"></a>Binary encoding libraries</h2><p>Thrift and Protocol Buffers require a schema as interface definition language (IDL) so that the encoded data only needs a numeric tag instead of name and type for each field.</p>
+<p>Avro has writer’s schema and reader’s schema and they don’t have to be the same. They should be compatible (for example new fields with default value).</p>
+<h2 id="Type-schema-as-a-better-documentation"><a href="#Type-schema-as-a-better-documentation" class="headerlink" title="Type schema as a better documentation"></a>Type schema as a better documentation</h2><p>Schema is used in encoding and decoding and therefore is guaranteed to be up-to-date and better than manually maintained documentation.</p>
+<h2 id="Message-broker-over-direct-RPC"><a href="#Message-broker-over-direct-RPC" class="headerlink" title="Message broker over direct RPC"></a>Message broker over direct RPC</h2><p>Served as a buffer when the recipient is unavailable or overloaded.</p>
+<p>Decouple sender from recipient.</p>
+<p>Allow one message to multiple recipients.</p>
+<h1 id="Chapter-5-Replication"><a href="#Chapter-5-Replication" class="headerlink" title="Chapter 5. Replication"></a>Chapter 5. Replication</h1><p>Single-leader: writes send to a single node (leader), read from any replica but could be stale if from nodes other than leader (followers). But all nodes can be eventually consistent. No need to worry about write conflicts.</p>
+<p>Multi-leader: writes send to one of leaders. A typical use case is that there is a leader in each data center. Read-after-write consistency is that users should always see data submitted by themselves. </p>
+<p>Leaderless: for n replicas, every write is confirmed by w nodes and query r nodes for each read. When w + r &gt; n, the result is supposed to be up-to-date (Quorum reads and writes). </p>
+<h3 id="Three-way-merge"><a href="#Three-way-merge" class="headerlink" title="Three-way merge"></a>Three-way merge</h3><p>Suppose c is the common ancestor of a and b. Merge a and b to d is three-way merge.</p>
+<h3 id="Tip-of-how-to-merge-deleted-record"><a href="#Tip-of-how-to-merge-deleted-record" class="headerlink" title="Tip of how to merge deleted record"></a>Tip of how to merge deleted record</h3><p>Instead of remove the record from a data container, leaving a deletion marker in place is more convenient.</p>
+<h1 id="Chapter-6-Partitioning"><a href="#Chapter-6-Partitioning" class="headerlink" title="Chapter 6. Partitioning"></a>Chapter 6. Partitioning</h1><h2 id="Two-approaches-to-partitioning"><a href="#Two-approaches-to-partitioning" class="headerlink" title="Two approaches to partitioning"></a>Two approaches to partitioning</h2><p>Key range: keys are sorted and each partition owns a range of keys. There is a risk of hot spots if application accesses keys close together. Normally, partitions are rebalanced by splitting the key range into two subranges when the data gets too big.</p>
+<p>Hash: hash function applied to each key and each partition owns a range of hashes. No ordering of keys makes range query inefficient but makes distribute load evenly.</p>
+<h2 id="Two-methods-of-secondary-index"><a href="#Two-methods-of-secondary-index" class="headerlink" title="Two methods of secondary index"></a>Two methods of secondary index</h2><p>Document-partitioned: local indexes. One partition needs to be updated on write, but read of the secondary index needs scatter/gather across all partitions.</p>
+<p>Term-partitioned: global indexes. The pros and cons are the opposite way of document-partitioned.</p>
+<h1 id="Chapter-7-Transaction"><a href="#Chapter-7-Transaction" class="headerlink" title="Chapter 7. Transaction"></a>Chapter 7. Transaction</h1><h2 id="Basic-level-read-committed"><a href="#Basic-level-read-committed" class="headerlink" title="Basic level - read committed"></a>Basic level - read committed</h2><ol>
+<li><p>No dirty reads (only see committed data)<br>No lock for read. Database keeps two values for every object being written. Read sees the old value until write commits a new value.</p>
+</li>
+<li><p>No dirty writes (only overwrite committed data)<br>Use an exclusive lock on row or document.</p>
+</li>
+</ol>
+<h2 id="Second-level-Snapshot-isolation-AKA-repeatable-read"><a href="#Second-level-Snapshot-isolation-AKA-repeatable-read" class="headerlink" title="Second level - Snapshot isolation (AKA repeatable read)"></a>Second level - Snapshot isolation (AKA repeatable read)</h2><p>Design for long-running, read-only queries like backup and analytics, providing a consistent snapshot at a point in time. Each transaction is given an increasing ID, which is used in created_by, deleted_by fields (update is translated into a delete and a create) of a row in a table. At the beginning of a transaction, all ongoing transactions are listed. Writes from aborted transactions or later transactions are ignored. Other writes are visible to the query of the current transaction.</p>
+<h2 id="Scenarios-outside-second-level-Read-update-write"><a href="#Scenarios-outside-second-level-Read-update-write" class="headerlink" title="Scenarios outside second level - Read-update-write"></a>Scenarios outside second level - Read-update-write</h2><ol>
+<li>Select query for several rows of data</li>
+<li>Depending on the result of the first query, application code decides whether the invariant meets.</li>
+<li>If so, application code makes a write to the database and commits the transaction.<br>The data from Step 1 can be modified by a concurrent transaction, which makes the invariant in Step 2 actually not be satisfied. So Step 3 was based on an incorrect fact.</li>
+</ol>
+<p>Solution includes: </p>
+<ol>
+<li><p>atomic write operation</p>
+</li>
+<li><p><code>FOR UPDATE</code> clause </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">begin transaction; </span><br><span class="line">select * from ... where ... FOR UPDATE;</span><br><span class="line">update ... set ... where ...;</span><br><span class="line">commit;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>If there is no rows for <code>FOR UPDATE</code> to lock, a virtual table could be created to contain slots for the purpose of lock (materializing conflicts).</p>
+<ol start="3">
+<li>Compare-and-set<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update ... set content = &apos;new_content&apos; where ... and content = &apos;old_content&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Most-serious-level-serializability"><a href="#Most-serious-level-serializability" class="headerlink" title="Most serious level - serializability"></a>Most serious level - serializability</h2><p>When all data a transaction needs can be access in memory, encapsulate a transaction in a fast store procedures. Some databases have abandoned PL/SQL but use Java/Groovy/Lua to create store procedures.</p>
+<p>Another algorithm is Two-phase locking, which not only blocks other writes, but also readers. On the contrary, in snapshot isolation, readers never block writers and writers never block readers. Reader asks for a shared lock while writers needs an exclusive lock. Database can detect deadlocks and abort one of the transactions. But when application retries the aborted transaction, the overall performance is not OK.</p>
+<p>A new implementation of serializability is serializable snapshot isolation, which uses a pessimistic concurrency control not to abort a transaction until it commits a change (so if it’s read-only it won’t abort).</p>
+<h1 id="Chapter-8-Trouble-with-distributed-systems"><a href="#Chapter-8-Trouble-with-distributed-systems" class="headerlink" title="Chapter 8. Trouble with distributed systems"></a>Chapter 8. Trouble with distributed systems</h1>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/my-blog/2018/01/20/python-2/" rel="next" title="Python for Java Programmer - 2">
+                <i class="fa fa-chevron-left"></i> Python for Java Programmer - 2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/my-blog/2018/06/09/groovy-style/" rel="prev" title="Single Script Pattern in Groovy and Style Suggestion">
+                Single Script Pattern in Groovy and Style Suggestion <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://s.gravatar.com/avatar/67a6b6bab2f6f4fb0f035c398789a241?s=80"
+               alt="Yuping Wang" />
+          <p class="site-author-name" itemprop="name">Yuping Wang</p>
+           
+              <p class="site-description motion-element" itemprop="description">85608565</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/my-blog/archives">
+                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/my-blog/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/my-blog/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sevenbamboos" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/sevenbamboos" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-1-Reliable-scalable-and-maintainable"><span class="nav-number">1.</span> <span class="nav-text">Chapter 1. Reliable, scalable, and maintainable</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Latency-and-response-time"><span class="nav-number">1.1.</span> <span class="nav-text">Latency and response time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mean-median-and-percentile"><span class="nav-number">1.2.</span> <span class="nav-text">Mean, median and percentile</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-2-Data-Model-and-query-language"><span class="nav-number">2.</span> <span class="nav-text">Chapter 2. Data Model and query language</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-3-Storage-and-retrieval"><span class="nav-number">3.</span> <span class="nav-text">Chapter 3. Storage and retrieval</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Two-categories-of-storage-engines"><span class="nav-number">3.1.</span> <span class="nav-text">Two categories of storage engines</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Two-categories-of-OLTP-storage-engines"><span class="nav-number">3.2.</span> <span class="nav-text">Two categories of OLTP storage engines</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Details-of-SSTable-and-LSM-tree"><span class="nav-number">3.3.</span> <span class="nav-text">Details of SSTable and LSM-tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TODO-Bloom-filter"><span class="nav-number">3.3.1.</span> <span class="nav-text">TODO Bloom filter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Details-of-B-Tree"><span class="nav-number">3.4.</span> <span class="nav-text">Details of B-Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tip-of-date-table"><span class="nav-number">3.4.1.</span> <span class="nav-text">Tip of date table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TODO-R-trees"><span class="nav-number">3.4.2.</span> <span class="nav-text">TODO R-trees</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Column-oriented-storage"><span class="nav-number">3.5.</span> <span class="nav-text">Column-oriented storage</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-4-Encoding-and-evolution"><span class="nav-number">4.</span> <span class="nav-text">Chapter 4. Encoding and evolution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON-and-XML"><span class="nav-number">4.1.</span> <span class="nav-text">JSON and XML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-encoding-libraries"><span class="nav-number">4.2.</span> <span class="nav-text">Binary encoding libraries</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Type-schema-as-a-better-documentation"><span class="nav-number">4.3.</span> <span class="nav-text">Type schema as a better documentation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Message-broker-over-direct-RPC"><span class="nav-number">4.4.</span> <span class="nav-text">Message broker over direct RPC</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-5-Replication"><span class="nav-number">5.</span> <span class="nav-text">Chapter 5. Replication</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Three-way-merge"><span class="nav-number">5.0.1.</span> <span class="nav-text">Three-way merge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tip-of-how-to-merge-deleted-record"><span class="nav-number">5.0.2.</span> <span class="nav-text">Tip of how to merge deleted record</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-6-Partitioning"><span class="nav-number">6.</span> <span class="nav-text">Chapter 6. Partitioning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Two-approaches-to-partitioning"><span class="nav-number">6.1.</span> <span class="nav-text">Two approaches to partitioning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Two-methods-of-secondary-index"><span class="nav-number">6.2.</span> <span class="nav-text">Two methods of secondary index</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-7-Transaction"><span class="nav-number">7.</span> <span class="nav-text">Chapter 7. Transaction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-level-read-committed"><span class="nav-number">7.1.</span> <span class="nav-text">Basic level - read committed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Second-level-Snapshot-isolation-AKA-repeatable-read"><span class="nav-number">7.2.</span> <span class="nav-text">Second level - Snapshot isolation (AKA repeatable read)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scenarios-outside-second-level-Read-update-write"><span class="nav-number">7.3.</span> <span class="nav-text">Scenarios outside second level - Read-update-write</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Most-serious-level-serializability"><span class="nav-number">7.4.</span> <span class="nav-text">Most serious level - serializability</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-8-Trouble-with-distributed-systems"><span class="nav-number">8.</span> <span class="nav-text">Chapter 8. Trouble with distributed systems</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuping Wang</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/my-blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/my-blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/my-blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/my-blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/my-blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
